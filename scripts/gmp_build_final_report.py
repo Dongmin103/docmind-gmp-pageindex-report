@@ -221,15 +221,16 @@ def render_sample_report(data: dict[str, Any]) -> str:
       <h2>부록 A. Tree 요약</h2>
       <p class="section-note">전체 tree를 긴 표로만 보지 않도록, 최상위 branch의 문서 범위와 node 밀도를 먼저 보여줍니다. 아래 막대는 각 branch가 차지하는 page span을 기준으로 상대 크기를 표현합니다.</p>
       {render_icicle_svg(data)}
+      {render_collapsible_tree(data)}
       {tree_overview(data)}
       <table>
         <thead><tr><th>Top branch</th><th>Nodes</th><th>Max depth</th><th>Own pages</th><th>Subtree pages</th></tr></thead>
         <tbody>{''.join(tr_multi([r['title'], r['nodes'], r['max_depth'], r['own_range'], r['subtree_range']]) for r in data['top_rows'])}</tbody>
       </table>
-      <h3>ASCII tree</h3>
+      <h3>Technical ASCII tree</h3>
       <div class="tree-toolbar screen-only">
-        <button class="plain-button" type="button" data-toggle-target="ascii-tree" data-toggle-label="ASCII tree">ASCII tree 전체 펼치기</button>
-        <span class="small">화면에서는 전체 tree를 펼쳐볼 수 있고, 인쇄/PDF에서는 overflow 방지를 위해 preview 높이로 고정됩니다.</span>
+        <button class="plain-button secondary" type="button" data-toggle-target="ascii-tree" data-toggle-label="ASCII tree">ASCII tree 전체 펼치기</button>
+        <span class="small">ASCII는 원본 구조 확인용 기술 부록입니다. 일반 검토는 위의 Document map과 Tree explorer를 사용합니다.</span>
       </div>
       <pre id="ascii-tree" class="ascii-excerpt" aria-label="GMP PageIndex ASCII tree">{esc('\n'.join(tree_lines))}</pre>
     </section>
@@ -344,6 +345,19 @@ code { background: var(--panel); border: 1px solid var(--line); border-radius: 1
 .icicle-legend { display: flex; flex-wrap: wrap; gap: 2mm 4mm; margin-top: 2.5mm; color: var(--muted); font-size: 8.4pt; }
 .icicle-key { display: inline-flex; align-items: center; gap: 1.5mm; }
 .icicle-swatch { width: 4mm; height: 3mm; border-radius: .8mm; border: 1px solid rgba(0,0,0,.12); }
+.tree-explorer-panel { border: 1px solid var(--line); border-radius: 3mm; background: #fff; padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
+.tree-explorer-panel h3 { margin-top: 0; }
+.tree-explorer-meta { display: flex; flex-wrap: wrap; gap: 2mm; margin: 2mm 0 3mm; }
+.tree-explorer-wrap { border: 1px solid var(--line); border-radius: 2mm; background: #fbfcfe; padding: 3mm; max-height: 118mm; overflow: auto; }
+.tree-explorer details { margin: 1.2mm 0 1.2mm 4mm; border-left: 1px solid #e1e7ef; padding-left: 2.5mm; }
+.tree-explorer details[open] > summary { background: #eef3f9; }
+.tree-explorer summary { cursor: pointer; list-style-position: outside; border-radius: 1.5mm; padding: 1.1mm 1.5mm; line-height: 1.35; }
+.tree-explorer summary:hover { background: #f1f5f9; }
+.tree-node-title { font-weight: 750; }
+.tree-node-muted { color: var(--muted); font-size: 8.1pt; }
+.tree-badge { display: inline-block; margin-left: 1mm; border: 1px solid var(--line); border-radius: 999px; padding: .3mm 1.3mm; background: #fff; color: var(--muted); font-size: 7.7pt; font-weight: 650; white-space: nowrap; }
+.tree-badge.page { color: var(--accent); border-color: #bfd0e4; background: #f3f7fc; }
+.tree-leaf { margin: .8mm 0 .8mm 7mm; padding: .8mm 1.5mm; border-left: 1px solid #e1e7ef; line-height: 1.35; }
 .tree-overview { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
 .tree-map { display: grid; gap: 2.3mm; margin-top: 2mm; }
 .tree-branch { display: grid; grid-template-columns: 45mm 1fr 32mm; align-items: center; gap: 3mm; }
@@ -398,6 +412,8 @@ li { margin-bottom: 1.8mm; }
   .screen-only { display: none !important; }
   .ascii-excerpt { max-height: 85mm; overflow: hidden; font-size: 6.6pt; break-inside: avoid; }
   .ascii-excerpt.expanded { max-height: 85mm; overflow: hidden; }
+  .tree-explorer-wrap { max-height: 95mm; overflow: hidden; }
+  .tree-explorer details details details { display: none; }
   .eval-browser { break-inside: auto; }
   .eval-controls { display: none; }
   .eval-table-wrap { max-height: none; overflow: visible; }
@@ -732,6 +748,54 @@ def render_icicle_svg(data: dict[str, Any]) -> str:
         <div class="icicle-legend">{legend}</div>
       </div>
     """
+
+
+def render_collapsible_tree(data: dict[str, Any]) -> str:
+    nodes = data["tree"].get("structure") or []
+    total_nodes = len(data["flat_tree"])
+    max_depth = max((depth for _, depth, _ in data["flat_tree"]), default=0)
+    opened_default_depth = 1
+    tree_html = "".join(render_tree_node(node, 0, opened_default_depth) for node in nodes)
+    return f"""
+      <div class="tree-explorer-panel">
+        <h3>Tree explorer: collapsible section outline</h3>
+        <p class="icicle-caption">ASCII 대신 section 제목을 직접 접고 펼쳐 볼 수 있는 탐색용 outline입니다. 화면에서는 전체 {total_nodes:,}개 node를 확인할 수 있고, PDF에서는 깊은 하위 레벨을 접어 레이아웃을 보호합니다.</p>
+        <div class="tree-explorer-meta">
+          <span class="tree-badge">nodes {total_nodes:,}</span>
+          <span class="tree-badge">max depth {max_depth}</span>
+          <span class="tree-badge page">top branches {len(nodes)}</span>
+        </div>
+        <div class="tree-explorer-wrap">
+          <div class="tree-explorer" aria-label="Collapsible GMP document tree">
+            {tree_html}
+          </div>
+        </div>
+      </div>
+    """
+
+
+def render_tree_node(node: dict[str, Any], depth: int, opened_default_depth: int) -> str:
+    kids = children(node)
+    own_start, own_end, subtree_start, subtree_end = node_range(node)
+    title = node.get("title", "Untitled")
+    own_range = fmt_range(own_start, own_end)
+    subtree_range = fmt_range(subtree_start, subtree_end)
+    badges = (
+        f'<span class="tree-badge">D{depth}</span>'
+        f'<span class="tree-badge page">p.{esc(subtree_range)}</span>'
+    )
+    if kids:
+        badges += f'<span class="tree-badge">{len(kids)} children</span>'
+    summary = (
+        f'<span class="tree-node-title">{esc(title)}</span> '
+        f'{badges} '
+        f'<span class="tree-node-muted">own p.{esc(own_range)}</span>'
+    )
+    if not kids:
+        return f'<div class="tree-leaf">{summary}</div>'
+    open_attr = " open" if depth <= opened_default_depth else ""
+    child_html = "".join(render_tree_node(child, depth + 1, opened_default_depth) for child in kids)
+    return f'<details{open_attr}><summary>{summary}</summary>{child_html}</details>'
 
 
 def tree_overview(data: dict[str, Any]) -> str:
