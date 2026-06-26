@@ -373,8 +373,8 @@ code { background: var(--panel); border: 1px solid var(--line); border-radius: 1
 .tree-toolbar { display: flex; align-items: center; gap: 3mm; margin: 2mm 0; }
 .plain-button { border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 2mm; padding: 1.8mm 3mm; cursor: pointer; }
 .plain-button.secondary { background: #fff; color: var(--accent); }
-.ascii-excerpt { display: block; width: 100%; max-width: 100%; white-space: pre-wrap; overflow: auto; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.0pt; line-height: 1.32; max-height: 95mm; overflow-wrap: anywhere; word-break: break-word; }
-.ascii-excerpt.expanded { max-height: none; overflow: visible; }
+.ascii-excerpt { display: block; width: 100%; max-width: 100%; white-space: pre; overflow: auto; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.0pt; line-height: 1.32; max-height: 95mm; overflow-wrap: normal; word-break: normal; tab-size: 2; }
+.ascii-excerpt.expanded { max-height: none; overflow: auto; }
 .eval-browser { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 4mm 0 6mm; break-inside: avoid; }
 .eval-controls { display: grid; grid-template-columns: 1.35fr repeat(3, minmax(24mm, 1fr)); gap: 2mm; margin-bottom: 3mm; }
 .eval-controls label { display: grid; gap: .8mm; color: var(--muted); font-size: 8.3pt; font-weight: 700; }
