@@ -1,0 +1,1415 @@
+Reading prompt from stdin...
+OpenAI Codex v0.137.0
+--------
+workdir: /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: medium
+reasoning summaries: none
+session id: 019efe7f-39c8-72a1-9c32-3ea72ed82078
+--------
+user
+You are running a CLEAN PageIndex-style agentic retrieval batch.
+
+Repository: /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+Working directory: /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+
+STRICT NO-GOLD RULE:
+- Do NOT read eval/gmp_eval_testset.jsonl.
+- Do NOT read any score_*.json/md, page_misses.json, generation_trace, or previous predictions under results/codex_retriever_10x10.
+- Do NOT read previous agentic prediction files unless they are your own output file for this exact batch.
+- Use only this question-only file as the question source:
+  results/codex_agentic_10x10/questions_061_070.jsonl
+- Do not use fields named gold_pages, gold_section_path, expected_answer, retrieval_target, answer_judging_notes.
+
+Use the PageIndex repo retrieval flow exactly:
+1. Call/get document metadata first:
+   .venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool document
+2. Call/get document structure:
+   .venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --max-depth 4
+   You may also query focused structure snippets:
+   .venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '검색어' --max-depth 4
+3. For each question, reason about the question intent and choose candidate section/page(s).
+4. Call get_page_content with tight ranges only. You may call multiple tight ranges per question if needed.
+5. Write final predictions JSONL only to:
+   results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+
+Output JSONL schema, one row per question:
+{"id":"gmp_eval_011","question":"copied exactly","predicted_section_path":["tree","path"],"predicted_pages":"tight page(s)","evidence_pages_read":"pages you actually inspected","reason":"brief retrieval rationale based on tree/page content"}
+
+Reasoning hints allowed, but verify via tree/page content:
+- 정의/무엇을 의미/정의상 -> 용어의 정의 first.
+- 누구/책임자/승인 책임 -> 조직 / 품질(보증)부서 책임자 first.
+- 요구사항 -> relevant 기준서/관리 section and exact clause.
+- 절차 -> relevant procedure section, not just keyword occurrence.
+- 비교 -> inspect both terms and allow multiple tight pages.
+- 예외/생략/다만/허용 -> inspect exception wording directly.
+- Never fetch the whole document.
+
+After writing the JSONL, run:
+.venv/bin/python scripts/gmp_pageindex_codex_retriever.py validate-predictions results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+
+Final answer: concise summary only. Do not include gold labels.
+
+2026-06-25T11:16:51.954255Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer realm=\"OAuth\", resource_metadata=\"https://mcp.notion.com/.well-known/oauth-protected-resource/mcp\", error=\"invalid_token\"" })
+2026-06-25T11:16:52.623560Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://mcp.figma.com/.well-known/oauth-protected-resource\",scope=\"mcp:connect\",authorization_uri=\"https://api.figma.com/.well-known/oauth-authorization-server\"" })
+2026-06-25T11:16:54.504292Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+진행 목표는 `061_070` 질문만 사용해 새 예측 JSONL을 만들고, 지정된 validator로 형식/흐름을 확인하는 것입니다. 금지된 gold/score/trace/prediction 파일은 열지 않고, metadata → structure → tight page reads 순서로만 근거를 모으겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc 'pwd && rg -n "PageIndex|codex_agentic_10x10|gmp_pageindex|predictions_061_070" /Users/dongmin/.codex/memories/MEMORY.md' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 0ms:
+/Users/dongmin/Documents/myproject/DocMIND/PageIndex
+1:# Task Group: PageIndex GMP tree read-only retrieval validation
+3:scope: read-only validation of PageIndex-generated GMP guidance tree artifacts before retrieval indexing, including OMX worker/verifier execution details, artifact quality checks, and post-processing gates; use when reopening `gmp_guidance_structure.json` / `gmp_guidance_tree.txt` readiness questions or repeating a similar read-only verifier pass
+4:applies_to: cwd=/private/tmp/pageindex-gmp-tree-validation-20260624T1312; reuse_rule=safe for this exact artifact family and similar PageIndex GMP tree validation runs, but recheck the current `results/`, `.omx/artifacts/`, and `OMX_TEAM_STATE_ROOT` before reusing workflow-specific commands or conclusions
+6:## Task 1: independently validate PageIndex GMP tree quality for retrieval indexing, outcome=structurally valid but only partial for downstream retrieval use
+16:- PageIndex, GMP, gmp_guidance_structure.json, gmp_guidance_tree.txt, gmp_guidance_tree.md, retrieval indexing, read-only validation, OMX_TEAM_STATE_ROOT, claim-task, json.tool, same_range_parent_child, repeated_title_in_ancestor_path, repeated_ancestor_title_nodes, annex boundary, subtree spans
+27:- The current PageIndex output is only partial for retrieval indexing, not a clean pass: repeated ancestor-title loops, same-page wrapper chains, and boundary ambiguity mean the tree is usable as TOC/path metadata but unsafe as-is for chunking or subtree-based retrieval [Task 1]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+exec
+/bin/zsh -lc 'ls -la && find .. -name AGENTS.md -print' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+hook: PostToolUse
+hook: PostToolUse Completed
+ succeeded in 179ms:
+codex
+메모리에는 이 계열 트리의 일반적 주의점만 있었고, 현재 배치의 정답이나 이전 예측은 보지 않았습니다. 이제 허용된 질문 파일과 retriever 도구 출력만으로 후보 페이지를 좁히겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc 'nl -ba results/codex_agentic_10x10/questions_061_070.jsonl' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 0ms:
+     1	{"id": "gmp_eval_061", "question": "모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?"}
+     2	{"id": "gmp_eval_062", "question": "원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?"}
+     3	{"id": "gmp_eval_063", "question": "제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?"}
+     4	{"id": "gmp_eval_064", "question": "제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?"}
+     5	{"id": "gmp_eval_065", "question": "시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?"}
+     6	{"id": "gmp_eval_066", "question": "점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?"}
+     7	{"id": "gmp_eval_067", "question": "데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?"}
+     8	{"id": "gmp_eval_068", "question": "포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?"}
+     9	{"id": "gmp_eval_069", "question": "위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?"}
+    10	{"id": "gmp_eval_070", "question": "불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?"}
+
+hook: PostToolUse
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool document' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --max-depth 4' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+hook: PostToolUse Completed
+ succeeded in 1355ms:
+{"doc_id": "gmp-guidance", "doc_name": "gmp_guidance.pdf", "doc_description": "Korean GMP guidance indexed by PageIndex tree.", "type": "pdf", "status": "completed", "page_count": 606}
+
+ succeeded in 1358ms:
+- Preface [own p.1-9, subtree p.1-9]
+- 제1장 서론 [own p.9-16, subtree p.9-16]
+  - 목적 및 원칙 [own p.10-12, subtree p.10-12]
+  - 구성방법 [own p.12-16, subtree p.12-16]
+- 제2장 완제의약품 제조 및 품질관리기준 [own p.16-478, subtree p.16-478]
+  - 용어의 정의 [own p.18-28, subtree p.18-28]
+    - 가. “관리번호”란 제조단위를 부여할 수 없는 자재 등을 관리하기 위하여 부여한 번호로서 숫자ㆍ문자 또는 이들을 조합한 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 나. “교정”이란 계측기, 시험기기 또는 기록계가 나타내는 값과 표준기기 의 참값을 비교하여 오차가 허용범위 내에 있음을 확인하고, 허용오 차범위를 벗어나는 경우 허용범위 내에 들도록 조정하는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 다. “일탈”이란 제조 또는 품질관리 과정에서 미리 정해진 기준을 벗어나 이루어진 행위를 말한다. [own p.18-18, subtree p.18-18]
+    - 라. “기준일탈”이란 시험의 결과가 미리 정하여진 시험기준을 벗어난 경우를 말한다. [own p.18-18, subtree p.18-18]
+    - 마. “무균구역”이란 무균작업을 위한 무균물질 또는 멸균처리된 용기가 노출되는 장소, 무균제제를 채워 넣거나 밀봉하는 작업을 하는 장소 및 무균시험 등의 무균조작을 하는 장소를 말한다. [own p.18-18, subtree p.18-18]
+    - 바. “반제품”이란 제조공정 단계에 있는 것으로서 필요한 제조공정을 더 거쳐야 완제품이 되는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 해설 [own p.18-18, subtree p.18-18]
+    - 참고자료 유럽 GMP EudraLex 4 Part I [own p.18-18, subtree p.18-18]
+    - 참고자료 캐나다 GUI-0001 [own p.18-18, subtree p.18-18]
+    - 사. “밸리데이션”이란 특정한 공정, 방법, 기계설비 또는 시스템이 미리 설정 되어 있는 판정기준에 맞는 결과를 일관되게 도출한다는 것을 검증하고 이를 문서화하는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 아. “수율”이란 이론 생산량에 대한 실생산량의 백분율을 말한다. [own p.18-18, subtree p.18-18]
+    - 자. “수율관리기준”이란 제조공정이 정상적으로 진행되었을 경우 얻어지는 제품별 연간 평균생산수율 범위를 말한다. [own p.18-18, subtree p.18-18]
+    - 차. “실생산량”이란 제조공정에서 실제로 얻은 양을 말한다. [own p.18-18, subtree p.18-18]
+    - 카. “완제의약품”이란 모든 제조공정이 완료되어 최종적으로 인체에 투여할 수 있도록 일정한 제형으로 제조된 의약품을 말한다. [own p.18-18, subtree p.18-18]
+    - 타. “완제품”이란 의약품 제조에서 모든 제조공정이 완료된 원료의약품 또는 완제의약품을 말한다. [own p.18-18, subtree p.18-18]
+    - 파. “원료약품”이란 완제품의 제조에 사용되는 물질(자재는 제외한다)을 말하며, 완제품에 남아 있지 않은 물질을 포함한다. [own p.18-18, subtree p.18-18]
+    - 하. “원료의약품”이란 합성, 발효, 추출 등 또는 이 방법들의 조합에 의하여 제조된 물질로서 완제의약품의 제조에 사용되는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 거. “원생약”이란 동물, 식물 또는 광물에서 채취된 것으로서 한약원료로 사용하기 위한 세척ㆍ선별ㆍ절단 등 가공을 하지 않은 상태의 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 너. “원자재”란 원료약품 및 자재를 말한다. [own p.18-18, subtree p.18-18]
+    - 더. “이론 생산량”이란 원료약품의 투입량으로부터 이론적으로 계산된 반제품 또는 완제품의 양을 말한다. [own p.18-18, subtree p.18-18]
+    - 러. “자재”란 포장과 표시작업에 사용되는 용기, 표시재료, 첨부 문서, 포장 재료 등을 말한다. [own p.18-18, subtree p.18-18]
+    - 머. “재가공”이란 기준일탈한 제조공정 단계에 있는 반제품에 대하여 이미 설정된 생산공정의 일부 공정을 반복하는 행위를 말한다. [own p.18-18, subtree p.18-18]
+    - 버. “적격성 평가”란 기계ㆍ설비가 설계한 대로 제작, 설치되고 목적한 대로 작동하여 원하는 결과가 얻어진다는 것을 증명하고 이를 문서화하는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 서. “제조”란 포장 및 표시작업을 포함하여 의약품을 생산하기 위하여 하는 모든 작업을 말한다. [own p.18-18, subtree p.18-18]
+    - 관련 규정 [own p.18-18, subtree p.18-18]
+    - 참고자료 미국 Title 21 CFR Part 210 [own p.18-18, subtree p.18-18]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.18-18, subtree p.18-18]
+    - 어. “제조단위” 또는 “로트”란 동일한 제조공정으로 제조되어 균질성을 가지는 의약품의 일정한 분량을 말한다. [own p.18-18, subtree p.18-18]
+    - 저. “제조번호” 또는 “로트번호”란 일정한 제조단위분에 대하여 제조관리 및 출하에 관한 모든 사항을 확인할 수 있도록 표시된 번호로서 숫자ㆍ문자 또는 이들을 조합한 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 처. “중요공정” 또는 “중요 기계ㆍ설비”란 제품의 품질에 영향을 미치는 공정 또는 기계ㆍ설비를 말한다. [own p.18-18, subtree p.18-18]
+    - 커. “청정구역"이란 부유입자 및 미생물이 유입되거나 잔류하는 것을 통제하여 일정 수준 이하로 유지되도록 관리하는 구역을 말한다. [own p.18-18, subtree p.18-18]
+    - 터. “청정등급"이란 청정구역의 관리수준을 정한 등급을 말한다. [own p.18-18, subtree p.18-18]
+    - 퍼. “한약분말”이란 완제의약품을 제조하기 위하여 한약을 가루로 만든 상태를 말한다. [own p.18-18, subtree p.18-18]
+    - 고. “한약원료”란 원생약, 한약, 한약분말, 한약엑스 등으로서 제제를 제조하기 위하여 사용하는 생약에서 유래한 모든 원료를 말한다. [own p.18-18, subtree p.18-18]
+    - 노. “동물유래원료”란 동물의 장기 또는 조직을 추출, 여과, 농축, 건조 등의 방법으로 제조한 완제의약품의 원료를 말한다. [own p.18-18, subtree p.18-18]
+    - 참고자료 유럽 GMP EudraLex Vol 4. [own p.18-19, subtree p.18-19]
+    - 참고자료 일본 MHLW Ordinance No. 179 [own p.19-28, subtree p.19-28]
+  - 품질경영 [own p.28-54, subtree p.28-54]
+    - 1의2 품질경영 (고시 [별표 17] 요약 [참고]) [own p.28-54, subtree p.28-54]
+      - 가. 품질보증은 의약품의 품질을 확보하는 모든 활동을 포함한다. [own p.28-42, subtree p.28-42]
+        - 해설 [own p.28-31, subtree p.28-31]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.1 원칙 [별표 17] 1.2 품질보증 [own p.31-31, subtree p.31-31]
+        - 참고자료 PIC/S Part I [own p.31-36, subtree p.31-36]
+        - 참고자료 ICH Pharmaceutical Quality System Q10 [own p.36-42, subtree p.36-42]
+      - 나. 제조 및 품질관리는 의약품이 허가된 품질기준에 따라 일관성 있게 생산, 관리됨을 보장하는 체계이다. [own p.42-46, subtree p.42-46]
+        - 해설 [own p.42-43, subtree p.42-43]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.3 의약품 제조 및 품질관리 기준 [own p.43-43, subtree p.43-43]
+        - 참고자료 PIC/S Part I [own p.43-46, subtree p.43-46]
+      - 다. 품질관리는 검체채취, 규격 및 시험, 그리고 조직, 문서화, 출하 절차와 관련된 체계이다. [own p.46-49, subtree p.46-49]
+        - 해설 [own p.46-47, subtree p.46-47]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.4 품질관리 [own p.47-47, subtree p.47-47]
+        - 참고자료 PIC/S Part I [own p.47-49, subtree p.47-49]
+      - 라. 품질평가는 공정의 일관성 확인, 원료약품 및 완제품의 품질 경향 파악 및 규격의 적절성 확인, 제품 및 공정 개선이 필요한 부분을 파악하는 체계이다. [own p.49-52, subtree p.49-52]
+        - 해설 [own p.49-49, subtree p.49-49]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.5 제품품질평가 [own p.49-49, subtree p.49-49]
+        - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.49-52, subtree p.49-52]
+      - 마. 품질위험관리는 품질에 대한 위험을 평가, 관리, 공유, 검토하는 체계이다. [own p.52-54, subtree p.52-54]
+        - 해설 [own p.52-52, subtree p.52-52]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.6 품질위험관리 [own p.52-52, subtree p.52-52]
+        - 참고자료 PIC/S Part I [own p.52-53, subtree p.52-53]
+        - 참고자료 ICH Pharmaceutical Quality System Q10 [own p.53-54, subtree p.53-54]
+  - 시설 및 환경의 관리 [own p.54-84, subtree p.54-84]
+    - 시설관리 [own p.54-78, subtree p.54-78]
+      - 가. 작업소의 기계ㆍ설비는 제조공정 흐름에 따라 배치할 것 [own p.54-61, subtree p.54-61]
+        - 해설 [own p.54-56, subtree p.54-56]
+        - 관련 규정 [own p.56-56, subtree p.56-56]
+        - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.56-57, subtree p.56-57]
+        - 참고자료 미국 Title 21 CFR Part 210 [own p.57-58, subtree p.57-58]
+        - 참고자료 일본 MHLW Ordinance No. 179 [own p.58-60, subtree p.58-60]
+        - 참고자료 EU Guidelines for Good Manufacturing Practice for Medicinal Products for Human and Veterinary Use [own p.60-61, subtree p.60-61]
+      - 나. 제조용 중요 기계ㆍ설비는 구분할 수 있도록 번호나 코드를 부여하고 해당 기계ㆍ설비를 사용한 제품명, 제조번호 및 제조일자를 기록할 것 [own p.61-62, subtree p.61-62]
+        - 해설 [own p.61-62, subtree p.61-62]
+        - 참고자료 PIC/S Part I [own p.62-62, subtree p.62-62]
+      - 다. 제조용수는 필요한 질과 양이 확보되도록 할 것 [own p.62-64, subtree p.62-64]
+        - 해설 [own p.62-63, subtree p.62-63]
+        - 관련 규정 [own p.63-63, subtree p.63-63]
+        - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.63-63, subtree p.63-63]
+        - 참고자료 PIC/S Part I [own p.63-64, subtree p.63-64]
+        - 참고자료 캐나다 GUI-0001 [own p.64-64, subtree p.64-64]
+      - 라. 각종 배관에는 각각 구분될 수 있도록 내용물과 흐름방향을 표시할 것 [own p.64-65, subtree p.64-65]
+        - 해설 [own p.64-64, subtree p.64-64]
+        - 관련 규정 [own p.64-64, subtree p.64-64]
+        - 참고자료 PIC/S Part I [own p.64-65, subtree p.64-65]
+      - 마. 윤활유, 냉매 등이 의약품의 품질에 영향을 미치지 않도록 관리할 것 [own p.65-66, subtree p.65-66]
+        - 해설 [own p.65-65, subtree p.65-65]
+        - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.65-65, subtree p.65-65]
+        - 참고자료 미국 Title 21 CFR Part 211 [own p.65-66, subtree p.65-66]
+      - 바. 작업소의 하수구는 역류를 방지할 수 있도록 되어 있어야 하고 정기적으로 소독할 것 [own p.66-68, subtree p.66-68]
+        - 해설 [own p.66-67, subtree p.66-67]
+        - 관련 규정 [own p.67-67, subtree p.67-67]
+        - 참고자료 미국 Title 21 CFR Part 211 [own p.67-68, subtree p.67-68]
+      - 사. 고장 등으로 사용하지 않는 기계ㆍ설비는 작업소에 두지 않거나 사용할 수 없다고 표시할 것 [own p.68-69, subtree p.68-69]
+        - 해설 [own p.68-68, subtree p.68-68]
+        - 관련 규정 [own p.68-68, subtree p.68-68]
+        - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.68-68, subtree p.68-68]
+        - 참고자료 PIC/S Part I [own p.68-69, subtree p.68-69]
+      - 아. 의약품의 제조 및 시험에 사용되는 중요 기계ㆍ설비에 대하여 교정 및 적격성평가를 할 것 [own p.69-76, subtree p.69-76]
+        - 해설 [own p.69-70, subtree p.69-70]
+        - 관련 규정 [own p.70-70, subtree p.70-70]
+        - 참고자료 의약품 제조 및 품질관리에 관한 규정 [별표 15] [own p.70-75, subtree p.70-75]
+        - 참고자료 PIC/S Part I [own p.75-76, subtree p.75-76]
+        - 참고자료 캐나다 GUI-0001 [own p.76-76, subtree p.76-76]
+      - 자. 생약(한약)을 원료로 사용하는 의약품 제조소는 가목부터 아목까지의 기준 외에 별도 기준을 갖출 것 [own p.76-78, subtree p.76-78]
+        - 보관소 기준 [own p.76-76, subtree p.76-76]
+        - 전처리 작업 기준 [own p.76-77, subtree p.76-77]
+        - 한약분말 및 한약엑스 작업실 기준 [own p.77-77, subtree p.77-77]
+        - 해설 [own p.77-78, subtree p.77-78]
+    - 자동화장치 등의 관리 [own p.78-81, subtree p.78-81]
+      - 가. 제조 및 품질관리에 자동화장치 등을 사용할 경우 계획을 수립하여 정기적으로 교정 또는 성능점검을 하고 기록할 것 [own p.78-79, subtree p.78-79]
+        - 해설 [own p.78-79, subtree p.78-79]
+        - 관련 규정 [own p.79-79, subtree p.79-79]
+      - 나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것 [own p.79-79, subtree p.79-79]
+      - 다. 자동화장치 등에 의한 모든 기록은 별도로 저장ㆍ보관하여야 하고 대체 시스템으로 자료 유실을 방지할 것 [own p.79-81, subtree p.79-81]
+        - 해설 [own p.79-80, subtree p.79-80]
+        - 관련 규정 [own p.80-80, subtree p.80-80]
+        - 참고자료 미국 Title 21 CFR Part 211 [own p.80-81, subtree p.80-81]
+    - 환경관리 [own p.81-84, subtree p.81-84]
+      - 가. 의약품의 종류ㆍ제형ㆍ제조방법 및 제조시설 등에 따라 작업소의 청정구역과 청정등급을 설정하고 유지할 것 [own p.81-82, subtree p.81-82]
+        - 해설 [own p.81-82, subtree p.81-82]
+        - 관련 규정 [own p.82-82, subtree p.82-82]
+      - 나. 공기조화장치의 성능을 정기적으로 점검하고 청정등급 및 작업실 간의 차압이 유지되도록 할 것 [own p.82-83, subtree p.82-83]
+        - 해설 [own p.82-83, subtree p.82-83]
+        - 참고자료 미국 Title 21 CFR Part 211 [own p.83-83, subtree p.83-83]
+      - 다. 제조조건과 보관조건에 적절한 온도 및 습도가 유지되도록 정기적으로 점검할 것 [own p.83-84, subtree p.83-84]
+        - 해설 [own p.83-84, subtree p.83-84]
+  - 조직 [own p.84-160, subtree p.84-160]
+    - 조직의 구성 [own p.84-94, subtree p.84-94]
+    - 제조부서 책임자 [own p.94-111, subtree p.94-111]
+    - 품질(보증)부서 책임자 [own p.111-158, subtree p.111-158]
+      - 품질관리를 적절히 하기 위하여 제품표준서 및 품질관리기준서에 성명을 적고 서명하여 승인을 받아 갖추어 두고 운영하여야 한다. [own p.113-119, subtree p.113-119]
+      - 제4.2호가목의 시험지시서에 의하여 시험을 지시하고 시험지시서에 따라 시험이 진행되는지를 점검ㆍ확인하여야 하며, 일탈 및 기준일탈이 있는 경우에는 이를 조사하고 기록하여야 한다. [own p.119-122, subtree p.119-122]
+      - 품질에 관련된 모든 문서와 절차를 검토하고 승인하여야 한다. [own p.122-122, subtree p.122-122]
+      - 제2.3호의 환경관리에 관한 사항을 승인하고 주관하여야 한다. [own p.122-125, subtree p.122-125]
+      - 제6호의 밸리데이션에 관한 사항을 승인하고 주관하여야 한다. 다만, 특별한 사유로 품질(보증)부서 책임자가 일부 밸리데이션 업무에 대하여 별도의 관리자를 지정하는 경우에는 그렇지 않다. [own p.125-127, subtree p.125-127]
+      - 제7.2호의 안정성 시험을 하여야 한다. [own p.127-129, subtree p.127-129]
+      - 제7.3호의 제품품질평가를 하여야 한다. [own p.129-133, subtree p.129-133]
+      - 제7.1호가목 및 제8.1호가목의 시험성적서 및 제조단위별 제조기록서의 내용을 검토하고 제품의 출하를 승인하여야 한다. [own p.133-140, subtree p.133-140]
+      - 시험결과에 따라 원자재의 사용 여부, 제조공정의 진행 여부 또는 제품의 출하 여부를 결정하고 그 결과를 미리 정한 절차에 따라 관련 부서에 통지하여야 한다. [own p.140-144, subtree p.140-144]
+      - 부적합품이 규정된 절차대로 처리되고 있는지를 확인하여야 한다. [own p.144-144, subtree p.144-144]
+      - 제11호의 불만처리 및 제품회수에 관한 사항을 주관하여야 한다. [own p.144-147, subtree p.144-147]
+      - 제12호의 변경관리를 승인하여야 한다. [own p.147-150, subtree p.147-150]
+      - 제13호의 자율점검을 계획하고 추진하여야 한다. [own p.150-153, subtree p.150-153]
+      - 제조 또는 시험의 수탁자와 주요 원자재의 제조업자를 평가하여야 한다. [own p.153-157, subtree p.153-157]
+      - 원료약품, 자재 및 완제품의 보관관리 담당자를 지정하여야 한다. [own p.157-158, subtree p.157-158]
+      - 위원회 [own p.158-158, subtree p.158-158]
+    - 위원회 [own p.158-160, subtree p.158-160]
+  - 기준서 [own p.160-233, subtree p.160-233]
+    - 제품표준서 [own p.160-186, subtree p.160-186]
+      - 해설 [own p.160-160, subtree p.160-160]
+      - 관련 규정 [own p.160-160, subtree p.160-160]
+      - 참고자료 PIC/S Guide(PE008-4) [own p.160-160, subtree p.160-160]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.160-160, subtree p.160-160]
+      - 가. 제품명, 제형 및 성상 [own p.160-160, subtree p.160-160]
+      - 나. 허가(신고) 연월일 및 허가(신고)사항 변경 연월일 [own p.160-160, subtree p.160-160]
+      - 다. 효능ㆍ효과, 용법ㆍ용량 및 사용상의 주의사항 [own p.160-160, subtree p.160-160]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.160-160, subtree p.160-160]
+      - 참고자료 미국 Title 21 CFR 211 [own p.160-160, subtree p.160-160]
+      - 참고자료 캐나다 GUI-0104 [own p.160-160, subtree p.160-160]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.160-162, subtree p.160-162]
+      - 라. 허가받은 원료약품 및 그 분량과 제조단위당 기준량, 필요한 경우 기준량 조정에 관한 사항 [own p.162-166, subtree p.162-166]
+      - 마. 제조공정 흐름도 및 상세한 공정별 제조방법과 공정검사방법(위탁하여 제조하는 경우에는 위탁하는 공정의 범위) [own p.166-166, subtree p.166-166]
+      - 바. 공정별 이론 생산량 및 수율관리기준 [own p.166-166, subtree p.166-166]
+      - 사. 작업 중 주의할 사항 [own p.166-169, subtree p.166-169]
+      - 아. 원자재ㆍ반제품ㆍ완제품의 기준 및 시험방법(이물ㆍ곤충이 섞이거나 미생물에 오염되는 등의 우려가 있는 원자재는 별도의 기준 및 시험방법을 설정한다) [own p.169-173, subtree p.169-173]
+      - 자. 한약원료 등에 관한 사항 [own p.173-175, subtree p.173-175]
+      - 차. 제조관리 및 품질관리에 필요한 시설 및 기기 [own p.175-175, subtree p.175-175]
+      - 카. 보관조건 [own p.175-175, subtree p.175-175]
+      - 타. 유효기간 또는 사용기간 [own p.175-175, subtree p.175-175]
+      - 파. 이력관리 [own p.175-175, subtree p.175-175]
+      - 하. 작성 연월일 [own p.175-175, subtree p.175-175]
+      - 거. 다음 사항이 포함된 제조지시서 [own p.175-178, subtree p.175-178]
+      - 너. 동물유래원료에 관한 사항(주사제로 한정한다) [own p.178-178, subtree p.178-178]
+      - 더. 그 밖에 필요한 사항 [own p.178-186, subtree p.178-186]
+    - 품질관리기준서 [own p.186-200, subtree p.186-200]
+      - 가. 다음 사항이 포함된 시험지시서 [own p.186-186, subtree p.186-186]
+      - 나. 검체(檢體)의 채취자, 채취량, 채취장소, 채취방법 및 채취 시 주의사항 (무균 여부 등)과 채취 시의 오염방지대책 [own p.186-186, subtree p.186-186]
+      - 다. 시험결과를 관련 부서에 통지하는 방법 [own p.186-186, subtree p.186-186]
+      - 해설 [own p.186-186, subtree p.186-186]
+      - 관련 규정 [own p.186-186, subtree p.186-186]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.186-186, subtree p.186-186]
+      - 참고자료 캐나다 GUI-0104 [own p.186-186, subtree p.186-186]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.186-186, subtree p.186-186]
+      - 라. 시험시설 및 시험기구의 점검 [own p.186-186, subtree p.186-186]
+      - 마. 안정성 시험 [own p.186-186, subtree p.186-186]
+      - 바. 주성분 및 완제품 등 보관용 검체의 관리 [own p.186-190, subtree p.186-190]
+      - 사. 표준품 및 시약의 관리 아 한약원료의 표본ㆍ보관에 관한 사항 [own p.190-190, subtree p.190-190]
+      - 자. 위탁시험 또는 위탁제조 하는 경우 검체의 송부방법 및 시험결과의 판정방법 [own p.190-190, subtree p.190-190]
+      - 차. 그 밖에 제3.3호의 품질(보증)부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.190-200, subtree p.190-200]
+    - 제조관리기준서 [own p.200-220, subtree p.200-220]
+      - 가. 제조공정관리에 관한 사항 [own p.200-200, subtree p.200-200]
+      - 해설 [own p.200-200, subtree p.200-200]
+      - 관련 규정 [own p.200-200, subtree p.200-200]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.200-200, subtree p.200-200]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.200-200, subtree p.200-200]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.200-200, subtree p.200-200]
+      - 나. 시설 및 기기 관리에 관한 사항 [own p.200-203, subtree p.200-203]
+      - 다. 원료약품 관리에 관한 사항 [own p.203-203, subtree p.203-203]
+      - 라. 자재 관리에 관한 사항 [own p.203-211, subtree p.203-211]
+      - 마. 완제품 관리에 관한 사항 [own p.211-211, subtree p.211-211]
+      - 바. 위탁제조에 관한 사항 [own p.211-211, subtree p.211-211]
+      - 사. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.211-220, subtree p.211-220]
+    - 제조위생관리기준서 [own p.220-233, subtree p.220-233]
+      - 가. 작업원의 건강관리 및 건강상태의 파악ㆍ조치방법 [own p.220-220, subtree p.220-220]
+      - 해설 [own p.220-220, subtree p.220-220]
+      - 관련 규정 [own p.220-220, subtree p.220-220]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.220-220, subtree p.220-220]
+      - 참고자료 캐나다 GUI-0104 [own p.220-220, subtree p.220-220]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.220-220, subtree p.220-220]
+      - 나. 작업원의 수세, 소독방법 등 위생에 관한 사항 [own p.220-220, subtree p.220-220]
+      - 다. 작업복장의 규격, 세탁방법 및 착용규정 [own p.220-220, subtree p.220-220]
+      - 라. 작업실 등의 청소(필요한 경우 소독을 포함한다. 이하 같다) 방법 및 청소주기 [own p.220-220, subtree p.220-220]
+      - 마. 작업실 등의 청소에 사용하는 약품 및 기구 [own p.220-220, subtree p.220-220]
+      - 바. 청소상태의 평가방법 [own p.220-220, subtree p.220-220]
+      - 사. 작업소의 청정도관리에 관한 사항 [own p.220-220, subtree p.220-220]
+      - 아. 제조시설의 세척 및 평가 [own p.220-221, subtree p.220-221]
+      - 다. 한 제품의 제조에만 전용으로 사용되는 설비인 경우에는, 그 제품의 제조단위 또는 배치 번호가 일련번호로 부여되고 그에 따라 순서대로 제조되면, 설비별 기록 서는 필요하지 않다. 전용 설비를 사용하는 경우에는 세척, 유지 관리 및 사용에 관 한 사항을 배치 기록서의 일부로 기록할 수 있다. 세척 및 유지관리 업무를 수행하 는 작업원과 이중 점검을 수행하는 작업원은(또는 세척 및 유지관리를 섹션 211.68 에 따른 자동화 설비를 이용해 수행하는 경우에는… [own p.221-224, subtree p.221-224]
+      - 자. 해충이나 쥐를 막는 방법 및 점검주기 [own p.224-225, subtree p.224-225]
+      - 차. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.225-233, subtree p.225-233]
+  - 문서 [own p.233-243, subtree p.233-243]
+    - 문서의 작성 [own p.233-237, subtree p.233-237]
+      - 가. 모든 문서의 작성 및 개정ㆍ승인ㆍ배포ㆍ회수 또는 폐기 등 관리에 관한 사항이 포함된 문서관리규정을 작성하여야 한다. [own p.233-233, subtree p.233-233]
+      - 나. 문서는 알아보기 쉽게 작성하여야 하며, 작성된 문서에는 제조부서 책임자 또는 품질(보증)부서 책임자의 서명과 승인 연월일이 있어야 한다. [own p.233-233, subtree p.233-233]
+      - 해설 [own p.233-234, subtree p.233-234]
+      - 관련 규정 [own p.234-234, subtree p.234-234]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.234-235, subtree p.234-235]
+      - 다. 문서의 작성자ㆍ검토자(또는 확인자) 및 승인자는 서명을 등록한 후 사용 하여야 한다. [own p.235-235, subtree p.235-235]
+      - 라. 모든 기록문서는 작업과 동시에 작성되어야 하며 지울 수 없는 잉크로 작성하여야 한다. 기록문서를 수정하는 경우에는 수정하려는 글자 또는 문장 위에 선을 그어 수정 전 내용을 알아볼 수 있도록 하고, 수정된 문서 에는 수정 사유, 수정 연월일 및 수정자의 서명이 있어야 한다. [own p.235-235, subtree p.235-235]
+      - 마. 문서를 개정할 때는 개정 사유 및 개정 연월일 등을 적고 제조부서 책임자 또는 품질(보증)부서 책임자의 승인을 받아야 하며, 정기적으로 점검하여 최근에 개정된 것인지를 확인하여야 한다. 개정 전의 것도 일정기간 보존 하여야 한다. [own p.235-237, subtree p.235-237]
+    - 문서의 관리 [own p.237-243, subtree p.237-243]
+      - 가. 모든 기록문서(전자기록을 포함한다)는 해당 제품의 유효기한 또는 사용 기한 경과 후 1년간 보존하여야 한다. 다만, 별도로 규정하는 경우 그 사 유와 보존기한을 명확하게 정하여야 한다. [own p.237-237, subtree p.237-237]
+      - 해설 [own p.237-237, subtree p.237-237]
+      - 관련 규정 [own p.237-237, subtree p.237-237]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.237-240, subtree p.237-240]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.240-242, subtree p.240-242]
+      - 나. 전자문서 시스템의 경우에는 허가된 사람만이 입력, 변경 또는 삭제할 수 있으며 자기테이프, 마이크로필름, 백업 등의 방법으로 기록의 훼손 또는 소실에 대비하고 필요시 판독 가능한 방법으로 출력하여야 한다. [own p.242-243, subtree p.242-243]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.243-243, subtree p.243-243]
+      - 다. 시스템 접근은 암호 또는 다른 수단에 의해 제한되어야하며 중요한 데이터 의 입력은 독립적으로 확인되어야 한다. 전자적으로 저장된 기록은 자기 테이프, 마이크로 필름, 용지 인쇄 출력 또는 다른 수단을 통한 백업 전송에 의해 보호되 어야 한다. 보유 기간 동안 데이터를 쉽게 이용할 수 있다는 것이 특히 중요하다. [own p.243-243, subtree p.243-243]
+  - 밸리데이션 [own p.243-286, subtree p.243-286]
+    - 밸리데이션의 대상 [own p.243-245, subtree p.243-245]
+      - 가. 다음의 어느 하나에 해당하는 경우에는 미리 수립된 밸리데이션계획서에 따라 밸리데이션을 실시하여야 한다. [own p.243-244, subtree p.243-244]
+      - 나. 밸리데이션 실시에 관한 기준서, 밸리데이션 실시 결과 및 결론을 종합한 보고서를 작성하여 갖추어 두어야 한다. [own p.244-244, subtree p.244-244]
+      - 다. 밸리데이션을 실시한 결과 제조관리 및 품질관리에 관하여 개선이 필요한 경우에는 필요한 조치를 하고 해당 조치에 대한 기록을 작성하여 갖추어 두어야 한다. [own p.244-244, subtree p.244-244]
+      - 라. 식품의약품안전처장이 정하는 바에 따라 객관적이고 합리적인 증거자료가 있는 경우에는 밸리데이션을 생략할 수 있다. [own p.244-244, subtree p.244-244]
+      - 해설 [own p.244-245, subtree p.244-245]
+    - 공정 밸리데이션 [own p.245-266, subtree p.245-266]
+      - 관련 규정 [own p.245-245, subtree p.245-245]
+      - 가. 의약품 제조공정이 미리 설정된 기준 및 품질 특성에 맞는 제품을 일관 되게 제조한다는 것을 검증하고 문서화하는 공정 밸리데이션을 실시하여야 한다. [own p.245-245, subtree p.245-245]
+      - 해설 [own p.245-245, subtree p.245-245]
+      - 참고자료 PIC/S GMP Annex 15 [own p.245-245, subtree p.245-245]
+      - 참고자료 미국 Guidance for Industry : Process Validation [own p.245-245, subtree p.245-245]
+      - 나. 제품의 품질에 영향을 미치는 중요한 제조공정에 대해서는 예측적 밸리 데이션을 실시하여야 하되, 부득이한 경우에는 동시적 또는 회고적 밸리 데이션으로 갈음할 수 있다. [own p.245-245, subtree p.245-245]
+      - 참고자료 Appendix 7 : non-sterile process validation [own p.245-245, subtree p.245-245]
+      - 다. 공정 밸리데이션은 품목별(무균제제 무균공정의 경우에는 공정별)로 실시 하여야 한다. [own p.245-245, subtree p.245-245]
+      - 다. (예 : 유사한 기본 과립을 다른 타정 중량으로 하여 제조된 정제 또는 서로 다른 크 기의 캡슐에 동일한 기본 조성의 중량을 충전한 캡슐). 동일한 용기 마개 시스템이면서 용기의 크기나 충전량만 다른 경우에도 브래케팅 접근법을 적용할 수 있다. [own p.245-247, subtree p.245-247]
+      - 참고자료 WHO TRS No. 992 GMP Annex 3 [own p.247-249, subtree p.247-249]
+      - 라. 공정 밸리데이션은 실시 시기에 따라 다음과 같이 분류한다. [own p.249-266, subtree p.249-266]
+    - 시험방법 밸리데이션 [own p.266-270, subtree p.266-270]
+      - 6.3 시험방법 밸리데이션 의약품등의 품질관리를 위한 시험방법의 타당성을 미리 검증하고 문서화하는 밸리데이션으로서 품목별로 실시하여야 한다. [own p.266-266, subtree p.266-266]
+      - 해설 [own p.266-267, subtree p.266-267]
+      - 관련 규정 [own p.267-267, subtree p.267-267]
+      - 참고자료 PIC/S Part I [own p.267-267, subtree p.267-267]
+      - 6.37 Prior to transferring a test method, the transferring site should verify that the test method(s) comply with those as described in the Marketing Authorisation or the relevant technical dossier. The original validation of the test method(s) should be… [own p.267-268, subtree p.267-268]
+      - 6.38 The transfer of testing methods from one laboratory (transferring laboratory) to another laboratory (receiving laboratory) should be described in a detailed protocol. [own p.268-268, subtree p.268-268]
+      - 6.39 The transfer protocol should include, but not be limited to, the following parameters: (i) Identification of the testing to be performed and the relevant test method(s) undergoing transfer; (ii) Identification of the additional training requirements; [own p.268-268, subtree p.268-268]
+      - 6.40 Deviations from the protocol should be investigated prior to closure of the technical transfer process. The technical transfer report should document the comparative outcome of the process and should identify areas requiring further test method… [own p.268-269, subtree p.268-269]
+      - 6.41 Where appropriate, specific requirements described in other guidelines should be addressed for the transfer of particular testing methods (e.g. Near Infrared Spectroscopy). [own p.269-269, subtree p.269-269]
+      - 참고자료 미국 Guideline : Guide to Inspections of Pharmaceutical [own p.269-269, subtree p.269-269]
+      - 15. 시험방법 밸리데이션 시험 방법 밸리데이션과 관련된 정보를 완결성, 정확성, 신뢰성 측면에서 주의 깊게 평가해야 한다. 특히 공정서 수재 방법이 있음에도 다른 방법을 선택하는 경우에는 두 방법을 비교하여 회사 자체의 방법이 공정서 수재 방법에 비해 동등 이상임을 증명해 야 한다. 공정서 수재 방법인 경우에는 그 방법이 실제 시험 조건에서 효과적으로 적 용될 수 있음을 증명해야 한다. [own p.269-270, subtree p.269-270]
+      - 15. METHODS VALIDATION [own p.270-270, subtree p.270-270]
+    - 세척 밸리데이션 [own p.270-285, subtree p.270-285]
+      - 6.4 세척 밸리데이션 기계·설비 등의 잔류물(전 작업 의약품, 세척제 등)이 적절하게 세척되었는 지를 검증하고 문서화하는 밸리데이션으로서 품목별로 실시하여야 한다. [own p.270-270, subtree p.270-270]
+      - 해설 [own p.270-270, subtree p.270-270]
+      - 관련 규정 [own p.270-270, subtree p.270-270]
+      - 참고자료 PIC/S GMP Annex 15 [own p.270-270, subtree p.270-270]
+      - 10. 세척 밸리데이션 [own p.270-270, subtree p.270-270]
+      - 10.1 모든 제품 접촉 장비에 대한 세척 절차의 효과를 확인하기 위해 세척 밸리데이 션을 수행해야 한다. 적절한 과학적 정당성이 있다면 모의제품을 사용할 수 있다. [own p.270-270, subtree p.270-270]
+      - 10.2 청결도의 시각적 확인은 세척 밸리데이션 허용기준의 중요한 부분이다. 하지만 일반적으로 이 기준만을 사용하는 것은 허용되지 않는다. 적합한 잔류물에 대한 결과가 얻어질 때 까지 반복적인 세척 및 재시험은 허용가능한 접근법이 아니다. [own p.270-270, subtree p.270-270]
+      - 10.3 세척 밸리데이션 프로그램이 완료되기 까지 시간이 소요되는 것과 몇몇 제품들 의 경우 매 배치 이후의 확인을 통한 검증이 필요하다는 것이 일반적으로 인정 된다.(예, 연구용 의약품) 장비가 깨끗하고 이후에도 사용할 수 있다는 결론을 뒷받침 할 수 있는 충분한 데이터가 있어야 한다. [own p.270-270, subtree p.270-270]
+      - 10.4 밸리데이션은 세척 공정의 자동화 수준을 고려해야 한다. 자동 공정이 사용되는 경우 시설 및 장비의 정해진 정상 작동 범위를 밸리데이션해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.5 모든 세척 공정에서 세척 효과 및 성능에 영향을 미치는 변수를 결정하기 위해 평가가 수행되어야 한다. (예, 작업자, 행굼시간과 같은 절차에 대한 상세한 수 준 등). 변동 인자가 확인된 경우 최악의 상황을 밸리데이션 연구의 기초로 사용 해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.6 제품 잔류물의 전이 한계는 독성평가에 근거해야 한다. 선택된 한계에 대한 정당 성은 모든 참고자료를 포함하는 위험평가에 문서화 되어야 한다. 사용된 세제의 제거에 대한 기준이 설정되어야 한다. 허용 기준은 공정 장비배열 내 여러 장비의 잠재적 누적 효과가 고려되어야 한다. [own p.270-270, subtree p.270-270]
+      - 10.6.1 치료용 거대 분자 및 팹타이드는 극단적인 pH 및 열에 노출되면 분해되고 변성되며 약리학 적으로 비활성이 될 수 있다. 따라서 독성 평가는 이러한 상황에는 적용될 수 없다. [own p.270-270, subtree p.270-270]
+      - 10.6.2 특정 잔류물을 시험할 수 없다면, 다른 대표적인 파라미터가 선택 될 수 있다. (예, 총유기탄소(TOC) 및 전도도) [own p.270-270, subtree p.270-270]
+      - 10.7 미생물 및 엔도톡신 오염으로 인한 위험은 세척 밸리데이션 계획서의 개발 중 고 려되어야 한다. [own p.270-270, subtree p.270-270]
+      - 10.8 제조 공정과 세척 사이의 시간 및 세척과 사용 사이의 시간의 영향을 고려하여 세척 공정의 세척전유지시간(dirty holding time) 및 세척후유지시간(clean holding time)을 정의해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.9 캠페인 생산을 수행하는 경우 캠페인 종료 시 세척 용이성에 대한 영향을 고려 해야 하며 캠페인의 최대 기간(시간 및 배치 수)을 세척 밸리데이션 수행의 기초로 삼아야 한다. [own p.270-270, subtree p.270-270]
+      - 10.10 최악 조건 접근법으로 세척 밸리데이션을 실시할 경우 최악 조건 제품의 선택과 평가된 제조소의 신제품에 대한 영향에 대한 과학적인 근거가 제공되어야 한다. [own p.270-270, subtree p.270-270]
+      - 10.11 세척 밸리데이션 계획서에는 검체 채취할 위치를 지정하거나 참조해야 하며, 이러한 위치를 선택하는 근거와 허용 기준을 정의해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.12 검체 채취 방법은 생산 설비에 따라 스왑 및 린스 또는 다른 방법으로 수행해야 한다. 검체 채취 도구 및 방법은 결과에 영향을 주지 않아야 한다. 사용된 모든 검체 채취 방법으로 제품과 접촉한 장비의 모든 구성품 재질에서 검체 회수가 가능해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.13 세척 절차는 위험평가를 토대로 적절한 횟수만큼 수행되어야 하고 세척 기준이 밸리데이션 되었음을 입증하기 위해 허용 기준을 충족시켜야 한다. [own p.270-270, subtree p.270-270]
+      - 10.14 세척 공정이 효과적이지 않거나 일부 장비에 적합하지 않은 경우 PIC/S GMP 가이드의 3장 및 5장에 명시된 대로 각 제품에 전용 장비 또는 기타 적절한 조 치를 사용해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.15 수동으로 장비를 세척하는 경우, 타당한 빈도로 수작업 공정의 효율성을 확인 하는 것이 특히 중요하다. [own p.270-270, subtree p.270-270]
+      - 10. Cleaning Validation [own p.270-270, subtree p.270-270]
+      - 10.1 Cleaning validation should be performed in order to confirm the effectiveness of any cleaning procedure for all product contact equipment. Simulating agents may [own p.270-270, subtree p.270-270]
+      - 10.2 A visual check for cleanliness is an important part of the acceptance criteria for cleaning validation. It is not generally acceptable for this criterion alone to be used. Repeated cleaning and retesting until acceptable residue results [own p.270-270, subtree p.270-270]
+      - 10.3 It is recognised that a cleaning validation programme may take some time to complete and validation with verification after each batch may be required for some products e.g. investigational medicinal products. There should be sufficient data from the… [own p.270-270, subtree p.270-270]
+      - 10.4 Validation should consider the level of automation in the cleaning process. Where an automatic process is used, the specified normal operating range of the utilities and equipment should be validated. [own p.270-270, subtree p.270-270]
+      - 10.5 For all cleaning processes an assessment should be performed to determine the variable factors which influence cleaning effectiveness and performance, e.g. operators, the level of detail in procedures such as rinsing times etc. If variable factors have… [own p.270-270, subtree p.270-270]
+      - 10.6 Limits for the carryover of product residues should be based on a toxicological evaluation. The justification for the selected limits should be documented in a risk assessment which includes all the supporting references. Limits should be established for… [own p.270-270, subtree p.270-270]
+      - 10.6.1 Therapeutic macromolecules and peptides are known to degrade and denature when exposed to pH extremes and/or heat, and may become pharmacologically inactive. A [own p.270-270, subtree p.270-270]
+      - 10.6.2 If it is not feasible to test for specific product residues, other representative parameters may be selected, e.g. total organic carbon (TOC) and conductivity. [own p.270-270, subtree p.270-270]
+      - 10.7 The risk presented by microbial and endotoxin contamination should [own p.270-270, subtree p.270-270]
+      - 10.8 The influence of the time between manufacture and cleaning and the time between cleaning and use should be taken into account to define dirty and clean hold times for the cleaning process. [own p.270-270, subtree p.270-270]
+      - 10.9 Where campaign manufacture is carried out, the impact on the ease of cleaning at the end of the campaign should be considered and the maximum length of a campaign (in time and/or number of batches) [own p.270-270, subtree p.270-270]
+      - 10.10 Where a worst case product approach is used as a cleaning validation model, a scientific rationale should be provided for the selection of the worst case product and the impact of new products to the site assessed. Criteria for determining the worst… [own p.270-270, subtree p.270-270]
+      - 10.11 Cleaning validation protocols should specify or reference the locations to be sampled, the rationale for the selection of these locations and define the acceptance criteria. [own p.270-270, subtree p.270-270]
+      - 10.12 Sampling should be carried out by swabbing and/or rinsing or by other means depending on the production equipment. The sampling materials and method should not influence the result. Recovery should be shown to be possible from all product contact… [own p.270-270, subtree p.270-270]
+      - 10.13 The cleaning procedure should be performed an appropriate number of times based on a risk assessment and meet the acceptance criteria in order to prove that the cleaning method is validated. [own p.270-270, subtree p.270-270]
+      - 10.14 Where a cleaning process is ineffective or is not appropriate for some equipment, dedicated equipment or [own p.270-270, subtree p.270-270]
+      - 10.15 Where manual cleaning of equipment is performed, it is especially important that the effectiveness of the manual process should be confirmed at a justified frequency. [own p.270-285, subtree p.270-285]
+    - 제조지원설비 밸리데이션 [own p.285-286, subtree p.285-286]
+      - 6.5 제조지원설비 밸리데이션 제조용수공급시스템 및 공기조화장치시스템 등 의약품 제조를 지원하는 시스템에 대하여 검증하고 문서화하는 밸리데이션으로서 기계ㆍ설비별로 실시하여야 한다. [own p.285-285, subtree p.285-285]
+      - 해설 [own p.285-285, subtree p.285-285]
+      - 관련 규정 [own p.285-286, subtree p.285-286]
+      - 참고자료 WHO TRS No. 961 GMP Annex 5 [own p.286-286, subtree p.286-286]
+      - 참고자료 WHO TRS No. 970 GMP Annex 2 [own p.286-286, subtree p.286-286]
+      - 참고자료 WHO TRS No. 992 GMP [own p.286-286, subtree p.286-286]
+  - 품질관리 [own p.286-332, subtree p.286-332]
+    - 시험관리 [own p.286-317, subtree p.286-317]
+      - 가. 의뢰한 시험별로 다음 사항이 포함된 시험성적서를 작성하여야 한다. 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다. [own p.286-290, subtree p.286-290]
+      - 나. 원자재, 반제품 및 완제품은 적합판정이 된 것만을 사용하거나 출하하여야 하며, 일탈, 기준일탈 또는 편향이 있는 경우에는 그 사유를 조사한 후 처리하여야 한다. 다만, 반제품의 경우에는 밸리데이션, 안정성시험, 제품품질평가 등을 고려하여 적합판정 이전에 사용할 수 있다. [own p.290-292, subtree p.290-292]
+      - 다. 원자재의 품질이 계속적으로 균질하여 시험성적에 충분한 신뢰성이 보증되는 경우에는 절차와 기준을 문서로 정하여 입고될 때마다 필요 항목만 검사할 수 있다. 다만, 확인시험 및 육안검사는 반드시 하여야 하며, 정기적으로 모든 항목을 시험하여야 한다. [own p.292-297, subtree p.292-297]
+      - 라. 시험기록(시험 근거자료를 포함한다)이 정확하고 설정된 기준에 맞다는 것을 확인하는 중간검토자를 두어야 한다. [own p.297-297, subtree p.297-297]
+      - 마. 완제품의 출하승인을 위한 평가는 제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다. [own p.297-297, subtree p.297-297]
+      - 바. 그래프, 계산식 등 시험에서 얻은 모든 기록(전자기록을 포함한다)은 보존하여야 한다. [own p.297-299, subtree p.297-299]
+      - 사. 시험용 검체는 오염되거나 변질되지 않도록 채취하여야 하고, 채취과정에서 원자재 및 반제품이 오염되지 않도록 관리하여야 한다. 채취한 후에는 원상태와 동등하게 포장하여야 하며, 시험용 검체가 채취되었음을 표시하는 절차를 포함한 검체채취 절차를 마련하여야 한다. [own p.299-300, subtree p.299-300]
+      - 아. 시험기기, 계측기 및 기록계는 미리 정한 계획서에 따라 정기적으로 교정ㆍ기록하여야 한다. [own p.300-301, subtree p.300-301]
+      - 자. 주성분 및 완제품의 보관용 검체는 제조단위 또는 관리번호별로 채취하고, 보관용 검체 중 주성분은 투입된 완제품의 마지막 제조단위, 완제품은 해당 제조단위의 유효기한 또는 사용기한 경과 후 1년간 보관하여야 한다. [own p.301-301, subtree p.301-301]
+      - 차. 주성분의 보관용 검체는 시판용 제품과 포장형태는 동일하거나 동등 이상이어야 하고 완제품의 보관용 검체와 시판용 제품의 포장형태는 동일하여야 하며, 규정된 시험항목(무균시험, 발열성물질시험은 제외할 수 있다)을 2회 이상 시험할 수 있는 양을 규정된 보관조건에서 보관하여야 한다. 다만, 시판용 제품이 대형포장인 경우에는 대형포장에 소량 검체를 보관하거나 대형포장과 동일한 재질의 소형 포장에 보관할 수 있다. [own p.301-304, subtree p.301-304]
+      - 카. 표준품, 배지, 검체, 중요 시약, 부피측정용 유리기구 등에 대한 관리상황을 기록하여야 한다. [own p.304-307, subtree p.304-307]
+      - 타. 표시재료는 기재사항이 변경될 때마다 규정에 맞는지를 확인하고 변경된 표시재료를 보관하여야 한다. [own p.307-307, subtree p.307-307]
+      - 파. 의약품과 접촉하는 포장재료는 의약품을 변질시키거나 인체에 유해한 재료가 아닌지를 확인한 후 사용하여야 한다. [own p.307-309, subtree p.307-309]
+      - 하. 제조용수는 정기적으로 사용점 등에서 제조용수를 채취하여 규정된 시험방법에 따라 시험하고 평가하여야 한다. [own p.309-311, subtree p.309-311]
+      - 거. 경시변화(經時變化 : 시간의 흐름에 따라 물리ㆍ화학적 성질 등이 변화하는 것을 말한다)가 우려되는 원료약품을 장기보관하는 경우 재시험하여 사용하여야 한다. [own p.311-313, subtree p.311-313]
+      - 너. 시험용 동물은 적절하게 관리하여야 하며, 각각 구분하여 그 사용내역을 기록하여야 한다. [own p.313-314, subtree p.313-314]
+      - 더. 실제 제조ㆍ사용된 검체를 대상으로 시험 시마다 시험자ㆍ시험기기 오차 등을 확인하는 적합성 시험을 하여야 한다. [own p.314-315, subtree p.314-315]
+      - 러. 원생약은 형태학적ㆍ이화학적 품종관리와 표본관리를 하여야 하며 동일한 생약이면서 표본과 다른 경우 품종에 따른 성분의 차이, 재배 시의 유해물질 사용 여부 등 재배지 정보수집 등을 통하여 품질관리를 철저히 하여야 한다. [own p.315-316, subtree p.315-316]
+      - 머. 한약분말 또는 한약엑스를 제조하는 경우에는 다음 사항을 준수하여야 한다. [own p.316-317, subtree p.316-317]
+    - 안정성 시험 [own p.317-327, subtree p.317-327]
+      - 가. 안정성시험은 계획을 수립하여 하고, 그 결과에 따라 완제품의 유효기간 또는 사용기간, 포장방법 및 저장조건을 설정하여야 한다. [own p.317-317, subtree p.317-317]
+    - 제품품질평가 [own p.327-332, subtree p.327-332]
+  - 제조관리 [own p.332-392, subtree p.332-392]
+    - 제조공정관리 [own p.332-364, subtree p.332-364]
+      - 가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다. [own p.332-332, subtree p.332-332]
+      - 해설 [own p.332-332, subtree p.332-332]
+      - 관련 규정 [own p.332-332, subtree p.332-332]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.332-332, subtree p.332-332]
+      - 참고자료 미국 Title 21 CFR Part 211. [own p.332-332, subtree p.332-332]
+      - 참고자료 일본 MHLW Ordinance No. 136. [own p.332-332, subtree p.332-332]
+      - 나. 해당 작업에 종사하지 않는 사람의 작업소 출입을 제한하여야 한다. [own p.332-332, subtree p.332-332]
+      - 참고자료 미국 Title 21 CFR Part 211 [own p.332-333, subtree p.332-333]
+      - 참고자료 일본 MHLW Ordinance No. 179 [own p.333-334, subtree p.333-334]
+      - 다. 작업 전에 시설 및 기구의 청결상태를 확인하여야 한다. [own p.334-336, subtree p.334-336]
+      - 라. 작업 중인 작업실과 보관용기 및 기계ㆍ설비에는 제품명과 제조번호 등을 표시하여야 한다. [own p.336-338, subtree p.336-338]
+      - 마. 반제품은 제품의 균질성을 확보하기 위하여 필요한 공정에서 적절한 시험을 하여 완제품의 규격에 맞도록 하여야 한다. [own p.338-341, subtree p.338-341]
+      - 바. 반제품은 신속하게 제조공정을 완료하되, 보관 시에는 품질이 변하지 아니하도록 보관하여야 한다. [own p.341-342, subtree p.341-342]
+      - 사. 이론 생산량과 실생산량을 비교하여 수율관리기준을 벗어난 경우에는 그 원인을 조사하고 대책을 수립하여 시행하여야 한다. [own p.342-344, subtree p.342-344]
+      - 아. 의약품을 제조하는 경우에는 미생물의 오염에 유의하고 청정등급에 맞도록 관리하여야 한다. [own p.344-347, subtree p.344-347]
+      - 자. 멸균조작이 필요한 의약품은 멸균 전과 멸균 후의 반제품 상호간에 혼동이 일어나지 않도록 관리하여야 한다. [own p.347-348, subtree p.347-348]
+      - 차. 제조용수의 수질을 작업 시마다 규정된 방법에 따라 확인하여야 한다. [own p.348-348, subtree p.348-348]
+      - 참고자료 미국 약전(USP 39) [own p.348-350, subtree p.348-350]
+      - 카. 제조공정 중 기준일탈한 반제품을 재가공하는 경우에는 품질(보증)부서 책임자의 승인을 받아야 하며 그 기록을 보관하여야 한다. [own p.350-351, subtree p.350-351]
+      - 참고자료 캐나다 GUI-0001 [own p.351-352, subtree p.351-352]
+      - 타. 발열성물질시험이 적용되는 의약품의 용기나 마개는 발열성물질을 제거 하기 위하여 세척ㆍ멸균하여야 한다. [own p.352-354, subtree p.352-354]
+      - 파. 완제품의 품질을 보증하기 위하여 중요공정에 설정된 작업시간을 벗어난 경우에는 제품의 품질에 영향이 없음을 규명하고 그 관련 기록을 보관 하여야 한다. [own p.354-355, subtree p.354-355]
+      - 하. 한약원료의 제조공정은 다음 사항을 준수하여야 한다. [own p.355-364, subtree p.355-364]
+    - 포장공정관리 [own p.364-385, subtree p.364-385]
+      - 가. 다른 의약품이나 다른 제조단위를 동시 또는 연속하여 포장할 경우에는 의약품 상호 간의 혼동 및 교차오염과 자재 상호 간의 혼동이 일어나지 않도록 작업실을 구획하는 등 적절한 방안을 마련하여야 한다. [own p.364-364, subtree p.364-364]
+      - 해설 [own p.364-364, subtree p.364-364]
+      - 관련 규정 [own p.364-364, subtree p.364-364]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.364-364, subtree p.364-364]
+      - 참고자료 미국 Title 21 CFR Part 211. [own p.364-364, subtree p.364-364]
+      - 나. 포장작업을 시작하기 전에 이전 작업의 포장재료가 남아 있지 않은지를 확인하여야 한다. [own p.364-364, subtree p.364-364]
+      - 다. 표시재료는 작업 전에 품질(보증)부서의 승인 여부와 제조번호 등 인쇄 내용이 정확한지를 확인하고 사용하여야 하며, 포장라인 중 인쇄되는 자재는 그 내용이 제조기록서에서 지시한 대로 인쇄되고 있는지를 확인 하여야 한다. [own p.364-365, subtree p.364-365]
+      - 라. 포장작업 중인 작업실, 포장라인 또는 기계ㆍ설비에는 제품명과 제조번호를 표시하여야 한다. [own p.365-366, subtree p.365-366]
+      - 마. 포장작업이 끝나면 자재의 인수량과 사용량을 비교하여 차이가 있을 경우에는 원인을 조사하여야 하며, 사용하고 남은 자재는 입ㆍ출고 내용을 기록하고 자재보관소로 반납하거나 폐기하여야 한다. 다만, 제조번호 등을 인쇄한 표시재료는 폐기하여야 한다. [own p.366-368, subtree p.366-368]
+      - 참고자료 캐나다 GUI-0001 [own p.368-370, subtree p.368-370]
+      - 바. 제품의 표시사항과 포장의 적합 여부를 확인ㆍ기록하여야 하며, 포장공정 에서 채취된 검체는 시험이 완료된 후 폐기하여야 한다. 다만, 혼동과 오염의 우려가 없는 경우에는 폐기하지 아니할 수 있다. [own p.370-372, subtree p.370-372]
+      - 사. 포장작업이 완료된 완제품은 품질(보증)부서의 적합판정이 나올 때까지 다른 제품과 혼동되지 아니하도록 보관하여야 한다. [own p.372-374, subtree p.372-374]
+      - 아. 의약품의 용기나 포장에 대하여 필요한 경우에는 기밀 또는 밀봉 등의 시험ㆍ검사를 하여야 한다. [own p.374-375, subtree p.374-375]
+      - 자. 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다. [own p.375-385, subtree p.375-385]
+    - 반품 및 재포장 [own p.385-392, subtree p.385-392]
+      - 가. 반품된 제품에 대해서는 품목명, 제조번호, 수량, 반품사유, 반품업소 및 반품일과 그 처리명세 및 처리일 등 반품에 관한 내용을 기록하여야 한다. [own p.385-385, subtree p.385-385]
+      - 나. 유통과정에서 반품된 제품은 원칙적으로 폐기하여야 한다. 다만, 다음 사 항을 모두 만족한 경우에 한정하여 재입고 또는 재포장할 수 있다. [own p.385-385, subtree p.385-385]
+      - 해설 [own p.385-385, subtree p.385-385]
+      - 관련 규정 [own p.385-386, subtree p.385-386]
+      - 참고자료 미국 Title 21 CFR Part 211. [own p.386-387, subtree p.386-387]
+      - 참고자료 캐나다 GUI-0001 [own p.387-388, subtree p.387-388]
+      - 다. 재입고 또는 재포장 작업은 품질(보증)부서 책임자의 승인이 있어야 하고, 재포장을 하는 경우에는 품목 및 제조번호에 따라 재포장을 지시하며 기록서에 의하여 작업하고 적합으로 판정된 후 입고하여야 한다. [own p.388-389, subtree p.388-389]
+      - 라. 재포장한 제품에는 제조번호 등에 재포장한 것임을 나타내는 표시를 하여야 하며, 사용기한 또는 유효기한을 변경해서는 안 된다. [own p.389-391, subtree p.389-391]
+      - 마. 재입고 또는 재포장할 수 없는 반품인 경우에는 따로 보관하고, 규정에 따라 신속하게 폐기하여야 한다. [own p.391-391, subtree p.391-391]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.391-392, subtree p.391-392]
+  - 제조위생관리 [own p.392-408, subtree p.392-408]
+    - 작업원의 위생 [own p.392-398, subtree p.392-398]
+      - 가. 작업원은 청정구역과 작업의 종류에 따라 규정된 작업복, 신발, 모자, 마스크 등을 착용하여야 한다. [own p.392-392, subtree p.392-392]
+      - 해설 [own p.392-392, subtree p.392-392]
+      - 관련 규정 [own p.392-392, subtree p.392-392]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.392-393, subtree p.392-393]
+      - 참고자료 미국 21 CFR Part 211 [own p.393-394, subtree p.393-394]
+      - 참고자료 캐나다 GMP GUI-0001 [own p.394-395, subtree p.394-395]
+      - 나. 신규 작업원 및 재직 중인 작업원은 정기적으로 건강진단을 받아야 한다. [own p.395-395, subtree p.395-395]
+      - 다. 전염성질환 등으로 인하여 의약품의 품질에 영향을 미칠 수 있는 작업원은 의약품과 직접 접촉하는 작업에 참여하여서는 안 된다. [own p.395-398, subtree p.395-398]
+    - 작업소의 위생관리 [own p.398-405, subtree p.398-405]
+      - 가. 오염과 혼동을 방지하기 위하여 정리정돈을 잘 하고 청결을 유지할 수 있도록 청소하여야 한다. [own p.398-398, subtree p.398-398]
+      - 해설 [own p.398-398, subtree p.398-398]
+      - 관련 규정 [own p.398-398, subtree p.398-398]
+      - 참고자료 미국 21 CFR Part 211 [own p.398-399, subtree p.398-399]
+      - 나. 작업소의 청소는 청소방법, 청소주기 및 확인방법에 대한 규정에 따라 하여야 한다. [own p.399-400, subtree p.399-400]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.400-401, subtree p.400-401]
+      - 다. 청정구역은 청정등급에 맞는 청정도가 유지되도록 관리하고 정기적으로 점검하여야 한다. [own p.401-402, subtree p.401-402]
+      - 라. 작업소 및 보관소에 음식물을 반입하거나 같은 장소에서 흡연을 하여서는 안 된다. [own p.402-402, subtree p.402-402]
+      - 마. 해충이나 쥐를 막을 대책을 마련하고 정기적으로 점검ㆍ확인하여야 한다. [own p.402-405, subtree p.402-405]
+    - 제조설비의 세척 [own p.405-408, subtree p.405-408]
+      - 가. 제조설비의 세척에 사용하는 세제 또는 소독제는 잔류하거나 적용하는 표면에 이상을 초래하지 아니하는 것이어야 한다. [own p.405-405, subtree p.405-405]
+      - 나. 세척한 제조설비는 다음 사용 시까지 오염되지 아니하도록 유지ㆍ관리 하여야 한다. [own p.405-405, subtree p.405-405]
+      - 다. 제조설비의 세척은 세척작업원, 세척작업일 및 세척에 사용된 약품 등을 기재한 세척기록과 그 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순 으로 작성하여 갖추어 두어야 하되, 세척기록과 사용기록은 통합하여 작성할 수 있다. [own p.405-405, subtree p.405-405]
+      - 해설 [own p.405-405, subtree p.405-405]
+      - 관련 규정 [own p.405-406, subtree p.405-406]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.406-407, subtree p.406-407]
+      - 참고자료 미국 21 CFR Part 211 [own p.407-407, subtree p.407-407]
+      - 참고자료 캐나다 GMP GUI-0001 [own p.407-408, subtree p.407-408]
+  - 원자재 및 제품의 관리 [own p.408-430, subtree p.408-430]
+    - 입고관리 [own p.408-419, subtree p.408-419]
+      - 가. 반입된 원자재 및 반제품(이하 “원자재등”이라 한다)은 시험결과 적합판 정이 날 때까지 격리ㆍ보관하여야 한다. 다만, 적합판정을 받은 원자재와 확실하게 구분할 수 있는 대책이 마련된 경우에는 그렇지 않다. [own p.408-408, subtree p.408-408]
+      - 해설 [own p.408-408, subtree p.408-408]
+      - 관련 규정 [own p.408-408, subtree p.408-408]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.408-408, subtree p.408-408]
+      - 참고자료 미국 21 CFR Part 211 [own p.408-408, subtree p.408-408]
+      - 참고자료 캐나다 GMP GUI-0001 [own p.408-408, subtree p.408-408]
+      - 나. 반입된 원자재등의 외관 및 표시사항을 확인하고 제조번호가 없는 경우 에는 관리번호를 부여하여 겉포장의 먼지를 제거한 후 보관하여야 한다. [own p.408-408, subtree p.408-408]
+      - 다. 원자재등이 반입되면 제조단위 또는 관리번호별로 시험용 검체를 채취하고 시험 중임을 표시하며, 검체의 용기ㆍ포장에 검체명, 제조번호, 채취일자, 채취자 등을 표시하여야 한다. [own p.408-410, subtree p.408-410]
+      - 참고자료 원료 시험 [own p.410-419, subtree p.410-419]
+    - 보관관리 [own p.419-426, subtree p.419-426]
+      - 가. 보관업무에 종사하지 않는 사람의 보관소 출입을 제한하여야 한다. [own p.419-419, subtree p.419-419]
+      - 해설 [own p.419-419, subtree p.419-419]
+      - 관련 규정 [own p.419-419, subtree p.419-419]
+      - 참고자료 미국 21 CFR Part 211 [own p.419-419, subtree p.419-419]
+      - 참고자료 캐나다 GMP GUI-0001 [own p.419-421, subtree p.419-421]
+      - 나. 원료약품, 반제품, 자재, 완제품, 부적합품 및 반품된 제품은 각각 구획된 장소에 종류별로 보관하여야 한다. 다만, 원자재 및 완제품이 혼동을 일 으킬 우려가 없는 시스템에 의하여 보관되는 경우에는 그러하지 아니하다. [own p.421-421, subtree p.421-421]
+      - 다. 원자재 및 완제품은 제조번호 또는 관리번호별로 시험 전후를 표시하고 구분ㆍ보관하여야 한다. 다만 자동관리 시스템인 경우에는 표시를 생략 할 수 있다. [own p.421-421, subtree p.421-421]
+      - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.421-423, subtree p.421-423]
+      - 라. 원자재 및 완제품은 바닥과 벽에 닿지 아니하도록 보관하고 선입선출에 의하여 출고할 수 있도록 정리ㆍ보관하여야 한다. [own p.423-423, subtree p.423-423]
+      - 마. 시험결과 부적합으로 판정된 원자재는 부적합 표시를 하여 다른 원자재와 구별하고 신속하게 처리하여야 한다. [own p.423-424, subtree p.423-424]
+      - 바. 원자재, 반제품 및 완제품은 품질에 나쁜 영향을 미치지 아니하는 조건에서 보관하여야 한다. [own p.424-424, subtree p.424-424]
+      - 사. 표시재료는 제품별, 종류별로 구분ㆍ보관하여야 하며 표시내용이 변경된 경우에는 이전의 자재와 섞이지 않도록 하기 위한 조치를 마련하여야 한다. [own p.424-426, subtree p.424-426]
+    - 원생약의 보관관리 [own p.426-429, subtree p.426-429]
+      - 가. 원생약은 적합판정된 한약원료와 구분하여 보관하여야 한다. [own p.426-426, subtree p.426-426]
+      - 나. 보관소는 적정한 온도 및 습도가 유지되도록 정기적으로 점검ㆍ기록 하여야 한다. [own p.426-426, subtree p.426-426]
+      - 해설 [own p.426-427, subtree p.426-427]
+      - 관련 규정 [own p.427-427, subtree p.427-427]
+      - 참고자료 PIC/S Annex 7 [own p.427-429, subtree p.427-429]
+      - 다. 쥐, 해충, 미생물 등으로부터 오염되지 않도록 관리하여야 한다. [own p.429-429, subtree p.429-429]
+      - 라. 곰팡이의 증식과 충해를 방지하기 위하여 약제를 살포하거나 훈증하는 경우 약전(藥典)에 따르고, 훈증기록은 3년간 보존한다. [own p.429-429, subtree p.429-429]
+    - 출고관리 [own p.429-430, subtree p.429-430]
+      - 가. 출고는 선입선출방식으로 하여야 하며, 그러지 아니할 경우에는 타당한 사유가 있어야 한다. [own p.429-429, subtree p.429-429]
+      - 나. 원자재는 시험결과 적합으로 판정된 것만을 작업소로 보내야 한다. [own p.429-429, subtree p.429-429]
+      - 다. 완제품은 품질(보증)부서 책임자가 출하 승인한 것만을 출하하여야 하며 제품명, 제조번호, 출하일자, 거래처 및 수량 등을 기록ㆍ관리하여야 한다. [own p.429-429, subtree p.429-429]
+      - 해설 [own p.429-429, subtree p.429-429]
+      - 참고자료 미국 21 CFR Part 211 [own p.429-430, subtree p.429-430]
+  - 불만처리 및 회수 [own p.430-441, subtree p.430-441]
+    - 가. 제품에 대한 불만을 효과적으로 처리하기 위하여 불만처리규정을 작성하고 불만처리위원회를 구성하여 운영하여야 한다. [own p.430-430, subtree p.430-430]
+    - 나. 소비자로부터 불만을 접수한 경우에는 신속하게 불만내용을 조사하여 그 원인을 규명하고, 재발방지대책을 마련하며 소비자에게는 적절한 조치를 하여야 한다. [own p.430-430, subtree p.430-430]
+    - 다. 불만처리기록에는 다음 사항이 포함되어야 한다. [own p.430-430, subtree p.430-430]
+    - 해설 [own p.430-430, subtree p.430-430]
+    - 관련 규정 [own p.430-430, subtree p.430-430]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.430-430, subtree p.430-430]
+    - 참고자료 미국 21 CFR Part 211 [own p.430-430, subtree p.430-430]
+    - 참고자료 캐나다 GMP GUI-0001 [own p.430-430, subtree p.430-430]
+    - 라. 출하된 제품에 중대한 결함이 있는 경우에는 신속히 조치하고 그 기록을 보존하여야 하며, 재발방지대책을 수립하여 시행하여야 한다. [own p.430-430, subtree p.430-430]
+    - 마. 회수품은 격리ㆍ보관하고 정하여진 규정에 따라 조치하여야 한다 [own p.430-433, subtree p.430-433]
+    - 바. 제품이 결함이 있거나 결함이 있는 것으로 의심되어 회수하고자 할 때에는 제품이 유통된 모든 국가의 관계 당국에 적절한 방법으로 알려야 한다. [own p.433-441, subtree p.433-441]
+  - 변경관리 [own p.441-447, subtree p.441-447]
+    - 가. 기계설비, 원자재, 제조공정, 시험방법 등을 변경할 경우에는 제품의 품질 또는 공정의 재현성에 미치는 영향을 검토하여야 하고, 충분한 데이터에 의하여 품질관리기준에 맞는 제품을 제조한다는 것을 확인하고 문서화하 여야 하되, 필요한 경우에는 밸리데이션과 안정성 시험 및 원자재의 제조 업자 평가 등을 실시한다. [own p.441-441, subtree p.441-441]
+    - 나. 변경된 내용을 실시할 경우에는 관련 문서의 개정, 작업원에 대한 교육ㆍ 훈련 등의 필요한 조치를 수립하여 시행하여야 한다. [own p.441-441, subtree p.441-441]
+    - 해설 [own p.441-442, subtree p.441-442]
+    - 관련 규정 [own p.442-443, subtree p.442-443]
+    - 참고자료 PIC/S GMP Guidance : PIC/S Validation Master Plan Installation [own p.443-444, subtree p.443-444]
+    - 참고자료 캐나다 GUI-0029 [own p.444-445, subtree p.444-445]
+    - 참고자료 WHO Annex 3 [own p.445-447, subtree p.445-447]
+  - 자율점검 [own p.447-452, subtree p.447-452]
+    - 가. 계획을 수립하여 자체적으로 제조 및 품질관리가 이 기준에 맞게 이루어 지고 있는지를 정기적으로 자율점검하여야 한다. 다만, 기준일탈이나 제품 회수가 빈번하게 발생하는 등 특별한 경우에는 추가로 실시하여야 한다. [own p.447-447, subtree p.447-447]
+    - 나. 자율점검을 실시할 수 있는 사람은 품질(보증)부서 책임자 또는 품질(보 증)부서 책임자가 지정하는 사람으로서 이 기준에 대한 지식과 경험이 풍부한 사람이어야 하며, 필요한 경우에는 외부 전문가에게 의뢰하여 실 시할 수 있다. [own p.447-447, subtree p.447-447]
+    - 다. 자율점검은 사전에 실시의 목적ㆍ범위 등을 정하여 실시하고, 자율점검 후에는 그 결과와 개선요구사항 등이 포함된 보고서를 작성하여야 하며, 개선요구사항에 대해서는 기한을 정하여 개선하여야 한다. [own p.447-447, subtree p.447-447]
+    - 해설 [own p.447-448, subtree p.447-448]
+    - 관련 규정 [own p.448-448, subtree p.448-448]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.448-451, subtree p.448-451]
+    - 참고자료 캐나다 GUI-0001 [own p.451-452, subtree p.451-452]
+  - 교육 및 훈련 [own p.452-456, subtree p.452-456]
+    - 가. 교육책임자 또는 담당자를 지정하고 교육ㆍ훈련의 내용 및 평가가 포함 된 교육ㆍ훈련규정을 작성하여야 하되, 필요한 경우에는 외부 전문기관에 교육을 의뢰할 수 있다. [own p.452-452, subtree p.452-452]
+    - 나. 작업원에 대한 교육ㆍ훈련은 연간계획을 수립하여 실시하며, 작업원이 맡은 업무를 효과적으로 수행할 수 있도록 제조ㆍ품질관리와 그 밖에 필요한 사항에 대하여 실시하여야 한다. [own p.452-452, subtree p.452-452]
+    - 다. 교육 후에는 교육결과를 평가하고, 필요하면 재교육을 하여야 한다. [own p.452-452, subtree p.452-452]
+    - 해설 [own p.452-453, subtree p.452-453]
+    - 관련 규정 [own p.453-453, subtree p.453-453]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.453-454, subtree p.453-454]
+    - 참고자료 캐나다 GUI-0001 [own p.454-456, subtree p.454-456]
+    - 참고자료 일본 MHLW Ordinance No. 179 [own p.456-456, subtree p.456-456]
+  - 위탁제조 및 위탁시험의 관리 [own p.456-478, subtree p.456-478]
+    - 가. 의약품등의 제조업자 [own p.456-456, subtree p.456-456]
+    - 나. 의약품등 외의 물품 제조업자로서 자동에어로졸 충전, 연필 제조, 가스 주입, 도금, 주물, 단조, 판금, 사출, 인쇄, 코팅, 도장, 멸균, 직조, 타면, 덴타 또는 설계에 관한 공정을 수행하는 자 [own p.456-456, subtree p.456-456]
+    - 다. 의약품등 외의 물품 제조업자로서 부분품 또는 부품의 제조를 전문으로 하는 자 [own p.456-456, subtree p.456-456]
+    - 라. 의약품등 외의 물품 제조업자로서 원료의약품의 합성공정 중 수소화 반응 공정을 수행하는 자 [own p.456-456, subtree p.456-456]
+    - 마. 세포독성 항암제제 등 식품의약품안전처장이 고시하는 의약품의 생산 시설을 갖춘 자 [own p.456-456, subtree p.456-456]
+    - 가. 특별시ㆍ광역시ㆍ도 및 특별자치도의 보건환경연구원 [own p.456-456, subtree p.456-456]
+    - 나. 법 제67조에 따라 조직된 사단법인인 한국의약품수출입협회 [own p.456-456, subtree p.456-456]
+    - 다. 의약품등의 제조업자 [own p.456-456, subtree p.456-456]
+    - 라. 법 제73조에 따라 식품의약품안전청장이 의약품등의 품질검사를 위 하여 지정하는 기관 [own p.456-456, subtree p.456-456]
+    - 해설 [own p.456-456, subtree p.456-456]
+    - 관련 규정 [own p.456-456, subtree p.456-456]
+    - 참고자료 PIC/S PART I [own p.456-456, subtree p.456-456]
+    - 참고자료 미국 Guidance : Contract Manufacturing Arrangements for Drugs : [own p.456-467, subtree p.456-467]
+    - 참고자료 일본 MHLW Ordinance No. 136 [own p.467-478, subtree p.467-478]
+- 별첨1 의약품 제조소의 시설 [own p.478-554, subtree p.478-554]
+  - 의약품 등의 제조업 및 수입자의 시설기준령 [own p.482-500, subtree p.482-500]
+    - 해설 [own p.482-482, subtree p.482-482]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.482-482, subtree p.482-482]
+    - 참고자료 미국 Title 21 CFR Part 211 [own p.482-482, subtree p.482-482]
+    - 참고자료 캐나다 GUI-0001 [own p.482-482, subtree p.482-482]
+    - 참고자료 일본 MHLW ordinance No. 179 [own p.482-482, subtree p.482-482]
+    - 참고자료 일본 MHLW ordinance No. 2 [own p.482-486, subtree p.482-486]
+    - 참고자료 일본 MHLW ordinance No. 136 [own p.486-490, subtree p.486-490]
+    - 관련 규정 [own p.490-494, subtree p.490-494]
+    - 참고자료 PIC/S PART I [own p.494-496, subtree p.494-496]
+    - 참고자료 미국 Guidance for industry : "NON-Penicillin Beta Lactam Drugs: A [own p.496-500, subtree p.496-500]
+    - 참고자료 WHO TRS No. 970 GMP Annex 2 [own p.500-500, subtree p.500-500]
+    - 참고자료 WHO TRS No. 992 GMP [own p.500-500, subtree p.500-500]
+    - 가. 제조하는 의약품의 종류ㆍ제형 또는 제조방법에 따라 오염을 방지하고 적절한 온도를 유지하며 필요한 경우에는 습도를 유지할 수 있는 공 기조화장치 [own p.500-500, subtree p.500-500]
+    - 참고자료 WHO TRS No. 961 Annex 5 [own p.500-500, subtree p.500-500]
+    - 참고자료 ISO 14644-1 [own p.500-500, subtree p.500-500]
+    - 나. 제조공정관리에 필요한 시험검사시설 또는 시험검사기구 [own p.500-500, subtree p.500-500]
+    - 다. 제조과정 중의 반제품을 품질에 영향을 미치지 아니하도록 보관할 수 있는 시설 [own p.500-500, subtree p.500-500]
+    - 가. 천장은 먼지가 떨어질 우려가 없도록 마무리되고, 바닥과 벽은 표면이 매끄럽고 먼지나 오물을 쉽게 제거할 수 있도록 되어 있을 것 [own p.500-500, subtree p.500-500]
+    - 나. 실내의 배관은 청소하기 쉽고 배관이 벽을 통과할 경우 틈이 없도록 마무리되어 있을 것 [own p.500-500, subtree p.500-500]
+    - 다. 출입구(비상구는 제외한다)와 창은 외부와 직접 통하지 아니하도록 되어 있을 것 [own p.500-500, subtree p.500-500]
+    - 라. 작업실은 작업원 외의 자의 통로가 되지 아니하도록 되어 있을 것 [own p.500-500, subtree p.500-500]
+    - 가. 용기의 세척시설, 세척 후 건조ㆍ멸균에 필요한 시설 및 멸균상태 를 유지할 수 있는 보관시설(해당 시설이 있는 작업실은 제3조제2 호 각 목에 적합하여야 한다) [own p.500-500, subtree p.500-500]
+    - 나. 무균제제의 종류에 따른 멸균시설 또는 제균시설(가열멸균시설인 경우 멸균작업 중 그 시설안의 어떠한 부분에서도 필요한 멸균조 건을 유지할 수 있는 시설이어야 한다) [own p.500-500, subtree p.500-500]
+    - 다. 이물(異物)검사에 필요한 시설 및 기구 [own p.500-500, subtree p.500-500]
+    - 라. 밀봉검사에 필요한 시설 및 기구(밀봉상태의 검사를 하는 경우에만 해당한다) [own p.500-500, subtree p.500-500]
+    - 가. 제균된 공기를 공급하는 시설을 설치할 것 [own p.500-500, subtree p.500-500]
+    - 나. 천장ㆍ바닥 및 벽의 표면은 소독액을 뿌려 세척하는 것에 견딜 수 있도록 되어 있을 것 [own p.500-500, subtree p.500-500]
+    - 다. 작업실 안으로 원료ㆍ자재 등을 반입하기 위한 작업준비실을 설치할 것 [own p.500-500, subtree p.500-500]
+    - 라. 작업원의 출입을 위하여 무균작업에 필요한 관리구역과 연결된 작업원 전용(專用) 탈의실 및 소독시설을 설치할 것 [own p.500-500, subtree p.500-500]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2. [own p.500-500, subtree p.500-500]
+    - 가. 세포나 미생물의 저장시설 [own p.500-500, subtree p.500-500]
+    - 나. 제조 또는 시험에 사용하는 동물 중 미생물을 접종한 동물을 관리하는 시설 [own p.500-500, subtree p.500-500]
+    - 다. 제조 또는 시험에 사용하는 동물을 처리하는 시설 [own p.500-500, subtree p.500-500]
+    - 라. 미생물을 배지(培地)에 이식하는 시설 [own p.500-500, subtree p.500-500]
+    - 마. 세포나 미생물의 배양시설 [own p.500-500, subtree p.500-500]
+    - 바. 배양한 세포나 미생물의 회수(回收)·정제·불활화(불활화：본래 가지고 있는 기능을 없애는 작용)ㆍ살균 등을 하는 시설 [own p.500-500, subtree p.500-500]
+    - 사. 원액의 희석용액을 조제하는 시설 [own p.500-500, subtree p.500-500]
+    - 아. 원액의 희석시설ㆍ분주(분주)시설과 용기의 밀봉시설 [own p.500-500, subtree p.500-500]
+    - 자. 제조 또는 시험에 사용한 기구ㆍ기계 등의 소독시설 [own p.500-500, subtree p.500-500]
+    - 차. 「혈액관리법 시행규칙」 [별표 4] 에 따른 시설(장비를 포함한다) [own p.500-500, subtree p.500-500]
+  - 의약품 등의 제조업 및 수입자의 시설기준령 시행규칙 [own p.500-554, subtree p.500-554]
+    - 해설 [own p.500-500, subtree p.500-500]
+    - 관련 규정 [own p.500-500, subtree p.500-500]
+    - 참고자료 PIC/S PART I [own p.500-500, subtree p.500-500]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2 [own p.500-500, subtree p.500-500]
+    - 참고자료 미국 Title 21 CFR Part 211 [own p.500-500, subtree p.500-500]
+    - 참고자료 미국 Guidance for industry : "NON-Penicillin Beta Lactam Drugs: A [own p.500-500, subtree p.500-500]
+    - 참고자료 캐나다 GUI-0001 [own p.500-504, subtree p.500-504]
+    - 참고자료 WHO TRS No. 970 GMP Annex 2 [own p.504-504, subtree p.504-504]
+    - 참고자료 WHO TRS No. 992 GMP [own p.504-506, subtree p.504-506]
+    - 참고자료 일본 MHLW ordinance No. 179 [own p.506-510, subtree p.506-510]
+    - 참고자료 일본 MHLW ordinance No. 2 [own p.510-516, subtree p.510-516]
+    - 가. 제조하는 의약품의 종류ㆍ제형 또는 제조방법에 따라 오염을 방지하고 적절한 온도를 유지하며 필요한 경우에는 습도를 유지할 수 있는 공 기조화장치 [own p.516-524, subtree p.516-524]
+    - 참고자료 WHO TRS No. 961 Annex 5 [own p.524-524, subtree p.524-524]
+    - 참고자료 ISO 14644-1 [own p.524-526, subtree p.524-526]
+    - 나. 제조공정관리에 필요한 시험검사시설 또는 시험검사기구 [own p.526-526, subtree p.526-526]
+    - 다. 제조과정 중의 반제품을 품질에 영향을 미치지 아니하도록 보관할 수 있는 시설 [own p.526-526, subtree p.526-526]
+    - 가. 천장은 먼지가 떨어질 우려가 없도록 마무리되고, 바닥과 벽은 표면이 매끄럽고 먼지나 오물을 쉽게 제거할 수 있도록 되어 있을 것 [own p.526-526, subtree p.526-526]
+    - 나. 실내의 배관은 청소하기 쉽고 배관이 벽을 통과할 경우 틈이 없도록 마무리되어 있을 것 [own p.526-526, subtree p.526-526]
+    - 다. 출입구(비상구는 제외한다)와 창은 외부와 직접 통하지 아니하도록 되어 있을 것 [own p.526-526, subtree p.526-526]
+    - 라. 작업실은 작업원 외의 자의 통로가 되지 아니하도록 되어 있을 것 [own p.526-528, subtree p.526-528]
+    - 가. 용기의 세척시설, 세척 후 건조ㆍ멸균에 필요한 시설 및 멸균상태 를 유지할 수 있는 보관시설(해당 시설이 있는 작업실은 제3조제2 호 각 목에 적합하여야 한다) [own p.528-528, subtree p.528-528]
+    - 나. 무균제제의 종류에 따른 멸균시설 또는 제균시설(가열멸균시설인 경우 멸균작업 중 그 시설안의 어떠한 부분에서도 필요한 멸균조 건을 유지할 수 있는 시설이어야 한다) [own p.528-528, subtree p.528-528]
+    - 다. 이물(異物)검사에 필요한 시설 및 기구 [own p.528-528, subtree p.528-528]
+    - 라. 밀봉검사에 필요한 시설 및 기구(밀봉상태의 검사를 하는 경우에만 해당한다) [own p.528-528, subtree p.528-528]
+    - 가. 제균된 공기를 공급하는 시설을 설치할 것 [own p.528-528, subtree p.528-528]
+    - 나. 천장ㆍ바닥 및 벽의 표면은 소독액을 뿌려 세척하는 것에 견딜 수 있도록 되어 있을 것 [own p.528-528, subtree p.528-528]
+    - 다. 작업실 안으로 원료ㆍ자재 등을 반입하기 위한 작업준비실을 설치할 것 [own p.528-528, subtree p.528-528]
+    - 라. 작업원의 출입을 위하여 무균작업에 필요한 관리구역과 연결된 작업원 전용(專用) 탈의실 및 소독시설을 설치할 것 [own p.528-530, subtree p.528-530]
+    - 참고자료 WHO TRS No. 986 GMP Annex 2. [own p.530-534, subtree p.530-534]
+    - 가. 세포나 미생물의 저장시설 [own p.534-534, subtree p.534-534]
+    - 나. 제조 또는 시험에 사용하는 동물 중 미생물을 접종한 동물을 관리하는 시설 [own p.534-534, subtree p.534-534]
+    - 다. 제조 또는 시험에 사용하는 동물을 처리하는 시설 [own p.534-534, subtree p.534-534]
+    - 라. 미생물을 배지(培地)에 이식하는 시설 [own p.534-534, subtree p.534-534]
+    - 마. 세포나 미생물의 배양시설 [own p.534-534, subtree p.534-534]
+    - 바. 배양한 세포나 미생물의 회수(回收)·정제·불활화(불활화：본래 가지고 있는 기능을 없애는 작용)ㆍ살균 등을 하는 시설 [own p.534-534, subtree p.534-534]
+    - 사. 원액의 희석용액을 조제하는 시설 [own p.534-534, subtree p.534-534]
+    - 아. 원액의 희석시설ㆍ분주(분주)시설과 용기의 밀봉시설 [own p.534-534, subtree p.534-534]
+    - 자. 제조 또는 시험에 사용한 기구ㆍ기계 등의 소독시설 [own p.534-534, subtree p.534-534]
+    - 차. 「혈액관리법 시행규칙」 [별표 4] 에 따른 시설(장비를 포함한다) [own p.534-534, subtree p.534-534]
+    - 가. 비씨지 백신에 사용되는 결핵균 [own p.534-554, subtree p.534-554]
+- 별첨2 컴퓨터화 시스템 [own p.554-606, subtree p.554-606]
+  - 원칙 [own p.559-564, subtree p.559-564]
+  - 일반사항 [own p.564-572, subtree p.564-572]
+    - 위험관리 [own p.564-568, subtree p.564-568]
+    - 작업원 [own p.568-568, subtree p.568-568]
+    - 공급업체와 서비스 제공자 [own p.568-572, subtree p.568-572]
+  - 계획 단계 [own p.572-590, subtree p.572-590]
+    - 밸리데이션 [own p.572-590, subtree p.572-590]
+  - 사용 단계 [own p.590-602, subtree p.590-602]
+    - 데이터 [own p.590-590, subtree p.590-590]
+    - 정확성 확인 [own p.590-590, subtree p.590-590]
+    - 데이터 저장 [own p.590-590, subtree p.590-590]
+    - 인쇄 [own p.590-591, subtree p.590-591]
+    - 점검기록 (Audit Trail) [own p.591-596, subtree p.591-596]
+    - 변경 및 구성 관리 [own p.596-596, subtree p.596-596]
+    - 정기 평가 [own p.596-597, subtree p.596-597]
+    - 보안 [own p.597-597, subtree p.597-597]
+    - 사건 관리 [own p.597-597, subtree p.597-597]
+    - 전자 서명 [own p.597-597, subtree p.597-597]
+    - 제조단위 출하 [own p.597-599, subtree p.597-599]
+    - 업무 지속성 [own p.599-599, subtree p.599-599]
+    - 기록 보관 [own p.599-602, subtree p.599-602]
+  - 용어 [own p.602-606, subtree p.602-606]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+전체 구조에서 관련 후보는 `문서`, `제조관리`, `품질관리`, `원생약의 보관관리`, `불만처리 및 회수`, `위탁제조 및 위탁시험`, `별첨2 점검기록/기록 보관` 쪽입니다. 각 질문별로 해당 좁은 페이지 범위만 열어 문구를 확인하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '세척기록' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '기록문서 보존' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '시험의뢰서' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '제조단위별 제조기록서' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 1627ms:
+      - 제7.1호가목 및 제8.1호가목의 시험성적서 및 제조단위별 제조기록서의 내용을 검토하고 제품의 출하를 승인하여야 한다. [own p.133-140, subtree p.133-140]
+      - 마. 완제품의 출하승인을 위한 평가는 제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다. [own p.297-297, subtree p.297-297]
+      - 가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다. [own p.332-332, subtree p.332-332]
+      - 다. 표시재료는 작업 전에 품질(보증)부서의 승인 여부와 제조번호 등 인쇄 내용이 정확한지를 확인하고 사용하여야 하며, 포장라인 중 인쇄되는 자재는 그 내용이 제조기록서에서 지시한 대로 인쇄되고 있는지를 확인 하여야 한다. [own p.364-365, subtree p.364-365]
+
+ succeeded in 1629ms:
+      - 가. 의뢰한 시험별로 다음 사항이 포함된 시험성적서를 작성하여야 한다. 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다. [own p.286-290, subtree p.286-290]
+
+ succeeded in 1642ms:
+      - 다. 제조설비의 세척은 세척작업원, 세척작업일 및 세척에 사용된 약품 등을 기재한 세척기록과 그 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순 으로 작성하여 갖추어 두어야 하되, 세척기록과 사용기록은 통합하여 작성할 수 있다. [own p.405-405, subtree p.405-405]
+
+ succeeded in 1643ms:
+      - 라. 모든 기록문서는 작업과 동시에 작성되어야 하며 지울 수 없는 잉크로 작성하여야 한다. 기록문서를 수정하는 경우에는 수정하려는 글자 또는 문장 위에 선을 그어 수정 전 내용을 알아볼 수 있도록 하고, 수정된 문서 에는 수정 사유, 수정 연월일 및 수정자의 서명이 있어야 한다. [own p.235-235, subtree p.235-235]
+      - 마. 문서를 개정할 때는 개정 사유 및 개정 연월일 등을 적고 제조부서 책임자 또는 품질(보증)부서 책임자의 승인을 받아야 하며, 정기적으로 점검하여 최근에 개정된 것인지를 확인하여야 한다. 개정 전의 것도 일정기간 보존 하여야 한다. [own p.235-237, subtree p.235-237]
+      - 가. 모든 기록문서(전자기록을 포함한다)는 해당 제품의 유효기한 또는 사용 기한 경과 후 1년간 보존하여야 한다. 다만, 별도로 규정하는 경우 그 사 유와 보존기한을 명확하게 정하여야 한다. [own p.237-237, subtree p.237-237]
+      - 바. 그래프, 계산식 등 시험에서 얻은 모든 기록(전자기록을 포함한다)은 보존하여야 한다. [own p.297-299, subtree p.297-299]
+      - 라. 곰팡이의 증식과 충해를 방지하기 위하여 약제를 살포하거나 훈증하는 경우 약전(藥典)에 따르고, 훈증기록은 3년간 보존한다. [own p.429-429, subtree p.429-429]
+    - 라. 출하된 제품에 중대한 결함이 있는 경우에는 신속히 조치하고 그 기록을 보존하여야 하며, 재발방지대책을 수립하여 시행하여야 한다. [own p.430-430, subtree p.430-430]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query 'Audit Trail 변경 삭제' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query 'ALCOA' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '포장작업 인적 사항' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '위탁자 수탁자 기록 서류 보존' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 1658ms:
+    - 저. “제조번호” 또는 “로트번호”란 일정한 제조단위분에 대하여 제조관리 및 출하에 관한 모든 사항을 확인할 수 있도록 표시된 번호로서 숫자ㆍ문자 또는 이들을 조합한 것을 말한다. [own p.18-18, subtree p.18-18]
+      - 제2.3호의 환경관리에 관한 사항을 승인하고 주관하여야 한다. [own p.122-125, subtree p.122-125]
+      - 제6호의 밸리데이션에 관한 사항을 승인하고 주관하여야 한다. 다만, 특별한 사유로 품질(보증)부서 책임자가 일부 밸리데이션 업무에 대하여 별도의 관리자를 지정하는 경우에는 그렇지 않다. [own p.125-127, subtree p.125-127]
+      - 제11호의 불만처리 및 제품회수에 관한 사항을 주관하여야 한다. [own p.144-147, subtree p.144-147]
+      - 나. 허가(신고) 연월일 및 허가(신고)사항 변경 연월일 [own p.160-160, subtree p.160-160]
+      - 다. 효능ㆍ효과, 용법ㆍ용량 및 사용상의 주의사항 [own p.160-160, subtree p.160-160]
+      - 라. 허가받은 원료약품 및 그 분량과 제조단위당 기준량, 필요한 경우 기준량 조정에 관한 사항 [own p.162-166, subtree p.162-166]
+      - 사. 작업 중 주의할 사항 [own p.166-169, subtree p.166-169]
+      - 자. 한약원료 등에 관한 사항 [own p.173-175, subtree p.173-175]
+      - 거. 다음 사항이 포함된 제조지시서 [own p.175-178, subtree p.175-178]
+      - 너. 동물유래원료에 관한 사항(주사제로 한정한다) [own p.178-178, subtree p.178-178]
+      - 더. 그 밖에 필요한 사항 [own p.178-186, subtree p.178-186]
+      - 가. 다음 사항이 포함된 시험지시서 [own p.186-186, subtree p.186-186]
+      - 나. 검체(檢體)의 채취자, 채취량, 채취장소, 채취방법 및 채취 시 주의사항 (무균 여부 등)과 채취 시의 오염방지대책 [own p.186-186, subtree p.186-186]
+      - 사. 표준품 및 시약의 관리 아 한약원료의 표본ㆍ보관에 관한 사항 [own p.190-190, subtree p.190-190]
+      - 차. 그 밖에 제3.3호의 품질(보증)부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.190-200, subtree p.190-200]
+      - 가. 제조공정관리에 관한 사항 [own p.200-200, subtree p.200-200]
+      - 나. 시설 및 기기 관리에 관한 사항 [own p.200-203, subtree p.200-203]
+      - 다. 원료약품 관리에 관한 사항 [own p.203-203, subtree p.203-203]
+      - 라. 자재 관리에 관한 사항 [own p.203-211, subtree p.203-211]
+      - 마. 완제품 관리에 관한 사항 [own p.211-211, subtree p.211-211]
+      - 바. 위탁제조에 관한 사항 [own p.211-211, subtree p.211-211]
+      - 사. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.211-220, subtree p.211-220]
+      - 나. 작업원의 수세, 소독방법 등 위생에 관한 사항 [own p.220-220, subtree p.220-220]
+      - 사. 작업소의 청정도관리에 관한 사항 [own p.220-220, subtree p.220-220]
+      - 다. 한 제품의 제조에만 전용으로 사용되는 설비인 경우에는, 그 제품의 제조단위 또는 배치 번호가 일련번호로 부여되고 그에 따라 순서대로 제조되면, 설비별 기록 서는 필요하지 않다. 전용 설비를 사용하는 경우에는 세척, 유지 관리 및 사용에 관 한 사항을 배치 기록서의 일부로 기록할 수 있다. 세척 및 유지관리 업무를 수행하 는 작업원과 이중 점검을 수행하는 작업원은(또는 세척 및 유지관리를 섹션 211.68 에 따른 자동화 설비를 이용해 수행하는 경우에는… [own p.221-224, subtree p.221-224]
+      - 차. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.225-233, subtree p.225-233]
+      - 가. 모든 문서의 작성 및 개정ㆍ승인ㆍ배포ㆍ회수 또는 폐기 등 관리에 관한 사항이 포함된 문서관리규정을 작성하여야 한다. [own p.233-233, subtree p.233-233]
+      - 가. 의뢰한 시험별로 다음 사항이 포함된 시험성적서를 작성하여야 한다. 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다. [own p.286-290, subtree p.286-290]
+      - 타. 표시재료는 기재사항이 변경될 때마다 규정에 맞는지를 확인하고 변경된 표시재료를 보관하여야 한다. [own p.307-307, subtree p.307-307]
+      - 머. 한약분말 또는 한약엑스를 제조하는 경우에는 다음 사항을 준수하여야 한다. [own p.316-317, subtree p.316-317]
+      - 가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다. [own p.332-332, subtree p.332-332]
+      - 하. 한약원료의 제조공정은 다음 사항을 준수하여야 한다. [own p.355-364, subtree p.355-364]
+      - 나. 포장작업을 시작하기 전에 이전 작업의 포장재료가 남아 있지 않은지를 확인하여야 한다. [own p.364-364, subtree p.364-364]
+      - 라. 포장작업 중인 작업실, 포장라인 또는 기계ㆍ설비에는 제품명과 제조번호를 표시하여야 한다. [own p.365-366, subtree p.365-366]
+      - 마. 포장작업이 끝나면 자재의 인수량과 사용량을 비교하여 차이가 있을 경우에는 원인을 조사하여야 하며, 사용하고 남은 자재는 입ㆍ출고 내용을 기록하고 자재보관소로 반납하거나 폐기하여야 한다. 다만, 제조번호 등을 인쇄한 표시재료는 폐기하여야 한다. [own p.366-368, subtree p.366-368]
+      - 바. 제품의 표시사항과 포장의 적합 여부를 확인ㆍ기록하여야 하며, 포장공정 에서 채취된 검체는 시험이 완료된 후 폐기하여야 한다. 다만, 혼동과 오염의 우려가 없는 경우에는 폐기하지 아니할 수 있다. [own p.370-372, subtree p.370-372]
+      - 사. 포장작업이 완료된 완제품은 품질(보증)부서의 적합판정이 나올 때까지 다른 제품과 혼동되지 아니하도록 보관하여야 한다. [own p.372-374, subtree p.372-374]
+      - 자. 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다. [own p.375-385, subtree p.375-385]
+      - 나. 반입된 원자재등의 외관 및 표시사항을 확인하고 제조번호가 없는 경우 에는 관리번호를 부여하여 겉포장의 먼지를 제거한 후 보관하여야 한다. [own p.408-408, subtree p.408-408]
+    - 다. 불만처리기록에는 다음 사항이 포함되어야 한다. [own p.430-430, subtree p.430-430]
+    - 다. 자율점검은 사전에 실시의 목적ㆍ범위 등을 정하여 실시하고, 자율점검 후에는 그 결과와 개선요구사항 등이 포함된 보고서를 작성하여야 하며, 개선요구사항에 대해서는 기한을 정하여 개선하여야 한다. [own p.447-447, subtree p.447-447]
+    - 나. 작업원에 대한 교육ㆍ훈련은 연간계획을 수립하여 실시하며, 작업원이 맡은 업무를 효과적으로 수행할 수 있도록 제조ㆍ품질관리와 그 밖에 필요한 사항에 대하여 실시하여야 한다. [own p.452-452, subtree p.452-452]
+  - 일반사항 [own p.564-572, subtree p.564-572]
+
+ succeeded in 1660ms:
+ succeeded in 1661ms:
+      - 나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것 [own p.79-79, subtree p.79-79]
+      - 제12호의 변경관리를 승인하여야 한다. [own p.147-150, subtree p.147-150]
+      - 나. 허가(신고) 연월일 및 허가(신고)사항 변경 연월일 [own p.160-160, subtree p.160-160]
+      - 나. 전자문서 시스템의 경우에는 허가된 사람만이 입력, 변경 또는 삭제할 수 있으며 자기테이프, 마이크로필름, 백업 등의 방법으로 기록의 훼손 또는 소실에 대비하고 필요시 판독 가능한 방법으로 출력하여야 한다. [own p.242-243, subtree p.242-243]
+      - 타. 표시재료는 기재사항이 변경될 때마다 규정에 맞는지를 확인하고 변경된 표시재료를 보관하여야 한다. [own p.307-307, subtree p.307-307]
+      - 라. 재포장한 제품에는 제조번호 등에 재포장한 것임을 나타내는 표시를 하여야 하며, 사용기한 또는 유효기한을 변경해서는 안 된다. [own p.389-391, subtree p.389-391]
+      - 사. 표시재료는 제품별, 종류별로 구분ㆍ보관하여야 하며 표시내용이 변경된 경우에는 이전의 자재와 섞이지 않도록 하기 위한 조치를 마련하여야 한다. [own p.424-426, subtree p.424-426]
+  - 변경관리 [own p.441-447, subtree p.441-447]
+    - 가. 기계설비, 원자재, 제조공정, 시험방법 등을 변경할 경우에는 제품의 품질 또는 공정의 재현성에 미치는 영향을 검토하여야 하고, 충분한 데이터에 의하여 품질관리기준에 맞는 제품을 제조한다는 것을 확인하고 문서화하 여야 하되, 필요한 경우에는 밸리데이션과 안정성 시험 및 원자재의 제조 업자 평가 등을 실시한다. [own p.441-441, subtree p.441-441]
+    - 나. 변경된 내용을 실시할 경우에는 관련 문서의 개정, 작업원에 대한 교육ㆍ 훈련 등의 필요한 조치를 수립하여 시행하여야 한다. [own p.441-441, subtree p.441-441]
+    - 점검기록 (Audit Trail) [own p.591-596, subtree p.591-596]
+    - 변경 및 구성 관리 [own p.596-596, subtree p.596-596]
+
+ succeeded in 1600ms:
+    - 나. “교정”이란 계측기, 시험기기 또는 기록계가 나타내는 값과 표준기기 의 참값을 비교하여 오차가 허용범위 내에 있음을 확인하고, 허용오 차범위를 벗어나는 경우 허용범위 내에 들도록 조정하는 것을 말한다. [own p.18-18, subtree p.18-18]
+      - 나. 제조용 중요 기계ㆍ설비는 구분할 수 있도록 번호나 코드를 부여하고 해당 기계ㆍ설비를 사용한 제품명, 제조번호 및 제조일자를 기록할 것 [own p.61-62, subtree p.61-62]
+      - 가. 제조 및 품질관리에 자동화장치 등을 사용할 경우 계획을 수립하여 정기적으로 교정 또는 성능점검을 하고 기록할 것 [own p.78-79, subtree p.78-79]
+      - 나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것 [own p.79-79, subtree p.79-79]
+      - 다. 자동화장치 등에 의한 모든 기록은 별도로 저장ㆍ보관하여야 하고 대체 시스템으로 자료 유실을 방지할 것 [own p.79-81, subtree p.79-81]
+      - 제4.2호가목의 시험지시서에 의하여 시험을 지시하고 시험지시서에 따라 시험이 진행되는지를 점검ㆍ확인하여야 하며, 일탈 및 기준일탈이 있는 경우에는 이를 조사하고 기록하여야 한다. [own p.119-122, subtree p.119-122]
+      - 제7.1호가목 및 제8.1호가목의 시험성적서 및 제조단위별 제조기록서의 내용을 검토하고 제품의 출하를 승인하여야 한다. [own p.133-140, subtree p.133-140]
+      - 제조 또는 시험의 수탁자와 주요 원자재의 제조업자를 평가하여야 한다. [own p.153-157, subtree p.153-157]
+      - 다. 한 제품의 제조에만 전용으로 사용되는 설비인 경우에는, 그 제품의 제조단위 또는 배치 번호가 일련번호로 부여되고 그에 따라 순서대로 제조되면, 설비별 기록 서는 필요하지 않다. 전용 설비를 사용하는 경우에는 세척, 유지 관리 및 사용에 관 한 사항을 배치 기록서의 일부로 기록할 수 있다. 세척 및 유지관리 업무를 수행하 는 작업원과 이중 점검을 수행하는 작업원은(또는 세척 및 유지관리를 섹션 211.68 에 따른 자동화 설비를 이용해 수행하는 경우에는… [own p.221-224, subtree p.221-224]
+      - 라. 모든 기록문서는 작업과 동시에 작성되어야 하며 지울 수 없는 잉크로 작성하여야 한다. 기록문서를 수정하는 경우에는 수정하려는 글자 또는 문장 위에 선을 그어 수정 전 내용을 알아볼 수 있도록 하고, 수정된 문서 에는 수정 사유, 수정 연월일 및 수정자의 서명이 있어야 한다. [own p.235-235, subtree p.235-235]
+      - 마. 문서를 개정할 때는 개정 사유 및 개정 연월일 등을 적고 제조부서 책임자 또는 품질(보증)부서 책임자의 승인을 받아야 하며, 정기적으로 점검하여 최근에 개정된 것인지를 확인하여야 한다. 개정 전의 것도 일정기간 보존 하여야 한다. [own p.235-237, subtree p.235-237]
+      - 가. 모든 기록문서(전자기록을 포함한다)는 해당 제품의 유효기한 또는 사용 기한 경과 후 1년간 보존하여야 한다. 다만, 별도로 규정하는 경우 그 사 유와 보존기한을 명확하게 정하여야 한다. [own p.237-237, subtree p.237-237]
+      - 나. 전자문서 시스템의 경우에는 허가된 사람만이 입력, 변경 또는 삭제할 수 있으며 자기테이프, 마이크로필름, 백업 등의 방법으로 기록의 훼손 또는 소실에 대비하고 필요시 판독 가능한 방법으로 출력하여야 한다. [own p.242-243, subtree p.242-243]
+      - 다. 시스템 접근은 암호 또는 다른 수단에 의해 제한되어야하며 중요한 데이터 의 입력은 독립적으로 확인되어야 한다. 전자적으로 저장된 기록은 자기 테이프, 마이크로 필름, 용지 인쇄 출력 또는 다른 수단을 통한 백업 전송에 의해 보호되 어야 한다. 보유 기간 동안 데이터를 쉽게 이용할 수 있다는 것이 특히 중요하다. [own p.243-243, subtree p.243-243]
+      - 다. 밸리데이션을 실시한 결과 제조관리 및 품질관리에 관하여 개선이 필요한 경우에는 필요한 조치를 하고 해당 조치에 대한 기록을 작성하여 갖추어 두어야 한다. [own p.244-244, subtree p.244-244]
+      - 라. 시험기록(시험 근거자료를 포함한다)이 정확하고 설정된 기준에 맞다는 것을 확인하는 중간검토자를 두어야 한다. [own p.297-297, subtree p.297-297]
+      - 마. 완제품의 출하승인을 위한 평가는 제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다. [own p.297-297, subtree p.297-297]
+      - 바. 그래프, 계산식 등 시험에서 얻은 모든 기록(전자기록을 포함한다)은 보존하여야 한다. [own p.297-299, subtree p.297-299]
+      - 아. 시험기기, 계측기 및 기록계는 미리 정한 계획서에 따라 정기적으로 교정ㆍ기록하여야 한다. [own p.300-301, subtree p.300-301]
+      - 카. 표준품, 배지, 검체, 중요 시약, 부피측정용 유리기구 등에 대한 관리상황을 기록하여야 한다. [own p.304-307, subtree p.304-307]
+      - 너. 시험용 동물은 적절하게 관리하여야 하며, 각각 구분하여 그 사용내역을 기록하여야 한다. [own p.313-314, subtree p.313-314]
+      - 가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다. [own p.332-332, subtree p.332-332]
+      - 카. 제조공정 중 기준일탈한 반제품을 재가공하는 경우에는 품질(보증)부서 책임자의 승인을 받아야 하며 그 기록을 보관하여야 한다. [own p.350-351, subtree p.350-351]
+      - 파. 완제품의 품질을 보증하기 위하여 중요공정에 설정된 작업시간을 벗어난 경우에는 제품의 품질에 영향이 없음을 규명하고 그 관련 기록을 보관 하여야 한다. [own p.354-355, subtree p.354-355]
+      - 다. 표시재료는 작업 전에 품질(보증)부서의 승인 여부와 제조번호 등 인쇄 내용이 정확한지를 확인하고 사용하여야 하며, 포장라인 중 인쇄되는 자재는 그 내용이 제조기록서에서 지시한 대로 인쇄되고 있는지를 확인 하여야 한다. [own p.364-365, subtree p.364-365]
+      - 마. 포장작업이 끝나면 자재의 인수량과 사용량을 비교하여 차이가 있을 경우에는 원인을 조사하여야 하며, 사용하고 남은 자재는 입ㆍ출고 내용을 기록하고 자재보관소로 반납하거나 폐기하여야 한다. 다만, 제조번호 등을 인쇄한 표시재료는 폐기하여야 한다. [own p.366-368, subtree p.366-368]
+      - 바. 제품의 표시사항과 포장의 적합 여부를 확인ㆍ기록하여야 하며, 포장공정 에서 채취된 검체는 시험이 완료된 후 폐기하여야 한다. 다만, 혼동과 오염의 우려가 없는 경우에는 폐기하지 아니할 수 있다. [own p.370-372, subtree p.370-372]
+      - 가. 반품된 제품에 대해서는 품목명, 제조번호, 수량, 반품사유, 반품업소 및 반품일과 그 처리명세 및 처리일 등 반품에 관한 내용을 기록하여야 한다. [own p.385-385, subtree p.385-385]
+      - 다. 재입고 또는 재포장 작업은 품질(보증)부서 책임자의 승인이 있어야 하고, 재포장을 하는 경우에는 품목 및 제조번호에 따라 재포장을 지시하며 기록서에 의하여 작업하고 적합으로 판정된 후 입고하여야 한다. [own p.388-389, subtree p.388-389]
+      - 다. 제조설비의 세척은 세척작업원, 세척작업일 및 세척에 사용된 약품 등을 기재한 세척기록과 그 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순 으로 작성하여 갖추어 두어야 하되, 세척기록과 사용기록은 통합하여 작성할 수 있다. [own p.405-405, subtree p.405-405]
+      - 나. 보관소는 적정한 온도 및 습도가 유지되도록 정기적으로 점검ㆍ기록 하여야 한다. [own p.426-426, subtree p.426-426]
+      - 라. 곰팡이의 증식과 충해를 방지하기 위하여 약제를 살포하거나 훈증하는 경우 약전(藥典)에 따르고, 훈증기록은 3년간 보존한다. [own p.429-429, subtree p.429-429]
+      - 다. 완제품은 품질(보증)부서 책임자가 출하 승인한 것만을 출하하여야 하며 제품명, 제조번호, 출하일자, 거래처 및 수량 등을 기록ㆍ관리하여야 한다. [own p.429-429, subtree p.429-429]
+    - 다. 불만처리기록에는 다음 사항이 포함되어야 한다. [own p.430-430, subtree p.430-430]
+    - 라. 출하된 제품에 중대한 결함이 있는 경우에는 신속히 조치하고 그 기록을 보존하여야 하며, 재발방지대책을 수립하여 시행하여야 한다. [own p.430-430, subtree p.430-430]
+    - 점검기록 (Audit Trail) [own p.591-596, subtree p.591-596]
+    - 기록 보관 [own p.599-602, subtree p.599-602]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+구조 검색으로 페이지 후보는 충분히 좁혀졌습니다. 특히 ALCOA는 구조 제목 검색에는 직접 안 잡혀서, `별첨2`의 원칙/일반사항 또는 데이터 완전성 주변 페이지를 좁게 확인합니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool --help' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '데이터 완전성' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '불만처리기록' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 1555ms:
+usage: gmp_pageindex_codex_retriever.py tool [-h] [--pages PAGES]
+                                             [--query QUERY]
+                                             [--max-depth MAX_DEPTH] [--raw]
+                                             {document,structure,page}
+
+positional arguments:
+  {document,structure,page}
+
+options:
+  -h, --help            show this help message and exit
+  --pages PAGES
+  --query QUERY
+  --max-depth MAX_DEPTH
+  --raw
+
+ succeeded in 1541ms:
+      - 다. 시스템 접근은 암호 또는 다른 수단에 의해 제한되어야하며 중요한 데이터 의 입력은 독립적으로 확인되어야 한다. 전자적으로 저장된 기록은 자기 테이프, 마이크로 필름, 용지 인쇄 출력 또는 다른 수단을 통한 백업 전송에 의해 보호되 어야 한다. 보유 기간 동안 데이터를 쉽게 이용할 수 있다는 것이 특히 중요하다. [own p.243-243, subtree p.243-243]
+      - 10.3 세척 밸리데이션 프로그램이 완료되기 까지 시간이 소요되는 것과 몇몇 제품들 의 경우 매 배치 이후의 확인을 통한 검증이 필요하다는 것이 일반적으로 인정 된다.(예, 연구용 의약품) 장비가 깨끗하고 이후에도 사용할 수 있다는 결론을 뒷받침 할 수 있는 충분한 데이터가 있어야 한다. [own p.270-270, subtree p.270-270]
+    - 가. 기계설비, 원자재, 제조공정, 시험방법 등을 변경할 경우에는 제품의 품질 또는 공정의 재현성에 미치는 영향을 검토하여야 하고, 충분한 데이터에 의하여 품질관리기준에 맞는 제품을 제조한다는 것을 확인하고 문서화하 여야 하되, 필요한 경우에는 밸리데이션과 안정성 시험 및 원자재의 제조 업자 평가 등을 실시한다. [own p.441-441, subtree p.441-441]
+    - 데이터 [own p.590-590, subtree p.590-590]
+    - 데이터 저장 [own p.590-590, subtree p.590-590]
+
+ succeeded in 1503ms:
+    - 다. 불만처리기록에는 다음 사항이 포함되어야 한다. [own p.430-430, subtree p.430-430]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 237' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 429' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 286-290' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 332' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 405' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 591-596' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 1854ms:
+[{"page": 237, "content": "230 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n5.2 문서의 관리\n가. 모든 기록문서(전자기록을 포함한다)는 해당 제품의 유효기한 또는 사용\n기한 경과 후 1년간 보존하여야 한다. 다만, 별도로 규정하는 경우 그 사\n유와 보존기한을 명확하게 정하여야 한다.\n해 설\n1) 제조단위 관련 문서는 해당 제조단위의 사용(유효)기간 경과 후 1년 동안 보관하여야 \n한다. 다만, 현재의 유효한 의약품 품목허가(신고)사항을 뒷받침해 주는 기초데이터(예 : \n밸리데이션이나 안정성 등과 관련된 자료)를 포함한 중요문서는 해당 의약품의 품목허가\n(신고)가 유지되는 동안 보존하여야 한다. 이러한 경우 타당성을 문서화하고, 해당 제조\n단위 관련 문서의 보존조건을 고려하여야 한다. 그 외 다른 유형의 문서에 대한 보존\n기간은 문서가 뒷받침하는 기업 활동에 따라 달라질 수 있다. \n 가) 보존기간동안 기록서가 온전하게 보관될 수 있도록 보안 관리를 하여야 한다.\n 나) 각 제조 활동과 관련한 기록서는 무엇이며, 각 기록서의 보관 장소가 어느 위치인\n지를 명확히 한다. \n2) 기록서는 원본 또는 복사본, 마이크로필름, 마이크로피시(Microfiche) 또는 기타 원본 \n기록서의 정확한 복제물로 보관될 수 있다. 축소 기법(예 : 마이크로필름)을 활용하는 \n경우에는 적합한 판독 장치 및 복사 장치를 용이하게 활용할 수 있어야 한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 4.1 원칙 \n [별표 17] 4.5 문서 보존"}]
+
+ succeeded in 1840ms:
+[{"page": 429, "content": "422 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n10.4 출고관리\n가. 출고는 선입선출방식으로 하여야 하며, 그러지 아니할 경우에는 타당한 \n사유가 있어야 한다. \n나. 원자재는 시험결과 적합으로 판정된 것만을 작업소로 보내야 한다.\n다. 완제품은 품질(보증)부서 책임자가 출하 승인한 것만을 출하하여야 하며\n제품명, 제조번호, 출하일자, 거래처 및 수량 등을 기록ㆍ관리하여야 한다.\n해 설\n1) 모든 물품(원자재등 및 완제품)은 원칙적으로 선입선출 방법으로 출고한다. 다만, 나중에 \n입고된 물품이 사용(유효)기한이 짧은 경우 먼저 입고된 물품보다 먼저 출고할 수 있다. \n2) 이외에도 선입선출을 하지 못하는 특별한 사유가 있을 경우, 적절하게 문서화된 절차에 \n따라 나중에 입고된 제품을 먼저 출고할 수 있으나, 문서화된 절차의 일탈은 일시적이고 \n적절한 경우에만 허용하도록 한다.\n3) 모든 원자재등은 시험·검사에 적합한 것만 작업소로 출고하여야 하며, 추적할 수 있도록 \n관리하여야 한다. 출하·출고되는 모든 원자재등 및 완제품에 대해 가능한 한 제조번호, \n제조일자 별로 거래처를 추적할 수 있도록 수기 작업 또는 컴퓨터화 시스템을 사용하여 \n기록하도록 한다.\n참고자료\n미국 21 CFR Part 211\n211.86 승인된 원료, 의약품 용기, 마개의 사용\n 사용 승인된 원료, 의약품 용기, 마개는 가장 먼저 승인된 재고를 우선 사용하도록 \n관리한다. 이 기준의 일탈은 일시적이고 적절한 경우에만 허용된다.\nSubpart H-보관 및 유통\n Sec.211.142 보관절차\n 의약품 보관 관리 방법을 기술한 절차 문서를 확립하고 이를 준수한다. 이 절차 문서에 \n다음 사항을 포함 시켜야 한다. \n (a) QCU의 출하 승인 이전까지 의약품 격리 보관\nSubpart J - 기록서 및 보고서"}]
+
+ succeeded in 1792ms:
+[{"page": 286, "content": "2장 완제의약품 제조 및 품질관리기준 279\n7\n품질관리\n7.1 시험관리\n가. 의뢰한 시험별로 다음 사항이 포함된 시험성적서를 작성하여야 한다. 시험\n성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다.\n (1) 품명, 제조번호 또는 관리번호, 제조연월일\n (2) 시험번호\n (3) 접수, 시험 및 판정연월일\n (4) 시험항목, 시험기준, 시험결과 및 항목별 적격ㆍ부적격 결과\n (5) 판정결과\n (6) 시험자의 성명, 판정자의 서명 및 중간검토자의 서명\n해 설\n시험성적서에는 수출의약품 등 필요한 경우 해당 제품의 제형, 보관조건, 사용(유효)기한, \n제조자 또는 공급자가 포함될 수 있다 .\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 6.6 시험\n \n참고자료\n캐나다 GUI-0001\nAppendix A1\n MRA 범위내 수출 의약품에 대한 공급자/제조자 배치 성적서 내용\n 1. 품명 : 소유권, 브랜드 또는 수입국에 사용하는 제품명\n 2. 수입국\n 3. 허가번호 : 수입국에서 허가번호는 제공되어야 한다.\n 4. 역가/함량 : 모든 주성분의 확인 및 dose 단위당 함량"}, {"page": 287, "content": "280 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n 5. 복용 형태 (제약 형태)\n 6. 포장 사이즈 (용기당 수량) 및 타입(예, 바이알, 병, 블리스터)\n 7. 제조번호\n - 제품과 관련하여\n 8. 공급일/제조일\n - 국내 요건에 따라\n 9. 사용기한\n 10. 공급자/제조자 이름 및 주소 - 제조 허가 빌딩\n - 포장, 품질관리가 포함된 배지의 제조 허가받은 건물은 목록화 되어야 한다. 이름과 \n주소는 제조 허가/설립 증에 제공된 정보와 일치해야 한다.\n 11. 공급자/제조자의 제조 허가/면허 번호 또는 GMP 인증서 \n - 10번과 같이 목록화 된 각 허가받은 건물마다 번호가 있어야 한다.\n 12. 분석 결과\n - 승인된 기준, 모든 결과의 표현, 분석방법 언급(날짜 및 서명하여 첨부한 별도 성\n적서에 언급할 수 있음)\n 13. 비고\n - 수입자 및/또는 배치 승인을 검증하는 검사관의 필요에 따른 추가정보(예, 저장조건 \n및 운송조건) \n 14. 인증 문구\n - 포장, 품질관리가 포함된 공급자/제조자가 포함되어야 한다. 다음의 문구가 사용\n되어야 한다. “이로써 상기 정보는 사실임을 보증한다. 이 제품의 배치는 수입국의 \n허가 기준 및 국내 규제당국에서 요구하는 GMP를 만족하여 상기 허가받은 건물\n에서 포장 및 품질관리를 포함하여 공급/제조되었다. 배치 제조, 포장, 분석결과는 \nGMP에 따라 검토되었다.\"\n 15. 배치 출하를 승인한 사람의 직책 및 이름\n - 승인자의 회사/허가받은 건물 이름 및 주소가 포함되어야 한다.(만약 10번에 언\n급된 회사 이외의 경우)\n 16. 배치 출하 승인자의 서명\n 17. 서명 일자\n Appendix A1 \n Content of the Fabricator’s/Manufacturer’s Batch Certificate for Drug/Medicinal \nProducts Exported to Countries under the Scope of a Mutual Recognition \nAgreement (MRA)\n 1. Name of product.\n - Proprietary, brand, or trade name in the importing country."}, {"page": 288, "content": "2장 완제의약품 제조 및 품질관리기준 281\n 2. Importing country.\n 3. Marketing authorization number.\n - The marketing authorization number of the product in the importing \ncountry should be provided.\n 4. Strength/Potency.\n - Identity (name) and amount per unit dose are required for all active \ningredients/constituents.\n 5. Dosage form (pharmaceutical form).\n 6. Package size (contents of container) and type (e.g., vials, bottles, blisters).\n 7. Lot/batch number.\n - As related to the product.\n 8. Date of fabrication/manufacture.\n - In accordance with national (local) requirements.\n 9. Expiry date.\n 10. Name and address of fabricator(s)/manufacturer(s) \n - manufacturing recognized building(s).\n - All recognized buildings involved in the manufacture of the batch \nincluding packaging and quality control of the batch, should be listed. \nThe name(s) and address(es) given must correspond to the information \nprovided on the manufacturing authorization / establishment licence.\n 11. Number(s) of manufacturing authorization(s)/licence(s) or certificate(s) \nof GMP compliance held by fabricator(s)/manufacturer(s).\n - A number should be given for each recognized building listed under \nItem 10.\n 12. Results of analysis.\n - Should include the approved specifications, describe all results obtained, \nand refer to the analytical methods used (May refer to a separate \ncertificate of analysis, which must be dated, signed, and attached).\n 13. Comments/remarks.\n - Any additional information that might be of value to the importer \nand/or inspector who must verify the compliance of the batch \ncertificate (e.g., specific storage or transportation conditions).\n 14. Certification statement.\n - Should cover the fabrication/manufacturing, including packaging and \nquality control. The following text should be used: ”I hereby certify"}, {"page": 289, "content": "282 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n \nthat the above information is authentic and accurate. This batch of \nproduct has been fabricated/manufactured, including packaging and \nquality control, at the above-mentioned recognized building(s) in full \ncompliance with the GMP requirements of the local regulatory \nauthority and with the specifications in the marketing authorization of \nthe importing country. The batch processing, packaging, and analysis \nrecords were reviewed and found to be in compliance with GMP”.\n 15. Name and position/title of person approving the batch release.\n - Must include the person’s company/recognized building name and \naddress, if more than one company is mentioned under Item 10.\n 16. Signature of person approving the batch release.\n 17. Date of signature."}, {"page": 290, "content": "2장 완제의약품 제조 및 품질관리기준 283\n나. 원자재, 반제품 및 완제품은 적합판정이 된 것만을 사용하거나 출하하여\n야 하며, 일탈, 기준일탈 또는 편향이 있는 경우에는 그 사유를 조사한\n후 처리하여야 한다. 다만, 반제품의 경우에는 밸리데이션, 안정성시험, \n제품품질평가 등을 고려하여 적합판정 이전에 사용할 수 있다.\n해 설\n1) 원자재, 완제품 및 시험이 필요한 반제품은 검체를 채취하여 검사 또는 시험하고 적합\n으로 판정된 것만을 사용 또는 출하하여야 하며, 적·부판정시까지 격리 보관한다. 또한 \n부적합 판정을 받은 원자재, 완제품 및 반제품은 부적합 표시를 하고, 별도 구획 보관\n하여야 한다. \n2) 무균원료는 무균상태를 유지하는데 어려움이 있고 보관 과정에서 오염되어 완제품의 \n품질 및 안전성에 영향을 줄 수 있기 때문에, 무균원료의 무균성 훼손을 최소화하기 \n위해 허용조건에 부합하는 경우 제조공정에 투입하는 시점에서 검체 채취하여 제조와 \n동시에 입고용기별 확인시험 및 품질시험을 진행 할 수 있다. \n - 이는 원료단계부터 일련의 무균공정에 따라서 제조하는 무균의약품의 무균원료(공정 \n중 무균상태가 유지되지 못하는 경우는 제외)를 그 대상으로 한다. \n - 무균원료를 제조공정에 투입하는 시점에서 검체 채취하여 제조와 동시에 무균원료 시험\n을 진행하여야 하고, 원료 제조업자 평가, 검체채취, 품질관리, 보관 및 출하 등이 기\n술된 아래의 허용조건에 부합하는 경우에만 적용할 수 있다. 만약, 무균원료에 대한 \n시험검사 결과가 부적합인 경우 동 원료를 투입하여 제조된 제품 전부를 폐기하여야 \n한다.\n 가) 원료 제조업자 평가(Vendor Qualification)\n 무균원료 제조업자를 처음 선택할 때 제조환경과 품질관리 수준 등에 대한 현장\n평가를 실시하고, 해당 무균원료 제조업자에 대해 위험평가를 실시하여 자체적\n으로 정하여 문서화된 기준 및 절차에 따라 정기적으로 재평가를 실시하여야 한다.\n 나) 검체채취(Sampling)\n (1) 무균원료의 무균성 및 품질을 확보하기 위해 아래의 내용을 포함하는 밸리\n데이션을 실시하여야 한다.\n - 검체 채취가 의약품 품질에 영향이 없음을 보장한다는 내용\n - 검체가 제조에 사용한 무균원료의 제조단위를 대표한다는 내용(공급자 및"}]
+
+ succeeded in 1794ms:
+[{"page": 405, "content": "398 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n9.3 제조설비의 세척\n가. 제조설비의 세척에 사용하는 세제 또는 소독제는 잔류하거나 적용하는 \n표면에 이상을 초래하지 아니하는 것이어야 한다.\n나. 세척한 제조설비는 다음 사용 시까지 오염되지 아니하도록 유지ㆍ관리\n하여야 한다.\n다. 제조설비의 세척은 세척작업원, 세척작업일 및 세척에 사용된 약품 등을\n기재한 세척기록과 그 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순\n으로 작성하여 갖추어 두어야 하되, 세척기록과 사용기록은 통합하여 \n작성할 수 있다.\n해 설\n1) 기계·설비 등의 세척을 위하여 청소용 세제 또는 소독제는 오염을 유발하지 않는 것으로 \n선정하여 사용하고, 이의 적절한 사용에 관한 규정 및 기록 문서를 비치해 두어야 한다. \n세척 및 청소에 사용하는 기계․장비는 오염원이 되지 않게 선택하고 사용하여야 한다. \n소독제 선정시 미국약전(general information <1072>) 등 공정서를 참조할 수 있다.\n2) 세척한 제조설비는 세척 후 청결상태를 적절하게 식별할 수 있도록 하고, 청결이 유지\n되는 시간과 다음 사용까지 오염 방지를 위한 방법에 대해 근거를 마련하여 규정을 마\n련하고 이 규정에 따라 유지·관리하여야 한다. 설비는 적절한 방법으로 내용물과 청결 \n상태가 식별되어야 한다. \n3) 의약품을 제조, 가공, 포장 또는 보관에 사용하는 기계(기구를 포함한다)를 청소하고 청\n결을 유지하는 방법에 관한 표준절차서를 마련하고 이를 지켜야 한다. 또한 청결유지, \n청소, 소독 및 점검에 대한 기록을 남겨야 한다. 예를 들어, 청소, 정비 및 사용에 관\n한 내용을 날짜와 시간, 사용제품, 제조번호(로트)와 함께 기계별 사용기록부에 기록하\n여야 한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 3.7 기계(기기)\n [별표 17] 4.8 절차서 및 기록서"}]
+
+ succeeded in 1686ms:
+[{"page": 591, "content": "584 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n4.5 점검기록(Audit Trail)\n 가. 위험 평가를 기반으로 하여, 의약품 제조 및 품질관리 기준 관련 변경\n또는 삭제 기록을 시스템에 입력할 때는 주의를 기울여야 한다(그 시\n스템은 점검기록을 생성한다). \n 나. 의약품 제조 및 품질관리 기준 관련 데이터를 변경하거나 삭제할 때는 \n그에 대한 사유를 문서화하여야 한다. 점검기록은 일반적으로 이해할\n수 있는 형식으로 전환 가능해야 하며 해당 형식으로 구비하고, 정기적\n으로 검토되어야 한다.\n해 설\n1. 의약품 품질 시스템(Pharmaceutical Quality System, 이하 PQS)의 근간이 되는 요\n건인 데이터 완전성은 컴퓨터화 시스템을 운영하는데 있어 더욱 중요하게 관리되어야 \n한다. 데이터 완전성의 주요 요건(ALCOA)은 아래와 같다. \n 1) 데이터의 출처나 작성자를 알 수 있어야 한다 (Attributable).\n 컴퓨터화 시스템에서 생성되는 데이터에는 해당 원데이터(raw data)의 출처 또는 사\n용자 및 생성시점 등의 부가적인 정보(meta data)가 확인될 수 있어야 한다. 데이\n터에 대한 수정, 삭제 등의 변경이 발생되는 경우에도 점검기록을 통해 확인될 수 \n있어야 한다. \n 2) 육안 또는 전자적인 방법으로 읽기 쉬워야 한다 (Legible).\n 컴퓨터화 시스템에서 생성된 데이터는 필요 시 인쇄 등 출력이 가능하고, 내용을 판\n독할 수 있도록 저장 맟 보관되어야 한다. \n 3) 데이터가 생성되는 현장에서 실시간으로 기록되어야 한다. (Contemporaneous).\n 작업이 수행되는 시점에서 해당 데이터가 생성되고 기록되어야 하며, 생성 시점을 \n확인할 수 있어야 한다. \n 4) 원본 또는 유효사본(True Copy)이여야 한다 (Original).\n 컴퓨터화 시스템에 의해 작성되는 기록은 최초 생성·저장된 상태의 원본 또는 유효\n사본임을 확인할 수 있어야 한다. 사용자는 컴퓨터화 시스템을 통해 생성되는 데이\n터의 원본 또는 유효사본을 정의하고, 이를 관련 규정에서 정한 기간 동안 보관하\n여야 한다."}, {"page": 592, "content": "[별첨2] 컴퓨터화 시스템 585\n 5) 정확하여야 한다 (Accurate).\n 컴퓨터화 시스템을 통해 작성된 기록은 오류가 없이 정확하여야 한다. 이는 대상 \n시스템에 대한 밸리데이션으로만 성취될 수 있는 것이 아니라, 해당 시스템에 대한 \n체계적인 운영 절차와, 일탈 발생 시 적절한 시정 및 예방 조치 관리, 사용하는 작\n업자의 적절한 교육 등 종합적 관리를 통하여 확보될 수 있다.\n \n2. 컴퓨터화 시스템에서 데이터의 생성, 수정, 삭제 등의 변경이 발생하는 경우 위험평가\n를 통하여 GMP 에 중요하다고 판단되는 데이터에 대해서는 수기 기록 방식과 유사하\n게 작성자, 작성시점, 사유와 원래 기록 등이 확인될 수 있도록 점검기록이 자동으로 \n생성되어야 한다. \n해당 점검기록은 필요 시 이해할 수 있는 형식으로 출력이 가능해야 하며, 정기적으로 \n검토되어야 한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 9]3.1 밸리데이션\n [별표13]4.0 적격성평가\n [별표17]5.3 밸리데이션\n참고자료\nPIC/S PI 011-3 \n20. 데이터 변경 – 점검 기록 / 중요 데이터 입력\n 20.1 데이터 완전성을 위한 점검기록은 승인된 사용자, 생성, 링크, 삽입된 주석, 삭제, \n조정/ 수정, 권한과 특히 시간 및 날짜와 같은 기능을 포함해야할 필요가 있다. \n링크된 모든 구성 요소는 IT 시스템의 보안을 관리하는 점검기록과 불가역적으로 \n연계되어야 한다. 모든 원본 데이터 기록 및 마스터 정보, 그리고 이후 발생되는 \n일련의 변경, 추가, 삭제 또는 수정은 확인 가능한 점검기록 하에서 정확하고 이\n해할 수 있도록 보존되어야 한다. 업체에서는 이와 같은 시스템 관리를 다루는 \n명확하게 문서화된 정책, 표준운영절차, 밸리데이션 보고서와 그 교육 기록이 요\n구된다.\n  20.2 제조 처방 데이터 입력과 점검 또는 실험실 데이터 입력 및 서류 기록 결과 접근 \n등 이중 점검이 필요한 중요한 데이터 입력 방법에 대한 특별한 절차가 있어야 \n한다. 즉, 이름과 ID가 등록된 2차 점검자가 시간과 날짜 기록 하에 키보드를 \n통해 데이터 입력을 점검할 수 있다. 타 데이터베이스 및 지능형 주변 장치와 \n연결되어 직접 데이터 캡처를 하는 자동화 시스템(예를 들어 칭량 시스템)의 경우, \n이중 검사 기능은 밸리데이션된 시스템 기능 요건의 일부분일 수 있다."}, {"page": 593, "content": "586 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n \n  20.3 점검기록과 연계된 전자기록은 문서화되어야 하며, 이는 운전 시스템, 데이터베\n이스관리시스템 (DBMS), 문서관리시스템 (DMS) 및 기타 주요 응용 프로그램 \n운영 체제가 이상적으로 갖추어야 할 요건이다. 시간과 연계된 점검기록은 필요 \n시 감사자가 요구할 때 읽을 수 있는 형식으로 확보되어야 한다. \n20. DATA CHANGES - AUDIT TRAIL/CRITICAL DATA ENTRY \n 20.1 Where applicable, the audit trail for the data integrity may need to \ninclude functions such as authorised user, creations, links, embedded \ncomments, deletions, modifications/corrections, authorities, privileges, \ntime and date, interalia. All linked components are to be immutably \nlinked in an IT system security controlled audit trail. All original data \nrecords and masters and any subsequent alterations, additions, deletions \nor modifications are to be retained accurately and comprehensively \nwithin the retrievable audit trail. Firms will need clearly documented \npolicies, standard operating procedures, validation reports and training \nrecords covering such system controls. \n 20.2 Where applicable, there should be special procedures for critical data \nentry requiring a second check, for example the data entry and \ncheck for a manufacturing formula or the keying in of laboratory \ndata and results from paper records. A second authorised person with \nlogged name and identification, with time and date, may verify data \nentry via the keyboard. For other automated systems featuring direct \ndata capture linked to other databases and intelligent peripherals \nthen the second check may be part of validated system functionality \n(e.g. in a dispensary). \n 20.3 The records pertaining to the audit trail events should be documented, \nideally as features of the operating system, database management \nsystem (DBMS), document management system (DMS) and other major \napplications. Timelinked audit trail records should be available, if \nrequired, in a human readable form as required by the inspector."}, {"page": 594, "content": "[별첨2] 컴퓨터화 시스템 587\n참고자료\nMHRA GMP　Data Integrity \n데이터 품질 및 완전성 보증을 위한 시스템 설계\n 시스템은 데이터 완전성의 원칙을 준수할 수 있는 방향으로 설계되어 한다. 다음은 그 \n사례이다. \n· 시간 이벤트 기록을 위한 기준 시계 접속\n· 임시 데이터를 발생시키거나, 추후 공식 기록에 전사하는 행위가 필요치 않도록 작업 \n활동이 이루어지는 그 위치에서 배치 기록에 접근.\n· 데이터 기록용 빈종이 양식 관리\n· 데이터 수정을 방지하거나, 추적할 수 있기 위한 사용자 접근 권한\n· 저울과 같은 장비에 연결된 자동 데이터 캡처 또는 프린터\n· 작업 활동과 관련하여 인쇄할 수 있는 프린터의 근접성\n· 샘플링 포인트에 대한 접근 (예 : 제조용수 시스템)\n· 데이터 검사 활동을 수행하는 직원을 위한 원데이터에 대한 접근\nDesigning systems to assure data quality and integrity\n Systems should be designed in a way that encourages compliance with the \nprinciples of data integrity.\n Examples include:\n·Access to clocks for recording timed events\n·Accessibility of batch records at locations where activities take place so \nthat ad hoc data recording and later transcription to official records is \nnot necessary\n·Control over blank paper templates for data recording\n·User access rights which prevent (or audit trail) data amendments\n·Automated data capture or printers attached to equipment such as \nbalances\n·Proximity of printers to relevant activities\n·Access to sampling points (e.g. for water systems)\n·Access to raw data for staff performing data checking activities"}, {"page": 595, "content": "588 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n참고자료\nFDA PART 11 \nSubpart B- 전자 기록\n 11.10 폐쇄형 시스템 관리\n 전자 기록을 작성, 수정, 유지 또는 전송하기 위한 폐쇄형시스템 사용자는 전자 기\n록의 신뢰성, 완전성 및 필요한 경우 기밀성을 보증할 수 있도록 하고, 서명자가 자\n신의 전자 기록을 쉽게 부인할 수 없도록 고안된 절차 및 관리 방법을 적용하여야 \n한다. 그러한 절차 및 관리에는 다음이 포함되어야 한다. \n (a) 정확성, 신뢰성, 일관된 수행 능력, 그리고 유효하지 않거나 변경된 기록을 식별 \n할 수 있는 능력을 보증하기 위한 시스템 밸리데이션.\n (b) 규제 기관에 의한 검사, 검토 및 복사에 적합하도록 사람이 읽을 수 있고 전자적인 \n형태로 기록을 정확하고 완전하게 사본을 생성 할 수 있는 능력. \n (c) 보존 기간 동안 정확하고 신속하게 검색 가능하도록 기록을 보존.\n (d) 승인된 개인에 대해서만 시스템 접근 제한.\n (e) 작업자가 입력 및 전자 기록을 생성, 수정 또는 삭제하는 행위를 수행한 날짜 및 \n시간과 독립된, 보안이 확보되고 시간이 기록되는 컴퓨터에서 자동적으로 생성되는 \n점검 기록기능 사용 \nSubpart B—Electronic Records \n Sec. 11.10 Controls for closed systems. \n Persons who use closed systems to create, modify, maintain, or transmit \nelectronic records shall employ procedures and controls designed to \nensure the authenticity, integrity, and, when appropriate, the confidentiality \nof electronic records, and to ensure that the signer cannot readily \nrepudiate the signed record as not genuine. Such procedures and \ncontrols shall include the following: \n (a) Validation of systems to ensure accuracy, reliability, consistent intended \nperformance, and the ability to discern invalid or altered records. \n (b) The ability to generate accurate and complete copies of records in \nboth human readable and electronic form suitable for inspection, \nreview, and copying by the agency. \n (c) Protection of records to enable their accurate and ready retrieval \nthroughout the records retention period. \n (d) Limiting system access to authorized individuals. \n (e) Use of secure, computer-generated, time-stamped audit trails to \nindependently record the date and time of operator entries and \nactions that create, modify, or delete electronic records."}, {"page": 596, "content": "[별첨2] 컴퓨터화 시스템 589\n4.6 변경 및 구성 관리\n시스템 구성을 포함하여 컴퓨터화 시스템에 발생하는 변경은 정해진 절차에\n따른 관리 하에서만 이루어져야 한다. \n4.7 정기 평가\n컴퓨터화 시스템을 정기적으로 평가하여 유효한 상태이며, 의약품 제조 및 \n품질관리 기준을 준수하고 있는지 확증하여야 한다. 현재 시스템의 기능 범위, \n일탈 기록, 사건, 문제점, 개선 내역, 성능, 신뢰도, 보안, 밸리데이션 상태\n보고서가 평가에 적절하게 포함되어야 한다.\n해 설\n1. GMP 가 적용되는 컴퓨터화 시스템은 의약품 품질 시스템(PQS) 에서의 일탈, 변경 관리 \n및 정기적 평가 등의 업무 절차를 동일하게 수행하여야 한다. 대상 시스템에서 발생하는 \n장애 및 데이터 오류뿐만 아니라, 모든 사건들에 대해 기록하고, 사안에 따라 제품의 \n품질에 중요한 영향을 미치는 사건은 일탈 관리 절차를 통해 원인 규명 및 시정 예방 \n조치를 수행한다. 또한 대상 시스템의 변경 관리는 일탈에 대한 시정 예방 조치의 일\n환으로 또는 기타 시스템 개선이 필요한 경우와 같이 시스템의 변경 요구 사항이 발생\n되는 경우에 진행하게 된다. \n2. 시스템의 기능 범위, 일탈 기록, 사건, 문제점, 개선 내역, 성능, 신뢰도, 보안, 밸리데\n이션 상태 등을 정기적으로 평가하여 현재 해당 시스템의 상태가 유효하고 GMP 및 \n관련 법규의 규제 사항을 만족하는지 확인하여야 한다. 이를 통해 필요하다고 판단되는 \n경우 시스템의 개선 및 대체를 위한 변경관리 절차를 다시 수행한다."}]
+
+ succeeded in 1826ms:
+[{"page": 332, "content": "2장 완제의약품 제조 및 품질관리기준 325\n8\n제조관리\n8.1 제조공정관리 \n가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되,\n제조기록서는 제조지시서와 통합하여 작성할 수 있다.\n 1) 제품명, 제형 및 성질ㆍ상태 \n 2) 제조번호, 제조 연월일 및 유효기한 또는 사용기한\n 3) 제조단위\n 4) 원료약품의 분량, 제조단위당 실 사용량 및 시험번호와 실 사용량이\n기준량과 다를 경우에는 그 사유 및 산출근거\n 5) 공정별 작업내용 및 수율과 수율관리기준을 벗어난 경우에는 그 사유\n 6) 공정 중의 시험결과 및 부적합 판정을 받은 경우에 한 조치\n 7) 중요공정을 수행한 작업원의 성명, 확인자의 서명, 작업 연월일 및 작\n업시간\n 8) 사용한 표시재료의 시험번호 또는 관리번호와 견본\n 9) 중요 사용 기계ㆍ설비의 번호 또는 코드\n 10) 특이사항(관찰사항 등)\n해 설\n제조 작업은 명확히 규정된 절차에 따라 수행되어야 한다. 제조하고자 하는 의약품의 품질을 \n확보하기 위해서 품목허가(신고)증에 따라, GMP 기준을 준수하여 의약품을 제조하여야 한다. \n제조공정 중의 혼동이나 착오를 방지하고, 작업 계획에 따라 제조 작업이 올바르게 수행되\n도록 하기 위하여, 제조지시서를 제조단위(로트)별로 작성하여, 발행하여야 한다. 제조기록\n서는 별도로 작성하지 않고 제조지시서와 통합하여 제조지시 및 기록서로 운영할 수 있다.\n 1) 제조지시서와 제조기록서는 제조 공정별로 구분하여 그 작업 내용을 구체적이며 상"}]
+
+codex
+현재까지 실제 본 페이지는 237, 429, 405, 332, 286-290, 591-596 후보입니다. 남은 것은 포장작업 인적사항, 위탁 보존, 불만처리, ALCOA 주변을 추가로 좁게 열어 확인하는 것입니다.
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+한 페이지짜리 구조 히트가 페이지 경계 때문에 본문 시작 부분만 잡히는 경우가 있어, `원생약 보관관리`와 `불만처리`는 앞뒤 1쪽을 포함해 확인합니다. 이는 같은 조항의 좁은 범위 확인입니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 428-429' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 375-385' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 430-431' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool page --pages 456-458' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+exec
+/bin/zsh -lc ".venv/bin/python scripts/gmp_pageindex_codex_retriever.py tool structure --query '수탁자로부터 받은 제조 및 품질관리 기록' --max-depth 4" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 1674ms:
+[{"page": 430, "content": "2장 완제의약품 제조 및 품질관리기준 423\n11\n불만처리 및 제품회수\n Sec.211.192 생산 기록서 검토\n 배치의 출하 승인 또는 유통에 앞서 포장 및 라벨링 기록서를 포함하여 모든 의약품 \n생산 및 관리 기록서를 QCU가 검토하여 승인된 모든 절차 문서에 부합하는지 판단\n하고 승인한다. 특정 배치의 유통 여부와 상관없이(마스터 생산 및 관리 기록서에 설\n정된 최대 또는 최소 비율을 초과하는 이론 수율 대 백분율을 포함하여) 모든 실명되\n지 않은 차이 또는 특정 배치나 그 배치의 제조에 사용된 원료가 규격에 부합하지 않\n는 경우 등 모든 것을 완벽하게 조사해야 한다. 그와 같은 부적합 또는 차이와 연관\n이 있을 수 있는 동일 의약품의 다른 배치와 다른 의약품까지 확대하여 조사를 실시\n한다. 조사 기록을 만들고 이때 조사 결론과 사후 조치 사항을 포함해야 한다.\n211.86 Use of approved components, drug product containers, and closures.\n Components, drug product containers, and closures approved for use shall \nbe rotated so that the oldest approved stock is used first. Deviation from this \nrequirement is permitted if such deviation is temporary and appropriate.\nSubpart H—Holding and Distribution\n 211.142 Warehousing procedures.\n Written procedures describing the warehousing of drug products shall be \nestablished and followed. They shall include:\n (a) Quarantine of drug products before release by the quality control unit.\n Subpart J—Records and Reports\n 211.192 Production record review.\n All drug product production and control records, including those for \npackaging and labeling, shall be reviewed and approved by the quality \ncontrol unit to determine compliance with all established, approved written \nprocedures before a batch is released or distributed. Any unexplained \ndiscrepancy (including a percentage of theoretical yield exceeding the \nmaximum or minimum percentages established in master production and \ncontrol records) or the failure of a batch or any of its components to \nmeet any of its specifications shall be thoroughly investigated, whether or \nnot the batch has already been distributed. The investigation shall extend \nto other batches of the same drug product and other drug products that \nmay have been associated with the specific failure or discrepancy. A \nwritten record of the investigation shall be made and shall include the \nconclusions and follow up."}, {"page": 431, "content": "424 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n가. 제품에 대한 불만을 효과적으로 처리하기 위하여 불만처리규정을 작성하고\n불만처리위원회를 구성하여 운영하여야 한다.\n나. 소비자로부터 불만을 접수한 경우에는 신속하게 불만내용을 조사하여 그\n원인을 규명하고, 재발방지대책을 마련하며 소비자에게는 적절한 조치를\n하여야 한다.\n다. 불만처리기록에는 다음 사항이 포함되어야 한다.\n (1) 제품명 및 제조번호\n (2) 불만제기자의 이름 및 연락처\n (3) 불만 접수연월일\n (4) 불만내용\n (5) 불만처리 결과 및 조치사항\n해 설\n의약품 품질에 대한 불만이 발생한 경우 필요 시 제조기록과 시험기록의 점검ㆍ확인, 보관\n검체의 시험 등을 하고 그 결과에 따라 적절히 조치하여야 한다. 품질(보증)부서책임자는 \n불만사항을 처리하고 이에 대한 조치사항을 관리하여야 하며, 불만의 접수를 포함한 불만에 \n대한 전반적인 관리를 담당하는 담당자를 지정해 처리하여야 한다. \n 1) 소비자로부터 불만을 접수한 경우 불만처리규정에 의한 절차에 따라 기록하고 조사\n하여야 한다.\n 2) 불만처리기록서는 다음 사항이 포함되도록 작성하는 것이 권장된다. 개인정보와 관련\n된 내용에 대해서는 「개인정보보호법」등 관련 규정을 준수하여야 한다.\n 가) 불만제기자의 이름 및 주소\n 나) 불만을 접수한 사람의 이름, 직위 및 전화번호\n 다) 불만의 내용(제품명(완제의약품) 및 제조번호 포함)\n 라) 불만을 접수한 날짜\n 마) 최초로 취한 조치(날짜 및 담당자 이름 포함)\n 바) 추적 조사한 내용"}]
+
+ succeeded in 1628ms:
+[{"page": 456, "content": "2장 완제의약품 제조 및 품질관리기준 449\n15\n위탁제조 및 위탁시험 관리\n의약품 등의 제조업 및 수입자의 시설기준령 시행규칙\n제11조 (수탁자의 범위와 준수사항 등) \n① 영 제4조제1항에 따라 의약품등의 제조업자가 의약품등의 제조 또는 시험을\n다른 의약품등의 제조업자 등에게 위탁하는 경우 그 수탁자의 범위는 다음\n각 호와 같다. \n 1. 제조의 수탁자. 다만, 나목 및 다목의 수탁자는 의약외품의 제조 또는\n시험을 위탁하는 경우에만 해당한다.\n 가. 의약품등의 제조업자\n 나. 의약품등 외의 물품 제조업자로서 자동에어로졸 충전, 연필 제조, 가스\n주입, 도금, 주물, 단조, 판금, 사출, 인쇄, 코팅, 도장, 멸균, 직조, 타면, \n덴타 또는 설계에 관한 공정을 수행하는 자\n 다. 의약품등 외의 물품 제조업자로서 부분품 또는 부품의 제조를 전문으로\n하는 자\n 라. 의약품등 외의 물품 제조업자로서 원료의약품의 합성공정 중 수소화\n반응 공정을 수행하는 자\n 마. 세포독성 항암제제 등 식품의약품안전처장이 고시하는 의약품의 생산\n시설을 갖춘 자\n 2. 시험의 수탁자. 다만, 마목의 수탁자는 상수(上水)(「약사법」제51조에 \n따른 대한민국약전에 실린 것을 말한다.)의 시험을 위탁하는 경우에만\n해당한다.\n 가. 특별시ㆍ광역시ㆍ도 및 특별자치도의 보건환경연구원\n 나. 법 제67조에 따라 조직된 사단법인인 한국의약품수출입협회\n 다. 의약품등의 제조업자\n 라. 법 제73조에 따라 식품의약품안전청장이 의약품등의 품질검사를 위\n하여 지정하는 기관"}, {"page": 457, "content": "450 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n② 영 제4조제1항에 따라 의약품등의 제조업자가 의약품등의 제조 또는 시험을\n다른 의약품등의 제조업자 등에게 위탁하는 경우 위탁자 및 수탁자의 준수\n사항은 다음 각 호와 같다.\n 1. 의약품등 제조 또는 시험의 위탁자는 제조 또는 시험이 적절하게 이루\n어지도록 수탁자에 대한 관리ㆍ감독을 철저히 하고, 수탁자로부터 제조\n및 품질관리의 기록에 관한 서류를 받아 3년 이상 보존할 것\n 2. 의약품등 제조의 위탁자는 제품표준서를 작성하여 수탁자에게 제공하고,\n수탁자는 이를 기준으로 제품마다 제조관리기준서 및 품질관리기준서를\n작성하여 그 기준서에 따른 기록에 관한 서류를 위탁자에게 제출하고\n수탁 제조 시 사용한 첨가제 및 용기 등에 대한 품질관리를 철저히 할 것\n 3. 의약품등 시험의 위탁자는 위탁시험에 따른 기준 및 시험방법과 시험용\n검체(檢體)를 수탁자에게 제공하며, 수탁자는 각 검체에 대한 시험기록에 \n관한 서류를 위탁자에게 제출하고 수탁시험에 필요한 시약 및 표준품 \n등의 관리를 철저히 할 것\n 4. 의약품등의 제조 또는 시험의 수탁자는 제조 공정에 따른 제조 또는 \n시험에 필요한 시설 및 기구를 갖추고, 그 최종 제품의 품질관리를\n철저히 할 것\n해 설\n1) 의약품의 제조 및 시험을 위탁하는 경우 관련 GMP 업무가 적절하게 수행되도록 하기 \n위하여, 위탁 제조 및 시험의 범위, 위탁된 제조 및 시험과 관련하여 위탁자와 수탁자가 \n각각 수행해야 하는 GMP 관련 역할·업무·책임, 수행하는 GMP 업무에 대하여 양자 \n중 어느 제조관리자가 최종 승인하는 지 등 책임을 이행하는 방식을 양자간 협약하고 \n해당 내용을 명확하게 규정한 계약서를 작성하고 갱신하는 등 관리하여야 한다. 약사법\n등 관련 법령에서 정한 위탁자와 수탁자의 GMP 준수에 대한 책임은 계약서를 통해 \n위임되지 않는다. 계약서 작성 및 관리에 대한 상세사항은 아래의 자료를 참고할 수 \n있다.\n2) 위탁자는 수탁자(시험실 포함)의 적절성을 평가하고 수탁자가 의약품 품목허가(신고) 사항"}, {"page": 458, "content": "2장 완제의약품 제조 및 품질관리기준 451\n및 GMP 기준을 준수하여 위탁 제조 및 시험 관련 GMP 업무가 실시되는 것을 보증\n하여야 한다. 위탁자는 위탁제조 및 시험과 관련된 기록과 결과를 검토하고 평가하여야 \n한다. 또한 수탁자가 위탁자에게 제공한 모든 제품과 물품이 GMP 기준과 품목허가사\n항을 준수하여 처리하였음을 위탁자가 직접 확인하거나 수탁자의 권한있는 책임자가 \n승인한 증명을 통해 확인하여야 한다. 위탁자는 수탁자의 업무 행위, 개선이 필요한 부\n분을 파악하고 그 실시사항을 모니터하고 검토한다. \n3) 수탁자는 계약서상의 위탁 업무를 제3자에게 위탁하지 않아야 한다. 또한 위탁된 업무에 \n부정적 영향을 미칠 수 있고 계약조건을 벗어나는 변경을 위탁자의 승인 없이 실시하지 \n않아야 한다.\n4) 의약품의 제조 및 시험 이외에 업무 특성 및 중요도, 제조소의 GMP 시스템을 고려하여 \n타당한 경우 일부 업무(예 : 방충방서 등)의 작업 실시를 외부업체에 의뢰할 수 있다. \n이러한 경우에도 외부에 의뢰한 작업의 범위와 역할 등을 규정하여 문서화, 작업을 의\n뢰한 업체에 대한 평가, 의뢰된 작업과 관련된 기록과 결과 등 의뢰된 작업의 실시상\n황에 대한 주기적인 검토, 개선 필요사항 파악 및 검토 등 적절한 관리를 하여야 한다. \n다만, 의약품 제조업자의 GMP 기준 준수 책임은 위임되지 않기 때문에 외부업체에 의\n뢰한 GMP　활동의 실시사항에 대한 최종 관리책임은 의약품 제조업자에게 있다. \n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 7. 위탁제조 및 시험\n참고자료\nPIC/S PART I\n제7장\n 원칙\n 불만족스러운 품질의 제품 또는 작업을 유발할 수 있는 오해를 피하기 위해, GMP 가\n이드의 적용 대상인 활동을 아웃소싱하는 경우에는, 그 활동을 적절하게 규정하고 합\n의하고 관리해야 한다. 위탁자와 수탁자는 양자의 임무를 명확히 규정한 서면 계약을 \n맺어야 한다. 계약에는 제품의 각 제조단위에 대해 출하 승인을 증명하는 유권한자가 \n자신의 전체 책임을 수행하는 방식이, 위탁자의 의약품품질시스템에 명확히 규정되어 \n있어야 한다.\n 비고: 이 장은 판매 및 제조허가 부여와 관련하여 관계당국에 대한 제조업자의 책임을 \n다루고 있다. 위탁자와 수탁자의 각각 소비자에 대한 책임에 영향을 미치고자 \n하는 의도는 없다. 이 부분은 국법의 다른 조항의 적용을 받는다.\n 일반사항\n 7.1 아웃소싱 대상 활동, 제품 또는 관련 작업, 그리고 이와 관련된 모든 기술적 합의"}]
+
+ succeeded in 1701ms:
+[{"page": 375, "content": "368 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n 21 CFR Part 211\n Subpart F Production and Process Controls \n Sec. 211.125 Labeling issuance.\n (c) Procedures shall be used to reconcile the quantities of labeling issued, \nused, and returned, and shall require evaluation of discrepancies \nfound between the quantity of drug product finished and the quantity \nof labeling issued when such discrepancies are outside narrow preset \nlimits based on historical operating data. Such discrepancies shall be \ninvestigated in accordance with 211.192. Labeling reconciliation is \nwaived for cut or roll labeling if a 100-percent examination for \ncorrect labeling is performed in accordance with 211.122(g)(2).\n (d) All excess labeling bearing lot or control numbers shall be destroyed.\n (e) Returned labeling shall be maintained and stored in a manner to \nprevent mixups and provide proper identification.\n (f) Procedures shall be written describing in sufficient detail the control \nprocedures employed for the issuance of labeling; such written \nprocedures shall be followed.\n참고자료\n캐나다 GUI-0001\n5.0 규정\n 제조 관리\n C.02.011\n 해석\n 32. 사용되는 모든 제품 및 포장 자재는 포장 부서에서 작성된 수령증과 수량을 \n비교 대조해야 하고, 포장 지시 사항과 일치하는지를 확인해야 한다.\n 39. 포장 작업이 완료되면, 사용되지 않은 인쇄 된 포장재는 폐기되고, 관련 기록\n이 작성된다. 배치 관련 정보가 인쇄되지 않은 포장 자재는 절차에 따라서 창\n고로 반환한다.\n 41. 포장 작업 중에 일탈 사항이 발생하게 되면, 자격을 갖춘 직원에 의해서 검사와 \n조사가 이뤄져야 한다. 이 작업에 대해서는 자세한 기록이 유지되어야 한다.\n 5.0 Regulation\n Manufacturing Control\n C.02.011"}, {"page": 376, "content": "2장 완제의약품 제조 및 품질관리기준 369\n Interpretation\n 32. All products and packaging materials to be used are checked on \nreceipt by the packaging department for quantity, identity and \nconformity with the packaging instructions.\n 39. Upon completion of the packaging operation, any unused batch- \ncoded packaging materials are destroyed, and their destruction is \nrecorded. A procedure is followed if non-coded printed materials \nare returned to stock.\n 41. Products that have been involved in non-standard occurrences \nduring packaging are subject to inspection and investigation by \nqualified personnel. A detailed record is kept of this operation."}, {"page": 377, "content": "370 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n바. 제품의 표시사항과 포장의 적합 여부를 확인ㆍ기록하여야 하며, 포장공정\n에서 채취된 검체는 시험이 완료된 후 폐기하여야 한다. 다만, 혼동과 \n오염의 우려가 없는 경우에는 폐기하지 아니할 수 있다.\n해 설\n \n포장공정에서 제조되는 완제품의 제조번호, 사용(유효)기한 등의 인쇄사항을 포함한 표시\n사항은 제조지시서 또는 제조기록서와 비교하여 점검·확인하고, 해당 표시재료 및 포장자\n재의 형태와 내용이 제조지시서에 명시된 내용과 일치하는지 검사한다. 검사결과는 제조기\n록서 또는 품질관리기록서에 기록한다.\n 1) 포장 작업중 수행하는 제품의 검사는 적어도 아래의 점검사항을 포함하여야 한다.\n 가) 포장 전체의 외관\n 나) 포장이 완전한지 여부\n 다) 제품과 포장자재가 일치하는지 여부\n 라) 사용(유효)기한, 제조번호 등 덧인쇄가 올바르게 인쇄되었는지 여부\n 마) 공정검사 설비 등이 올바르게 작동하고 있는지 여부 등\n 2) 포장라인에서 꺼내어 해당 라인에서 점검하지 않고 다른 곳으로 이동한 시험검체는 \n다시 해당 라인에 투입되어서는 안된다. 다만, 포장설비의 문제발생 등 공정 중 일탈로 \n해당 포장라인에서 벗어난 제품은 신중히 점검 및 조사된 후 권한 있는 자의 승인 하에 \n해당 라인에 다시 투입되어야 하며, 해당 작업은 상세하게 기록하고 관리되어야 한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 5.7. 포장작업\n참고자료\nWHO TRS No. 986 GMP Annex 2\n 16. 포장 작업\n 포장 작업\n 16.32 적어도 다음 사항의 점검을 포함하여 포장 중에 제품에 대한 온라인 관리를 \n주기적으로 실시해야 한다.\n (a) 포장의 전반적인 외관\n (b) 포장이 완전한지 여부"}, {"page": 378, "content": "2장 완제의약품 제조 및 품질관리기준 371\n (c) 적합한 제품과 포장 자재가 사용되었는지 여부\n (d) 덧인쇄가 정확하게 되었는지 여부\n (e) 라인 모니터의 정확한 작동\n 포장 라인에서 벗어난 검체는 다시 투입하지 않아야 한다. \n16. Packaging operations\n Packaging operations\n 16.32 Regular online control of the product during packaging should \ninclude at a minimum checks on:\n (a) the general appearance of the packages;\n (b) whether the packages are complete;\n (c) whether the correct products and packaging materials are used;\n (d) whether any overprinting is correct;\n (e) the correct functioning of line monitors. \nSamples taken away from the packaging line should not be returned.\n참고자료\n미국 Title 21 CFR Part 211. \nSubpart G 포장 및 라벨 작업 관리\n sec. 211.134 의약품 검사\n (a) 포장과 라벨 작업이 완료된 의약품은 해당 로트의 용기와 포장자재에 올바른 라\n벨이 부착되었는지 여부에 대한 검사를 최종 작업 중에 해야 한다.\n (b) 작업 종료 시에 대표 검체를 채취하여 라벨 작업이 정확히 되었는지 육안으로 검\n사해야 한다.\n (c) 이러한 검사 결과를 해당 배치의 생산 또는 관리 기록서에 기록해야 한다.\nSubpart G Packaging and Labeling Control \n Sec. 211.134 Drug product inspection. \n (a) Packaged and labeled products shall be examined during finishing \noperations to provide assurance that containers and packages in the \nlot have the correct label.\n (b) A representative sample of units shall be collected at the completion \nof finishing operations and shall be visually examined for correct \nlabeling.\n (c) Results of these examinations shall be recorded in the batch production \nor control records."}, {"page": 379, "content": "372 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n사. 포장작업이 완료된 완제품은 품질(보증)부서의 적합판정이 나올 때까지\n다른 제품과 혼동되지 아니하도록 보관하여야 한다.\n해 설\n포장작업이 완료된 제품은 품질(보증)부서가 적합으로 판정할 때까지 다른 제품과 혼동되지 \n않도록, 정해진 조건에서 격리하여 보관하여야 한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 5.8. 완제품\n참고자료\nWHO TRS No. 986 GMP Annex 2\n14. 물품\n 완제품\n 14.26 최종 출하 승인이 나기까지 최종 제품을 격리 상태로 두어야 하며, 최종 출하 \n승인이 난 이후에는 제조자가 정한 조건에서 가용 재고로 보관한다.\n 14.27 제품을 판매용으로 출하 승인하는데 필요한 완제품의 평가와 문서화는 17항 \n\"우수 품질 관리 절차\"에서 다룬다.\n14. Materials\n Finished products\n 14.26 Finished products should be held in quarantine until their final \nrelease, after which they should be stored as usable stock under \nconditions established by the manufacturer.\n 14.27 The evaluation of finished products and the documentation necessary \nfor release of a product for sale are described in section 17, “Good \npractices in quality control”."}, {"page": 380, "content": "2장 완제의약품 제조 및 품질관리기준 373\n참고자료\n미국 Title 21 CFR Part 211.\nSubpart H 보관 및 유통\n sec. 211.142 보관 절차\n 의약품 보관 관리 방법을 기술한 절차 문서가 확립되어 있어야 하며 이를 준수해야 \n한다. 이 절차 문서는 다음 사항을 포함해야 한다.\n (a) 품질관리조직에 의한 출하 승인 이전 단계의 의약품 격리 보관\n (b) 의약품의 확인, 함량, 품질 및 순도에 영향을 주지 않도록, 적절한 온도, 습도 및 \n조건에서의 의약품 보관\nSubpart H Packaging and Labeling Control \n Sec. 211.142 Warehousing procedures. \n Written procedures describing the warehousing of drug products shall be \nestablished and followed. They shall include:\n (a) Quarantine of drug products before release by the quality control unit.\n (b) Storage of drug products under appropriate conditions of temperature, \nhumidity, and light so that the identity, strength, quality, and purity \nof the drug products are not affected. \n참고자료\n캐나다 GUI-0001\n5.0 규정\n 제조 관리\n C.02.011\n 해석 \n 49. 모든 반제품과 최종 제품은 품질부서에서 사용 또는 출하 승인이 나기까지, 격리 \n보관하며 해석 21에 나와 있는 사항들에 따라 확인될 수 있도록 하여야 한다.\n 50. 모든 포장은 로트번호에 의해서 구분된다.\n5.0 Regulation\n Manufacturing Control\n C.02.011\n Interpretation\n 49. All intermediate and finished products are held in quarantine and \nare so identified in accordance with interpretation 21, until \nreleased by the quality control department.\n 50. Every package of a drug is identified by a lot number."}, {"page": 381, "content": "374 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n아. 의약품의 용기나 포장에 대하여 필요한 경우에는 기밀 또는 밀봉 등의\n시험ㆍ검사를 하여야 한다.\n해 설\n플라스틱류, 금속, 유리, 고무 등의 포장용기는 재질에 따라 봉함조건을 설정하고, 보관 중 \n외부로부터의 오염 및 침투에 유의하여야 한다. 특히 무균제제의 용기는 미생물 오염에 유의\n하여야 한다.\n 1) 보관조건을 기밀용기로 허가받은 제품, 특히 수분에 예민한 제품을 포장하는 경우(은박, \nPTP 포장 등) 기밀시험을 하여 수분에 대한 안정성을 확보하도록 한다.\n 2) 무균제제에 사용하는 유리 또는 플라스틱 앰플과 같이 용융으로 닫는 용기는 밀봉 \n검사를 전수로 실시하여야 한다. 다른 용기는 검체를 채취하는 방식으로 적절한 절차에 \n따라 밀봉 상태를 확인하여야 한다. 밀봉 검사 방법은 제품 형태 및 관련 규정 등에 \n따라 선택한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 1] 21. 무균 제품의 최종 공정"}, {"page": 382, "content": "2장 완제의약품 제조 및 품질관리기준 375\n자. 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다.\n해 설\n포장공정의 각 단계를 수행할 때마다 포장지시서의 지시사항에 따라 필요한 정보를 기록하고, \n수기 서명 또는 전자 서명을 통해 해당 작업의 책임이 있는 작업자 및 확인자와, 수행한 날짜를 \n확인할 수 있도록 하여야 한다. \n포장작업을 하는 작업원의 성명과 확인자의 서명에 관련하여 다음 자료를 참고한다. \n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 4.8. 절차서 및 기록서\n참고자료\nWHO TRS No. 986 GMP Annex 2\n15. 문서\n 배치 포장 기록서\n 15.30 각 행위를 할 때마다 다음 정보를 기록하며, 서명 또는 전자적 암호를 통해 그에 \n대한 책임이 있는 사람의 이름과 날짜를 명확히 표시한다.\n (a) 제품명, 배치 번호, 포장한 벌크 제품의 양, 그리고 수득할 예정인 최종 제품의 \n배치 번호와 예상 수량, 실제로 수득한 양, 그 차이에 대한 설명\n (b) 포장작업의 일자와 시간\n (c) 포장 작업을 수행한 작업원의 성명\n (d) 각 다른 중요 단계 작업원 이니셜\n (e) 공정 중 검사 결과를 포함하여 포장 지시 문서의 준수 여부와 확인 점검 사항\n (f) 사용된 포장 라인과 설비에 대한 정보를 포함하여 포장 작업 세부 사항과 필\n요한 경우에는 포장되지 않은 제품의 보관 지시 사항이나 포장되지 않은 제\n품을 보관 지역에 반환한 기록\n (g) 가능하면 사용한 인쇄 포장 자재 견본, 배치 번호, 유효(사용)기한, 기타 추\n가 인쇄사항의 인쇄를 승인한 사실이 표시된 견본과 주기적 점검(해당되는 \n경우) 결과 포함\n (h) 포장 지시 문서 일탈 사항에 대한 세부 내용과 그에 대해 적정 권한을 가진 \n자가 승인한 문서를 포함하여 특이 사항에 관한 기록"}, {"page": 383, "content": "376 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n (i) 모든 인쇄 포장 자재와 벌크 제품의 참조 번호 또는 식별 정보와 발행, 사용, \n폐기 또는 반환 수량과 획득된 제품의 수량 등 적절한 수량 관리에 필요한 \n정보\n15. Documentation\n Batch packaging records\n 15.30 The following information should be recorded at the time each \naction is taken, and the date and the person responsible should be \nclearly identified by signature or electronic password:\n (a) the name of the product, the batch number and the quantity of \nbulk product to be packed, as well as the batch number and the \nplanned quantity of finished product that will be obtained, the \nquantity actually obtained and the reconciliation;\n (b) the date(s) and time(s) of the packaging operations;\n (c) the name of the responsible person carrying out the packaging \noperation;\n (d) the initials of the operators of the different significant steps;\n (e) the checks made for identity and conformity with the packaging \ninstructions, including the results of in-process controls;\n (f) details of the packaging operations carried out, including references \nto equipment and the packaging lines used, and, when necessary, \nthe instructions for keeping the product unpacked or a record of \nreturning product that has not been packaged to the storage area;\n (g) whenever possible, samples of the printed packaging materials used, \nincluding specimens bearing the approval for the printing of and \nregular check (where appropriate) of the batch number, expiry \ndate, and any additional overprinting;\n (h) notes on any special problems, including details of any deviation \nfrom the packaging instructions, with written authorization by an \nappropriate person;\n (i) the quantities and reference number or identification of all printed \npackaging materials and bulk product issued, used, destroyed or \nreturned to stock and the quantities of product obtained to permit \nan adequate reconciliation.\n참고자료\n캐나다 GUI-0001"}, {"page": 384, "content": "2장 완제의약품 제조 및 품질관리기준 377\n5.0 규정\n 제조 관리\n C.02.011\n 해석\n 35. 포장 기록서는(단계별 공정이 수행 될 때 기록한다) 다음의 정보를 포함한다.\n 35.3 포장 작업 및 벌크의 회수를 감독 하는 직원의 서명\n 35.4 여러 중요한 단계별 작업원의 서명 \n5.0 Regulation\n Manufacturing Control\n C.02.011\n Interpretation\n 35. Packaging orders include the following information (recorded at the \ntime each action is taken):\n 35.3 the identification of the personnel who are supervising packaging \noperations and the withdrawal of bulks;\n 35.4 the identification of the operators of the different significant steps;"}, {"page": 385, "content": "378 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n8.3 반품 및 재포장 \n가. 반품된 제품에 대해서는 품목명, 제조번호, 수량, 반품사유, 반품업소 및\n반품일과 그 처리명세 및 처리일 등 반품에 관한 내용을 기록하여야 한다.\n나. 유통과정에서 반품된 제품은 원칙적으로 폐기하여야 한다. 다만, 다음 사\n항을 모두 만족한 경우에 한정하여 재입고 또는 재포장할 수 있다.\n 1) 적절한 조건에서 보관되었다는 것이 확인된 경우\n 2) 직접용기가 파손되지 않은 경우\n 3) 사용기한 또는 유효기한이 충분히 남아 있는 경우\n 4) 시험ㆍ검사 결과 품질기준에 맞다는 것이 확인된 경우\n해 설\n1) 반품된 제품은 반품된 내역을 알 수 있도록 제품명, 제조번호, 수량, 반품사유, 반품처\n의 명칭·주소, 반품일자와 처리내용과 일자, 보관조건 및 사용(유효)기한 등을 기록하여 \n문서화하여야 한다. \n2) 판매된 제품이 반품된 경우에는 품질이 만족스러운 경우가 아니면 폐기되어야 한다. 이\n러한 제품은 품질(보증)부서가 문서화된 절차에 따라 엄격하게 품질 검사한 후에만 재\n입고, 재포장(2차 포장에 한함)을 고려할 수 있다. \n 가) 반품된 제품은 품질 검사 전까지 다른 제품과 혼입되지 않도록 구획된 장소에 따로 격\n리하여 보관하여야 한다.\n 나) 반품된 제품을 품질 평가 시에는 제품의 특성, 제품에 요구되는 특별한 보관조건, \n성상 및 출하 이후 경과된 시간을 모두를 고려하여야 한다. 이렇게 취해진 모든 조\n치를 적절히 기록하여야 한다.\n 다) 반품사유가 제조단위 전체의 문제가 되는 경우, 적절한 조사를 추가적으로 수행한다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 17] 4.8. 절차서 및 기록서\n [별표 17] 5.9. 기준일탈한 물품, 수거품 및 반품"}]
+
+ succeeded in 1613ms:
+- 제2장 완제의약품 제조 및 품질관리기준 [own p.16-478, subtree p.16-478]
+    - 가. “관리번호”란 제조단위를 부여할 수 없는 자재 등을 관리하기 위하여 부여한 번호로서 숫자ㆍ문자 또는 이들을 조합한 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 나. “교정”이란 계측기, 시험기기 또는 기록계가 나타내는 값과 표준기기 의 참값을 비교하여 오차가 허용범위 내에 있음을 확인하고, 허용오 차범위를 벗어나는 경우 허용범위 내에 들도록 조정하는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 다. “일탈”이란 제조 또는 품질관리 과정에서 미리 정해진 기준을 벗어나 이루어진 행위를 말한다. [own p.18-18, subtree p.18-18]
+    - 바. “반제품”이란 제조공정 단계에 있는 것으로서 필요한 제조공정을 더 거쳐야 완제품이 되는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 자. “수율관리기준”이란 제조공정이 정상적으로 진행되었을 경우 얻어지는 제품별 연간 평균생산수율 범위를 말한다. [own p.18-18, subtree p.18-18]
+    - 차. “실생산량”이란 제조공정에서 실제로 얻은 양을 말한다. [own p.18-18, subtree p.18-18]
+    - 카. “완제의약품”이란 모든 제조공정이 완료되어 최종적으로 인체에 투여할 수 있도록 일정한 제형으로 제조된 의약품을 말한다. [own p.18-18, subtree p.18-18]
+    - 타. “완제품”이란 의약품 제조에서 모든 제조공정이 완료된 원료의약품 또는 완제의약품을 말한다. [own p.18-18, subtree p.18-18]
+    - 파. “원료약품”이란 완제품의 제조에 사용되는 물질(자재는 제외한다)을 말하며, 완제품에 남아 있지 않은 물질을 포함한다. [own p.18-18, subtree p.18-18]
+    - 하. “원료의약품”이란 합성, 발효, 추출 등 또는 이 방법들의 조합에 의하여 제조된 물질로서 완제의약품의 제조에 사용되는 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 머. “재가공”이란 기준일탈한 제조공정 단계에 있는 반제품에 대하여 이미 설정된 생산공정의 일부 공정을 반복하는 행위를 말한다. [own p.18-18, subtree p.18-18]
+    - 서. “제조”란 포장 및 표시작업을 포함하여 의약품을 생산하기 위하여 하는 모든 작업을 말한다. [own p.18-18, subtree p.18-18]
+    - 어. “제조단위” 또는 “로트”란 동일한 제조공정으로 제조되어 균질성을 가지는 의약품의 일정한 분량을 말한다. [own p.18-18, subtree p.18-18]
+    - 저. “제조번호” 또는 “로트번호”란 일정한 제조단위분에 대하여 제조관리 및 출하에 관한 모든 사항을 확인할 수 있도록 표시된 번호로서 숫자ㆍ문자 또는 이들을 조합한 것을 말한다. [own p.18-18, subtree p.18-18]
+    - 퍼. “한약분말”이란 완제의약품을 제조하기 위하여 한약을 가루로 만든 상태를 말한다. [own p.18-18, subtree p.18-18]
+    - 고. “한약원료”란 원생약, 한약, 한약분말, 한약엑스 등으로서 제제를 제조하기 위하여 사용하는 생약에서 유래한 모든 원료를 말한다. [own p.18-18, subtree p.18-18]
+    - 노. “동물유래원료”란 동물의 장기 또는 조직을 추출, 여과, 농축, 건조 등의 방법으로 제조한 완제의약품의 원료를 말한다. [own p.18-18, subtree p.18-18]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.1 원칙 [별표 17] 1.2 품질보증 [own p.31-31, subtree p.31-31]
+      - 나. 제조 및 품질관리는 의약품이 허가된 품질기준에 따라 일관성 있게 생산, 관리됨을 보장하는 체계이다. [own p.42-46, subtree p.42-46]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.3 의약품 제조 및 품질관리 기준 [own p.43-43, subtree p.43-43]
+      - 다. 품질관리는 검체채취, 규격 및 시험, 그리고 조직, 문서화, 출하 절차와 관련된 체계이다. [own p.46-49, subtree p.46-49]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.4 품질관리 [own p.47-47, subtree p.47-47]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.5 제품품질평가 [own p.49-49, subtree p.49-49]
+        - 관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.6 품질위험관리 [own p.52-52, subtree p.52-52]
+      - 가. 작업소의 기계ㆍ설비는 제조공정 흐름에 따라 배치할 것 [own p.54-61, subtree p.54-61]
+      - 나. 제조용 중요 기계ㆍ설비는 구분할 수 있도록 번호나 코드를 부여하고 해당 기계ㆍ설비를 사용한 제품명, 제조번호 및 제조일자를 기록할 것 [own p.61-62, subtree p.61-62]
+      - 다. 제조용수는 필요한 질과 양이 확보되도록 할 것 [own p.62-64, subtree p.62-64]
+      - 아. 의약품의 제조 및 시험에 사용되는 중요 기계ㆍ설비에 대하여 교정 및 적격성평가를 할 것 [own p.69-76, subtree p.69-76]
+        - 참고자료 의약품 제조 및 품질관리에 관한 규정 [별표 15] [own p.70-75, subtree p.70-75]
+      - 자. 생약(한약)을 원료로 사용하는 의약품 제조소는 가목부터 아목까지의 기준 외에 별도 기준을 갖출 것 [own p.76-78, subtree p.76-78]
+      - 가. 제조 및 품질관리에 자동화장치 등을 사용할 경우 계획을 수립하여 정기적으로 교정 또는 성능점검을 하고 기록할 것 [own p.78-79, subtree p.78-79]
+      - 나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것 [own p.79-79, subtree p.79-79]
+      - 다. 자동화장치 등에 의한 모든 기록은 별도로 저장ㆍ보관하여야 하고 대체 시스템으로 자료 유실을 방지할 것 [own p.79-81, subtree p.79-81]
+      - 가. 의약품의 종류ㆍ제형ㆍ제조방법 및 제조시설 등에 따라 작업소의 청정구역과 청정등급을 설정하고 유지할 것 [own p.81-82, subtree p.81-82]
+      - 다. 제조조건과 보관조건에 적절한 온도 및 습도가 유지되도록 정기적으로 점검할 것 [own p.83-84, subtree p.83-84]
+    - 제조부서 책임자 [own p.94-111, subtree p.94-111]
+      - 품질관리를 적절히 하기 위하여 제품표준서 및 품질관리기준서에 성명을 적고 서명하여 승인을 받아 갖추어 두고 운영하여야 한다. [own p.113-119, subtree p.113-119]
+      - 제4.2호가목의 시험지시서에 의하여 시험을 지시하고 시험지시서에 따라 시험이 진행되는지를 점검ㆍ확인하여야 하며, 일탈 및 기준일탈이 있는 경우에는 이를 조사하고 기록하여야 한다. [own p.119-122, subtree p.119-122]
+      - 제7.1호가목 및 제8.1호가목의 시험성적서 및 제조단위별 제조기록서의 내용을 검토하고 제품의 출하를 승인하여야 한다. [own p.133-140, subtree p.133-140]
+      - 시험결과에 따라 원자재의 사용 여부, 제조공정의 진행 여부 또는 제품의 출하 여부를 결정하고 그 결과를 미리 정한 절차에 따라 관련 부서에 통지하여야 한다. [own p.140-144, subtree p.140-144]
+      - 제조 또는 시험의 수탁자와 주요 원자재의 제조업자를 평가하여야 한다. [own p.153-157, subtree p.153-157]
+      - 라. 허가받은 원료약품 및 그 분량과 제조단위당 기준량, 필요한 경우 기준량 조정에 관한 사항 [own p.162-166, subtree p.162-166]
+      - 마. 제조공정 흐름도 및 상세한 공정별 제조방법과 공정검사방법(위탁하여 제조하는 경우에는 위탁하는 공정의 범위) [own p.166-166, subtree p.166-166]
+      - 차. 제조관리 및 품질관리에 필요한 시설 및 기기 [own p.175-175, subtree p.175-175]
+      - 거. 다음 사항이 포함된 제조지시서 [own p.175-178, subtree p.175-178]
+    - 품질관리기준서 [own p.186-200, subtree p.186-200]
+      - 자. 위탁시험 또는 위탁제조 하는 경우 검체의 송부방법 및 시험결과의 판정방법 [own p.190-190, subtree p.190-190]
+    - 제조관리기준서 [own p.200-220, subtree p.200-220]
+      - 가. 제조공정관리에 관한 사항 [own p.200-200, subtree p.200-200]
+      - 바. 위탁제조에 관한 사항 [own p.211-211, subtree p.211-211]
+      - 사. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.211-220, subtree p.211-220]
+    - 제조위생관리기준서 [own p.220-233, subtree p.220-233]
+      - 아. 제조시설의 세척 및 평가 [own p.220-221, subtree p.220-221]
+      - 다. 한 제품의 제조에만 전용으로 사용되는 설비인 경우에는, 그 제품의 제조단위 또는 배치 번호가 일련번호로 부여되고 그에 따라 순서대로 제조되면, 설비별 기록 서는 필요하지 않다. 전용 설비를 사용하는 경우에는 세척, 유지 관리 및 사용에 관 한 사항을 배치 기록서의 일부로 기록할 수 있다. 세척 및 유지관리 업무를 수행하 는 작업원과 이중 점검을 수행하는 작업원은(또는 세척 및 유지관리를 섹션 211.68 에 따른 자동화 설비를 이용해 수행하는 경우에는… [own p.221-224, subtree p.221-224]
+      - 차. 그 밖에 제3.2호의 제조부서 책임자의 의무 이행에 관련된 세부 기준 등 필요한 사항 [own p.225-233, subtree p.225-233]
+      - 나. 문서는 알아보기 쉽게 작성하여야 하며, 작성된 문서에는 제조부서 책임자 또는 품질(보증)부서 책임자의 서명과 승인 연월일이 있어야 한다. [own p.233-233, subtree p.233-233]
+      - 라. 모든 기록문서는 작업과 동시에 작성되어야 하며 지울 수 없는 잉크로 작성하여야 한다. 기록문서를 수정하는 경우에는 수정하려는 글자 또는 문장 위에 선을 그어 수정 전 내용을 알아볼 수 있도록 하고, 수정된 문서 에는 수정 사유, 수정 연월일 및 수정자의 서명이 있어야 한다. [own p.235-235, subtree p.235-235]
+      - 마. 문서를 개정할 때는 개정 사유 및 개정 연월일 등을 적고 제조부서 책임자 또는 품질(보증)부서 책임자의 승인을 받아야 하며, 정기적으로 점검하여 최근에 개정된 것인지를 확인하여야 한다. 개정 전의 것도 일정기간 보존 하여야 한다. [own p.235-237, subtree p.235-237]
+      - 가. 모든 기록문서(전자기록을 포함한다)는 해당 제품의 유효기한 또는 사용 기한 경과 후 1년간 보존하여야 한다. 다만, 별도로 규정하는 경우 그 사 유와 보존기한을 명확하게 정하여야 한다. [own p.237-237, subtree p.237-237]
+      - 나. 전자문서 시스템의 경우에는 허가된 사람만이 입력, 변경 또는 삭제할 수 있으며 자기테이프, 마이크로필름, 백업 등의 방법으로 기록의 훼손 또는 소실에 대비하고 필요시 판독 가능한 방법으로 출력하여야 한다. [own p.242-243, subtree p.242-243]
+      - 다. 시스템 접근은 암호 또는 다른 수단에 의해 제한되어야하며 중요한 데이터 의 입력은 독립적으로 확인되어야 한다. 전자적으로 저장된 기록은 자기 테이프, 마이크로 필름, 용지 인쇄 출력 또는 다른 수단을 통한 백업 전송에 의해 보호되 어야 한다. 보유 기간 동안 데이터를 쉽게 이용할 수 있다는 것이 특히 중요하다. [own p.243-243, subtree p.243-243]
+      - 다. 밸리데이션을 실시한 결과 제조관리 및 품질관리에 관하여 개선이 필요한 경우에는 필요한 조치를 하고 해당 조치에 대한 기록을 작성하여 갖추어 두어야 한다. [own p.244-244, subtree p.244-244]
+      - 가. 의약품 제조공정이 미리 설정된 기준 및 품질 특성에 맞는 제품을 일관 되게 제조한다는 것을 검증하고 문서화하는 공정 밸리데이션을 실시하여야 한다. [own p.245-245, subtree p.245-245]
+      - 나. 제품의 품질에 영향을 미치는 중요한 제조공정에 대해서는 예측적 밸리 데이션을 실시하여야 하되, 부득이한 경우에는 동시적 또는 회고적 밸리 데이션으로 갈음할 수 있다. [own p.245-245, subtree p.245-245]
+      - 다. (예 : 유사한 기본 과립을 다른 타정 중량으로 하여 제조된 정제 또는 서로 다른 크 기의 캡슐에 동일한 기본 조성의 중량을 충전한 캡슐). 동일한 용기 마개 시스템이면서 용기의 크기나 충전량만 다른 경우에도 브래케팅 접근법을 적용할 수 있다. [own p.245-247, subtree p.245-247]
+      - 6.3 시험방법 밸리데이션 의약품등의 품질관리를 위한 시험방법의 타당성을 미리 검증하고 문서화하는 밸리데이션으로서 품목별로 실시하여야 한다. [own p.266-266, subtree p.266-266]
+      - 10.8 제조 공정과 세척 사이의 시간 및 세척과 사용 사이의 시간의 영향을 고려하여 세척 공정의 세척전유지시간(dirty holding time) 및 세척후유지시간(clean holding time)을 정의해야 한다. [own p.270-270, subtree p.270-270]
+      - 10.10 최악 조건 접근법으로 세척 밸리데이션을 실시할 경우 최악 조건 제품의 선택과 평가된 제조소의 신제품에 대한 영향에 대한 과학적인 근거가 제공되어야 한다. [own p.270-270, subtree p.270-270]
+    - 제조지원설비 밸리데이션 [own p.285-286, subtree p.285-286]
+      - 6.5 제조지원설비 밸리데이션 제조용수공급시스템 및 공기조화장치시스템 등 의약품 제조를 지원하는 시스템에 대하여 검증하고 문서화하는 밸리데이션으로서 기계ㆍ설비별로 실시하여야 한다. [own p.285-285, subtree p.285-285]
+  - 품질관리 [own p.286-332, subtree p.286-332]
+      - 라. 시험기록(시험 근거자료를 포함한다)이 정확하고 설정된 기준에 맞다는 것을 확인하는 중간검토자를 두어야 한다. [own p.297-297, subtree p.297-297]
+      - 마. 완제품의 출하승인을 위한 평가는 제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다. [own p.297-297, subtree p.297-297]
+      - 바. 그래프, 계산식 등 시험에서 얻은 모든 기록(전자기록을 포함한다)은 보존하여야 한다. [own p.297-299, subtree p.297-299]
+      - 아. 시험기기, 계측기 및 기록계는 미리 정한 계획서에 따라 정기적으로 교정ㆍ기록하여야 한다. [own p.300-301, subtree p.300-301]
+      - 자. 주성분 및 완제품의 보관용 검체는 제조단위 또는 관리번호별로 채취하고, 보관용 검체 중 주성분은 투입된 완제품의 마지막 제조단위, 완제품은 해당 제조단위의 유효기한 또는 사용기한 경과 후 1년간 보관하여야 한다. [own p.301-301, subtree p.301-301]
+      - 카. 표준품, 배지, 검체, 중요 시약, 부피측정용 유리기구 등에 대한 관리상황을 기록하여야 한다. [own p.304-307, subtree p.304-307]
+      - 하. 제조용수는 정기적으로 사용점 등에서 제조용수를 채취하여 규정된 시험방법에 따라 시험하고 평가하여야 한다. [own p.309-311, subtree p.309-311]
+      - 너. 시험용 동물은 적절하게 관리하여야 하며, 각각 구분하여 그 사용내역을 기록하여야 한다. [own p.313-314, subtree p.313-314]
+      - 더. 실제 제조ㆍ사용된 검체를 대상으로 시험 시마다 시험자ㆍ시험기기 오차 등을 확인하는 적합성 시험을 하여야 한다. [own p.314-315, subtree p.314-315]
+      - 러. 원생약은 형태학적ㆍ이화학적 품종관리와 표본관리를 하여야 하며 동일한 생약이면서 표본과 다른 경우 품종에 따른 성분의 차이, 재배 시의 유해물질 사용 여부 등 재배지 정보수집 등을 통하여 품질관리를 철저히 하여야 한다. [own p.315-316, subtree p.315-316]
+      - 머. 한약분말 또는 한약엑스를 제조하는 경우에는 다음 사항을 준수하여야 한다. [own p.316-317, subtree p.316-317]
+  - 제조관리 [own p.332-392, subtree p.332-392]
+    - 제조공정관리 [own p.332-364, subtree p.332-364]
+      - 가. 제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다. [own p.332-332, subtree p.332-332]
+      - 라. 작업 중인 작업실과 보관용기 및 기계ㆍ설비에는 제품명과 제조번호 등을 표시하여야 한다. [own p.336-338, subtree p.336-338]
+      - 바. 반제품은 신속하게 제조공정을 완료하되, 보관 시에는 품질이 변하지 아니하도록 보관하여야 한다. [own p.341-342, subtree p.341-342]
+      - 아. 의약품을 제조하는 경우에는 미생물의 오염에 유의하고 청정등급에 맞도록 관리하여야 한다. [own p.344-347, subtree p.344-347]
+      - 차. 제조용수의 수질을 작업 시마다 규정된 방법에 따라 확인하여야 한다. [own p.348-348, subtree p.348-348]
+      - 카. 제조공정 중 기준일탈한 반제품을 재가공하는 경우에는 품질(보증)부서 책임자의 승인을 받아야 하며 그 기록을 보관하여야 한다. [own p.350-351, subtree p.350-351]
+      - 파. 완제품의 품질을 보증하기 위하여 중요공정에 설정된 작업시간을 벗어난 경우에는 제품의 품질에 영향이 없음을 규명하고 그 관련 기록을 보관 하여야 한다. [own p.354-355, subtree p.354-355]
+      - 하. 한약원료의 제조공정은 다음 사항을 준수하여야 한다. [own p.355-364, subtree p.355-364]
+      - 가. 다른 의약품이나 다른 제조단위를 동시 또는 연속하여 포장할 경우에는 의약품 상호 간의 혼동 및 교차오염과 자재 상호 간의 혼동이 일어나지 않도록 작업실을 구획하는 등 적절한 방안을 마련하여야 한다. [own p.364-364, subtree p.364-364]
+      - 다. 표시재료는 작업 전에 품질(보증)부서의 승인 여부와 제조번호 등 인쇄 내용이 정확한지를 확인하고 사용하여야 하며, 포장라인 중 인쇄되는 자재는 그 내용이 제조기록서에서 지시한 대로 인쇄되고 있는지를 확인 하여야 한다. [own p.364-365, subtree p.364-365]
+      - 라. 포장작업 중인 작업실, 포장라인 또는 기계ㆍ설비에는 제품명과 제조번호를 표시하여야 한다. [own p.365-366, subtree p.365-366]
+      - 마. 포장작업이 끝나면 자재의 인수량과 사용량을 비교하여 차이가 있을 경우에는 원인을 조사하여야 하며, 사용하고 남은 자재는 입ㆍ출고 내용을 기록하고 자재보관소로 반납하거나 폐기하여야 한다. 다만, 제조번호 등을 인쇄한 표시재료는 폐기하여야 한다. [own p.366-368, subtree p.366-368]
+      - 바. 제품의 표시사항과 포장의 적합 여부를 확인ㆍ기록하여야 하며, 포장공정 에서 채취된 검체는 시험이 완료된 후 폐기하여야 한다. 다만, 혼동과 오염의 우려가 없는 경우에는 폐기하지 아니할 수 있다. [own p.370-372, subtree p.370-372]
+      - 가. 반품된 제품에 대해서는 품목명, 제조번호, 수량, 반품사유, 반품업소 및 반품일과 그 처리명세 및 처리일 등 반품에 관한 내용을 기록하여야 한다. [own p.385-385, subtree p.385-385]
+      - 다. 재입고 또는 재포장 작업은 품질(보증)부서 책임자의 승인이 있어야 하고, 재포장을 하는 경우에는 품목 및 제조번호에 따라 재포장을 지시하며 기록서에 의하여 작업하고 적합으로 판정된 후 입고하여야 한다. [own p.388-389, subtree p.388-389]
+      - 라. 재포장한 제품에는 제조번호 등에 재포장한 것임을 나타내는 표시를 하여야 하며, 사용기한 또는 유효기한을 변경해서는 안 된다. [own p.389-391, subtree p.389-391]
+  - 제조위생관리 [own p.392-408, subtree p.392-408]
+    - 제조설비의 세척 [own p.405-408, subtree p.405-408]
+      - 가. 제조설비의 세척에 사용하는 세제 또는 소독제는 잔류하거나 적용하는 표면에 이상을 초래하지 아니하는 것이어야 한다. [own p.405-405, subtree p.405-405]
+      - 나. 세척한 제조설비는 다음 사용 시까지 오염되지 아니하도록 유지ㆍ관리 하여야 한다. [own p.405-405, subtree p.405-405]
+      - 다. 제조설비의 세척은 세척작업원, 세척작업일 및 세척에 사용된 약품 등을 기재한 세척기록과 그 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순 으로 작성하여 갖추어 두어야 하되, 세척기록과 사용기록은 통합하여 작성할 수 있다. [own p.405-405, subtree p.405-405]
+      - 가. 반입된 원자재 및 반제품(이하 “원자재등”이라 한다)은 시험결과 적합판 정이 날 때까지 격리ㆍ보관하여야 한다. 다만, 적합판정을 받은 원자재와 확실하게 구분할 수 있는 대책이 마련된 경우에는 그렇지 않다. [own p.408-408, subtree p.408-408]
+      - 나. 반입된 원자재등의 외관 및 표시사항을 확인하고 제조번호가 없는 경우 에는 관리번호를 부여하여 겉포장의 먼지를 제거한 후 보관하여야 한다. [own p.408-408, subtree p.408-408]
+      - 다. 원자재등이 반입되면 제조단위 또는 관리번호별로 시험용 검체를 채취하고 시험 중임을 표시하며, 검체의 용기ㆍ포장에 검체명, 제조번호, 채취일자, 채취자 등을 표시하여야 한다. [own p.408-410, subtree p.408-410]
+      - 다. 원자재 및 완제품은 제조번호 또는 관리번호별로 시험 전후를 표시하고 구분ㆍ보관하여야 한다. 다만 자동관리 시스템인 경우에는 표시를 생략 할 수 있다. [own p.421-421, subtree p.421-421]
+      - 나. 보관소는 적정한 온도 및 습도가 유지되도록 정기적으로 점검ㆍ기록 하여야 한다. [own p.426-426, subtree p.426-426]
+      - 라. 곰팡이의 증식과 충해를 방지하기 위하여 약제를 살포하거나 훈증하는 경우 약전(藥典)에 따르고, 훈증기록은 3년간 보존한다. [own p.429-429, subtree p.429-429]
+      - 다. 완제품은 품질(보증)부서 책임자가 출하 승인한 것만을 출하하여야 하며 제품명, 제조번호, 출하일자, 거래처 및 수량 등을 기록ㆍ관리하여야 한다. [own p.429-429, subtree p.429-429]
+    - 다. 불만처리기록에는 다음 사항이 포함되어야 한다. [own p.430-430, subtree p.430-430]
+    - 라. 출하된 제품에 중대한 결함이 있는 경우에는 신속히 조치하고 그 기록을 보존하여야 하며, 재발방지대책을 수립하여 시행하여야 한다. [own p.430-430, subtree p.430-430]
+    - 가. 기계설비, 원자재, 제조공정, 시험방법 등을 변경할 경우에는 제품의 품질 또는 공정의 재현성에 미치는 영향을 검토하여야 하고, 충분한 데이터에 의하여 품질관리기준에 맞는 제품을 제조한다는 것을 확인하고 문서화하 여야 하되, 필요한 경우에는 밸리데이션과 안정성 시험 및 원자재의 제조 업자 평가 등을 실시한다. [own p.441-441, subtree p.441-441]
+    - 가. 계획을 수립하여 자체적으로 제조 및 품질관리가 이 기준에 맞게 이루어 지고 있는지를 정기적으로 자율점검하여야 한다. 다만, 기준일탈이나 제품 회수가 빈번하게 발생하는 등 특별한 경우에는 추가로 실시하여야 한다. [own p.447-447, subtree p.447-447]
+    - 나. 작업원에 대한 교육ㆍ훈련은 연간계획을 수립하여 실시하며, 작업원이 맡은 업무를 효과적으로 수행할 수 있도록 제조ㆍ품질관리와 그 밖에 필요한 사항에 대하여 실시하여야 한다. [own p.452-452, subtree p.452-452]
+  - 위탁제조 및 위탁시험의 관리 [own p.456-478, subtree p.456-478]
+    - 가. 의약품등의 제조업자 [own p.456-456, subtree p.456-456]
+    - 나. 의약품등 외의 물품 제조업자로서 자동에어로졸 충전, 연필 제조, 가스 주입, 도금, 주물, 단조, 판금, 사출, 인쇄, 코팅, 도장, 멸균, 직조, 타면, 덴타 또는 설계에 관한 공정을 수행하는 자 [own p.456-456, subtree p.456-456]
+    - 다. 의약품등 외의 물품 제조업자로서 부분품 또는 부품의 제조를 전문으로 하는 자 [own p.456-456, subtree p.456-456]
+    - 라. 의약품등 외의 물품 제조업자로서 원료의약품의 합성공정 중 수소화 반응 공정을 수행하는 자 [own p.456-456, subtree p.456-456]
+    - 다. 의약품등의 제조업자 [own p.456-456, subtree p.456-456]
+- 별첨1 의약품 제조소의 시설 [own p.478-554, subtree p.478-554]
+  - 의약품 등의 제조업 및 수입자의 시설기준령 [own p.482-500, subtree p.482-500]
+    - 가. 제조하는 의약품의 종류ㆍ제형 또는 제조방법에 따라 오염을 방지하고 적절한 온도를 유지하며 필요한 경우에는 습도를 유지할 수 있는 공 기조화장치 [own p.500-500, subtree p.500-500]
+    - 나. 제조공정관리에 필요한 시험검사시설 또는 시험검사기구 [own p.500-500, subtree p.500-500]
+    - 다. 제조과정 중의 반제품을 품질에 영향을 미치지 아니하도록 보관할 수 있는 시설 [own p.500-500, subtree p.500-500]
+    - 나. 제조 또는 시험에 사용하는 동물 중 미생물을 접종한 동물을 관리하는 시설 [own p.500-500, subtree p.500-500]
+    - 다. 제조 또는 시험에 사용하는 동물을 처리하는 시설 [own p.500-500, subtree p.500-500]
+    - 자. 제조 또는 시험에 사용한 기구ㆍ기계 등의 소독시설 [own p.500-500, subtree p.500-500]
+  - 의약품 등의 제조업 및 수입자의 시설기준령 시행규칙 [own p.500-554, subtree p.500-554]
+    - 가. 제조하는 의약품의 종류ㆍ제형 또는 제조방법에 따라 오염을 방지하고 적절한 온도를 유지하며 필요한 경우에는 습도를 유지할 수 있는 공 기조화장치 [own p.516-524, subtree p.516-524]
+    - 나. 제조공정관리에 필요한 시험검사시설 또는 시험검사기구 [own p.526-526, subtree p.526-526]
+    - 다. 제조과정 중의 반제품을 품질에 영향을 미치지 아니하도록 보관할 수 있는 시설 [own p.526-526, subtree p.526-526]
+    - 나. 제조 또는 시험에 사용하는 동물 중 미생물을 접종한 동물을 관리하는 시설 [own p.534-534, subtree p.534-534]
+    - 다. 제조 또는 시험에 사용하는 동물을 처리하는 시설 [own p.534-534, subtree p.534-534]
+    - 자. 제조 또는 시험에 사용한 기구ㆍ기계 등의 소독시설 [own p.534-534, subtree p.534-534]
+    - 점검기록 (Audit Trail) [own p.591-596, subtree p.591-596]
+    - 제조단위 출하 [own p.597-599, subtree p.597-599]
+    - 기록 보관 [own p.599-602, subtree p.599-602]
+
+ succeeded in 1705ms:
+[{"page": 428, "content": "2장 완제의약품 제조 및 품질관리기준 421\n다. 쥐, 해충, 미생물 등으로부터 오염되지 않도록 관리하여야 한다.\n라. 곰팡이의 증식과 충해를 방지하기 위하여 약제를 살포하거나 훈증하는 \n경우 약전(藥典)에 따르고, 훈증기록은 3년간 보존한다.\n해 설\n1) 곰팡이 증식과 충해를 방지하기 위하여 약제(예 : 사염화탄소, 황화탄소, 이산화황, 클\n로로포름)를 살포 또는 훈증하는 경우 약제의 독성이 강하기 때문에 가능한 한 사용하지 \n않고 부득이 사용할 경우 약제가 잔류하지 않도록 대책을 강구한다.\n2) 미생물 오염에 대한 대책으로 약제 살균 외에 원료한약의 종류에 따라 적절한 멸균방\n법을 선택할 수 있다. 건열멸균 또는 습열멸균에 의한 방법이 있으나 변색여부 등 한\n약에 미치는 영향을 고려할 필요가 있다.\n관련 규정\n의약품 제조 및 품질관리에 관한 규정 [별표 5] 2.1 보관소"}, {"page": 429, "content": "422 완제의약품 제조 및 품질관리기준 가이던스(민원인 안내서)\n10.4 출고관리\n가. 출고는 선입선출방식으로 하여야 하며, 그러지 아니할 경우에는 타당한 \n사유가 있어야 한다. \n나. 원자재는 시험결과 적합으로 판정된 것만을 작업소로 보내야 한다.\n다. 완제품은 품질(보증)부서 책임자가 출하 승인한 것만을 출하하여야 하며\n제품명, 제조번호, 출하일자, 거래처 및 수량 등을 기록ㆍ관리하여야 한다.\n해 설\n1) 모든 물품(원자재등 및 완제품)은 원칙적으로 선입선출 방법으로 출고한다. 다만, 나중에 \n입고된 물품이 사용(유효)기한이 짧은 경우 먼저 입고된 물품보다 먼저 출고할 수 있다. \n2) 이외에도 선입선출을 하지 못하는 특별한 사유가 있을 경우, 적절하게 문서화된 절차에 \n따라 나중에 입고된 제품을 먼저 출고할 수 있으나, 문서화된 절차의 일탈은 일시적이고 \n적절한 경우에만 허용하도록 한다.\n3) 모든 원자재등은 시험·검사에 적합한 것만 작업소로 출고하여야 하며, 추적할 수 있도록 \n관리하여야 한다. 출하·출고되는 모든 원자재등 및 완제품에 대해 가능한 한 제조번호, \n제조일자 별로 거래처를 추적할 수 있도록 수기 작업 또는 컴퓨터화 시스템을 사용하여 \n기록하도록 한다.\n참고자료\n미국 21 CFR Part 211\n211.86 승인된 원료, 의약품 용기, 마개의 사용\n 사용 승인된 원료, 의약품 용기, 마개는 가장 먼저 승인된 재고를 우선 사용하도록 \n관리한다. 이 기준의 일탈은 일시적이고 적절한 경우에만 허용된다.\nSubpart H-보관 및 유통\n Sec.211.142 보관절차\n 의약품 보관 관리 방법을 기술한 절차 문서를 확립하고 이를 준수한다. 이 절차 문서에 \n다음 사항을 포함 시켜야 한다. \n (a) QCU의 출하 승인 이전까지 의약품 격리 보관\nSubpart J - 기록서 및 보고서"}]
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+이제 예측 파일을 지정 경로에 작성합니다. 각 행은 질문 원문, 구조상 섹션 경로, 실제 열람 페이지, 그리고 본문에서 확인한 짧은 근거만 포함합니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc "test -e results/codex_agentic_10x10/predictions_061_070_agentic.jsonl; printf '%s\\n' "'$?' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 0ms:
+1
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+apply patch
+patch: completed
+/Users/dongmin/Documents/myproject/DocMIND/PageIndex/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+hook: PostToolUse
+hook: PostToolUse Completed
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+codex
+예측 JSONL 작성이 끝났습니다. 이제 지정 validator를 실행해 행 수, 필드, 페이지 형식 같은 제출 조건이 맞는지 확인하겠습니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc '.venv/bin/python scripts/gmp_pageindex_codex_retriever.py validate-predictions results/codex_agentic_10x10/predictions_061_070_agentic.jsonl' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+ succeeded in 1203ms:
+{
+  "status": "PASS",
+  "rows": 10,
+  "errors": []
+}
+
+hook: PostToolUse
+hook: PostToolUse Completed
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+codex
+Validator 결과는 `PASS`, 10행, 오류 없음입니다. 마지막으로 생성 파일 자체가 10개 JSONL 행인지 가볍게 확인하고 종료합니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc 'wc -l results/codex_agentic_10x10/predictions_061_070_agentic.jsonl' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 0ms:
+      10 results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+
+hook: PostToolUse
+exec
+/bin/zsh -lc '.venv/bin/python -m json.tool results/codex_agentic_10x10/predictions_061_070_agentic.jsonl' in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ exited 1 in 0ms:
+Extra data: line 2 column 1 (char 294)
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+codex
+`json.tool`은 JSON 배열용이라 JSONL 파일에는 부적합해서 `Extra data`가 정상적으로 발생했습니다. JSONL 방식으로 각 행을 파싱하는 검사로 바꿔 확인합니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc ".venv/bin/python -c \"import json, pathlib; p=pathlib.Path('results/codex_agentic_10x10/predictions_061_070_agentic.jsonl'); rows=[json.loads(line) for line in p.read_text().splitlines()]; print(len(rows)); print(rows[0]['id'], rows[-1]['id'])\"" in /Users/dongmin/Documents/myproject/DocMIND/PageIndex
+ succeeded in 0ms:
+10
+gmp_eval_061 gmp_eval_070
+
+hook: PostToolUse
+hook: PostToolUse Completed
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+codex
+완료했습니다.
+
+생성 파일: [predictions_061_070_agentic.jsonl](/Users/dongmin/Documents/myproject/DocMIND/PageIndex/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl)
+
+검증 결과:
+`validate-predictions` PASS, 10 rows, errors 없음.
+
+추가로 JSONL 행 파싱 확인도 완료했습니다: 10행, `gmp_eval_061`부터 `gmp_eval_070`까지입니다.
+
+
+diff --git a/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+new file mode 100644
+index 0000000000000000000000000000000000000000..f4552f501fc6996dd8703dc9569958dc705b512a
+--- /dev/null
++++ b/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl
+@@ -0,0 +1,10 @@
++{"id":"gmp_eval_061","question":"모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","문서","문서의 관리","문서 보존"],"predicted_pages":"237","evidence_pages_read":"237","reason":"문서의 관리 중 문서 보존 조항에서 모든 기록문서(전자기록 포함)는 해당 제품의 유효기한 또는 사용기한 경과 후 1년간 보존한다고 직접 규정한다."}
++{"id":"gmp_eval_062","question":"원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","원자재 및 제품의 관리","원생약의 보관관리"],"predicted_pages":"428","evidence_pages_read":"428-429","reason":"원생약의 보관관리 조항에서 곰팡이 증식과 충해 방지를 위해 약제 살포 또는 훈증하는 경우 훈증기록을 3년간 보존한다고 확인된다."}
++{"id":"gmp_eval_063","question":"제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조위생관리","제조설비의 세척"],"predicted_pages":"405","evidence_pages_read":"405","reason":"제조설비의 세척 조항은 세척작업원, 세척작업일, 세척에 사용된 약품 등을 기재한 세척기록과 해당 기계ㆍ설비를 사용한 품목 등 사용기록을 날짜순으로 갖추도록 한다."}
++{"id":"gmp_eval_064","question":"제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","제조공정관리"],"predicted_pages":"332","evidence_pages_read":"332","reason":"제조공정관리 조항에서 제품의 제조단위마다 제조기록서를 작성하여야 하며 제조기록서는 제조지시서와 통합하여 작성할 수 있다고 규정한다."}
++{"id":"gmp_eval_065","question":"시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","품질관리","시험관리"],"predicted_pages":"286","evidence_pages_read":"286-290","reason":"시험관리 첫 조항은 의뢰한 시험별로 시험성적서를 작성해야 하며, 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다고 한다."}
++{"id":"gmp_eval_066","question":"점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 조항은 GMP 관련 데이터를 변경하거나 삭제할 때 그 사유를 문서화해야 하며 점검기록은 이해 가능한 형식으로 구비하고 정기적으로 검토되어야 한다고 규정한다."}
++{"id":"gmp_eval_067","question":"데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?","predicted_section_path":["별첨2 컴퓨터화 시스템","사용 단계","점검기록 (Audit Trail)"],"predicted_pages":"591-592","evidence_pages_read":"591-596","reason":"점검기록 해설에서 데이터 완전성의 주요 요건(ALCOA)을 Attributable, Legible, Contemporaneous, Original, Accurate의 다섯 항목으로 설명한다."}
++{"id":"gmp_eval_068","question":"포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","제조관리","포장작업"],"predicted_pages":"382-384","evidence_pages_read":"375-385","reason":"포장작업 조항은 포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다고 하며, 해설과 참고자료에서 책임자 및 단계별 작업원의 식별ㆍ서명 기록을 확인한다."}
++{"id":"gmp_eval_069","question":"위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","위탁제조 및 위탁시험의 관리"],"predicted_pages":"457","evidence_pages_read":"456-458","reason":"위탁제조 및 위탁시험 관리 조항에서 위탁자는 수탁자로부터 제조 및 품질관리 기록에 관한 서류를 받아 3년 이상 보존해야 한다고 규정한다."}
++{"id":"gmp_eval_070","question":"불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?","predicted_section_path":["제2장 완제의약품 제조 및 품질관리기준","불만처리 및 회수"],"predicted_pages":"431","evidence_pages_read":"430-431","reason":"불만처리 및 제품회수 조항은 불만처리기록에 제품명 및 제조번호, 불만제기자 이름 및 연락처, 접수연월일, 불만내용, 처리 결과 및 조치사항이 포함되어야 한다고 정한다."}
+
+hook: Stop
+hook: Stop Completed
+tokens used
+146,970
+완료했습니다.
+
+생성 파일: [predictions_061_070_agentic.jsonl](/Users/dongmin/Documents/myproject/DocMIND/PageIndex/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl)
+
+검증 결과:
+`validate-predictions` PASS, 10 rows, errors 없음.
+
+추가로 JSONL 행 파싱 확인도 완료했습니다: 10행, `gmp_eval_061`부터 `gmp_eval_070`까지입니다.
+
+

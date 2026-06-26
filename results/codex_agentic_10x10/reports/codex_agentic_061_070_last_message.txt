@@ -1,0 +1,9 @@
+완료했습니다.
+
+생성 파일: [predictions_061_070_agentic.jsonl](/Users/dongmin/Documents/myproject/DocMIND/PageIndex/results/codex_agentic_10x10/predictions_061_070_agentic.jsonl)
+
+검증 결과:
+`validate-predictions` PASS, 10 rows, errors 없음.
+
+추가로 JSONL 행 파싱 확인도 완료했습니다: 10행, `gmp_eval_061`부터 `gmp_eval_070`까지입니다.
+

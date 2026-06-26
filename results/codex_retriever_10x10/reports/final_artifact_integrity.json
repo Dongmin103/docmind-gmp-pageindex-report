@@ -1,0 +1,10 @@
+{
+  "prediction_validation": {
+    "status": "PASS",
+    "rows": 100,
+    "errors": []
+  },
+  "packet_count": 10,
+  "packet_gold_leaks": [],
+  "generator_disallowed_eval_field_access": []
+}

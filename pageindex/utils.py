@@ -5,6 +5,8 @@ import textwrap
 from datetime import datetime
 import time
 import json
+import subprocess
+import tempfile
 import PyPDF2
 import copy
 import asyncio
@@ -23,6 +25,77 @@ if not os.getenv("OPENAI_API_KEY") and os.getenv("CHATGPT_API_KEY"):
 
 litellm.drop_params = True
 
+
+def _use_codex_backend(model=None):
+    backend = os.getenv("PAGEINDEX_LLM_BACKEND", "").strip().lower()
+    if backend == "codex":
+        return True
+    if model and str(model).strip().lower() in {"codex", "codex-cli"}:
+        return True
+    return False
+
+
+def _format_codex_prompt(prompt, chat_history=None):
+    parts = [
+        "You are acting as the LLM completion engine inside the PageIndex pipeline.",
+        "Return only the requested completion for the final user prompt.",
+        "Do not add explanations, markdown fences, or commentary unless the prompt explicitly asks for them.",
+    ]
+    if chat_history:
+        parts.append("\nConversation history:")
+        for msg in chat_history:
+            role = msg.get("role", "user")
+            content = msg.get("content", "")
+            parts.append(f"\n[{role}]\n{content}")
+    parts.append("\nFinal user prompt:")
+    parts.append(prompt)
+    return "\n".join(parts)
+
+
+def _codex_completion(prompt, chat_history=None):
+    codex_model = os.getenv("PAGEINDEX_CODEX_MODEL")
+    timeout = int(os.getenv("PAGEINDEX_CODEX_TIMEOUT", "600"))
+    with tempfile.NamedTemporaryFile("w+", suffix=".md", delete=False) as out:
+        output_path = out.name
+    cmd = [
+        "codex",
+        "exec",
+        "--sandbox",
+        "read-only",
+        "--skip-git-repo-check",
+        "--output-last-message",
+        output_path,
+    ]
+    if codex_model:
+        cmd.extend(["--model", codex_model])
+    cmd.append(_format_codex_prompt(prompt, chat_history=chat_history))
+
+    try:
+        completed = subprocess.run(
+            cmd,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+        content = Path(output_path).read_text(encoding="utf-8").strip()
+        if completed.returncode != 0:
+            logging.error(
+                "Codex backend failed with return code %s. stderr=%s stdout=%s",
+                completed.returncode,
+                completed.stderr,
+                completed.stdout,
+            )
+        return content
+    except Exception as e:
+        logging.error(f"Codex backend error: {e}")
+        return ""
+    finally:
+        try:
+            Path(output_path).unlink(missing_ok=True)
+        except Exception:
+            pass
+
 def count_tokens(text, model=None):
     if not text:
         return 0
@@ -30,6 +103,12 @@ def count_tokens(text, model=None):
 
 
 def llm_completion(model, prompt, chat_history=None, return_finish_reason=False):
+    if _use_codex_backend(model):
+        content = _codex_completion(prompt, chat_history=chat_history)
+        if return_finish_reason:
+            return content, "finished" if content else "error"
+        return content
+
     if model:
         model = model.removeprefix("litellm/")
     max_retries = 10
@@ -60,6 +139,9 @@ def llm_completion(model, prompt, chat_history=None, return_finish_reason=False)
 
 
 async def llm_acompletion(model, prompt):
+    if _use_codex_backend(model):
+        return await asyncio.to_thread(_codex_completion, prompt)
+
     if model:
         model = model.removeprefix("litellm/")
     max_retries = 10
@@ -707,4 +789,3 @@ def print_tree(tree, indent=0):
 def print_wrapped(text, width=100):
     for line in text.splitlines():
         print(textwrap.fill(line, width=width))
-

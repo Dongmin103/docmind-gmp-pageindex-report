@@ -301,4 +301,56 @@ PageIndex Blog, Sep 2025.
 
 ---
 
+## GMP PageIndex Local UI
+
+This repo also includes a local UI for the GMP PageIndex workspace created under `results/pageindex_gmp_workspace/`.
+
+### Launch
+
+```bash
+pip3 install --upgrade -r requirements.txt
+bash run_gmp_pageindex_ui.sh
+```
+
+The default presentation UI is local/offline and reads existing artifacts only. It exposes v0.1 document exploration and v0.2 eval analysis; it does not require an API key, does not call model APIs, and does not show v0.3 runner controls.
+
+### Score semantics
+
+The UI intentionally separates the score channels:
+
+- **Canonical default score:** `0.96` aligned predicted union hit rate from `results/page_alignment/score_001_100_agentic_official_alignment.json`.
+- **Diagnostic-only score:** `0.99` evidence + aligned coverage. This is useful for coverage analysis, but it is not the canonical header score.
+- **Known unresolved case:** `gmp_eval_025` remains the primary non-coordinate semantic confusion case.
+
+The Streamlit shell renders typed view objects from `pageindex/ui_data.py`; it should not parse raw score artifacts directly.
+
+### UI versions covered
+
+- **v0.1 document explorer:** question/tree search, section candidates, page content, physical PDF page, and internal printed page label.
+- **v0.2 eval explorer:** filterable 100-row eval inspection with original/aligned/evidence coverage details.
+
+The demo/presentation shell intentionally excludes v0.3. The design source of truth is `DESIGN.md`; the separate v0.3 runner code remains disabled/off-surface for non-demo experiment work.
+
+### Smoke verification
+
+```bash
+.venv/bin/python scripts/gmp_pageindex_ui_smoke.py
+python3 -m compileall pageindex scripts apps
+```
+
+### Final HTML report
+
+The shareable standalone report is generated at:
+
+```bash
+python3 scripts/gmp_build_html_report.py
+open results/reports/gmp_pageindex_final_report.html
+```
+
+It includes the pipeline summary, ASCII/interactive tree visualization, official 100-row eval metrics, and an interactive eval browser.
+
+
+---
+
 © 2026 [Vectify AI](https://vectify.ai)
+

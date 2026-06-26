@@ -1,0 +1,893 @@
+{
+  "name": "gmp_facility_expansion",
+  "smoke_name": "facilities",
+  "target_path": [
+    "제2장 완제의약품 제조 및 품질관리기준",
+    "시설 및 환경의 관리"
+  ],
+  "source_files": {
+    "facility": "../.omx/pageindex_codex/sections/0008_시설관리.txt",
+    "automation": "../.omx/pageindex_codex/sections/0009_자동화장치_등의_관리.txt",
+    "environment": "../.omx/pageindex_codex/sections/0010_환경관리.txt"
+  },
+  "candidate_subtree": {
+    "title": "시설 및 환경의 관리",
+    "node_id": "",
+    "start_index": 54,
+    "end_index": 84,
+    "nodes": [
+      {
+        "title": "시설관리",
+        "node_id": "",
+        "start_index": 54,
+        "end_index": 78,
+        "nodes": [
+          {
+            "title": "가. 작업소의 기계ㆍ설비는 제조공정 흐름에 따라 배치할 것",
+            "node_id": "",
+            "start_index": 54,
+            "end_index": 61,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 54,
+                "end_index": 56,
+                "nodes": [],
+                "own_start_index": 54,
+                "own_end_index": 56,
+                "subtree_start_index": 54,
+                "subtree_end_index": 56
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 56,
+                "end_index": 56,
+                "nodes": [],
+                "own_start_index": 56,
+                "own_end_index": 56,
+                "subtree_start_index": 56,
+                "subtree_end_index": 56
+              },
+              {
+                "title": "참고자료 WHO TRS No. 986 GMP Annex 2",
+                "node_id": "",
+                "start_index": 56,
+                "end_index": 57,
+                "nodes": [],
+                "own_start_index": 56,
+                "own_end_index": 57,
+                "subtree_start_index": 56,
+                "subtree_end_index": 57
+              },
+              {
+                "title": "참고자료 미국 Title 21 CFR Part 210",
+                "node_id": "",
+                "start_index": 57,
+                "end_index": 58,
+                "nodes": [],
+                "own_start_index": 57,
+                "own_end_index": 58,
+                "subtree_start_index": 57,
+                "subtree_end_index": 58
+              },
+              {
+                "title": "참고자료 일본 MHLW Ordinance No. 179",
+                "node_id": "",
+                "start_index": 58,
+                "end_index": 60,
+                "nodes": [],
+                "own_start_index": 58,
+                "own_end_index": 60,
+                "subtree_start_index": 58,
+                "subtree_end_index": 60
+              },
+              {
+                "title": "참고자료 EU Guidelines for Good Manufacturing Practice for Medicinal Products for Human and Veterinary Use",
+                "node_id": "",
+                "start_index": 60,
+                "end_index": 61,
+                "nodes": [],
+                "own_start_index": 60,
+                "own_end_index": 61,
+                "subtree_start_index": 60,
+                "subtree_end_index": 61
+              }
+            ],
+            "own_start_index": 54,
+            "own_end_index": 54,
+            "subtree_start_index": 54,
+            "subtree_end_index": 61
+          },
+          {
+            "title": "나. 제조용 중요 기계ㆍ설비는 구분할 수 있도록 번호나 코드를 부여하고 해당 기계ㆍ설비를 사용한 제품명, 제조번호 및 제조일자를 기록할 것",
+            "node_id": "",
+            "start_index": 61,
+            "end_index": 62,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 61,
+                "end_index": 62,
+                "nodes": [],
+                "own_start_index": 61,
+                "own_end_index": 62,
+                "subtree_start_index": 61,
+                "subtree_end_index": 62
+              },
+              {
+                "title": "참고자료 PIC/S Part I",
+                "node_id": "",
+                "start_index": 62,
+                "end_index": 62,
+                "nodes": [],
+                "own_start_index": 62,
+                "own_end_index": 62,
+                "subtree_start_index": 62,
+                "subtree_end_index": 62
+              }
+            ],
+            "own_start_index": 61,
+            "own_end_index": 61,
+            "subtree_start_index": 61,
+            "subtree_end_index": 62
+          },
+          {
+            "title": "다. 제조용수는 필요한 질과 양이 확보되도록 할 것",
+            "node_id": "",
+            "start_index": 62,
+            "end_index": 64,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 62,
+                "end_index": 63,
+                "nodes": [],
+                "own_start_index": 62,
+                "own_end_index": 63,
+                "subtree_start_index": 62,
+                "subtree_end_index": 63
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 63,
+                "end_index": 63,
+                "nodes": [],
+                "own_start_index": 63,
+                "own_end_index": 63,
+                "subtree_start_index": 63,
+                "subtree_end_index": 63
+              },
+              {
+                "title": "참고자료 WHO TRS No. 986 GMP Annex 2",
+                "node_id": "",
+                "start_index": 63,
+                "end_index": 63,
+                "nodes": [],
+                "own_start_index": 63,
+                "own_end_index": 63,
+                "subtree_start_index": 63,
+                "subtree_end_index": 63
+              },
+              {
+                "title": "참고자료 PIC/S Part I",
+                "node_id": "",
+                "start_index": 63,
+                "end_index": 64,
+                "nodes": [],
+                "own_start_index": 63,
+                "own_end_index": 64,
+                "subtree_start_index": 63,
+                "subtree_end_index": 64
+              },
+              {
+                "title": "참고자료 캐나다 GUI-0001",
+                "node_id": "",
+                "start_index": 64,
+                "end_index": 64,
+                "nodes": [],
+                "own_start_index": 64,
+                "own_end_index": 64,
+                "subtree_start_index": 64,
+                "subtree_end_index": 64
+              }
+            ],
+            "own_start_index": 62,
+            "own_end_index": 62,
+            "subtree_start_index": 62,
+            "subtree_end_index": 64
+          },
+          {
+            "title": "라. 각종 배관에는 각각 구분될 수 있도록 내용물과 흐름방향을 표시할 것",
+            "node_id": "",
+            "start_index": 64,
+            "end_index": 65,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 64,
+                "end_index": 64,
+                "nodes": [],
+                "own_start_index": 64,
+                "own_end_index": 64,
+                "subtree_start_index": 64,
+                "subtree_end_index": 64
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 64,
+                "end_index": 64,
+                "nodes": [],
+                "own_start_index": 64,
+                "own_end_index": 64,
+                "subtree_start_index": 64,
+                "subtree_end_index": 64
+              },
+              {
+                "title": "참고자료 PIC/S Part I",
+                "node_id": "",
+                "start_index": 64,
+                "end_index": 65,
+                "nodes": [],
+                "own_start_index": 64,
+                "own_end_index": 65,
+                "subtree_start_index": 64,
+                "subtree_end_index": 65
+              }
+            ],
+            "own_start_index": 64,
+            "own_end_index": 64,
+            "subtree_start_index": 64,
+            "subtree_end_index": 65
+          },
+          {
+            "title": "마. 윤활유, 냉매 등이 의약품의 품질에 영향을 미치지 않도록 관리할 것",
+            "node_id": "",
+            "start_index": 65,
+            "end_index": 66,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 65,
+                "end_index": 65,
+                "nodes": [],
+                "own_start_index": 65,
+                "own_end_index": 65,
+                "subtree_start_index": 65,
+                "subtree_end_index": 65
+              },
+              {
+                "title": "참고자료 WHO TRS No. 986 GMP Annex 2",
+                "node_id": "",
+                "start_index": 65,
+                "end_index": 65,
+                "nodes": [],
+                "own_start_index": 65,
+                "own_end_index": 65,
+                "subtree_start_index": 65,
+                "subtree_end_index": 65
+              },
+              {
+                "title": "참고자료 미국 Title 21 CFR Part 211",
+                "node_id": "",
+                "start_index": 65,
+                "end_index": 66,
+                "nodes": [],
+                "own_start_index": 65,
+                "own_end_index": 66,
+                "subtree_start_index": 65,
+                "subtree_end_index": 66
+              }
+            ],
+            "own_start_index": 65,
+            "own_end_index": 65,
+            "subtree_start_index": 65,
+            "subtree_end_index": 66
+          },
+          {
+            "title": "바. 작업소의 하수구는 역류를 방지할 수 있도록 되어 있어야 하고 정기적으로 소독할 것",
+            "node_id": "",
+            "start_index": 66,
+            "end_index": 68,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 66,
+                "end_index": 67,
+                "nodes": [],
+                "own_start_index": 66,
+                "own_end_index": 67,
+                "subtree_start_index": 66,
+                "subtree_end_index": 67
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 67,
+                "end_index": 67,
+                "nodes": [],
+                "own_start_index": 67,
+                "own_end_index": 67,
+                "subtree_start_index": 67,
+                "subtree_end_index": 67
+              },
+              {
+                "title": "참고자료 미국 Title 21 CFR Part 211",
+                "node_id": "",
+                "start_index": 67,
+                "end_index": 68,
+                "nodes": [],
+                "own_start_index": 67,
+                "own_end_index": 68,
+                "subtree_start_index": 67,
+                "subtree_end_index": 68
+              }
+            ],
+            "own_start_index": 66,
+            "own_end_index": 66,
+            "subtree_start_index": 66,
+            "subtree_end_index": 68
+          },
+          {
+            "title": "사. 고장 등으로 사용하지 않는 기계ㆍ설비는 작업소에 두지 않거나 사용할 수 없다고 표시할 것",
+            "node_id": "",
+            "start_index": 68,
+            "end_index": 69,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 68,
+                "end_index": 68,
+                "nodes": [],
+                "own_start_index": 68,
+                "own_end_index": 68,
+                "subtree_start_index": 68,
+                "subtree_end_index": 68
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 68,
+                "end_index": 68,
+                "nodes": [],
+                "own_start_index": 68,
+                "own_end_index": 68,
+                "subtree_start_index": 68,
+                "subtree_end_index": 68
+              },
+              {
+                "title": "참고자료 WHO TRS No. 986 GMP Annex 2",
+                "node_id": "",
+                "start_index": 68,
+                "end_index": 68,
+                "nodes": [],
+                "own_start_index": 68,
+                "own_end_index": 68,
+                "subtree_start_index": 68,
+                "subtree_end_index": 68
+              },
+              {
+                "title": "참고자료 PIC/S Part I",
+                "node_id": "",
+                "start_index": 68,
+                "end_index": 69,
+                "nodes": [],
+                "own_start_index": 68,
+                "own_end_index": 69,
+                "subtree_start_index": 68,
+                "subtree_end_index": 69
+              }
+            ],
+            "own_start_index": 68,
+            "own_end_index": 68,
+            "subtree_start_index": 68,
+            "subtree_end_index": 69
+          },
+          {
+            "title": "아. 의약품의 제조 및 시험에 사용되는 중요 기계ㆍ설비에 대하여 교정 및 적격성평가를 할 것",
+            "node_id": "",
+            "start_index": 69,
+            "end_index": 76,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 69,
+                "end_index": 70,
+                "nodes": [],
+                "own_start_index": 69,
+                "own_end_index": 70,
+                "subtree_start_index": 69,
+                "subtree_end_index": 70
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 70,
+                "end_index": 70,
+                "nodes": [],
+                "own_start_index": 70,
+                "own_end_index": 70,
+                "subtree_start_index": 70,
+                "subtree_end_index": 70
+              },
+              {
+                "title": "참고자료 의약품 제조 및 품질관리에 관한 규정 [별표 15]",
+                "node_id": "",
+                "start_index": 70,
+                "end_index": 75,
+                "nodes": [],
+                "own_start_index": 70,
+                "own_end_index": 75,
+                "subtree_start_index": 70,
+                "subtree_end_index": 75
+              },
+              {
+                "title": "참고자료 PIC/S Part I",
+                "node_id": "",
+                "start_index": 75,
+                "end_index": 76,
+                "nodes": [],
+                "own_start_index": 75,
+                "own_end_index": 76,
+                "subtree_start_index": 75,
+                "subtree_end_index": 76
+              },
+              {
+                "title": "참고자료 캐나다 GUI-0001",
+                "node_id": "",
+                "start_index": 76,
+                "end_index": 76,
+                "nodes": [],
+                "own_start_index": 76,
+                "own_end_index": 76,
+                "subtree_start_index": 76,
+                "subtree_end_index": 76
+              }
+            ],
+            "own_start_index": 69,
+            "own_end_index": 69,
+            "subtree_start_index": 69,
+            "subtree_end_index": 76
+          },
+          {
+            "title": "자. 생약(한약)을 원료로 사용하는 의약품 제조소는 가목부터 아목까지의 기준 외에 별도 기준을 갖출 것",
+            "node_id": "",
+            "start_index": 76,
+            "end_index": 78,
+            "nodes": [
+              {
+                "title": "보관소 기준",
+                "node_id": "",
+                "start_index": 76,
+                "end_index": 76,
+                "nodes": [],
+                "own_start_index": 76,
+                "own_end_index": 76,
+                "subtree_start_index": 76,
+                "subtree_end_index": 76
+              },
+              {
+                "title": "전처리 작업 기준",
+                "node_id": "",
+                "start_index": 76,
+                "end_index": 77,
+                "nodes": [],
+                "own_start_index": 76,
+                "own_end_index": 77,
+                "subtree_start_index": 76,
+                "subtree_end_index": 77
+              },
+              {
+                "title": "한약분말 및 한약엑스 작업실 기준",
+                "node_id": "",
+                "start_index": 77,
+                "end_index": 77,
+                "nodes": [],
+                "own_start_index": 77,
+                "own_end_index": 77,
+                "subtree_start_index": 77,
+                "subtree_end_index": 77
+              },
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 77,
+                "end_index": 78,
+                "nodes": [],
+                "own_start_index": 77,
+                "own_end_index": 78,
+                "subtree_start_index": 77,
+                "subtree_end_index": 78
+              }
+            ],
+            "own_start_index": 76,
+            "own_end_index": 77,
+            "subtree_start_index": 76,
+            "subtree_end_index": 78
+          }
+        ],
+        "own_start_index": 54,
+        "own_end_index": 54,
+        "subtree_start_index": 54,
+        "subtree_end_index": 78
+      },
+      {
+        "title": "자동화장치 등의 관리",
+        "node_id": "",
+        "start_index": 78,
+        "end_index": 81,
+        "nodes": [
+          {
+            "title": "가. 제조 및 품질관리에 자동화장치 등을 사용할 경우 계획을 수립하여 정기적으로 교정 또는 성능점검을 하고 기록할 것",
+            "node_id": "",
+            "start_index": 78,
+            "end_index": 79,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 78,
+                "end_index": 79,
+                "nodes": [],
+                "own_start_index": 78,
+                "own_end_index": 79,
+                "subtree_start_index": 78,
+                "subtree_end_index": 79
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 79,
+                "end_index": 79,
+                "nodes": [],
+                "own_start_index": 79,
+                "own_end_index": 79,
+                "subtree_start_index": 79,
+                "subtree_end_index": 79
+              }
+            ],
+            "own_start_index": 78,
+            "own_end_index": 78,
+            "subtree_start_index": 78,
+            "subtree_end_index": 79
+          },
+          {
+            "title": "나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것",
+            "node_id": "",
+            "start_index": 79,
+            "end_index": 79,
+            "nodes": [],
+            "own_start_index": 79,
+            "own_end_index": 79,
+            "subtree_start_index": 79,
+            "subtree_end_index": 79
+          },
+          {
+            "title": "다. 자동화장치 등에 의한 모든 기록은 별도로 저장ㆍ보관하여야 하고 대체 시스템으로 자료 유실을 방지할 것",
+            "node_id": "",
+            "start_index": 79,
+            "end_index": 81,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 79,
+                "end_index": 80,
+                "nodes": [],
+                "own_start_index": 79,
+                "own_end_index": 80,
+                "subtree_start_index": 79,
+                "subtree_end_index": 80
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 80,
+                "end_index": 80,
+                "nodes": [],
+                "own_start_index": 80,
+                "own_end_index": 80,
+                "subtree_start_index": 80,
+                "subtree_end_index": 80
+              },
+              {
+                "title": "참고자료 미국 Title 21 CFR Part 211",
+                "node_id": "",
+                "start_index": 80,
+                "end_index": 81,
+                "nodes": [],
+                "own_start_index": 80,
+                "own_end_index": 81,
+                "subtree_start_index": 80,
+                "subtree_end_index": 81
+              }
+            ],
+            "own_start_index": 79,
+            "own_end_index": 79,
+            "subtree_start_index": 79,
+            "subtree_end_index": 81
+          }
+        ],
+        "own_start_index": 78,
+        "own_end_index": 78,
+        "subtree_start_index": 78,
+        "subtree_end_index": 81
+      },
+      {
+        "title": "환경관리",
+        "node_id": "",
+        "start_index": 81,
+        "end_index": 84,
+        "nodes": [
+          {
+            "title": "가. 의약품의 종류ㆍ제형ㆍ제조방법 및 제조시설 등에 따라 작업소의 청정구역과 청정등급을 설정하고 유지할 것",
+            "node_id": "",
+            "start_index": 81,
+            "end_index": 82,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 81,
+                "end_index": 82,
+                "nodes": [],
+                "own_start_index": 81,
+                "own_end_index": 82,
+                "subtree_start_index": 81,
+                "subtree_end_index": 82
+              },
+              {
+                "title": "관련 규정",
+                "node_id": "",
+                "start_index": 82,
+                "end_index": 82,
+                "nodes": [],
+                "own_start_index": 82,
+                "own_end_index": 82,
+                "subtree_start_index": 82,
+                "subtree_end_index": 82
+              }
+            ],
+            "own_start_index": 81,
+            "own_end_index": 81,
+            "subtree_start_index": 81,
+            "subtree_end_index": 82
+          },
+          {
+            "title": "나. 공기조화장치의 성능을 정기적으로 점검하고 청정등급 및 작업실 간의 차압이 유지되도록 할 것",
+            "node_id": "",
+            "start_index": 82,
+            "end_index": 83,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 82,
+                "end_index": 83,
+                "nodes": [],
+                "own_start_index": 82,
+                "own_end_index": 83,
+                "subtree_start_index": 82,
+                "subtree_end_index": 83
+              },
+              {
+                "title": "참고자료 미국 Title 21 CFR Part 211",
+                "node_id": "",
+                "start_index": 83,
+                "end_index": 83,
+                "nodes": [],
+                "own_start_index": 83,
+                "own_end_index": 83,
+                "subtree_start_index": 83,
+                "subtree_end_index": 83
+              }
+            ],
+            "own_start_index": 82,
+            "own_end_index": 82,
+            "subtree_start_index": 82,
+            "subtree_end_index": 83
+          },
+          {
+            "title": "다. 제조조건과 보관조건에 적절한 온도 및 습도가 유지되도록 정기적으로 점검할 것",
+            "node_id": "",
+            "start_index": 83,
+            "end_index": 84,
+            "nodes": [
+              {
+                "title": "해설",
+                "node_id": "",
+                "start_index": 83,
+                "end_index": 84,
+                "nodes": [],
+                "own_start_index": 83,
+                "own_end_index": 84,
+                "subtree_start_index": 83,
+                "subtree_end_index": 84
+              }
+            ],
+            "own_start_index": 83,
+            "own_end_index": 83,
+            "subtree_start_index": 83,
+            "subtree_end_index": 84
+          }
+        ],
+        "own_start_index": 81,
+        "own_end_index": 81,
+        "subtree_start_index": 81,
+        "subtree_end_index": 84
+      }
+    ],
+    "own_start_index": 54,
+    "own_end_index": 54,
+    "subtree_start_index": 54,
+    "subtree_end_index": 84
+  },
+  "smoke_rows": [
+    {
+      "label": "facility_machine_layout",
+      "checks": [
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "시설관리",
+            "가. 작업소의 기계ㆍ설비는 제조공정 흐름에 따라 배치할 것"
+          ],
+          "expected_range": [
+            54,
+            61
+          ],
+          "expected_own_range": [
+            54,
+            54
+          ]
+        }
+      ],
+      "required_parent_ranges": {
+        "시설관리": [
+          54,
+          78
+        ],
+        "시설 및 환경의 관리": [
+          54,
+          84
+        ]
+      },
+      "source_file": "../.omx/pageindex_codex/sections/0008_시설관리.txt",
+      "source_needles": [
+        "가. 작업소의 기계ㆍ설비는 제조공정 흐름에 따라 배치할 것"
+      ]
+    },
+    {
+      "label": "automation_record_change_backup",
+      "checks": [
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "자동화장치 등의 관리",
+            "나. 자동화장치 등의 기록 변경은 권한이 있는 자만 할 수 있도록 하고 적절하게 관리할 것"
+          ],
+          "expected_range": [
+            79,
+            79
+          ],
+          "expected_own_range": [
+            79,
+            79
+          ]
+        },
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "자동화장치 등의 관리",
+            "다. 자동화장치 등에 의한 모든 기록은 별도로 저장ㆍ보관하여야 하고 대체 시스템으로 자료 유실을 방지할 것"
+          ],
+          "expected_range": [
+            79,
+            81
+          ],
+          "expected_own_range": [
+            79,
+            79
+          ]
+        }
+      ],
+      "required_parent_ranges": {
+        "자동화장치 등의 관리": [
+          78,
+          81
+        ],
+        "시설 및 환경의 관리": [
+          54,
+          84
+        ]
+      },
+      "source_file": "../.omx/pageindex_codex/sections/0009_자동화장치_등의_관리.txt",
+      "source_needles": [
+        "나. 자동화장치 등의 기록 변경은 권한이 있는 자만",
+        "다. 자동화장치 등에 의한 모든 기록은 별도로 저장"
+      ]
+    },
+    {
+      "label": "environment_cleanroom_pressure_temperature_humidity",
+      "checks": [
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "환경관리",
+            "가. 의약품의 종류ㆍ제형ㆍ제조방법 및 제조시설 등에 따라 작업소의 청정구역과 청정등급을 설정하고 유지할 것"
+          ],
+          "expected_range": [
+            81,
+            82
+          ],
+          "expected_own_range": [
+            81,
+            81
+          ]
+        },
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "환경관리",
+            "나. 공기조화장치의 성능을 정기적으로 점검하고 청정등급 및 작업실 간의 차압이 유지되도록 할 것"
+          ],
+          "expected_range": [
+            82,
+            83
+          ],
+          "expected_own_range": [
+            82,
+            82
+          ]
+        },
+        {
+          "path": [
+            "제2장 완제의약품 제조 및 품질관리기준",
+            "시설 및 환경의 관리",
+            "환경관리",
+            "다. 제조조건과 보관조건에 적절한 온도 및 습도가 유지되도록 정기적으로 점검할 것"
+          ],
+          "expected_range": [
+            83,
+            84
+          ],
+          "expected_own_range": [
+            83,
+            83
+          ]
+        }
+      ],
+      "required_parent_ranges": {
+        "환경관리": [
+          81,
+          84
+        ],
+        "시설 및 환경의 관리": [
+          54,
+          84
+        ]
+      },
+      "source_file": "../.omx/pageindex_codex/sections/0010_환경관리.txt",
+      "source_needles": [
+        "가. 의약품의 종류ㆍ제형",
+        "나. 공기조화장치의 성능",
+        "다. 제조조건과 보관조건"
+      ]
+    }
+  ]
+}

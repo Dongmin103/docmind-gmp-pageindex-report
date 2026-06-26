@@ -1,0 +1,9 @@
+완료했습니다. 지정 파일에 10개 예측을 작성했습니다:
+
+`results/codex_agentic_10x10/predictions_091_100_agentic.jsonl`
+
+검증 결과:
+
+```json
+{"status":"PASS","rows":10,"errors":[]}
+```

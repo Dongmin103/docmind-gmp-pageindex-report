@@ -1,0 +1,192 @@
+[
+  {
+    "batch": "001-010",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.6,
+    "predicted_page_precision_avg": 0.5,
+    "predicted_page_recall_avg": 0.6,
+    "predicted_section_path_hit_rate": 0.1,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.6,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.1,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "011-020",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.6,
+    "predicted_page_precision_avg": 0.5,
+    "predicted_page_recall_avg": 0.6,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.6,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "021-030",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.8,
+    "predicted_page_precision_avg": 0.75,
+    "predicted_page_recall_avg": 0.8,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.8,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "031-040",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.9,
+    "predicted_page_precision_avg": 0.8,
+    "predicted_page_recall_avg": 0.9,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.9,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "041-050",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.5,
+    "predicted_page_precision_avg": 0.45,
+    "predicted_page_recall_avg": 0.5,
+    "predicted_section_path_hit_rate": 0.1,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.5,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.1,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "051-060",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.7,
+    "predicted_page_precision_avg": 0.6,
+    "predicted_page_recall_avg": 0.7,
+    "predicted_section_path_hit_rate": 0.2,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.7,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.2,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "061-070",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.8,
+    "predicted_page_precision_avg": 0.7,
+    "predicted_page_recall_avg": 0.8,
+    "predicted_section_path_hit_rate": 0.2,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.8,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.2,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "071-080",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.4,
+    "predicted_page_precision_avg": 0.2333,
+    "predicted_page_recall_avg": 0.4,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.4,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "081-090",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.6,
+    "predicted_page_precision_avg": 0.55,
+    "predicted_page_recall_avg": 0.6,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.6,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  },
+  {
+    "batch": "091-100",
+    "status": "FAIL",
+    "predicted_page_hit_rate": 0.7,
+    "predicted_page_precision_avg": 0.6,
+    "predicted_page_recall_avg": 0.7,
+    "predicted_section_path_hit_rate": 0.0,
+    "predicted_grounding_ok_rate": 1.0,
+    "threshold_failures": {
+      "predicted_page_hit_rate": {
+        "actual": 0.7,
+        "minimum": 1.0
+      },
+      "predicted_section_path_hit_rate": {
+        "actual": 0.0,
+        "minimum": 1.0
+      }
+    }
+  }
+]

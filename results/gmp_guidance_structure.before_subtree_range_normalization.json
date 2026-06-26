@@ -1,0 +1,1301 @@
+{
+  "doc_name": "gmp_guidance.pdf",
+  "structure": [
+    {
+      "title": "Preface",
+      "node_id": "0000",
+      "start_index": 1,
+      "end_index": 9,
+      "nodes": []
+    },
+    {
+      "title": "제1장 서론",
+      "node_id": "0001",
+      "start_index": 9,
+      "end_index": 10,
+      "nodes": [
+        {
+          "title": "목적 및 원칙",
+          "node_id": "0002",
+          "start_index": 10,
+          "end_index": 12,
+          "nodes": []
+        },
+        {
+          "title": "구성방법",
+          "node_id": "0003",
+          "start_index": 12,
+          "end_index": 16,
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "title": "제2장 완제의약품 제조 및 품질관리기준",
+      "node_id": "0004",
+      "start_index": 16,
+      "end_index": 18,
+      "nodes": [
+        {
+          "title": "용어의 정의",
+          "node_id": "0005",
+          "start_index": 18,
+          "end_index": 28,
+          "nodes": []
+        },
+        {
+          "title": "품질경영",
+          "node_id": "0006",
+          "start_index": 28,
+          "end_index": 54,
+          "nodes": [
+            {
+              "title": "1의2 품질경영 (고시 [별표 17] 요약 [참고])",
+              "node_id": "0007",
+              "start_index": 28,
+              "end_index": 28,
+              "nodes": [
+                {
+                  "title": "가. 품질보증은 의약품의 품질을 확보하는 모든 활동을 포함한다.",
+                  "node_id": "0008",
+                  "start_index": 28,
+                  "end_index": 28,
+                  "nodes": [
+                    {
+                      "title": "해설",
+                      "node_id": "0009",
+                      "start_index": 28,
+                      "end_index": 28,
+                      "nodes": [
+                        {
+                          "title": "1) 의약품품질시스템",
+                          "node_id": "0010",
+                          "start_index": 28,
+                          "end_index": 29,
+                          "nodes": []
+                        },
+                        {
+                          "title": "2) 의약품품질시스템의 역할",
+                          "node_id": "0011",
+                          "start_index": 29,
+                          "end_index": 31,
+                          "nodes": []
+                        },
+                        {
+                          "title": "3) 의약품품질시스템 주기적 점검 및 문서화",
+                          "node_id": "0012",
+                          "start_index": 31,
+                          "end_index": 31,
+                          "nodes": []
+                        }
+                      ]
+                    },
+                    {
+                      "title": "관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.1 원칙 [별표 17] 1.2 품질보증",
+                      "node_id": "0013",
+                      "start_index": 31,
+                      "end_index": 31,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 PIC/S Part I",
+                      "node_id": "0014",
+                      "start_index": 31,
+                      "end_index": 31,
+                      "nodes": [
+                        {
+                          "title": "원칙",
+                          "node_id": "0015",
+                          "start_index": 31,
+                          "end_index": 33,
+                          "nodes": []
+                        },
+                        {
+                          "title": "PRINCIPLE",
+                          "node_id": "0016",
+                          "start_index": 33,
+                          "end_index": 36,
+                          "nodes": []
+                        }
+                      ]
+                    },
+                    {
+                      "title": "참고자료 ICH Pharmaceutical Quality System Q10",
+                      "node_id": "0017",
+                      "start_index": 36,
+                      "end_index": 36,
+                      "nodes": [
+                        {
+                          "title": "1.6.1 지식 관리",
+                          "node_id": "0018",
+                          "start_index": 36,
+                          "end_index": 36,
+                          "nodes": []
+                        },
+                        {
+                          "title": "2. 경영진 책임",
+                          "node_id": "0019",
+                          "start_index": 36,
+                          "end_index": 37,
+                          "nodes": [
+                            {
+                              "title": "2.1 경영진의 임무",
+                              "node_id": "0020",
+                              "start_index": 37,
+                              "end_index": 37,
+                              "nodes": []
+                            },
+                            {
+                              "title": "2.7 외부위탁 업무 및 구매 원자재 등의 감독",
+                              "node_id": "0021",
+                              "start_index": 37,
+                              "end_index": 37,
+                              "nodes": []
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3.2.1. 공정수행 및 의약품 품질 점검 시스템",
+                          "node_id": "0022",
+                          "start_index": 37,
+                          "end_index": 38,
+                          "nodes": []
+                        },
+                        {
+                          "title": "[표 I] 전주기 공정성능 및 의약품 품질 점검 시스템 적용",
+                          "node_id": "0023",
+                          "start_index": 38,
+                          "end_index": 38,
+                          "nodes": []
+                        },
+                        {
+                          "title": "1.6.1 Knowledge Management",
+                          "node_id": "0024",
+                          "start_index": 38,
+                          "end_index": 39,
+                          "nodes": []
+                        },
+                        {
+                          "title": "2. MANAGEMENT RESPONSIBILITY",
+                          "node_id": "0025",
+                          "start_index": 39,
+                          "end_index": 39,
+                          "nodes": [
+                            {
+                              "title": "2.1 Management Commitment",
+                              "node_id": "0026",
+                              "start_index": 39,
+                              "end_index": 39,
+                              "nodes": []
+                            },
+                            {
+                              "title": "2.7 Management of Outsourced Activities and Purchased Materials",
+                              "node_id": "0027",
+                              "start_index": 39,
+                              "end_index": 40,
+                              "nodes": []
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3.2.1 Process Performance and Product Quality Monitoring System",
+                          "node_id": "0028",
+                          "start_index": 40,
+                          "end_index": 42,
+                          "nodes": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "나. 제조 및 품질관리는 의약품이 허가된 품질기준에 따라 일관성 있게 생산, 관리됨을 보장하는 체계이다.",
+                  "node_id": "0029",
+                  "start_index": 42,
+                  "end_index": 42,
+                  "nodes": [
+                    {
+                      "title": "해설",
+                      "node_id": "0030",
+                      "start_index": 42,
+                      "end_index": 43,
+                      "nodes": []
+                    },
+                    {
+                      "title": "관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.3 의약품 제조 및 품질관리 기준",
+                      "node_id": "0031",
+                      "start_index": 43,
+                      "end_index": 43,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 PIC/S Part I",
+                      "node_id": "0032",
+                      "start_index": 43,
+                      "end_index": 46,
+                      "nodes": []
+                    }
+                  ]
+                },
+                {
+                  "title": "다. 품질관리는 검체채취, 규격 및 시험, 그리고 조직, 문서화, 출하 절차와 관련된 체계이다.",
+                  "node_id": "0033",
+                  "start_index": 46,
+                  "end_index": 46,
+                  "nodes": [
+                    {
+                      "title": "해설",
+                      "node_id": "0034",
+                      "start_index": 46,
+                      "end_index": 47,
+                      "nodes": []
+                    },
+                    {
+                      "title": "관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.4 품질관리",
+                      "node_id": "0035",
+                      "start_index": 47,
+                      "end_index": 47,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 PIC/S Part I",
+                      "node_id": "0036",
+                      "start_index": 47,
+                      "end_index": 49,
+                      "nodes": []
+                    }
+                  ]
+                },
+                {
+                  "title": "라. 품질평가는 공정의 일관성 확인, 원료약품 및 완제품의 품질 경향 파악 및 규격의 적절성 확인, 제품 및 공정 개선이 필요한 부분을 파악하는 체계이다.",
+                  "node_id": "0037",
+                  "start_index": 49,
+                  "end_index": 49,
+                  "nodes": [
+                    {
+                      "title": "해설",
+                      "node_id": "0038",
+                      "start_index": 49,
+                      "end_index": 49,
+                      "nodes": []
+                    },
+                    {
+                      "title": "관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.5 제품품질평가",
+                      "node_id": "0039",
+                      "start_index": 49,
+                      "end_index": 49,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 WHO TRS No. 986 GMP Annex 2",
+                      "node_id": "0040",
+                      "start_index": 49,
+                      "end_index": 52,
+                      "nodes": []
+                    }
+                  ]
+                },
+                {
+                  "title": "마. 품질위험관리는 품질에 대한 위험을 평가, 관리, 공유, 검토하는 체계이다.",
+                  "node_id": "0041",
+                  "start_index": 52,
+                  "end_index": 52,
+                  "nodes": [
+                    {
+                      "title": "해설",
+                      "node_id": "0042",
+                      "start_index": 52,
+                      "end_index": 52,
+                      "nodes": []
+                    },
+                    {
+                      "title": "관련 규정 의약품 제조 및 품질관리에 관한 규정 [별표 17] 1.6 품질위험관리",
+                      "node_id": "0043",
+                      "start_index": 52,
+                      "end_index": 52,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 PIC/S Part I",
+                      "node_id": "0044",
+                      "start_index": 52,
+                      "end_index": 53,
+                      "nodes": []
+                    },
+                    {
+                      "title": "참고자료 ICH Pharmaceutical Quality System Q10",
+                      "node_id": "0045",
+                      "start_index": 53,
+                      "end_index": 53,
+                      "nodes": [
+                        {
+                          "title": "1.6.2 품질위험관리",
+                          "node_id": "0046",
+                          "start_index": 53,
+                          "end_index": 53,
+                          "nodes": []
+                        },
+                        {
+                          "title": "1.6.2 Quality Risk Management",
+                          "node_id": "0047",
+                          "start_index": 53,
+                          "end_index": 54,
+                          "nodes": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "시설 및 환경의 관리",
+          "node_id": "0048",
+          "start_index": 54,
+          "end_index": 54,
+          "nodes": [
+            {
+              "title": "시설관리",
+              "node_id": "0049",
+              "start_index": 54,
+              "end_index": 78,
+              "nodes": []
+            },
+            {
+              "title": "자동화장치 등의 관리",
+              "node_id": "0050",
+              "start_index": 78,
+              "end_index": 81,
+              "nodes": []
+            },
+            {
+              "title": "환경관리",
+              "node_id": "0051",
+              "start_index": 81,
+              "end_index": 84,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "조직",
+          "node_id": "0052",
+          "start_index": 84,
+          "end_index": 84,
+          "nodes": [
+            {
+              "title": "조직의 구성",
+              "node_id": "0053",
+              "start_index": 84,
+              "end_index": 94,
+              "nodes": []
+            },
+            {
+              "title": "제조부서 책임자",
+              "node_id": "0054",
+              "start_index": 94,
+              "end_index": 111,
+              "nodes": []
+            },
+            {
+              "title": "품질(보증)부서 책임자",
+              "node_id": "0055",
+              "start_index": 111,
+              "end_index": 113,
+              "nodes": [
+                {
+                  "title": "품질관리를 적절히 하기 위하여 제품표준서 및 품질관리기준서에 성명을 적고 서명하여 승인을 받아 갖추어 두고 운영하여야 한다.",
+                  "node_id": "0056",
+                  "start_index": 113,
+                  "end_index": 119,
+                  "nodes": []
+                },
+                {
+                  "title": "제4.2호가목의 시험지시서에 의하여 시험을 지시하고 시험지시서에 따라 시험이 진행되는지를 점검ㆍ확인하여야 하며, 일탈 및 기준일탈이 있는 경우에는 이를 조사하고 기록하여야 한다.",
+                  "node_id": "0057",
+                  "start_index": 119,
+                  "end_index": 122,
+                  "nodes": []
+                },
+                {
+                  "title": "품질에 관련된 모든 문서와 절차를 검토하고 승인하여야 한다.",
+                  "node_id": "0058",
+                  "start_index": 122,
+                  "end_index": 122,
+                  "nodes": []
+                },
+                {
+                  "title": "제2.3호의 환경관리에 관한 사항을 승인하고 주관하여야 한다.",
+                  "node_id": "0059",
+                  "start_index": 122,
+                  "end_index": 125,
+                  "nodes": []
+                },
+                {
+                  "title": "제6호의 밸리데이션에 관한 사항을 승인하고 주관하여야 한다. 다만, 특별한 사유로 품질(보증)부서 책임자가 일부 밸리데이션 업무에 대하여 별도의 관리자를 지정하는 경우에는 그렇지 않다.",
+                  "node_id": "0060",
+                  "start_index": 125,
+                  "end_index": 127,
+                  "nodes": []
+                },
+                {
+                  "title": "제7.2호의 안정성 시험을 하여야 한다.",
+                  "node_id": "0061",
+                  "start_index": 127,
+                  "end_index": 129,
+                  "nodes": []
+                },
+                {
+                  "title": "제7.3호의 제품품질평가를 하여야 한다.",
+                  "node_id": "0062",
+                  "start_index": 129,
+                  "end_index": 133,
+                  "nodes": []
+                },
+                {
+                  "title": "제7.1호가목 및 제8.1호가목의 시험성적서 및 제조단위별 제조기록서의 내용을 검토하고 제품의 출하를 승인하여야 한다.",
+                  "node_id": "0063",
+                  "start_index": 133,
+                  "end_index": 140,
+                  "nodes": []
+                },
+                {
+                  "title": "시험결과에 따라 원자재의 사용 여부, 제조공정의 진행 여부 또는 제품의 출하 여부를 결정하고 그 결과를 미리 정한 절차에 따라 관련 부서에 통지하여야 한다.",
+                  "node_id": "0064",
+                  "start_index": 140,
+                  "end_index": 144,
+                  "nodes": []
+                },
+                {
+                  "title": "부적합품이 규정된 절차대로 처리되고 있는지를 확인하여야 한다.",
+                  "node_id": "0065",
+                  "start_index": 144,
+                  "end_index": 144,
+                  "nodes": []
+                },
+                {
+                  "title": "제11호의 불만처리 및 제품회수에 관한 사항을 주관하여야 한다.",
+                  "node_id": "0066",
+                  "start_index": 144,
+                  "end_index": 147,
+                  "nodes": []
+                },
+                {
+                  "title": "제12호의 변경관리를 승인하여야 한다.",
+                  "node_id": "0067",
+                  "start_index": 147,
+                  "end_index": 150,
+                  "nodes": []
+                },
+                {
+                  "title": "제13호의 자율점검을 계획하고 추진하여야 한다.",
+                  "node_id": "0068",
+                  "start_index": 150,
+                  "end_index": 153,
+                  "nodes": []
+                },
+                {
+                  "title": "제조 또는 시험의 수탁자와 주요 원자재의 제조업자를 평가하여야 한다.",
+                  "node_id": "0069",
+                  "start_index": 153,
+                  "end_index": 157,
+                  "nodes": []
+                },
+                {
+                  "title": "원료약품, 자재 및 완제품의 보관관리 담당자를 지정하여야 한다.",
+                  "node_id": "0070",
+                  "start_index": 157,
+                  "end_index": 158,
+                  "nodes": []
+                },
+                {
+                  "title": "위원회",
+                  "node_id": "0071",
+                  "start_index": 158,
+                  "end_index": 158,
+                  "nodes": []
+                }
+              ]
+            },
+            {
+              "title": "위원회",
+              "node_id": "0072",
+              "start_index": 158,
+              "end_index": 160,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "기준서",
+          "node_id": "0073",
+          "start_index": 160,
+          "end_index": 160,
+          "nodes": [
+            {
+              "title": "제품표준서",
+              "node_id": "0074",
+              "start_index": 160,
+              "end_index": 186,
+              "nodes": []
+            },
+            {
+              "title": "품질관리기준서",
+              "node_id": "0075",
+              "start_index": 186,
+              "end_index": 200,
+              "nodes": []
+            },
+            {
+              "title": "제조관리기준서",
+              "node_id": "0076",
+              "start_index": 200,
+              "end_index": 220,
+              "nodes": []
+            },
+            {
+              "title": "제조위생관리기준서",
+              "node_id": "0077",
+              "start_index": 220,
+              "end_index": 233,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "문서",
+          "node_id": "0078",
+          "start_index": 233,
+          "end_index": 233,
+          "nodes": [
+            {
+              "title": "문서의 작성",
+              "node_id": "0079",
+              "start_index": 233,
+              "end_index": 237,
+              "nodes": []
+            },
+            {
+              "title": "문서의 관리",
+              "node_id": "0080",
+              "start_index": 237,
+              "end_index": 243,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "밸리데이션",
+          "node_id": "0081",
+          "start_index": 243,
+          "end_index": 243,
+          "nodes": [
+            {
+              "title": "밸리데이션의 대상",
+              "node_id": "0082",
+              "start_index": 243,
+              "end_index": 245,
+              "nodes": []
+            },
+            {
+              "title": "공정 밸리데이션",
+              "node_id": "0083",
+              "start_index": 245,
+              "end_index": 266,
+              "nodes": []
+            },
+            {
+              "title": "시험방법 밸리데이션",
+              "node_id": "0084",
+              "start_index": 266,
+              "end_index": 270,
+              "nodes": []
+            },
+            {
+              "title": "세척 밸리데이션",
+              "node_id": "0085",
+              "start_index": 270,
+              "end_index": 285,
+              "nodes": []
+            },
+            {
+              "title": "제조지원설비 밸리데이션",
+              "node_id": "0086",
+              "start_index": 285,
+              "end_index": 286,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "품질관리",
+          "node_id": "0087",
+          "start_index": 286,
+          "end_index": 286,
+          "nodes": [
+            {
+              "title": "시험관리",
+              "node_id": "0088",
+              "start_index": 286,
+              "end_index": 317,
+              "nodes": [
+                {
+                  "title": "가. 의뢰한 시험별로 다음 사항이 포함된 시험성적서를 작성하여야 한다. 시험성적서는 시험의뢰서와 시험지시서를 통합하여 작성하거나 관리할 수 있다.",
+                  "node_id": "0089",
+                  "start_index": 286,
+                  "end_index": 290,
+                  "nodes": []
+                },
+                {
+                  "title": "나. 원자재, 반제품 및 완제품은 적합판정이 된 것만을 사용하거나 출하하여야 하며, 일탈, 기준일탈 또는 편향이 있는 경우에는 그 사유를 조사한 후 처리하여야 한다. 다만, 반제품의 경우에는 밸리데이션, 안정성시험, 제품품질평가 등을 고려하여 적합판정 이전에 사용할 수 있다.",
+                  "node_id": "0090",
+                  "start_index": 290,
+                  "end_index": 292,
+                  "nodes": []
+                },
+                {
+                  "title": "다. 원자재의 품질이 계속적으로 균질하여 시험성적에 충분한 신뢰성이 보증되는 경우에는 절차와 기준을 문서로 정하여 입고될 때마다 필요 항목만 검사할 수 있다. 다만, 확인시험 및 육안검사는 반드시 하여야 하며, 정기적으로 모든 항목을 시험하여야 한다.",
+                  "node_id": "0091",
+                  "start_index": 292,
+                  "end_index": 297,
+                  "nodes": []
+                },
+                {
+                  "title": "라. 시험기록(시험 근거자료를 포함한다)이 정확하고 설정된 기준에 맞다는 것을 확인하는 중간검토자를 두어야 한다.",
+                  "node_id": "0092",
+                  "start_index": 297,
+                  "end_index": 297,
+                  "nodes": []
+                },
+                {
+                  "title": "마. 완제품의 출하승인을 위한 평가는 제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다.",
+                  "node_id": "0093",
+                  "start_index": 297,
+                  "end_index": 297,
+                  "nodes": []
+                },
+                {
+                  "title": "바. 그래프, 계산식 등 시험에서 얻은 모든 기록(전자기록을 포함한다)은 보존하여야 한다.",
+                  "node_id": "0094",
+                  "start_index": 297,
+                  "end_index": 299,
+                  "nodes": []
+                },
+                {
+                  "title": "사. 시험용 검체는 오염되거나 변질되지 않도록 채취하여야 하고, 채취과정에서 원자재 및 반제품이 오염되지 않도록 관리하여야 한다. 채취한 후에는 원상태와 동등하게 포장하여야 하며, 시험용 검체가 채취되었음을 표시하는 절차를 포함한 검체채취 절차를 마련하여야 한다.",
+                  "node_id": "0095",
+                  "start_index": 299,
+                  "end_index": 300,
+                  "nodes": []
+                },
+                {
+                  "title": "아. 시험기기, 계측기 및 기록계는 미리 정한 계획서에 따라 정기적으로 교정ㆍ기록하여야 한다.",
+                  "node_id": "0096",
+                  "start_index": 300,
+                  "end_index": 301,
+                  "nodes": []
+                },
+                {
+                  "title": "자. 주성분 및 완제품의 보관용 검체는 제조단위 또는 관리번호별로 채취하고, 보관용 검체 중 주성분은 투입된 완제품의 마지막 제조단위, 완제품은 해당 제조단위의 유효기한 또는 사용기한 경과 후 1년간 보관하여야 한다.",
+                  "node_id": "0097",
+                  "start_index": 301,
+                  "end_index": 301,
+                  "nodes": []
+                },
+                {
+                  "title": "차. 주성분의 보관용 검체는 시판용 제품과 포장형태는 동일하거나 동등 이상이어야 하고 완제품의 보관용 검체와 시판용 제품의 포장형태는 동일하여야 하며, 규정된 시험항목(무균시험, 발열성물질시험은 제외할 수 있다)을 2회 이상 시험할 수 있는 양을 규정된 보관조건에서 보관하여야 한다. 다만, 시판용 제품이 대형포장인 경우에는 대형포장에 소량 검체를 보관하거나 대형포장과 동일한 재질의 소형 포장에 보관할 수 있다.",
+                  "node_id": "0098",
+                  "start_index": 301,
+                  "end_index": 304,
+                  "nodes": []
+                },
+                {
+                  "title": "카. 표준품, 배지, 검체, 중요 시약, 부피측정용 유리기구 등에 대한 관리상황을 기록하여야 한다.",
+                  "node_id": "0099",
+                  "start_index": 304,
+                  "end_index": 307,
+                  "nodes": []
+                },
+                {
+                  "title": "타. 표시재료는 기재사항이 변경될 때마다 규정에 맞는지를 확인하고 변경된 표시재료를 보관하여야 한다.",
+                  "node_id": "0100",
+                  "start_index": 307,
+                  "end_index": 307,
+                  "nodes": []
+                },
+                {
+                  "title": "파. 의약품과 접촉하는 포장재료는 의약품을 변질시키거나 인체에 유해한 재료가 아닌지를 확인한 후 사용하여야 한다.",
+                  "node_id": "0101",
+                  "start_index": 307,
+                  "end_index": 309,
+                  "nodes": []
+                },
+                {
+                  "title": "하. 제조용수는 정기적으로 사용점 등에서 제조용수를 채취하여 규정된 시험방법에 따라 시험하고 평가하여야 한다.",
+                  "node_id": "0102",
+                  "start_index": 309,
+                  "end_index": 311,
+                  "nodes": []
+                },
+                {
+                  "title": "거. 경시변화(經時變化 : 시간의 흐름에 따라 물리ㆍ화학적 성질 등이 변화하는 것을 말한다)가 우려되는 원료약품을 장기보관하는 경우 재시험하여 사용하여야 한다.",
+                  "node_id": "0103",
+                  "start_index": 311,
+                  "end_index": 313,
+                  "nodes": []
+                },
+                {
+                  "title": "너. 시험용 동물은 적절하게 관리하여야 하며, 각각 구분하여 그 사용내역을 기록하여야 한다.",
+                  "node_id": "0104",
+                  "start_index": 313,
+                  "end_index": 314,
+                  "nodes": []
+                },
+                {
+                  "title": "더. 실제 제조ㆍ사용된 검체를 대상으로 시험 시마다 시험자ㆍ시험기기 오차 등을 확인하는 적합성 시험을 하여야 한다.",
+                  "node_id": "0105",
+                  "start_index": 314,
+                  "end_index": 315,
+                  "nodes": []
+                },
+                {
+                  "title": "러. 원생약은 형태학적ㆍ이화학적 품종관리와 표본관리를 하여야 하며 동일한 생약이면서 표본과 다른 경우 품종에 따른 성분의 차이, 재배 시의 유해물질 사용 여부 등 재배지 정보수집 등을 통하여 품질관리를 철저히 하여야 한다.",
+                  "node_id": "0106",
+                  "start_index": 315,
+                  "end_index": 316,
+                  "nodes": []
+                },
+                {
+                  "title": "머. 한약분말 또는 한약엑스를 제조하는 경우에는 다음 사항을 준수하여야 한다.",
+                  "node_id": "0107",
+                  "start_index": 316,
+                  "end_index": 317,
+                  "nodes": []
+                }
+              ]
+            },
+            {
+              "title": "안정성 시험",
+              "node_id": "0108",
+              "start_index": 317,
+              "end_index": 327,
+              "nodes": [
+                {
+                  "title": "가. 안정성시험은 계획을 수립하여 하고, 그 결과에 따라 완제품의 유효기간 또는 사용기간, 포장방법 및 저장조건을 설정하여야 한다.",
+                  "node_id": "0109",
+                  "start_index": 317,
+                  "end_index": 317,
+                  "nodes": []
+                }
+              ]
+            },
+            {
+              "title": "제품품질평가",
+              "node_id": "0110",
+              "start_index": 327,
+              "end_index": 332,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "제조관리",
+          "node_id": "0111",
+          "start_index": 332,
+          "end_index": 332,
+          "nodes": [
+            {
+              "title": "제조공정관리",
+              "node_id": "0112",
+              "start_index": 332,
+              "end_index": 364,
+              "nodes": [
+                {
+                  "title": "제품의 제조단위마다 다음 사항이 포함된 제조기록서를 작성하여야 하되, 제조기록서는 제조지시서와 통합하여 작성할 수 있다.",
+                  "node_id": "0113",
+                  "start_index": 332,
+                  "end_index": 338,
+                  "nodes": []
+                },
+                {
+                  "title": "해당 작업에 종사하지 않는 사람의 작업소 출입을 제한하여야 한다.",
+                  "node_id": "0114",
+                  "start_index": 338,
+                  "end_index": 341,
+                  "nodes": []
+                },
+                {
+                  "title": "작업 전에 시설 및 기구의 청결상태를 확인하여야 한다.",
+                  "node_id": "0115",
+                  "start_index": 341,
+                  "end_index": 343,
+                  "nodes": []
+                },
+                {
+                  "title": "작업 중인 작업실과 보관용기 및 기계ㆍ설비에는 제품명과 제조번호 등을 표시하여야 한다.",
+                  "node_id": "0116",
+                  "start_index": 343,
+                  "end_index": 345,
+                  "nodes": []
+                },
+                {
+                  "title": "반제품은 제품의 균질성을 확보하기 위하여 필요한 공정에서 적절한 시험을 하여 완제품의 규격에 맞도록 하여야 한다.",
+                  "node_id": "0117",
+                  "start_index": 345,
+                  "end_index": 348,
+                  "nodes": []
+                },
+                {
+                  "title": "반제품은 신속하게 제조공정을 완료하되, 보관 시에는 품질이 변하지 아니하도록 보관하여야 한다.",
+                  "node_id": "0118",
+                  "start_index": 348,
+                  "end_index": 349,
+                  "nodes": []
+                },
+                {
+                  "title": "이론 생산량과 실생산량을 비교하여 수율관리기준을 벗어난 경우에는 그 원인을 조사하고 대책을 수립하여 시행하여야 한다.",
+                  "node_id": "0119",
+                  "start_index": 349,
+                  "end_index": 351,
+                  "nodes": []
+                },
+                {
+                  "title": "의약품을 제조하는 경우에는 미생물의 오염에 유의하고 청정등급에 맞도록 관리하여야 한다.",
+                  "node_id": "0120",
+                  "start_index": 351,
+                  "end_index": 354,
+                  "nodes": []
+                },
+                {
+                  "title": "멸균조작이 필요한 의약품은 멸균 전과 멸균 후의 반제품 상호간에 혼동이 일어나지 않도록 관리하여야 한다.",
+                  "node_id": "0121",
+                  "start_index": 354,
+                  "end_index": 355,
+                  "nodes": []
+                },
+                {
+                  "title": "제조용수의 수질을 작업 시마다 규정된 방법에 따라 확인하여야 한다.",
+                  "node_id": "0122",
+                  "start_index": 355,
+                  "end_index": 357,
+                  "nodes": []
+                },
+                {
+                  "title": "제조공정 중 기준일탈한 반제품을 재가공하는 경우에는 품질(보증)부서 책임자의 승인을 받아야 하며 그 기록을 보관하여야 한다.",
+                  "node_id": "0123",
+                  "start_index": 357,
+                  "end_index": 359,
+                  "nodes": []
+                },
+                {
+                  "title": "발열성물질시험이 적용되는 의약품의 용기나 마개는 발열성물질을 제거하기 위하여 세척ㆍ멸균하여야 한다.",
+                  "node_id": "0124",
+                  "start_index": 359,
+                  "end_index": 361,
+                  "nodes": []
+                },
+                {
+                  "title": "완제품의 품질을 보증하기 위하여 중요공정에 설정된 작업시간을 벗어난 경우에는 제품의 품질에 영향이 없음을 규명하고 그 관련 기록을 보관하여야 한다.",
+                  "node_id": "0125",
+                  "start_index": 361,
+                  "end_index": 362,
+                  "nodes": []
+                },
+                {
+                  "title": "한약원료의 제조공정은 다음 사항을 준수하여야 한다.",
+                  "node_id": "0126",
+                  "start_index": 362,
+                  "end_index": 364,
+                  "nodes": []
+                }
+              ]
+            },
+            {
+              "title": "포장공정관리",
+              "node_id": "0127",
+              "start_index": 364,
+              "end_index": 385,
+              "nodes": [
+                {
+                  "title": "다른 의약품이나 다른 제조단위를 동시 또는 연속하여 포장할 경우에는 의약품 상호 간의 혼동 및 교차오염과 자재 상호 간의 혼동이 일어나지 않도록 작업실을 구획하는 등 적절한 방안을 마련하여야 한다.",
+                  "node_id": "0128",
+                  "start_index": 364,
+                  "end_index": 364,
+                  "nodes": []
+                }
+              ]
+            },
+            {
+              "title": "반품 및 재포장",
+              "node_id": "0129",
+              "start_index": 385,
+              "end_index": 392,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "제조위생관리",
+          "node_id": "0130",
+          "start_index": 392,
+          "end_index": 392,
+          "nodes": [
+            {
+              "title": "작업원의 위생",
+              "node_id": "0131",
+              "start_index": 392,
+              "end_index": 398,
+              "nodes": []
+            },
+            {
+              "title": "작업소의 위생관리",
+              "node_id": "0132",
+              "start_index": 398,
+              "end_index": 405,
+              "nodes": []
+            },
+            {
+              "title": "제조설비의 세척",
+              "node_id": "0133",
+              "start_index": 405,
+              "end_index": 408,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "원자재 및 제품의 관리",
+          "node_id": "0134",
+          "start_index": 408,
+          "end_index": 408,
+          "nodes": [
+            {
+              "title": "입고관리",
+              "node_id": "0135",
+              "start_index": 408,
+              "end_index": 419,
+              "nodes": []
+            },
+            {
+              "title": "보관관리",
+              "node_id": "0136",
+              "start_index": 419,
+              "end_index": 426,
+              "nodes": []
+            },
+            {
+              "title": "원생약의 보관관리",
+              "node_id": "0137",
+              "start_index": 426,
+              "end_index": 429,
+              "nodes": []
+            },
+            {
+              "title": "출고관리",
+              "node_id": "0138",
+              "start_index": 429,
+              "end_index": 430,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "불만처리 및 회수",
+          "node_id": "0139",
+          "start_index": 430,
+          "end_index": 441,
+          "nodes": []
+        },
+        {
+          "title": "변경관리",
+          "node_id": "0140",
+          "start_index": 441,
+          "end_index": 447,
+          "nodes": []
+        },
+        {
+          "title": "자율점검",
+          "node_id": "0141",
+          "start_index": 447,
+          "end_index": 452,
+          "nodes": []
+        },
+        {
+          "title": "교육 및 훈련",
+          "node_id": "0142",
+          "start_index": 452,
+          "end_index": 456,
+          "nodes": []
+        },
+        {
+          "title": "위탁제조 및 위탁시험의 관리",
+          "node_id": "0143",
+          "start_index": 456,
+          "end_index": 478,
+          "nodes": []
+        }
+      ]
+    },
+    {
+      "title": "별첨1 의약품 제조소의 시설",
+      "node_id": "0144",
+      "start_index": 478,
+      "end_index": 482,
+      "nodes": [
+        {
+          "title": "의약품 등의 제조업 및 수입자의 시설기준령",
+          "node_id": "0145",
+          "start_index": 482,
+          "end_index": 482,
+          "nodes": [
+            {
+              "title": "의약품 등 제조소의 시설기준 등",
+              "node_id": "0146",
+              "start_index": 482,
+              "end_index": 498,
+              "nodes": []
+            },
+            {
+              "title": "위탁에 의한 시설 및 기구 이용",
+              "node_id": "0147",
+              "start_index": 498,
+              "end_index": 499,
+              "nodes": []
+            },
+            {
+              "title": "제조시설 및 기구의 다른 용도 이용",
+              "node_id": "0148",
+              "start_index": 499,
+              "end_index": 500,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "의약품 등의 제조업 및 수입자의 시설기준령 시행규칙",
+          "node_id": "0149",
+          "start_index": 500,
+          "end_index": 500,
+          "nodes": [
+            {
+              "title": "의약품 등 제조소의 시설기준 등",
+              "node_id": "0150",
+              "start_index": 500,
+              "end_index": 524,
+              "nodes": []
+            },
+            {
+              "title": "완제의약품 작업소의 시설 기준",
+              "node_id": "0151",
+              "start_index": 524,
+              "end_index": 535,
+              "nodes": []
+            },
+            {
+              "title": "무균제제 작업소의 시설 기준",
+              "node_id": "0152",
+              "start_index": 535,
+              "end_index": 537,
+              "nodes": []
+            },
+            {
+              "title": "페니실린제제 등 작업소의 시설 기준",
+              "node_id": "0153",
+              "start_index": 537,
+              "end_index": 541,
+              "nodes": []
+            },
+            {
+              "title": "생물학적제제등 작업소의 시설 기준",
+              "node_id": "0154",
+              "start_index": 541,
+              "end_index": 551,
+              "nodes": []
+            },
+            {
+              "title": "원료의약품 작업소의 시설 기준",
+              "node_id": "0155",
+              "start_index": 551,
+              "end_index": 552,
+              "nodes": []
+            },
+            {
+              "title": "수탁자의 범위와 준수사항 등",
+              "node_id": "0156",
+              "start_index": 552,
+              "end_index": 554,
+              "nodes": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "별첨2 컴퓨터화 시스템",
+      "node_id": "0157",
+      "start_index": 554,
+      "end_index": 559,
+      "nodes": [
+        {
+          "title": "원칙",
+          "node_id": "0158",
+          "start_index": 559,
+          "end_index": 564,
+          "nodes": []
+        },
+        {
+          "title": "일반사항",
+          "node_id": "0159",
+          "start_index": 564,
+          "end_index": 564,
+          "nodes": [
+            {
+              "title": "위험관리",
+              "node_id": "0160",
+              "start_index": 564,
+              "end_index": 568,
+              "nodes": []
+            },
+            {
+              "title": "작업원",
+              "node_id": "0161",
+              "start_index": 568,
+              "end_index": 568,
+              "nodes": []
+            },
+            {
+              "title": "공급업체와 서비스 제공자",
+              "node_id": "0162",
+              "start_index": 568,
+              "end_index": 572,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "계획 단계",
+          "node_id": "0163",
+          "start_index": 572,
+          "end_index": 572,
+          "nodes": [
+            {
+              "title": "밸리데이션",
+              "node_id": "0164",
+              "start_index": 572,
+              "end_index": 590,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "사용 단계",
+          "node_id": "0165",
+          "start_index": 590,
+          "end_index": 590,
+          "nodes": [
+            {
+              "title": "데이터",
+              "node_id": "0166",
+              "start_index": 590,
+              "end_index": 590,
+              "nodes": []
+            },
+            {
+              "title": "정확성 확인",
+              "node_id": "0167",
+              "start_index": 590,
+              "end_index": 590,
+              "nodes": []
+            },
+            {
+              "title": "데이터 저장",
+              "node_id": "0168",
+              "start_index": 590,
+              "end_index": 590,
+              "nodes": []
+            },
+            {
+              "title": "인쇄",
+              "node_id": "0169",
+              "start_index": 590,
+              "end_index": 591,
+              "nodes": []
+            },
+            {
+              "title": "점검기록 (Audit Trail)",
+              "node_id": "0170",
+              "start_index": 591,
+              "end_index": 596,
+              "nodes": []
+            },
+            {
+              "title": "변경 및 구성 관리",
+              "node_id": "0171",
+              "start_index": 596,
+              "end_index": 596,
+              "nodes": []
+            },
+            {
+              "title": "정기 평가",
+              "node_id": "0172",
+              "start_index": 596,
+              "end_index": 597,
+              "nodes": []
+            },
+            {
+              "title": "보안",
+              "node_id": "0173",
+              "start_index": 597,
+              "end_index": 597,
+              "nodes": []
+            },
+            {
+              "title": "사건 관리",
+              "node_id": "0174",
+              "start_index": 597,
+              "end_index": 597,
+              "nodes": []
+            },
+            {
+              "title": "전자 서명",
+              "node_id": "0175",
+              "start_index": 597,
+              "end_index": 597,
+              "nodes": []
+            },
+            {
+              "title": "제조단위 출하",
+              "node_id": "0176",
+              "start_index": 597,
+              "end_index": 599,
+              "nodes": []
+            },
+            {
+              "title": "업무 지속성",
+              "node_id": "0177",
+              "start_index": 599,
+              "end_index": 599,
+              "nodes": []
+            },
+            {
+              "title": "기록 보관",
+              "node_id": "0178",
+              "start_index": 599,
+              "end_index": 602,
+              "nodes": []
+            }
+          ]
+        },
+        {
+          "title": "용어",
+          "node_id": "0179",
+          "start_index": 602,
+          "end_index": 606,
+          "nodes": []
+        }
+      ]
+    }
+  ]
+}

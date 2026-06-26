@@ -1,0 +1,7385 @@
+{
+  "generated_at": "2026-06-25T12:43:32.254927+00:00",
+  "inputs": {
+    "eval_items": 100,
+    "prediction_rows": 100
+  },
+  "metrics": {
+    "original_predicted_page_hit_rate": 0.93,
+    "original_predicted_page_precision_avg": 0.7203,
+    "aligned_predicted_union_hit_rate": 0.96,
+    "aligned_predicted_union_precision_avg": 0.3773,
+    "evidence_union_hit_rate": 0.95,
+    "evidence_plus_aligned_hit_rate": 0.99
+  },
+  "classification_counts": {
+    "already_hit": 93,
+    "coordinate_shift_in_evidence_pages_read": 1,
+    "semantic_duplicate_section_confusion": 1,
+    "coordinate_shift_in_predicted_pages": 3,
+    "evidence_read_contains_gold_but_final_page_selection_missed": 2
+  },
+  "original_page_misses": [
+    {
+      "id": "gmp_eval_013",
+      "question": "원료 칭량·조제·충전·밀봉 작업실의 천장과 바닥·벽은 어떤 기준을 갖추어야 하는가?",
+      "gold_pages": "533",
+      "predicted_pages": "519-521",
+      "aligned_predicted_pages": "526-528",
+      "predicted_plus_aligned_pages": "519-521,526-528",
+      "evidence_pages_read": "500,519-521,526-528",
+      "aligned_evidence_pages_read": "507,526-528,533-535",
+      "evidence_plus_aligned_pages": "500,507,519-521,526-528,533-535",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          533
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "classification": "coordinate_shift_in_evidence_pages_read",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "의약품 등의 제조업 및 수입자의 시설기준령 시행규칙"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "기준에",
+          "되어",
+          "등의",
+          "떨어질",
+          "매끄럽고",
+          "먼지가",
+          "먼지나",
+          "바닥",
+          "바닥과",
+          "벽은",
+          "별첨1"
+        ],
+        "content_chars": 6994
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_025",
+      "question": "작업소의 청정구역은 청정도를 어떻게 관리하여야 하는가?",
+      "gold_pages": "401",
+      "predicted_pages": "81",
+      "aligned_predicted_pages": "88",
+      "predicted_plus_aligned_pages": "81,88",
+      "evidence_pages_read": "81-84",
+      "aligned_evidence_pages_read": "88-91",
+      "evidence_plus_aligned_pages": "81-84,88-91",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "classification": "semantic_duplicate_section_confusion",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하고",
+          "관리하여야",
+          "유지",
+          "유지되도록",
+          "있다",
+          "작업소의",
+          "점검",
+          "정기적으로",
+          "청정등급"
+        ],
+        "content_chars": 9115
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_032",
+      "question": "원자재 등이 반입되면 검체 채취와 함께 무엇을 표시하여야 하는가?",
+      "gold_pages": "415",
+      "predicted_pages": "408-410",
+      "aligned_predicted_pages": "415-417",
+      "predicted_plus_aligned_pages": "408-410,415-417",
+      "evidence_pages_read": "408-414",
+      "aligned_evidence_pages_read": "415-421",
+      "evidence_plus_aligned_pages": "408-421",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          415
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          415
+        ],
+        "precision": 0.0714,
+        "recall": 1.0,
+        "f1": 0.1333
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검체",
+          "검체를",
+          "관리번호별로",
+          "또는",
+          "반입되면",
+          "시험",
+          "시험용",
+          "원자재",
+          "입고관리",
+          "있다",
+          "절차가",
+          "제조단위"
+        ],
+        "content_chars": 13518
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_042",
+      "question": "공정 밸리데이션은 어떤 단위로 실시하여야 하는가?",
+      "gold_pages": "252",
+      "predicted_pages": "245",
+      "aligned_predicted_pages": "252",
+      "predicted_plus_aligned_pages": "245,252",
+      "evidence_pages_read": "245",
+      "aligned_evidence_pages_read": "252",
+      "evidence_plus_aligned_pages": "245,252",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          252
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          252
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "경우에는",
+          "공정",
+          "공정별",
+          "무균공정의",
+          "무균제제",
+          "밸리데이션",
+          "밸리데이션은",
+          "실시",
+          "실시하여야",
+          "있다",
+          "품목별"
+        ],
+        "content_chars": 1839
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_072",
+      "question": "무균제제 작업소의 시설 기준은 일반 제조 작업소와 어떻게 다른가?",
+      "gold_pages": "535",
+      "predicted_pages": "500,516-522,528-530",
+      "aligned_predicted_pages": "507,523-529,535-537",
+      "predicted_plus_aligned_pages": "500,507,516-530,535-537",
+      "evidence_pages_read": "500,516-522,526-530",
+      "aligned_evidence_pages_read": "507,523-529,533-537",
+      "evidence_plus_aligned_pages": "500,507,516-530,533-537",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.05,
+        "recall": 1.0,
+        "f1": 0.0952
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.0455,
+        "recall": 1.0,
+        "f1": 0.087
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "의약품 등의 제조업 및 수입자의 시설기준령 시행규칙"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "건조",
+          "기준에",
+          "등의",
+          "멸균",
+          "멸균상태",
+          "무균제제",
+          "별첨1",
+          "보관시설",
+          "세척",
+          "수입자의",
+          "시설"
+        ],
+        "content_chars": 13642
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_084",
+      "question": "동시적 밸리데이션은 어떤 예외적 상황에서 사용할 수 있는가?",
+      "gold_pages": "249",
+      "predicted_pages": "256-260",
+      "aligned_predicted_pages": "263-267",
+      "predicted_plus_aligned_pages": "256-260,263-267",
+      "evidence_pages_read": "249-266",
+      "aligned_evidence_pages_read": "256-273",
+      "evidence_plus_aligned_pages": "249-273",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          249
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          249
+        ],
+        "precision": 0.04,
+        "recall": 1.0,
+        "f1": 0.0769
+      },
+      "classification": "evidence_read_contains_gold_but_final_page_selection_missed",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "15",
+          "16",
+          "annex",
+          "pic",
+          "경우",
+          "공정",
+          "높은",
+          "동시적",
+          "문서화",
+          "밸리데이션",
+          "밸리데이션은",
+          "밸리데이션을"
+        ],
+        "content_chars": 33278
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_086",
+      "question": "반입된 원자재 등을 적합판정 전에 사용할 수 있는 경우가 있는가?",
+      "gold_pages": "408",
+      "predicted_pages": "290-291",
+      "aligned_predicted_pages": "297-298",
+      "predicted_plus_aligned_pages": "290-291,297-298",
+      "evidence_pages_read": "290-292,408-410",
+      "aligned_evidence_pages_read": "297-299,415-417",
+      "evidence_plus_aligned_pages": "290-292,297-299,408-410,415-417",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "evidence_read_contains_gold_but_final_page_selection_missed",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "격리",
+          "등을",
+          "따라",
+          "반입된",
+          "보관",
+          "사용할",
+          "원자재",
+          "원칙적으로",
+          "입고관리",
+          "있다",
+          "적합판정",
+          "적합판정을"
+        ],
+        "content_chars": 10750
+      },
+      "is_known_original_miss": true
+    }
+  ],
+  "unrecovered_after_evidence_alignment": [
+    {
+      "id": "gmp_eval_025",
+      "question": "작업소의 청정구역은 청정도를 어떻게 관리하여야 하는가?",
+      "gold_pages": "401",
+      "predicted_pages": "81",
+      "aligned_predicted_pages": "88",
+      "predicted_plus_aligned_pages": "81,88",
+      "evidence_pages_read": "81-84",
+      "aligned_evidence_pages_read": "88-91",
+      "evidence_plus_aligned_pages": "81-84,88-91",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "classification": "semantic_duplicate_section_confusion",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하고",
+          "관리하여야",
+          "유지",
+          "유지되도록",
+          "있다",
+          "작업소의",
+          "점검",
+          "정기적으로",
+          "청정등급"
+        ],
+        "content_chars": 9115
+      },
+      "is_known_original_miss": true
+    }
+  ],
+  "items": [
+    {
+      "id": "gmp_eval_001",
+      "question": "GMP 기준에서 '일탈'은 무엇을 의미하는가?",
+      "gold_pages": "18",
+      "predicted_pages": "18-19",
+      "aligned_predicted_pages": "25-26",
+      "predicted_plus_aligned_pages": "18-19,25-26",
+      "evidence_pages_read": "18-19",
+      "aligned_evidence_pages_read": "25-26",
+      "evidence_plus_aligned_pages": "18-19,25-26",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조 또는 품질관리 과정에서 미리 정해진 기준을 벗어나 이루어진 행위를 말한다"
+        ],
+        "token_overlap_sample": [
+          "gmp",
+          "과정에서",
+          "기준에서",
+          "기준을",
+          "또는",
+          "말한다",
+          "미리",
+          "벗어나",
+          "용어의",
+          "이루어진",
+          "일탈",
+          "있다"
+        ],
+        "content_chars": 4040
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_002",
+      "question": "'기준일탈'의 정의는 무엇인가?",
+      "gold_pages": "18",
+      "predicted_pages": "18-19",
+      "aligned_predicted_pages": "25-26",
+      "predicted_plus_aligned_pages": "18-19,25-26",
+      "evidence_pages_read": "18-19",
+      "aligned_evidence_pages_read": "25-26",
+      "evidence_plus_aligned_pages": "18-19,25-26",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "시험의 결과가 미리 정하여진 시험기준을 벗어난 경우를 말한다"
+        ],
+        "token_overlap_sample": [
+          "결과가",
+          "경우를",
+          "기준일탈",
+          "말한다",
+          "미리",
+          "벗어난",
+          "시험기준을",
+          "시험의",
+          "용어의",
+          "있다",
+          "정의",
+          "정하여진"
+        ],
+        "content_chars": 4040
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_003",
+      "question": "이 기준에서 '밸리데이션'은 어떻게 정의되는가?",
+      "gold_pages": "21",
+      "predicted_pages": "21",
+      "aligned_predicted_pages": "28",
+      "predicted_plus_aligned_pages": "21,28",
+      "evidence_pages_read": "18,21",
+      "aligned_evidence_pages_read": "25,28",
+      "evidence_plus_aligned_pages": "18,21,25,28",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검증하고",
+          "것을",
+          "결과를",
+          "공정",
+          "기계설비",
+          "기준에서",
+          "도출한다는",
+          "또는",
+          "맞는",
+          "문서화하는",
+          "미리",
+          "방법"
+        ],
+        "content_chars": 3697
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_004",
+      "question": "GMP 기준에서 '컴퓨터화 시스템(computerized system)'은 어떻게 정의되는가?",
+      "gold_pages": "559",
+      "predicted_pages": "559",
+      "aligned_predicted_pages": "566",
+      "predicted_plus_aligned_pages": "559,566",
+      "evidence_pages_read": "554-559,602-606",
+      "aligned_evidence_pages_read": "561-566",
+      "evidence_plus_aligned_pages": "554-559,561-566,602-606",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          559
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          559
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          559
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          559
+        ],
+        "precision": 0.0588,
+        "recall": 1.0,
+        "f1": 0.1111
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "소프트웨어와 하드웨어의 조합으로서 특정 기능을 수행하는 것을 말한다"
+        ],
+        "token_overlap_sample": [
+          "computerized",
+          "gmp",
+          "system",
+          "것을",
+          "기능을",
+          "말한다",
+          "별첨2",
+          "소프트웨어와",
+          "수행하는",
+          "시스템",
+          "시스템의",
+          "원칙"
+        ],
+        "content_chars": 14677
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_005",
+      "question": "'재가공'의 정의는 무엇인가?",
+      "gold_pages": "21",
+      "predicted_pages": "21",
+      "aligned_predicted_pages": "28",
+      "predicted_plus_aligned_pages": "21,28",
+      "evidence_pages_read": "18,21",
+      "aligned_evidence_pages_read": "25,28",
+      "evidence_plus_aligned_pages": "18,21,25,28",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "공정을",
+          "기준일탈한",
+          "대하여",
+          "반복하는",
+          "반제품에",
+          "생산공정의",
+          "설정된",
+          "용어의",
+          "이미",
+          "일부",
+          "있다",
+          "재가공"
+        ],
+        "content_chars": 3697
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_006",
+      "question": "컴퓨터화 시스템 관리에서 '시스템 책임자(System owner)'는 무엇을 책임지는 사람인가?",
+      "gold_pages": "602",
+      "predicted_pages": "602",
+      "aligned_predicted_pages": "",
+      "predicted_plus_aligned_pages": "602",
+      "evidence_pages_read": "602-606",
+      "aligned_evidence_pages_read": "",
+      "evidence_plus_aligned_pages": "602-606",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "컴퓨터화 시스템의 가용성과 유지보수",
+          "그리고 해당 시스템에 저장된 데이터 보안을 책임지는 사람"
+        ],
+        "token_overlap_sample": [
+          "owner",
+          "system",
+          "가용성과",
+          "그리고",
+          "데이터",
+          "별첨2",
+          "보안을",
+          "시스템",
+          "시스템에",
+          "시스템의",
+          "있다",
+          "저장된"
+        ],
+        "content_chars": 4100
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_007",
+      "question": "'청정구역'이란 무엇을 관리하는 구역인가?",
+      "gold_pages": "24",
+      "predicted_pages": "24",
+      "aligned_predicted_pages": "31",
+      "predicted_plus_aligned_pages": "24,31",
+      "evidence_pages_read": "23-24",
+      "aligned_evidence_pages_read": "30-31",
+      "evidence_plus_aligned_pages": "23-24,30-31",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          24
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          24
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          24
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          24
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "것을",
+          "관리하는",
+          "미생물이",
+          "부유입자",
+          "수준",
+          "유지되도록",
+          "이란",
+          "이하로",
+          "일정",
+          "있다",
+          "잔류하는",
+          "정의"
+        ],
+        "content_chars": 4736
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_008",
+      "question": "컴퓨터화 시스템 관리에서 '전주기(Life cycle)'란 무엇을 의미하는가?",
+      "gold_pages": "602",
+      "predicted_pages": "602",
+      "aligned_predicted_pages": "",
+      "predicted_plus_aligned_pages": "602",
+      "evidence_pages_read": "602-606",
+      "aligned_evidence_pages_read": "",
+      "evidence_plus_aligned_pages": "602-606",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          602
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "cycle",
+          "life",
+          "규격",
+          "디자인",
+          "모든",
+          "별첨2",
+          "설치",
+          "수명의",
+          "시스템",
+          "시스템의",
+          "시험",
+          "운영"
+        ],
+        "content_chars": 4100
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_009",
+      "question": "'무균구역'은 어떤 장소들을 말하는가?",
+      "gold_pages": "18",
+      "predicted_pages": "18-19",
+      "aligned_predicted_pages": "25-26",
+      "predicted_plus_aligned_pages": "18-19,25-26",
+      "evidence_pages_read": "18-19",
+      "aligned_evidence_pages_read": "25-26",
+      "evidence_plus_aligned_pages": "18-19,25-26",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "넣거나",
+          "노출되는",
+          "멸균처리된",
+          "무균구역",
+          "무균물질",
+          "무균시험",
+          "무균제제를",
+          "무균조작을",
+          "밀봉하는",
+          "어떤",
+          "용기가",
+          "용어의"
+        ],
+        "content_chars": 4040
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_010",
+      "question": "세척 밸리데이션은 무엇을 검증·문서화하는 밸리데이션인가?",
+      "gold_pages": "270",
+      "predicted_pages": "270",
+      "aligned_predicted_pages": "277",
+      "predicted_plus_aligned_pages": "270,277",
+      "evidence_pages_read": "270",
+      "aligned_evidence_pages_read": "277",
+      "evidence_plus_aligned_pages": "270,277",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "기계·설비 등의 잔류물(전 작업 의약품",
+          "세척 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "기계",
+          "등의",
+          "문서화하는",
+          "밸리데이션",
+          "밸리데이션은",
+          "설비",
+          "세척",
+          "세척되었는지를",
+          "세척제",
+          "실시",
+          "의약품",
+          "있다"
+        ],
+        "content_chars": 2446
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_011",
+      "question": "작업소의 기계·설비는 어떤 기준에 따라 배치하여야 하는가?",
+      "gold_pages": "54",
+      "predicted_pages": "54-56",
+      "aligned_predicted_pages": "61-63",
+      "predicted_plus_aligned_pages": "54-56,61-63",
+      "evidence_pages_read": "54-56",
+      "aligned_evidence_pages_read": "61-63",
+      "evidence_plus_aligned_pages": "54-56,61-63",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          54
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          54
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          54
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          54
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "기계",
+          "기준에",
+          "따라",
+          "배치하여야",
+          "설비",
+          "설비는",
+          "시설관리",
+          "있다",
+          "작업소의",
+          "제조공정",
+          "흐름에"
+        ],
+        "content_chars": 6190
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_012",
+      "question": "의약품 제조에 사용하는 제조용수는 어떤 점이 확보되도록 관리하여야 하는가?",
+      "gold_pages": "62",
+      "predicted_pages": "62-63",
+      "aligned_predicted_pages": "69-70",
+      "predicted_plus_aligned_pages": "62-63,69-70",
+      "evidence_pages_read": "62-63",
+      "aligned_evidence_pages_read": "69-70",
+      "evidence_plus_aligned_pages": "62-63,69-70",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          62
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          62
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          62
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          62
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하여야",
+          "사용하는",
+          "양이",
+          "의약품",
+          "있다",
+          "제조용수는",
+          "제조용수의",
+          "질과",
+          "필요한",
+          "확보되도록"
+        ],
+        "content_chars": 4061
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_013",
+      "question": "원료 칭량·조제·충전·밀봉 작업실의 천장과 바닥·벽은 어떤 기준을 갖추어야 하는가?",
+      "gold_pages": "533",
+      "predicted_pages": "519-521",
+      "aligned_predicted_pages": "526-528",
+      "predicted_plus_aligned_pages": "519-521,526-528",
+      "evidence_pages_read": "500,519-521,526-528",
+      "aligned_evidence_pages_read": "507,526-528,533-535",
+      "evidence_plus_aligned_pages": "500,507,519-521,526-528,533-535",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          533
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "classification": "coordinate_shift_in_evidence_pages_read",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "의약품 등의 제조업 및 수입자의 시설기준령 시행규칙"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "기준에",
+          "되어",
+          "등의",
+          "떨어질",
+          "매끄럽고",
+          "먼지가",
+          "먼지나",
+          "바닥",
+          "바닥과",
+          "벽은",
+          "별첨1"
+        ],
+        "content_chars": 6994
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_014",
+      "question": "작업소의 하수구가 갖추어야 할 두 가지 요구사항은 무엇인가?",
+      "gold_pages": "67",
+      "predicted_pages": "67",
+      "aligned_predicted_pages": "74",
+      "predicted_plus_aligned_pages": "67,74",
+      "evidence_pages_read": "67",
+      "aligned_evidence_pages_read": "74",
+      "evidence_plus_aligned_pages": "67,74",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          67
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          67
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          67
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          67
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "역류를 방지할 수 있도록 되어 있어야 하고"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "되어",
+          "방지할",
+          "역류를",
+          "있도록",
+          "있어야",
+          "작업소의",
+          "정기적으로",
+          "하고",
+          "하수구"
+        ],
+        "content_chars": 2951
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_015",
+      "question": "작업소의 청정구역과 청정등급은 어떻게 설정하고 유지·점검하여야 하는가?",
+      "gold_pages": "81",
+      "predicted_pages": "81",
+      "aligned_predicted_pages": "88",
+      "predicted_plus_aligned_pages": "81,88",
+      "evidence_pages_read": "81",
+      "aligned_evidence_pages_read": "88",
+      "evidence_plus_aligned_pages": "81,88",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          81
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          81
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          81
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          81
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하여야",
+          "등에",
+          "따라",
+          "설정하고",
+          "유지",
+          "유지되도록",
+          "의약품의",
+          "있다",
+          "작업소의",
+          "정기적으로",
+          "제조방법",
+          "제조시설"
+        ],
+        "content_chars": 2528
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_016",
+      "question": "공기조화장치의 성능과 작업실 간 차압은 어떻게 점검·유지하여야 하는가?",
+      "gold_pages": "82",
+      "predicted_pages": "82",
+      "aligned_predicted_pages": "89",
+      "predicted_plus_aligned_pages": "82,89",
+      "evidence_pages_read": "82",
+      "aligned_evidence_pages_read": "89",
+      "evidence_plus_aligned_pages": "82,89",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          82
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          82
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          82
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          82
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공기조화장치의 성능을 정기적으로 점검하고"
+        ],
+        "token_overlap_sample": [
+          "간의",
+          "공기조화장치",
+          "공기조화장치의",
+          "성능을",
+          "유지",
+          "유지되도록",
+          "작업실",
+          "점검",
+          "점검하고",
+          "정기적으로",
+          "차압",
+          "차압이"
+        ],
+        "content_chars": 2410
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_017",
+      "question": "제조·품질관리에 자동화장치 등을 사용할 경우 요구되는 관리사항은?",
+      "gold_pages": "78",
+      "predicted_pages": "78-80",
+      "aligned_predicted_pages": "85-87",
+      "predicted_plus_aligned_pages": "78-80,85-87",
+      "evidence_pages_read": "78-80",
+      "aligned_evidence_pages_read": "85-87",
+      "evidence_plus_aligned_pages": "78-80,85-87",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          78
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          78
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          78
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          78
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "자동화장치 등의 관리"
+        ],
+        "token_overlap_sample": [
+          "경우",
+          "계획을",
+          "교정",
+          "기록",
+          "기록하여야",
+          "등을",
+          "등의",
+          "또는",
+          "사용할",
+          "성능점검을",
+          "수립하여",
+          "있다"
+        ],
+        "content_chars": 6858
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_018",
+      "question": "기록문서 작성 방식에 대한 요구사항은 무엇인가?",
+      "gold_pages": "235",
+      "predicted_pages": "235",
+      "aligned_predicted_pages": "242",
+      "predicted_plus_aligned_pages": "235,242",
+      "evidence_pages_read": "235",
+      "aligned_evidence_pages_read": "242",
+      "evidence_plus_aligned_pages": "235,242",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          235
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          235
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          235
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          235
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "모든 기록문서는 작업과 동시에 작성되어야 하며",
+          "지울 수 없는 잉크로 작성하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "기록문서는",
+          "동시에",
+          "모든",
+          "문서의",
+          "있다",
+          "잉크로",
+          "작성",
+          "작성되어야",
+          "작성하여야",
+          "작업과",
+          "지울",
+          "하며"
+        ],
+        "content_chars": 2221
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_019",
+      "question": "작업원은 작업복 등을 어떤 기준에 따라 착용하여야 하는가?",
+      "gold_pages": "392",
+      "predicted_pages": "392",
+      "aligned_predicted_pages": "399",
+      "predicted_plus_aligned_pages": "392,399",
+      "evidence_pages_read": "392",
+      "aligned_evidence_pages_read": "399",
+      "evidence_plus_aligned_pages": "392,399",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          392
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          392
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          392
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          392
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "규정된",
+          "등을",
+          "따라",
+          "마스크",
+          "모자",
+          "신발",
+          "위생",
+          "작업복",
+          "작업원은",
+          "작업원의",
+          "작업의",
+          "종류에"
+        ],
+        "content_chars": 1280
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_020",
+      "question": "원자재 및 완제품의 보관·출고 방식에 대한 요구사항은?",
+      "gold_pages": "423",
+      "predicted_pages": "421,423-424,429",
+      "aligned_predicted_pages": "428,430-431,436",
+      "predicted_plus_aligned_pages": "421,423-424,428-431,436",
+      "evidence_pages_read": "421,423-424,429",
+      "aligned_evidence_pages_read": "428,430-431,436",
+      "evidence_plus_aligned_pages": "421,423-424,428-431,436",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          423
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          423
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          423
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          423
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "바닥과 벽에 닿지 아니하도록 보관하고"
+        ],
+        "token_overlap_sample": [
+          "닿지",
+          "대한",
+          "바닥과",
+          "벽에",
+          "보관",
+          "보관하고",
+          "보관하여야",
+          "선입선출",
+          "선입선출에",
+          "아니하도록",
+          "완제품의",
+          "원자재"
+        ],
+        "content_chars": 7681
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_021",
+      "question": "안정성시험 결과는 무엇을 설정하는 데 사용하여야 하는가?",
+      "gold_pages": "317",
+      "predicted_pages": "317",
+      "aligned_predicted_pages": "324",
+      "predicted_plus_aligned_pages": "317,324",
+      "evidence_pages_read": "317",
+      "aligned_evidence_pages_read": "324",
+      "evidence_plus_aligned_pages": "317,324",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "그 결과에 따라 완제품의 유효기간 또는 사용기간",
+          "포장방법 및 저장조건을 설정하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "결과에",
+          "따라",
+          "또는",
+          "사용기간",
+          "사용하여야",
+          "설정하여야",
+          "시험",
+          "안정성",
+          "완제품의",
+          "유효기간",
+          "있다",
+          "저장조건을"
+        ],
+        "content_chars": 2065
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_022",
+      "question": "의약품과 접촉하는 포장재료는 사용 전 무엇을 확인하여야 하는가?",
+      "gold_pages": "307",
+      "predicted_pages": "307",
+      "aligned_predicted_pages": "314",
+      "predicted_plus_aligned_pages": "307,314",
+      "evidence_pages_read": "307-309",
+      "aligned_evidence_pages_read": "314-316",
+      "evidence_plus_aligned_pages": "307-309,314-316",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          307
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          307
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          307
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          307
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "의약품을 변질시키거나 인체에 유해한 재료가 아닌지를 확인한 후 사용하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "변질시키거나",
+          "사용",
+          "사용하여야",
+          "아닌지를",
+          "유해성",
+          "유해한",
+          "의약품과",
+          "의약품을",
+          "인체에",
+          "있다",
+          "재료가",
+          "접촉하는"
+        ],
+        "content_chars": 4857
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_023",
+      "question": "시험기기·계측기·기록계는 어떻게 교정하여야 하는가?",
+      "gold_pages": "300",
+      "predicted_pages": "300",
+      "aligned_predicted_pages": "307",
+      "predicted_plus_aligned_pages": "300,307",
+      "evidence_pages_read": "300-301",
+      "aligned_evidence_pages_read": "307-308",
+      "evidence_plus_aligned_pages": "300-301,307-308",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          300
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          300
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          300
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          300
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "계측기",
+          "계획서에",
+          "교정",
+          "교정하고",
+          "기록",
+          "기록계는",
+          "기록하여야",
+          "따라",
+          "미리",
+          "시험기기",
+          "있다",
+          "정기적으로"
+        ],
+        "content_chars": 2969
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_024",
+      "question": "무균제제 작업소는 일반 제조 작업소 기준에 더하여 어떤 시설을 추가로 갖추어야 하는가?",
+      "gold_pages": "535",
+      "predicted_pages": "535-536",
+      "aligned_predicted_pages": "542-543",
+      "predicted_plus_aligned_pages": "535-536,542-543",
+      "evidence_pages_read": "535-536",
+      "aligned_evidence_pages_read": "542-543",
+      "evidence_plus_aligned_pages": "535-536,542-543",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "용기의 세척시설"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "건조",
+          "기준에",
+          "등을",
+          "등의",
+          "멸균에",
+          "무균제제",
+          "별첨1",
+          "보관시설",
+          "세척",
+          "세척시설",
+          "시설"
+        ],
+        "content_chars": 3220
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_025",
+      "question": "작업소의 청정구역은 청정도를 어떻게 관리하여야 하는가?",
+      "gold_pages": "401",
+      "predicted_pages": "81",
+      "aligned_predicted_pages": "88",
+      "predicted_plus_aligned_pages": "81,88",
+      "evidence_pages_read": "81-84",
+      "aligned_evidence_pages_read": "88-91",
+      "evidence_plus_aligned_pages": "81-84,88-91",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "classification": "semantic_duplicate_section_confusion",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하고",
+          "관리하여야",
+          "유지",
+          "유지되도록",
+          "있다",
+          "작업소의",
+          "점검",
+          "정기적으로",
+          "청정등급"
+        ],
+        "content_chars": 9115
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_026",
+      "question": "제조설비 세척에 사용하는 세제·소독제가 갖추어야 할 조건은?",
+      "gold_pages": "405",
+      "predicted_pages": "405",
+      "aligned_predicted_pages": "412",
+      "predicted_plus_aligned_pages": "405,412",
+      "evidence_pages_read": "405",
+      "aligned_evidence_pages_read": "412",
+      "evidence_plus_aligned_pages": "405,412",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "잔류하거나 적용하는 표면에 이상을 초래하지 아니하는 것이어야 한다",
+          "제조설비의 세척"
+        ],
+        "token_overlap_sample": [
+          "것이어야",
+          "사용하는",
+          "세제",
+          "세척",
+          "세척에",
+          "소독제",
+          "아니하는",
+          "이상을",
+          "있다",
+          "잔류하거나",
+          "적용하는",
+          "제조설비의"
+        ],
+        "content_chars": 2212
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_027",
+      "question": "제조조건·보관조건에 적절한 온도와 습도는 어떻게 관리하여야 하는가?",
+      "gold_pages": "83",
+      "predicted_pages": "83",
+      "aligned_predicted_pages": "90",
+      "predicted_plus_aligned_pages": "83,90",
+      "evidence_pages_read": "81-84",
+      "aligned_evidence_pages_read": "88-91",
+      "evidence_plus_aligned_pages": "81-84,88-91",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          83
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          83
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          83
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          83
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "관리하여야",
+          "보관조건에",
+          "습도",
+          "습도가",
+          "온도",
+          "온도와",
+          "유지",
+          "유지되도록",
+          "있다",
+          "적절한",
+          "점검",
+          "정기적으로"
+        ],
+        "content_chars": 9115
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_028",
+      "question": "검체의 채취자·채취량·채취방법 및 채취 시 오염방지대책 등 검체 채취에 관한 사항은 어느 기준서에 정하여야 하는가?",
+      "gold_pages": "186",
+      "predicted_pages": "186",
+      "aligned_predicted_pages": "193",
+      "predicted_plus_aligned_pages": "186,193",
+      "evidence_pages_read": "186",
+      "aligned_evidence_pages_read": "193",
+      "evidence_plus_aligned_pages": "186,193",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          186
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          186
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          186
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          186
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검체",
+          "관한",
+          "무균",
+          "시의",
+          "여부",
+          "오염방지대책",
+          "주의사항",
+          "채취",
+          "채취량",
+          "채취방법",
+          "채취자",
+          "채취장소"
+        ],
+        "content_chars": 2575
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_029",
+      "question": "고장 등으로 사용하지 않는 기계·설비는 어떻게 조치하여야 하는가?",
+      "gold_pages": "68",
+      "predicted_pages": "68",
+      "aligned_predicted_pages": "75",
+      "predicted_plus_aligned_pages": "68,75",
+      "evidence_pages_read": "68-70",
+      "aligned_evidence_pages_read": "75-77",
+      "evidence_plus_aligned_pages": "68-70,75-77",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          68
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          68
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          68
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          68
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "작업소에 두지 않거나"
+        ],
+        "token_overlap_sample": [
+          "고장",
+          "기계",
+          "두지",
+          "등으로",
+          "또는",
+          "사용하지",
+          "사용할",
+          "설비",
+          "설비는",
+          "않거나",
+          "않는",
+          "어떻게"
+        ],
+        "content_chars": 5615
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_030",
+      "question": "의약품의 제조 및 시험에 사용되는 중요 기계·설비에 대하여 무엇을 하여야 하는가?",
+      "gold_pages": "69",
+      "predicted_pages": "69",
+      "aligned_predicted_pages": "76",
+      "predicted_plus_aligned_pages": "69,76",
+      "evidence_pages_read": "68-70",
+      "aligned_evidence_pages_read": "75-77",
+      "evidence_plus_aligned_pages": "68-70,75-77",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          69
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          69
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          69
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          69
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "교정",
+          "기계",
+          "대하여",
+          "사용되는",
+          "설비에",
+          "설비의",
+          "시험에",
+          "의약품의",
+          "있다",
+          "적격성평가",
+          "제조",
+          "중요"
+        ],
+        "content_chars": 5615
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_031",
+      "question": "반입된 원자재 및 반제품은 시험결과가 나올 때까지 어떻게 처리하여야 하는가?",
+      "gold_pages": "408",
+      "predicted_pages": "408",
+      "aligned_predicted_pages": "415",
+      "predicted_plus_aligned_pages": "408,415",
+      "evidence_pages_read": "408-410",
+      "aligned_evidence_pages_read": "415-417",
+      "evidence_plus_aligned_pages": "408-410,415-417",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "격리",
+          "때까지",
+          "반입된",
+          "보관",
+          "보관하여야",
+          "시험결과",
+          "원자재",
+          "입고관리",
+          "있다",
+          "적합판정"
+        ],
+        "content_chars": 5446
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_032",
+      "question": "원자재 등이 반입되면 검체 채취와 함께 무엇을 표시하여야 하는가?",
+      "gold_pages": "415",
+      "predicted_pages": "408-410",
+      "aligned_predicted_pages": "415-417",
+      "predicted_plus_aligned_pages": "408-410,415-417",
+      "evidence_pages_read": "408-414",
+      "aligned_evidence_pages_read": "415-421",
+      "evidence_plus_aligned_pages": "408-421",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          415
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          415
+        ],
+        "precision": 0.0714,
+        "recall": 1.0,
+        "f1": 0.1333
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검체",
+          "검체를",
+          "관리번호별로",
+          "또는",
+          "반입되면",
+          "시험",
+          "시험용",
+          "원자재",
+          "입고관리",
+          "있다",
+          "절차가",
+          "제조단위"
+        ],
+        "content_chars": 13518
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_033",
+      "question": "이론 생산량과 실생산량 비교 결과 수율관리기준을 벗어난 경우의 조치 절차는?",
+      "gold_pages": "349",
+      "predicted_pages": "349",
+      "aligned_predicted_pages": "356",
+      "predicted_plus_aligned_pages": "349,356",
+      "evidence_pages_read": "342-351",
+      "aligned_evidence_pages_read": "349-358",
+      "evidence_plus_aligned_pages": "342-358",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          349
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          349
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          349
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          349
+        ],
+        "precision": 0.0588,
+        "recall": 1.0,
+        "f1": 0.1111
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "그 원인을 조사하고 대책을 수립하여 시행하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "결과",
+          "대책을",
+          "벗어난",
+          "생산량과",
+          "수립하여",
+          "수율관리기준을",
+          "시행하여야",
+          "원인을",
+          "이론",
+          "있다",
+          "절차는",
+          "조사하고"
+        ],
+        "content_chars": 17333
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_034",
+      "question": "포장작업을 시작하기 전에 반드시 확인하여야 하는 절차는?",
+      "gold_pages": "367",
+      "predicted_pages": "367",
+      "aligned_predicted_pages": "374",
+      "predicted_plus_aligned_pages": "367,374",
+      "evidence_pages_read": "364-368",
+      "aligned_evidence_pages_read": "371-375",
+      "evidence_plus_aligned_pages": "364-368,371-375",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          367
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          367
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          367
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          367
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "이전 작업의 포장재료가 남아 있지 않은지를 확인하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "남아",
+          "시작하기",
+          "않은지를",
+          "이전",
+          "있다",
+          "있지",
+          "작업의",
+          "전에",
+          "절차가",
+          "포장공정관리",
+          "포장작업을",
+          "포장재료가"
+        ],
+        "content_chars": 10834
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_035",
+      "question": "포장작업이 끝나면 자재에 대하여 어떤 절차를 수행하여야 하는가?",
+      "gold_pages": "373",
+      "predicted_pages": "373",
+      "aligned_predicted_pages": "380",
+      "predicted_plus_aligned_pages": "373,380",
+      "evidence_pages_read": "369-374",
+      "aligned_evidence_pages_read": "376-381",
+      "evidence_plus_aligned_pages": "369-374,376-381",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          373
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          373
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          373
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          373
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "경우",
+          "끝나면",
+          "남은",
+          "대하여",
+          "비교",
+          "비교하여",
+          "사용량",
+          "사용량을",
+          "수행하여야",
+          "원인을",
+          "인수량과",
+          "있다"
+        ],
+        "content_chars": 11982
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_036",
+      "question": "회수하고자 할 때 제품이 유통된 국가에 대하여 어떤 절차를 거쳐야 하는가?",
+      "gold_pages": "440",
+      "predicted_pages": "440",
+      "aligned_predicted_pages": "447",
+      "predicted_plus_aligned_pages": "440,447",
+      "evidence_pages_read": "430-441",
+      "aligned_evidence_pages_read": "437-448",
+      "evidence_plus_aligned_pages": "430-448",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          440
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          440
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          440
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          440
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제품이 유통된 모든 국가의 관계 당국에 적절한 방법으로 알려야 한다"
+        ],
+        "token_overlap_sample": [
+          "관계",
+          "국가의",
+          "당국에",
+          "대하여",
+          "모든",
+          "방법으로",
+          "불만처리",
+          "알려야",
+          "어떤",
+          "유통",
+          "유통된",
+          "있다"
+        ],
+        "content_chars": 23918
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_037",
+      "question": "소비자로부터 불만을 접수한 경우의 처리 절차는 무엇인가?",
+      "gold_pages": "431",
+      "predicted_pages": "431-432",
+      "aligned_predicted_pages": "438-439",
+      "predicted_plus_aligned_pages": "431-432,438-439",
+      "evidence_pages_read": "430-441",
+      "aligned_evidence_pages_read": "437-448",
+      "evidence_plus_aligned_pages": "430-448",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "경우의",
+          "규명하고",
+          "마련하며",
+          "불만",
+          "불만내용을",
+          "불만을",
+          "불만처리",
+          "소비자로부터",
+          "신속하게",
+          "원인규명",
+          "원인을",
+          "있다"
+        ],
+        "content_chars": 23918
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_038",
+      "question": "기계설비·원자재·제조공정·시험방법 등을 변경할 경우 가장 먼저 수행할 절차는?",
+      "gold_pages": "441",
+      "predicted_pages": "441",
+      "aligned_predicted_pages": "448",
+      "predicted_plus_aligned_pages": "441,448",
+      "evidence_pages_read": "441",
+      "aligned_evidence_pages_read": "448",
+      "evidence_plus_aligned_pages": "441,448",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검토하여야",
+          "경우",
+          "공정의",
+          "기계설비",
+          "등을",
+          "또는",
+          "미치는",
+          "변경",
+          "변경관리",
+          "변경할",
+          "시험방법",
+          "영향"
+        ],
+        "content_chars": 1919
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_039",
+      "question": "자율점검은 어떤 방식으로 실시하여야 하는가?",
+      "gold_pages": "447",
+      "predicted_pages": "447",
+      "aligned_predicted_pages": "454",
+      "predicted_plus_aligned_pages": "447,454",
+      "evidence_pages_read": "447-453",
+      "aligned_evidence_pages_read": "454-460",
+      "evidence_plus_aligned_pages": "447-460",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.1429,
+        "recall": 1.0,
+        "f1": 0.25
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.0714,
+        "recall": 1.0,
+        "f1": 0.1333
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "계획을",
+          "기준에",
+          "맞게",
+          "방식으로",
+          "수립하여",
+          "실시하여야",
+          "어떤",
+          "있다",
+          "자율점검",
+          "자율점검은",
+          "자율점검하여야",
+          "정기적으로"
+        ],
+        "content_chars": 16642
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_040",
+      "question": "작업원에 대한 교육·훈련은 어떻게 계획하여 실시하여야 하는가?",
+      "gold_pages": "452",
+      "predicted_pages": "452",
+      "aligned_predicted_pages": "459",
+      "predicted_plus_aligned_pages": "452,459",
+      "evidence_pages_read": "447-453",
+      "aligned_evidence_pages_read": "454-460",
+      "evidence_plus_aligned_pages": "447-460",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.1429,
+        "recall": 1.0,
+        "f1": 0.25
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.0714,
+        "recall": 1.0,
+        "f1": 0.1333
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "연간계획을 수립하여 실시하며"
+        ],
+        "token_overlap_sample": [
+          "교육",
+          "대한",
+          "맡은",
+          "수립하여",
+          "수행할",
+          "실시하며",
+          "실시하여야",
+          "업무를",
+          "연간계획을",
+          "있다",
+          "있도록",
+          "작업원에"
+        ],
+        "content_chars": 16642
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_041",
+      "question": "교육·훈련 실시 후에는 어떤 절차를 수행하여야 하는가?",
+      "gold_pages": "452",
+      "predicted_pages": "452",
+      "aligned_predicted_pages": "459",
+      "predicted_plus_aligned_pages": "452,459",
+      "evidence_pages_read": "452",
+      "aligned_evidence_pages_read": "459",
+      "evidence_plus_aligned_pages": "452,459",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "교육결과를 평가하고",
+          "필요하면 재교육을 하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "교육",
+          "교육결과를",
+          "어떤",
+          "있다",
+          "재교육을",
+          "절차를",
+          "평가",
+          "평가하고",
+          "필요하면",
+          "후에는",
+          "훈련"
+        ],
+        "content_chars": 2162
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_042",
+      "question": "공정 밸리데이션은 어떤 단위로 실시하여야 하는가?",
+      "gold_pages": "252",
+      "predicted_pages": "245",
+      "aligned_predicted_pages": "252",
+      "predicted_plus_aligned_pages": "245,252",
+      "evidence_pages_read": "245",
+      "aligned_evidence_pages_read": "252",
+      "evidence_plus_aligned_pages": "245,252",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          252
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          252
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "경우에는",
+          "공정",
+          "공정별",
+          "무균공정의",
+          "무균제제",
+          "밸리데이션",
+          "밸리데이션은",
+          "실시",
+          "실시하여야",
+          "있다",
+          "품목별"
+        ],
+        "content_chars": 1839
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_043",
+      "question": "세척 밸리데이션은 일반적으로 몇 개의 제조단위에 대해 수행하여 입증하는가?",
+      "gold_pages": "270",
+      "predicted_pages": "270",
+      "aligned_predicted_pages": "277",
+      "predicted_plus_aligned_pages": "270,277",
+      "evidence_pages_read": "270",
+      "aligned_evidence_pages_read": "277",
+      "evidence_plus_aligned_pages": "270,277",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "세척 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "3개",
+          "대해",
+          "밸리데이션",
+          "밸리데이션은",
+          "보여야",
+          "성공하였음을",
+          "세척",
+          "연속",
+          "일반적으로",
+          "있다",
+          "제조단위에",
+          "제조한"
+        ],
+        "content_chars": 2446
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_044",
+      "question": "완제품의 출고는 누가 승인한 것만 출하할 수 있는가?",
+      "gold_pages": "429",
+      "predicted_pages": "429",
+      "aligned_predicted_pages": "436",
+      "predicted_plus_aligned_pages": "429,436",
+      "evidence_pages_read": "429",
+      "aligned_evidence_pages_read": "436",
+      "evidence_plus_aligned_pages": "429,436",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "거래처",
+          "것만",
+          "관리한다",
+          "기록",
+          "등을",
+          "보증",
+          "부서",
+          "수량",
+          "승인한",
+          "있다",
+          "제조번호",
+          "제품명"
+        ],
+        "content_chars": 2086
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_045",
+      "question": "완제품의 출하승인을 위한 평가는 무엇을 종합하여 판정하는가?",
+      "gold_pages": "297",
+      "predicted_pages": "297",
+      "aligned_predicted_pages": "304",
+      "predicted_plus_aligned_pages": "297,304",
+      "evidence_pages_read": "297",
+      "aligned_evidence_pages_read": "304",
+      "evidence_plus_aligned_pages": "297,304",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          297
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          297
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          297
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          297
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조기록서와 반제품 및 완제품의 시험결과를 종합하여 판정하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "반제품",
+          "완제품의",
+          "위한",
+          "있다",
+          "제조기록서와",
+          "종합하여",
+          "출하승인을",
+          "판정하여야",
+          "평가는"
+        ],
+        "content_chars": 1659
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_046",
+      "question": "전자적으로 저장된 데이터는 손상 대비와 별도로 어떤 절차로 관리하여야 하는가?",
+      "gold_pages": "590",
+      "predicted_pages": "590",
+      "aligned_predicted_pages": "597",
+      "predicted_plus_aligned_pages": "590,597",
+      "evidence_pages_read": "590",
+      "aligned_evidence_pages_read": "597",
+      "evidence_plus_aligned_pages": "590,597",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "능력을",
+          "데이터",
+          "데이터는",
+          "데이터의",
+          "백업",
+          "별첨2",
+          "복구",
+          "완전성",
+          "있다",
+          "저장",
+          "저장된",
+          "전자적으로"
+        ],
+        "content_chars": 1391
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_047",
+      "question": "컴퓨터화 시스템에 대한 밸리데이션 문서·보고서는 시스템 전주기에 걸쳐 어떻게 적용·구성하여야 하는가?",
+      "gold_pages": "572",
+      "predicted_pages": "572-576",
+      "aligned_predicted_pages": "579-583",
+      "predicted_plus_aligned_pages": "572-576,579-583",
+      "evidence_pages_read": "572-576",
+      "aligned_evidence_pages_read": "579-583",
+      "evidence_plus_aligned_pages": "572-576,579-583",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          572
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          572
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          572
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          572
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "기록과",
+          "기록을",
+          "기반으로",
+          "단계에",
+          "대한",
+          "밸리데이션",
+          "변경",
+          "별첨2",
+          "보고서는",
+          "보고서를",
+          "시스템",
+          "시스템에"
+        ],
+        "content_chars": 8162
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_048",
+      "question": "반품된 제품에 대해서는 어떤 절차로 내용을 기록·보관하여야 하는가?",
+      "gold_pages": "385",
+      "predicted_pages": "385",
+      "aligned_predicted_pages": "392",
+      "predicted_plus_aligned_pages": "385,392",
+      "evidence_pages_read": "385",
+      "aligned_evidence_pages_read": "392",
+      "evidence_plus_aligned_pages": "385,392",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "반품 및 재포장"
+        ],
+        "token_overlap_sample": [
+          "관한",
+          "내용을",
+          "대해서는",
+          "반품",
+          "반품된",
+          "반품사유",
+          "반품업소",
+          "반품에",
+          "반품일과",
+          "보관하여야",
+          "수량",
+          "있다"
+        ],
+        "content_chars": 1528
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_049",
+      "question": "작업 전 시설 및 기구에 대하여 수행하여야 하는 확인 절차는?",
+      "gold_pages": "341",
+      "predicted_pages": "341-342",
+      "aligned_predicted_pages": "348-349",
+      "predicted_plus_aligned_pages": "341-342,348-349",
+      "evidence_pages_read": "332-344",
+      "aligned_evidence_pages_read": "339-351",
+      "evidence_plus_aligned_pages": "332-351",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          341
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          341
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          341
+        ],
+        "precision": 0.0769,
+        "recall": 1.0,
+        "f1": 0.1429
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          341
+        ],
+        "precision": 0.05,
+        "recall": 1.0,
+        "f1": 0.0952
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "작업 전에 시설 및 기구의 청결상태를 확인하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "기구의",
+          "대하여",
+          "시설",
+          "있다",
+          "작업",
+          "전에",
+          "제조공정관리",
+          "청결상태를",
+          "하는",
+          "확인",
+          "확인하여야"
+        ],
+        "content_chars": 21998
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_050",
+      "question": "작업 중인 작업실·보관용기·기계설비에는 무엇을 표시하여야 하는가?",
+      "gold_pages": "343",
+      "predicted_pages": "343-344",
+      "aligned_predicted_pages": "350-351",
+      "predicted_plus_aligned_pages": "343-344,350-351",
+      "evidence_pages_read": "343-344",
+      "aligned_evidence_pages_read": "350-351",
+      "evidence_plus_aligned_pages": "343-344,350-351",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          343
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          343
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          343
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          343
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제품명과 제조번호 등을 표시하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "등을",
+          "보관용기",
+          "있다",
+          "작업",
+          "작업실",
+          "제조번호",
+          "제품명과",
+          "중인",
+          "표시",
+          "표시하여야"
+        ],
+        "content_chars": 3698
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_051",
+      "question": "시험성적서와 제조단위별 제조기록서를 검토하여 제품의 출하를 승인하는 책임자는 누구인가?",
+      "gold_pages": "133",
+      "predicted_pages": "133",
+      "aligned_predicted_pages": "140",
+      "predicted_plus_aligned_pages": "133,140",
+      "evidence_pages_read": "133-140",
+      "aligned_evidence_pages_read": "140-147",
+      "evidence_plus_aligned_pages": "133-147",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자",
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "검토",
+          "검토하여",
+          "보증",
+          "부서",
+          "승인이",
+          "시험성적서",
+          "제조기록서",
+          "제조단위별",
+          "제품의",
+          "책임자는",
+          "출하",
+          "출하를"
+        ],
+        "content_chars": 20286
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_052",
+      "question": "변경관리를 승인하는 책임자는 누구인가?",
+      "gold_pages": "147",
+      "predicted_pages": "147-148",
+      "aligned_predicted_pages": "154-155",
+      "predicted_plus_aligned_pages": "147-148,154-155",
+      "evidence_pages_read": "147-158",
+      "aligned_evidence_pages_read": "154-165",
+      "evidence_plus_aligned_pages": "147-165",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          147
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          147
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          147
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          147
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자",
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "변경관리",
+          "변경관리를",
+          "보증",
+          "부서",
+          "조항에",
+          "책임자",
+          "책임자는",
+          "품질"
+        ],
+        "content_chars": 21168
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_053",
+      "question": "위탁 제조·시험에서 위탁자는 수탁자에 대하여 무엇을 평가·보증할 책임이 있는가?",
+      "gold_pages": "457",
+      "predicted_pages": "457-459",
+      "aligned_predicted_pages": "464-466",
+      "predicted_plus_aligned_pages": "457-459,464-466",
+      "evidence_pages_read": "456-467",
+      "aligned_evidence_pages_read": "463-474",
+      "evidence_plus_aligned_pages": "456-474",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "수탁자(시험실 포함)의 적절성을 평가하고"
+        ],
+        "token_overlap_sample": [
+          "gmp",
+          "검토",
+          "결과를",
+          "기록과",
+          "기준을",
+          "대하여",
+          "보증",
+          "보증할",
+          "수탁자",
+          "수탁자가",
+          "수탁자에",
+          "시험실"
+        ],
+        "content_chars": 31736
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_054",
+      "question": "자율점검을 계획하고 추진하는 책임자는 누구인가?",
+      "gold_pages": "150",
+      "predicted_pages": "150",
+      "aligned_predicted_pages": "157",
+      "predicted_plus_aligned_pages": "150,157",
+      "evidence_pages_read": "147-158",
+      "aligned_evidence_pages_read": "154-165",
+      "evidence_plus_aligned_pages": "147-165",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          150
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          150
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          150
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          150
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자",
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "계획하고",
+          "보증",
+          "부서",
+          "자율점검",
+          "자율점검을",
+          "조항에",
+          "책임자",
+          "책임자는",
+          "품질"
+        ],
+        "content_chars": 21168
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_055",
+      "question": "제조 또는 시험의 수탁자와 주요 원자재 제조업자를 평가하는 책임자는 누구인가?",
+      "gold_pages": "153",
+      "predicted_pages": "153-154",
+      "aligned_predicted_pages": "160-161",
+      "predicted_plus_aligned_pages": "153-154,160-161",
+      "evidence_pages_read": "147-158",
+      "aligned_evidence_pages_read": "154-165",
+      "evidence_plus_aligned_pages": "147-165",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          153
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          153
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          153
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          153
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자",
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "또는",
+          "보증",
+          "부서",
+          "수탁자와",
+          "시험의",
+          "원자재",
+          "제조",
+          "제조업자",
+          "제조업자를",
+          "조항에",
+          "주요",
+          "책임자"
+        ],
+        "content_chars": 21168
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_056",
+      "question": "제조소의 제조부서와 품질(보증)부서 책임자에 대한 조직 구성 원칙은 무엇인가?",
+      "gold_pages": "84",
+      "predicted_pages": "84-87",
+      "aligned_predicted_pages": "91-94",
+      "predicted_plus_aligned_pages": "84-87,91-94",
+      "evidence_pages_read": "84-94",
+      "aligned_evidence_pages_read": "91-101",
+      "evidence_plus_aligned_pages": "84-101",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "각각",
+          "겸직",
+          "겸직할",
+          "구성",
+          "대한",
+          "독립된",
+          "두고",
+          "보증",
+          "부서",
+          "부서를",
+          "부서의",
+          "서로"
+        ],
+        "content_chars": 23246
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_057",
+      "question": "제조지시서에 의하여 작업을 지시하고 그에 따라 진행되는지 점검하는 책임자는?",
+      "gold_pages": "101",
+      "predicted_pages": "101",
+      "aligned_predicted_pages": "108",
+      "predicted_plus_aligned_pages": "101,108",
+      "evidence_pages_read": "94-111",
+      "aligned_evidence_pages_read": "101-118",
+      "evidence_plus_aligned_pages": "94-118",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          101
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          101
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          101
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          101
+        ],
+        "precision": 0.04,
+        "recall": 1.0,
+        "f1": 0.0769
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조부서 책임자",
+          "제조부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "따라",
+          "의하여",
+          "작업을",
+          "제조부서",
+          "제조지시서",
+          "제조지시서에",
+          "지시하고",
+          "책임자",
+          "책임자는"
+        ],
+        "content_chars": 30484
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_058",
+      "question": "위탁 제조·시험에서 법령상 위탁자·수탁자의 GMP 준수 책임은 계약서를 통해 위임되는가?",
+      "gold_pages": "457",
+      "predicted_pages": "457-458",
+      "aligned_predicted_pages": "464-465",
+      "predicted_plus_aligned_pages": "457-458,464-465",
+      "evidence_pages_read": "456-467",
+      "aligned_evidence_pages_read": "463-474",
+      "evidence_plus_aligned_pages": "456-474",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "gmp",
+          "계약서를",
+          "계약서에",
+          "규정",
+          "명확히",
+          "법령에서",
+          "수탁자의",
+          "승인",
+          "않는다",
+          "약사법",
+          "업무",
+          "역할"
+        ],
+        "content_chars": 31736
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_059",
+      "question": "원료약품·자재 및 완제품의 보관관리 담당자를 지정하는 책임자는 누구인가?",
+      "gold_pages": "157",
+      "predicted_pages": "157",
+      "aligned_predicted_pages": "164",
+      "predicted_plus_aligned_pages": "157,164",
+      "evidence_pages_read": "147-158",
+      "aligned_evidence_pages_read": "154-165",
+      "evidence_plus_aligned_pages": "147-165",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          157
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          157
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          157
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          157
+        ],
+        "precision": 0.0526,
+        "recall": 1.0,
+        "f1": 0.1
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자",
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "담당자를",
+          "보관관리",
+          "보증",
+          "부서",
+          "완제품의",
+          "원료약품",
+          "자재",
+          "책임자",
+          "책임자는",
+          "품질"
+        ],
+        "content_chars": 21168
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_060",
+      "question": "기준일탈한 반제품을 재가공하려면 누구의 승인을 받아야 하는가?",
+      "gold_pages": "357",
+      "predicted_pages": "357",
+      "aligned_predicted_pages": "364",
+      "predicted_plus_aligned_pages": "357,364",
+      "evidence_pages_read": "348-358",
+      "aligned_evidence_pages_read": "355-365",
+      "evidence_plus_aligned_pages": "348-365",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          357
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          357
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          357
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          357
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자의 승인을 받아야 하며",
+          "그 기록을 보관하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "기록",
+          "기록을",
+          "기준일탈한",
+          "반제품을",
+          "받아야",
+          "보관하여야",
+          "보증",
+          "부서",
+          "승인",
+          "승인을",
+          "있다",
+          "재가공"
+        ],
+        "content_chars": 16753
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_061",
+      "question": "모든 기록문서(전자기록 포함)는 원칙적으로 얼마 동안 보존하여야 하는가?",
+      "gold_pages": "237",
+      "predicted_pages": "237",
+      "aligned_predicted_pages": "244",
+      "predicted_plus_aligned_pages": "237,244",
+      "evidence_pages_read": "237",
+      "aligned_evidence_pages_read": "244",
+      "evidence_plus_aligned_pages": "237,244",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          237
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          237
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          237
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          237
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "1년",
+          "1년간",
+          "경과",
+          "규정",
+          "기록문서",
+          "동안",
+          "또는",
+          "모든",
+          "문서의",
+          "보존하여야",
+          "유효기한",
+          "있다"
+        ],
+        "content_chars": 1381
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_062",
+      "question": "원생약 보관 시 약제 살포·훈증을 한 경우 훈증기록은 몇 년간 보존하는가?",
+      "gold_pages": "428",
+      "predicted_pages": "428",
+      "aligned_predicted_pages": "435",
+      "predicted_plus_aligned_pages": "428,435",
+      "evidence_pages_read": "428-429",
+      "aligned_evidence_pages_read": "435-436",
+      "evidence_plus_aligned_pages": "428-429,435-436",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          428
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          428
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          428
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          428
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "훈증기록은 3년간 보존한다"
+        ],
+        "token_overlap_sample": [
+          "3년간",
+          "경우",
+          "보관",
+          "보존한다",
+          "살포",
+          "약제",
+          "훈증기록은"
+        ],
+        "content_chars": 3862
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_063",
+      "question": "제조설비의 세척기록에는 어떤 사항을 기재하여야 하는가?",
+      "gold_pages": "405",
+      "predicted_pages": "405",
+      "aligned_predicted_pages": "412",
+      "predicted_plus_aligned_pages": "405,412",
+      "evidence_pages_read": "405",
+      "aligned_evidence_pages_read": "412",
+      "evidence_plus_aligned_pages": "405,412",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          405
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조설비의 세척"
+        ],
+        "token_overlap_sample": [
+          "기계",
+          "기재한",
+          "등을",
+          "사용기록을",
+          "사용된",
+          "사용한",
+          "설비를",
+          "세척",
+          "세척기록과",
+          "세척에",
+          "세척작업원",
+          "세척작업일"
+        ],
+        "content_chars": 2212
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_064",
+      "question": "제품의 제조단위마다 작성하여야 하는 기록은 무엇이며 어떤 문서와 통합 가능한가?",
+      "gold_pages": "332",
+      "predicted_pages": "332",
+      "aligned_predicted_pages": "339",
+      "predicted_plus_aligned_pages": "332,339",
+      "evidence_pages_read": "332",
+      "aligned_evidence_pages_read": "339",
+      "evidence_plus_aligned_pages": "332,339",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          332
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          332
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          332
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          332
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조지시서와 통합하여 작성할 수 있다"
+        ],
+        "token_overlap_sample": [
+          "있다",
+          "작성하여야",
+          "작성할",
+          "제조공정관리",
+          "제조기록서를",
+          "제조단위마다",
+          "제조지시서와",
+          "제품의",
+          "통합하여",
+          "하는"
+        ],
+        "content_chars": 1967
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_065",
+      "question": "시험을 의뢰한 경우 작성하여야 하는 기록 문서는 무엇인가?",
+      "gold_pages": "286",
+      "predicted_pages": "286",
+      "aligned_predicted_pages": "293",
+      "predicted_plus_aligned_pages": "286,293",
+      "evidence_pages_read": "286-290",
+      "aligned_evidence_pages_read": "293-297",
+      "evidence_plus_aligned_pages": "286-290,293-297",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          286
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          286
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          286
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          286
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "경우",
+          "관리할",
+          "기록",
+          "문서는",
+          "시험관리",
+          "시험별로",
+          "시험성적서를",
+          "의뢰한",
+          "있다",
+          "작성하여야",
+          "통합하여",
+          "하며"
+        ],
+        "content_chars": 12651
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_066",
+      "question": "점검기록(Audit Trail)과 관련하여 데이터를 변경·삭제할 때 무엇을 하여야 하는가?",
+      "gold_pages": "591",
+      "predicted_pages": "591-592",
+      "aligned_predicted_pages": "598-599",
+      "predicted_plus_aligned_pages": "591-592,598-599",
+      "evidence_pages_read": "591-596",
+      "aligned_evidence_pages_read": "598-603",
+      "evidence_plus_aligned_pages": "591-596,598-603",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "점검기록 (Audit Trail)"
+        ],
+        "token_overlap_sample": [
+          "audit",
+          "trail",
+          "가능한",
+          "검토가",
+          "관련하여",
+          "구비하고",
+          "데이터를",
+          "문서화하여야",
+          "변경",
+          "별첨2",
+          "사유를",
+          "삭제"
+        ],
+        "content_chars": 13617
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_067",
+      "question": "데이터 완전성의 주요 요건인 ALCOA 원칙의 다섯 가지는 무엇인가?",
+      "gold_pages": "591",
+      "predicted_pages": "591-592",
+      "aligned_predicted_pages": "598-599",
+      "predicted_plus_aligned_pages": "591-592,598-599",
+      "evidence_pages_read": "591-596",
+      "aligned_evidence_pages_read": "598-603",
+      "evidence_plus_aligned_pages": "591-596,598-603",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          591
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "점검기록 (Audit Trail)"
+        ],
+        "token_overlap_sample": [
+          "accurate",
+          "alcoa",
+          "attributable",
+          "audit",
+          "contemporaneous",
+          "legible",
+          "original",
+          "trail",
+          "기록",
+          "데이터",
+          "별첨2",
+          "완전성의"
+        ],
+        "content_chars": 13617
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_068",
+      "question": "포장작업과 관련하여 작성·기록하여야 하는 인적 사항은 무엇인가?",
+      "gold_pages": "382",
+      "predicted_pages": "382-384",
+      "aligned_predicted_pages": "389-391",
+      "predicted_plus_aligned_pages": "382-384,389-391",
+      "evidence_pages_read": "375-385",
+      "aligned_evidence_pages_read": "382-392",
+      "evidence_plus_aligned_pages": "375-392",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          382
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          382
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          382
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          382
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "포장작업을 한 작업원의 성명과 확인자의 서명을 적어야 한다"
+        ],
+        "token_overlap_sample": [
+          "관련하여",
+          "기록이",
+          "기록하여야",
+          "사항은",
+          "서명",
+          "서명을",
+          "성명",
+          "성명과",
+          "있다",
+          "작업원",
+          "작업원의",
+          "적어야"
+        ],
+        "content_chars": 17916
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_069",
+      "question": "위탁자는 수탁자로부터 받은 제조 및 품질관리 기록 서류를 얼마 동안 보존하여야 하는가?",
+      "gold_pages": "457",
+      "predicted_pages": "457",
+      "aligned_predicted_pages": "464",
+      "predicted_plus_aligned_pages": "457,464",
+      "evidence_pages_read": "456-458",
+      "aligned_evidence_pages_read": "463-465",
+      "evidence_plus_aligned_pages": "456-458,463-465",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "3년",
+          "관한",
+          "기록에",
+          "받아",
+          "서류를",
+          "수탁자로부터",
+          "위탁자는",
+          "위탁제조",
+          "이상",
+          "제조",
+          "품질관리의"
+        ],
+        "content_chars": 7730
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_070",
+      "question": "불만처리기록에 관하여 조항이 정하는 내용은 무엇인가?",
+      "gold_pages": "431",
+      "predicted_pages": "431",
+      "aligned_predicted_pages": "438",
+      "predicted_plus_aligned_pages": "431,438",
+      "evidence_pages_read": "430-431",
+      "aligned_evidence_pages_read": "437-438",
+      "evidence_plus_aligned_pages": "430-431,437-438",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          431
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "불만내용",
+          "불만처리",
+          "불만처리기록에는",
+          "사항이",
+          "있다",
+          "정해진",
+          "조사",
+          "조치",
+          "포함되어야",
+          "회수"
+        ],
+        "content_chars": 5273
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_071",
+      "question": "'완제의약품'과 '완제품'은 정의상 어떻게 구분되는가?",
+      "gold_pages": "21",
+      "predicted_pages": "21-22",
+      "aligned_predicted_pages": "28-29",
+      "predicted_plus_aligned_pages": "21-22,28-29",
+      "evidence_pages_read": "18-22",
+      "aligned_evidence_pages_read": "25-29",
+      "evidence_plus_aligned_pages": "18-22,25-29",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          21
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "또는",
+          "말한다",
+          "모든",
+          "완료되어",
+          "완료된",
+          "완제의약품",
+          "완제의약품을",
+          "완제품",
+          "완제품이",
+          "용어의",
+          "원료의약품",
+          "인체에"
+        ],
+        "content_chars": 9240
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_072",
+      "question": "무균제제 작업소의 시설 기준은 일반 제조 작업소와 어떻게 다른가?",
+      "gold_pages": "535",
+      "predicted_pages": "500,516-522,528-530",
+      "aligned_predicted_pages": "507,523-529,535-537",
+      "predicted_plus_aligned_pages": "500,507,516-530,535-537",
+      "evidence_pages_read": "500,516-522,526-530",
+      "aligned_evidence_pages_read": "507,523-529,533-537",
+      "evidence_plus_aligned_pages": "500,507,516-530,533-537",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.05,
+        "recall": 1.0,
+        "f1": 0.0952
+      },
+      "evidence_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          535
+        ],
+        "precision": 0.0455,
+        "recall": 1.0,
+        "f1": 0.087
+      },
+      "classification": "coordinate_shift_in_predicted_pages",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "의약품 등의 제조업 및 수입자의 시설기준령 시행규칙"
+        ],
+        "token_overlap_sample": [
+          "갖추어야",
+          "건조",
+          "기준에",
+          "등의",
+          "멸균",
+          "멸균상태",
+          "무균제제",
+          "별첨1",
+          "보관시설",
+          "세척",
+          "수입자의",
+          "시설"
+        ],
+        "content_chars": 13642
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_073",
+      "question": "예측적·동시적·회고적 밸리데이션 중 원칙적으로 실시해야 하는 것은 무엇이며 나머지는 어떤 경우에 적용하는가?",
+      "gold_pages": "248",
+      "predicted_pages": "248-250",
+      "aligned_predicted_pages": "255-257",
+      "predicted_plus_aligned_pages": "248-250,255-257",
+      "evidence_pages_read": "245-252",
+      "aligned_evidence_pages_read": "252-259",
+      "evidence_plus_aligned_pages": "245-259",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "갈음할",
+          "경우에",
+          "공정",
+          "동시적",
+          "또는",
+          "밸리데이션",
+          "밸리데이션으로",
+          "밸리데이션을",
+          "부득이한",
+          "예측적",
+          "있다",
+          "중요"
+        ],
+        "content_chars": 18213
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_074",
+      "question": "'연속적 공정 검증'과 '지속적 공정 검증'은 의미상 어떻게 다른가?",
+      "gold_pages": "248",
+      "predicted_pages": "248-250",
+      "aligned_predicted_pages": "255-257",
+      "predicted_plus_aligned_pages": "248-250,255-257",
+      "evidence_pages_read": "245-252",
+      "aligned_evidence_pages_read": "252-259",
+      "evidence_plus_aligned_pages": "245-259",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          248
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "검증",
+          "검증은",
+          "공정",
+          "공정이",
+          "다른",
+          "대안",
+          "모니터링",
+          "문서화된",
+          "밸리데이션",
+          "밸리데이션의",
+          "상태에",
+          "성능을"
+        ],
+        "content_chars": 18213
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_075",
+      "question": "'일탈'과 '기준일탈'은 어떻게 구분되는가?",
+      "gold_pages": "18",
+      "predicted_pages": "18-19",
+      "aligned_predicted_pages": "25-26",
+      "predicted_plus_aligned_pages": "18-19,25-26",
+      "evidence_pages_read": "18-19",
+      "aligned_evidence_pages_read": "25-26",
+      "evidence_plus_aligned_pages": "18-19,25-26",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          18
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "결과가",
+          "경우이다",
+          "과정에서",
+          "기준을",
+          "기준일탈",
+          "기준일탈은",
+          "벗어난",
+          "시험기준을",
+          "시험의",
+          "용어의",
+          "일탈",
+          "정의"
+        ],
+        "content_chars": 4040
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_076",
+      "question": "GMP 기준서는 어떤 네 가지로 구성되며 각각 무엇에 관한 기준서인가?",
+      "gold_pages": "160",
+      "predicted_pages": "160,186,200,220",
+      "aligned_predicted_pages": "167,193,207,227",
+      "predicted_plus_aligned_pages": "160,167,186,193,200,207,220,227",
+      "evidence_pages_read": "160-161,186-187,200-201,220-221",
+      "aligned_evidence_pages_read": "167-168,193-194,207-208,227-228",
+      "evidence_plus_aligned_pages": "160-161,167-168,186-187,193-194,200-201,207-208,220-221,227-228",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          160
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          160
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          160
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          160
+        ],
+        "precision": 0.0625,
+        "recall": 1.0,
+        "f1": 0.1176
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "gmp",
+          "관한",
+          "기준서",
+          "사항을",
+          "에서",
+          "작성",
+          "절차",
+          "제조관리",
+          "제조관리기준서",
+          "제품",
+          "제품표준서",
+          "품질관리기준서"
+        ],
+        "content_chars": 20029
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_077",
+      "question": "위탁제조와 위탁시험에서 위탁자가 수탁자에게 제공하는 것은 각각 어떻게 다른가?",
+      "gold_pages": "457",
+      "predicted_pages": "457",
+      "aligned_predicted_pages": "464",
+      "predicted_plus_aligned_pages": "457,464",
+      "evidence_pages_read": "456-458",
+      "aligned_evidence_pages_read": "463-465",
+      "evidence_plus_aligned_pages": "456-458,463-465",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          457
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "각각",
+          "검체",
+          "검체를",
+          "것은",
+          "기준으로",
+          "서류를",
+          "수탁자가",
+          "수탁자에게",
+          "시험",
+          "시험방법과",
+          "시험용",
+          "어떻게"
+        ],
+        "content_chars": 7730
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_078",
+      "question": "'재가공'과 반품 제품의 '재포장'은 어떻게 구분되는가?",
+      "gold_pages": "388",
+      "predicted_pages": "21,385,388",
+      "aligned_predicted_pages": "28,392,395",
+      "predicted_plus_aligned_pages": "21,28,385,388,392,395",
+      "evidence_pages_read": "21,385-389",
+      "aligned_evidence_pages_read": "28,392-396",
+      "evidence_plus_aligned_pages": "21,28,385-389,392-396",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "반품 및 재포장"
+        ],
+        "token_overlap_sample": [
+          "공정",
+          "기존",
+          "기준일탈한",
+          "다시",
+          "반복하는",
+          "반제품에",
+          "반품",
+          "반품된",
+          "없다",
+          "재가공",
+          "재포장",
+          "제조공정"
+        ],
+        "content_chars": 13312
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_079",
+      "question": "제조부서와 품질(보증)부서는 조직상 어떤 관계여야 하는가?",
+      "gold_pages": "84",
+      "predicted_pages": "84-86",
+      "aligned_predicted_pages": "91-93",
+      "predicted_plus_aligned_pages": "84-86,91-93",
+      "evidence_pages_read": "84-86",
+      "aligned_evidence_pages_read": "91-93",
+      "evidence_plus_aligned_pages": "84-86,91-93",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "겸직할",
+          "구성",
+          "권한을",
+          "독립되어",
+          "보증",
+          "부서는",
+          "부서의",
+          "서로",
+          "없다",
+          "제조부서와",
+          "조직의",
+          "책임과"
+        ],
+        "content_chars": 7710
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_080",
+      "question": "품질보증·품질관리·품질평가는 각각 무엇과 관련된 체계인가?",
+      "gold_pages": "46",
+      "predicted_pages": "28,46,49",
+      "aligned_predicted_pages": "35,53,56",
+      "predicted_plus_aligned_pages": "28,35,46,49,53,56",
+      "evidence_pages_read": "28,42,46,49",
+      "aligned_evidence_pages_read": "35,49,53,56",
+      "evidence_plus_aligned_pages": "28,35,42,46,49,53,56",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          46
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          46
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          46
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          46
+        ],
+        "precision": 0.1429,
+        "recall": 1.0,
+        "f1": 0.25
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "검체채취",
+          "공정",
+          "관련된",
+          "규격",
+          "모든",
+          "문서화",
+          "의약품",
+          "일관성",
+          "적절성",
+          "절차와",
+          "조직",
+          "출하"
+        ],
+        "content_chars": 8460
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_081",
+      "question": "제조부서와 품질부서 책임자의 겸직 금지에는 어떤 예외가 있는가?",
+      "gold_pages": "84",
+      "predicted_pages": "84",
+      "aligned_predicted_pages": "91",
+      "predicted_plus_aligned_pages": "84,91",
+      "evidence_pages_read": "84-94",
+      "aligned_evidence_pages_read": "91-101",
+      "evidence_plus_aligned_pages": "84-101",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          84
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "방사성의약품 제조업소",
+          "의료용 고압가스 제조업소"
+        ],
+        "token_overlap_sample": [
+          "겸직",
+          "겸직할",
+          "경우",
+          "고압가스",
+          "구성",
+          "또는",
+          "모든",
+          "방사성의약품",
+          "소분하는",
+          "업소의",
+          "위탁제조하거나",
+          "의료용"
+        ],
+        "content_chars": 23246
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_082",
+      "question": "밸리데이션을 생략할 수 있는 조건은 무엇인가?",
+      "gold_pages": "243",
+      "predicted_pages": "243-245",
+      "aligned_predicted_pages": "250-252",
+      "predicted_plus_aligned_pages": "243-245,250-252",
+      "evidence_pages_read": "243-245",
+      "aligned_evidence_pages_read": "250-252",
+      "evidence_plus_aligned_pages": "243-245,250-252",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "밸리데이션의 대상"
+        ],
+        "token_overlap_sample": [
+          "객관적이고",
+          "경우",
+          "대상",
+          "따라",
+          "바에",
+          "밸리데이션을",
+          "밸리데이션의",
+          "생략할",
+          "식품의약품안전처장이",
+          "있다",
+          "정하는",
+          "증거자료가"
+        ],
+        "content_chars": 6484
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_083",
+      "question": "위탁자가 안정성 시험을 생략할 수 있는 조건은 무엇인가?",
+      "gold_pages": "317",
+      "predicted_pages": "317",
+      "aligned_predicted_pages": "324",
+      "predicted_plus_aligned_pages": "317,324",
+      "evidence_pages_read": "317-327",
+      "aligned_evidence_pages_read": "324-334",
+      "evidence_plus_aligned_pages": "317-334",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 0.0909,
+        "recall": 1.0,
+        "f1": 0.1667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          317
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "제조방법(공정변수 포함)"
+        ],
+        "token_overlap_sample": [
+          "1차",
+          "경우",
+          "공정변수",
+          "동일한",
+          "명확히",
+          "문서화된",
+          "분량",
+          "사항",
+          "생략할",
+          "수탁자가",
+          "시험",
+          "시험을"
+        ],
+        "content_chars": 21856
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_084",
+      "question": "동시적 밸리데이션은 어떤 예외적 상황에서 사용할 수 있는가?",
+      "gold_pages": "249",
+      "predicted_pages": "256-260",
+      "aligned_predicted_pages": "263-267",
+      "predicted_plus_aligned_pages": "256-260,263-267",
+      "evidence_pages_read": "249-266",
+      "aligned_evidence_pages_read": "256-273",
+      "evidence_plus_aligned_pages": "249-273",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          249
+        ],
+        "precision": 0.0556,
+        "recall": 1.0,
+        "f1": 0.1053
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          249
+        ],
+        "precision": 0.04,
+        "recall": 1.0,
+        "f1": 0.0769
+      },
+      "classification": "evidence_read_contains_gold_but_final_page_selection_missed",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "공정 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "15",
+          "16",
+          "annex",
+          "pic",
+          "경우",
+          "공정",
+          "높은",
+          "동시적",
+          "문서화",
+          "밸리데이션",
+          "밸리데이션은",
+          "밸리데이션을"
+        ],
+        "content_chars": 33278
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_085",
+      "question": "유통과정에서 반품된 제품은 원칙적으로 어떻게 처리하며, 재입고·재포장은 어떤 경우에 허용되는가?",
+      "gold_pages": "385",
+      "predicted_pages": "385-388",
+      "aligned_predicted_pages": "392-395",
+      "predicted_plus_aligned_pages": "385-388,392-395",
+      "evidence_pages_read": "385-392",
+      "aligned_evidence_pages_read": "392-399",
+      "evidence_plus_aligned_pages": "385-399",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          385
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "반품 및 재포장"
+        ],
+        "token_overlap_sample": [
+          "경우에",
+          "또는",
+          "만족한",
+          "모두",
+          "반품",
+          "반품된",
+          "원칙적으로",
+          "유통과정에서",
+          "있다",
+          "재입고",
+          "재포장",
+          "재포장할"
+        ],
+        "content_chars": 15635
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_086",
+      "question": "반입된 원자재 등을 적합판정 전에 사용할 수 있는 경우가 있는가?",
+      "gold_pages": "408",
+      "predicted_pages": "290-291",
+      "aligned_predicted_pages": "297-298",
+      "predicted_plus_aligned_pages": "290-291,297-298",
+      "evidence_pages_read": "290-292,408-410",
+      "aligned_evidence_pages_read": "297-299,415-417",
+      "evidence_plus_aligned_pages": "290-292,297-299,408-410,415-417",
+      "original_page_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": false,
+        "overlap_pages": [],
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          408
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "evidence_read_contains_gold_but_final_page_selection_missed",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "격리",
+          "등을",
+          "따라",
+          "반입된",
+          "보관",
+          "사용할",
+          "원자재",
+          "원칙적으로",
+          "입고관리",
+          "있다",
+          "적합판정",
+          "적합판정을"
+        ],
+        "content_chars": 10750
+      },
+      "is_known_original_miss": true
+    },
+    {
+      "id": "gmp_eval_087",
+      "question": "입고 때마다의 시험을 생략(간소화)할 수 있는 조건은 무엇인가?",
+      "gold_pages": "292",
+      "predicted_pages": "292-297",
+      "aligned_predicted_pages": "299-304",
+      "predicted_plus_aligned_pages": "292-297,299-304",
+      "evidence_pages_read": "292-297",
+      "aligned_evidence_pages_read": "299-304",
+      "evidence_plus_aligned_pages": "292-297,299-304",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          292
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          292
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          292
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          292
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "원자재의 품질이 계속적으로 균질하여 시험성적에 충분한 신뢰성이 보증되는 경우"
+        ],
+        "token_overlap_sample": [
+          "경우",
+          "계속적으로",
+          "균질하여",
+          "기준을",
+          "문서로",
+          "보증",
+          "시험",
+          "시험성적에",
+          "시험을",
+          "신뢰성",
+          "신뢰성이",
+          "원자재의"
+        ],
+        "content_chars": 14314
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_088",
+      "question": "출고는 어떤 방식이 원칙이며, 그러지 않을 경우 무엇이 필요한가?",
+      "gold_pages": "429",
+      "predicted_pages": "429",
+      "aligned_predicted_pages": "436",
+      "predicted_plus_aligned_pages": "429,436",
+      "evidence_pages_read": "429",
+      "aligned_evidence_pages_read": "436",
+      "evidence_plus_aligned_pages": "429,436",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          429
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "그러지 아니할 경우에는 타당한 사유가 있어야 한다"
+        ],
+        "token_overlap_sample": [
+          "경우",
+          "경우에는",
+          "그러지",
+          "사유가",
+          "선입선출",
+          "아니할",
+          "있다",
+          "있어야",
+          "출고관리",
+          "출고는",
+          "타당한"
+        ],
+        "content_chars": 2086
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_089",
+      "question": "보관 시 원자재·완제품의 시험 전후 구분 표시를 생략할 수 있는 경우는?",
+      "gold_pages": "421",
+      "predicted_pages": "421",
+      "aligned_predicted_pages": "428",
+      "predicted_plus_aligned_pages": "421,428",
+      "evidence_pages_read": "421",
+      "aligned_evidence_pages_read": "428",
+      "evidence_plus_aligned_pages": "421,428",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          421
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          421
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          421
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          421
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "자동관리 시스템인 경우에는 표시를 생략할 수 있다"
+        ],
+        "token_overlap_sample": [
+          "경우에는",
+          "구분",
+          "시스템인",
+          "시험",
+          "원자재",
+          "있다",
+          "자동관리",
+          "표시를"
+        ],
+        "content_chars": 1356
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_090",
+      "question": "세척 밸리데이션에서 '깨끗할 때까지 시험 실시' 방식은 허용되는가?",
+      "gold_pages": "270",
+      "predicted_pages": "270",
+      "aligned_predicted_pages": "277",
+      "predicted_plus_aligned_pages": "270,277",
+      "evidence_pages_read": "270",
+      "aligned_evidence_pages_read": "277",
+      "evidence_plus_aligned_pages": "270,277",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "세척 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "깨끗할",
+          "대체방법으로",
+          "때까지",
+          "밸리데이션",
+          "밸리데이션의",
+          "세척",
+          "시험",
+          "실시",
+          "않다",
+          "적절하지"
+        ],
+        "content_chars": 2446
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_091",
+      "question": "품질(보증)부서 책임자가 제품 출하를 승인하기 위해 검토하는 두 가지 문서는 무엇인가?",
+      "gold_pages": "133",
+      "predicted_pages": "133",
+      "aligned_predicted_pages": "140",
+      "predicted_plus_aligned_pages": "133,140",
+      "evidence_pages_read": "133-140",
+      "aligned_evidence_pages_read": "140-147",
+      "evidence_plus_aligned_pages": "133-147",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          133
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질(보증)부서 책임자"
+        ],
+        "token_overlap_sample": [
+          "검토",
+          "검토한",
+          "내용을",
+          "문서가",
+          "문서는",
+          "보증",
+          "부서",
+          "승인",
+          "승인하기",
+          "시험성적서",
+          "위해",
+          "제조기록서의"
+        ],
+        "content_chars": 20286
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_092",
+      "question": "제품품질평가 시 평가에 포함되어야 하는 항목들은 무엇인가?",
+      "gold_pages": "327",
+      "predicted_pages": "327-328",
+      "aligned_predicted_pages": "334-335",
+      "predicted_plus_aligned_pages": "327-328,334-335",
+      "evidence_pages_read": "49-52,129-133,327-332",
+      "aligned_evidence_pages_read": "56-59,136-140,334-339",
+      "evidence_plus_aligned_pages": "49-52,56-59,129-133,136-140,327-332,334-339",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          327
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          327
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          327
+        ],
+        "precision": 0.0667,
+        "recall": 1.0,
+        "f1": 0.125
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          327
+        ],
+        "precision": 0.0333,
+        "recall": 1.0,
+        "f1": 0.0645
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "안정성평가 결과"
+        ],
+        "token_overlap_sample": [
+          "결과",
+          "공정",
+          "공정관리",
+          "기록",
+          "기준일탈",
+          "반품",
+          "변경관리기록",
+          "불만",
+          "시정조치",
+          "시험결과",
+          "안정성평가",
+          "제조단위"
+        ],
+        "content_chars": 41103
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_093",
+      "question": "세척 밸리데이션에서 한계기준 설정·민감도·검증 배치 수에 대한 요건을 종합하면?",
+      "gold_pages": "270",
+      "predicted_pages": "270-272",
+      "aligned_predicted_pages": "277-279",
+      "predicted_plus_aligned_pages": "270-272,277-279",
+      "evidence_pages_read": "270-285",
+      "aligned_evidence_pages_read": "277-292",
+      "evidence_plus_aligned_pages": "270-292",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.3333,
+        "recall": 1.0,
+        "f1": 0.5
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.0625,
+        "recall": 1.0,
+        "f1": 0.1176
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          270
+        ],
+        "precision": 0.0435,
+        "recall": 1.0,
+        "f1": 0.0833
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "세척 밸리데이션"
+        ],
+        "token_overlap_sample": [
+          "3개",
+          "검증된",
+          "대한",
+          "대해",
+          "따라",
+          "미생물",
+          "배치",
+          "밸리데이션",
+          "설정",
+          "세척",
+          "세척제",
+          "시험방법"
+        ],
+        "content_chars": 32208
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_094",
+      "question": "품질경영(품질보증시스템)이 포함하여 시행하여야 하는 체계들은 무엇인가?",
+      "gold_pages": "28",
+      "predicted_pages": "28",
+      "aligned_predicted_pages": "35",
+      "predicted_plus_aligned_pages": "28,35",
+      "evidence_pages_read": "28-31",
+      "aligned_evidence_pages_read": "35-38",
+      "evidence_plus_aligned_pages": "28-31,35-38",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          28
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          28
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          28
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          28
+        ],
+        "precision": 0.125,
+        "recall": 1.0,
+        "f1": 0.2222
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "품질보증시스템은 제조 및 품질관리",
+          "품질위험관리 등을 포함하여 적절하게 시행하여야 한다"
+        ],
+        "token_overlap_sample": [
+          "등을",
+          "시행하여야",
+          "적절하게",
+          "제조",
+          "포함하여",
+          "포함해야",
+          "품질경영",
+          "품질관리",
+          "품질위험관리",
+          "품질평가",
+          "하는"
+        ],
+        "content_chars": 11503
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_095",
+      "question": "컴퓨터화 시스템에 전자적으로 저장된 데이터는 보호·접근성·백업 측면에서 어떻게 관리하여야 하는가?",
+      "gold_pages": "590",
+      "predicted_pages": "590",
+      "aligned_predicted_pages": "597",
+      "predicted_plus_aligned_pages": "590,597",
+      "evidence_pages_read": "590-602",
+      "aligned_evidence_pages_read": "597-605",
+      "evidence_plus_aligned_pages": "590-605",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 0.0769,
+        "recall": 1.0,
+        "f1": 0.1429
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          590
+        ],
+        "precision": 0.0625,
+        "recall": 1.0,
+        "f1": 0.1176
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "가독성",
+          "능력을",
+          "데이터",
+          "데이터는",
+          "물리적",
+          "백업",
+          "별첨2",
+          "보호",
+          "복구",
+          "손상에",
+          "시스템에",
+          "저장"
+        ],
+        "content_chars": 17140
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_096",
+      "question": "변경관리에서 변경 영향 검토 이후, 변경 내용을 실시할 때 함께 수립·시행해야 하는 조치는?",
+      "gold_pages": "441",
+      "predicted_pages": "441-442",
+      "aligned_predicted_pages": "448-449",
+      "predicted_plus_aligned_pages": "441-442,448-449",
+      "evidence_pages_read": "441-446",
+      "aligned_evidence_pages_read": "448-453",
+      "evidence_plus_aligned_pages": "441-446,448-453",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          441
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "개정",
+          "교육",
+          "내용을",
+          "대한",
+          "문서의",
+          "변경",
+          "변경관리",
+          "수립하여",
+          "시행하여야",
+          "실시할",
+          "영향",
+          "있다"
+        ],
+        "content_chars": 14773
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_097",
+      "question": "자율점검을 실시할 수 있는 사람과 점검 후 작성하여야 하는 문서는 무엇인가?",
+      "gold_pages": "447",
+      "predicted_pages": "447",
+      "aligned_predicted_pages": "454",
+      "predicted_plus_aligned_pages": "447,454",
+      "evidence_pages_read": "447-452",
+      "aligned_evidence_pages_read": "454-459",
+      "evidence_plus_aligned_pages": "447-452,454-459",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.1667,
+        "recall": 1.0,
+        "f1": 0.2857
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          447
+        ],
+        "precision": 0.0833,
+        "recall": 1.0,
+        "f1": 0.1538
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "갖춘",
+          "개선요구사항",
+          "결과와",
+          "등이",
+          "또는",
+          "보고서를",
+          "보증",
+          "부서",
+          "실시하며",
+          "실시할",
+          "자율점검",
+          "자율점검을"
+        ],
+        "content_chars": 13174
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_098",
+      "question": "교육·훈련 규정 작성부터 평가까지 일련의 요건을 종합하면?",
+      "gold_pages": "452",
+      "predicted_pages": "452",
+      "aligned_predicted_pages": "459",
+      "predicted_plus_aligned_pages": "452,459",
+      "evidence_pages_read": "452-456",
+      "aligned_evidence_pages_read": "459-463",
+      "evidence_plus_aligned_pages": "452-456,459-463",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          452
+        ],
+        "precision": 0.1,
+        "recall": 1.0,
+        "f1": 0.1818
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [],
+        "token_overlap_sample": [
+          "결과를",
+          "교육",
+          "교육책임자",
+          "규정",
+          "내용",
+          "연간계획을",
+          "지정하고",
+          "평가",
+          "평가가",
+          "필요하면",
+          "훈련",
+          "훈련규정을"
+        ],
+        "content_chars": 15011
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_099",
+      "question": "밸리데이션 대상에 해당하면 어떤 문서를 작성·구비하며, 결과상 개선이 필요하면 무엇을 해야 하는가?",
+      "gold_pages": "243",
+      "predicted_pages": "243-244",
+      "aligned_predicted_pages": "250-251",
+      "predicted_plus_aligned_pages": "243-244,250-251",
+      "evidence_pages_read": "243-244",
+      "aligned_evidence_pages_read": "250-251",
+      "evidence_plus_aligned_pages": "243-244,250-251",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          243
+        ],
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "밸리데이션의 대상"
+        ],
+        "token_overlap_sample": [
+          "개선이",
+          "결과",
+          "결론을",
+          "기록을",
+          "기준서",
+          "대상",
+          "따라",
+          "미리",
+          "밸리데이션",
+          "밸리데이션계획서에",
+          "밸리데이션의",
+          "보고서를"
+        ],
+        "content_chars": 4644
+      },
+      "is_known_original_miss": false
+    },
+    {
+      "id": "gmp_eval_100",
+      "question": "재포장한 제품의 표시와 사용기한에 관한 요건을 종합하면?",
+      "gold_pages": "388",
+      "predicted_pages": "388",
+      "aligned_predicted_pages": "395",
+      "predicted_plus_aligned_pages": "388,395",
+      "evidence_pages_read": "385-391",
+      "aligned_evidence_pages_read": "392-398",
+      "evidence_plus_aligned_pages": "385-398",
+      "original_page_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "aligned_predicted_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667
+      },
+      "evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.1429,
+        "recall": 1.0,
+        "f1": 0.25
+      },
+      "aligned_evidence_union_metrics": {
+        "hit": true,
+        "overlap_pages": [
+          388
+        ],
+        "precision": 0.0714,
+        "recall": 1.0,
+        "f1": 0.1333
+      },
+      "classification": "already_hit",
+      "text_support_proxy_on_evidence_plus_aligned": {
+        "ok": true,
+        "phrase_hits": [
+          "사용기한 또는 유효기한을 변경해서는 안 된다",
+          "반품 및 재포장"
+        ],
+        "token_overlap_sample": [
+          "것임을",
+          "관한",
+          "기한",
+          "나타내는",
+          "된다",
+          "등에",
+          "또는",
+          "반품",
+          "변경",
+          "변경해서는",
+          "보증",
+          "부서"
+        ],
+        "content_chars": 14996
+      },
+      "is_known_original_miss": false
+    }
+  ]
+}

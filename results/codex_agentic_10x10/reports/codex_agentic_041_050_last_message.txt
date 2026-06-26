@@ -1,0 +1,10 @@
+Completed clean batch.
+
+Wrote `results/codex_agentic_10x10/predictions_041_050_agentic.jsonl` with 10 rows. Validation passed:
+
+```json
+{"status":"PASS","rows":10,"errors":[]}
+```
+
+No gold/score/previous prediction contents were read.
+

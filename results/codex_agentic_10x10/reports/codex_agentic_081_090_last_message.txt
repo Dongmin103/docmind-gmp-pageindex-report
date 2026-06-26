@@ -1,0 +1,15 @@
+완료했습니다.
+
+`results/codex_agentic_10x10/predictions_081_090_agentic.jsonl`에 10개 예측을 작성했고, 검증 결과는 PASS입니다.
+
+Validation:
+```json
+{
+  "status": "PASS",
+  "rows": 10,
+  "errors": []
+}
+```
+
+No-gold 제한 내에서 `questions_081_090.jsonl`, document/structure tool, tight page reads만 사용했습니다.
+

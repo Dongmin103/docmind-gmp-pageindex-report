@@ -1,0 +1,12 @@
+완료했습니다.
+
+작성 파일: `results/codex_agentic_10x10/predictions_021_030_agentic.jsonl`
+
+검증 결과:
+```json
+{
+  "status": "PASS",
+  "rows": 10,
+  "errors": []
+}
+```

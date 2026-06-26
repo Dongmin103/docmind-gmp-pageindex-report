@@ -1,0 +1,7 @@
+완료했습니다.
+
+- 작성: `results/codex_agentic_10x10/predictions_011_020_agentic.jsonl`
+- 검증: `validate-predictions` 통과
+- 결과: `status: PASS`, `rows: 10`, `errors: []`
+
+No-gold 규칙을 지켜서 허용된 질문 파일과 retriever tool/document/structure/page 흐름만 사용했습니다.

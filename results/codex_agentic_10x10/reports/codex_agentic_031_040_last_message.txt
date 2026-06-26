@@ -1,0 +1,9 @@
+완료했습니다. 예측 파일은 [predictions_031_040_agentic.jsonl](/Users/dongmin/Documents/myproject/DocMIND/PageIndex/results/codex_agentic_10x10/predictions_031_040_agentic.jsonl)에 작성했습니다.
+
+검증 결과:
+```json
+{"status":"PASS","rows":10,"errors":[]}
+```
+
+Gold/score/trace/previous prediction 파일은 읽지 않았고, 지정된 question-only 파일과 PageIndex retriever tool 흐름만 사용했습니다.
+

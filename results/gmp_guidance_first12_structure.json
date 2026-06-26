@@ -1,0 +1,31 @@
+{
+  "doc_name": "gmp_guidance_first12.pdf",
+  "structure": [
+    {
+      "title": "Preface",
+      "node_id": "0000",
+      "start_index": 1,
+      "end_index": 9
+    },
+    {
+      "title": "\uc81c1\uc7a5 \uc11c\ub860",
+      "node_id": "0001",
+      "start_index": 9,
+      "end_index": 10,
+      "nodes": [
+        {
+          "title": "\ubaa9\uc801 \ubc0f \uc6d0\uce59",
+          "node_id": "0002",
+          "start_index": 10,
+          "end_index": 12
+        },
+        {
+          "title": "\uad6c\uc131\ubc29\ubc95",
+          "node_id": "0003",
+          "start_index": 12,
+          "end_index": 12
+        }
+      ]
+    }
+  ]
+}
