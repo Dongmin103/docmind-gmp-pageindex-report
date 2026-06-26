@@ -350,7 +350,7 @@ code { background: var(--panel); border: 1px solid var(--line); border-radius: 1
 .ascii-excerpt { display: block; width: 100%; max-width: 100%; white-space: pre-wrap; overflow: auto; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.0pt; line-height: 1.32; max-height: 95mm; overflow-wrap: anywhere; word-break: break-word; }
 .ascii-excerpt.expanded { max-height: none; overflow: visible; }
 .eval-browser { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 4mm 0 6mm; break-inside: avoid; }
-.eval-controls { display: grid; grid-template-columns: 1.25fr repeat(4, minmax(24mm, 1fr)); gap: 2mm; margin-bottom: 3mm; }
+.eval-controls { display: grid; grid-template-columns: 1.35fr repeat(3, minmax(24mm, 1fr)); gap: 2mm; margin-bottom: 3mm; }
 .eval-controls label { display: grid; gap: .8mm; color: var(--muted); font-size: 8.3pt; font-weight: 700; }
 .eval-controls input, .eval-controls select { width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 2mm; padding: 1.8mm 2mm; color: var(--ink); }
 .eval-status { display: flex; justify-content: space-between; align-items: center; gap: 3mm; margin: 2mm 0; color: var(--muted); font-size: 8.8pt; }
@@ -445,7 +445,6 @@ def inline_js() -> str:
     var controls = {
       search: document.getElementById("eval-search"),
       difficulty: document.getElementById("eval-difficulty"),
-      qtype: document.getElementById("eval-qtype"),
       hit: document.getElementById("eval-hit"),
       select: document.getElementById("eval-select"),
       count: document.getElementById("eval-count"),
@@ -453,7 +452,6 @@ def inline_js() -> str:
       detail: document.getElementById("eval-detail")
     };
     optionize(controls.difficulty, rows, "difficulty");
-    optionize(controls.qtype, rows, "question_type");
     rows.forEach(function (row) {
       var opt = document.createElement("option");
       opt.value = row.id;
@@ -463,14 +461,13 @@ def inline_js() -> str:
     function isVisible(row) {
       var q = text(controls.search && controls.search.value).trim().toLowerCase();
       var blob = [
-        row.id, row.question, row.difficulty, row.question_type, row.classification,
+        row.id, row.question, row.difficulty, row.classification,
         row.gold_pages, row.predicted_pages, row.aligned_predicted_pages,
         row.evidence_pages_read, row.evidence_plus_aligned_pages,
         row.gold_section_path, row.predicted_section_path, row.expected_answer
       ].map(text).join(" ").toLowerCase();
       if (q && blob.indexOf(q) === -1) return false;
       if (controls.difficulty.value && text(row.difficulty) !== controls.difficulty.value) return false;
-      if (controls.qtype.value && text(row.question_type) !== controls.qtype.value) return false;
       if (controls.hit.value === "aligned-hit" && !row.aligned_hit) return false;
       if (controls.hit.value === "aligned-miss" && row.aligned_hit) return false;
       if (controls.hit.value === "evidence-hit" && !row.evidence_hit) return false;
@@ -487,7 +484,7 @@ def inline_js() -> str:
         '<div class="eval-detail-grid">' +
           '<div>' + pill("Gold", row.gold_pages) + pill("Pred", row.predicted_pages) + pill("Aligned", row.aligned_predicted_pages) + '</div>' +
           '<div>' + pill("Aligned hit", row.aligned_hit ? "hit" : "miss") + pill("Evidence+aligned", row.evidence_hit ? "hit" : "miss") + '</div>' +
-          '<div>' + pill("Difficulty", row.difficulty) + pill("Type", row.question_type) + '</div>' +
+          '<div>' + pill("Difficulty", row.difficulty) + '</div>' +
         '</div>' +
         '<p><strong>Gold section:</strong> ' + html(row.gold_section_path) + '</p>' +
         '<p><strong>Predicted section:</strong> ' + html(row.predicted_section_path) + '</p>' +
@@ -506,7 +503,7 @@ def inline_js() -> str:
       controls.tbody.innerHTML = visible.map(function (row) {
         var hit = row.aligned_hit ? "aligned hit" : (row.evidence_hit ? "evidence only" : "miss");
         return '<tr data-id="' + html(row.id) + '" class="' + (row.id === state.selected ? "is-selected" : "") + '">' +
-          '<td>' + html(row.id) + '</td><td>' + html(row.difficulty) + '</td><td>' + html(row.question_type) + '</td>' +
+          '<td>' + html(row.id) + '</td><td>' + html(row.difficulty) + '</td>' +
           '<td>' + html(hit) + '</td><td>' + html(row.gold_pages) + '</td><td>' + html(row.question) + '</td></tr>';
       }).join("");
       renderDetail(rows.find(function (row) { return row.id === state.selected; }) || visible[0]);
@@ -517,7 +514,7 @@ def inline_js() -> str:
         });
       });
     }
-    [controls.search, controls.difficulty, controls.qtype, controls.hit].forEach(function (el) {
+    [controls.search, controls.difficulty, controls.hit].forEach(function (el) {
       if (el) el.addEventListener("input", render);
     });
     if (controls.select) controls.select.addEventListener("change", function () {
@@ -693,9 +690,6 @@ def eval_browser(eval_json: str) -> str:
           <label>난이도
             <select id="eval-difficulty"><option value="">전체</option></select>
           </label>
-          <label>질문 유형
-            <select id="eval-qtype"><option value="">전체</option></select>
-          </label>
           <label>Hit 상태
             <select id="eval-hit">
               <option value="">전체</option>
@@ -715,7 +709,7 @@ def eval_browser(eval_json: str) -> str:
         </div>
         <div class="eval-table-wrap">
           <table class="eval-table">
-            <thead><tr><th style="width:22mm;">ID</th><th style="width:20mm;">Diff</th><th style="width:28mm;">Type</th><th style="width:24mm;">Hit</th><th style="width:24mm;">Gold</th><th>Question</th></tr></thead>
+            <thead><tr><th style="width:22mm;">ID</th><th style="width:20mm;">Diff</th><th style="width:28mm;">Hit</th><th style="width:24mm;">Gold</th><th>Question</th></tr></thead>
             <tbody id="eval-tbody"></tbody>
           </table>
         </div>
@@ -739,8 +733,8 @@ def eval_sample_table(rows: list[dict[str, Any]]) -> str:
         if row.get("id") not in seen:
             seen.add(row.get("id"))
             uniq.append(row)
-    body = "".join(tr_multi([row.get("id"), row.get("difficulty"), row.get("question_type"), "hit" if row.get("aligned_hit") else "miss", row.get("gold_pages"), row.get("question")]) for row in uniq)
-    return f"<table><thead><tr><th>ID</th><th>Difficulty</th><th>Type</th><th>Aligned</th><th>Gold</th><th>Question</th></tr></thead><tbody>{body}</tbody></table>"
+    body = "".join(tr_multi([row.get("id"), row.get("difficulty"), "hit" if row.get("aligned_hit") else "miss", row.get("gold_pages"), row.get("question")]) for row in uniq)
+    return f"<table><thead><tr><th>ID</th><th>Difficulty</th><th>Aligned</th><th>Gold</th><th>Question</th></tr></thead><tbody>{body}</tbody></table>"
 
 
 def fmt_range(start: Any, end: Any) -> str:
