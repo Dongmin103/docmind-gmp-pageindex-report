@@ -104,6 +104,10 @@ def render_sample_report(data: dict[str, Any]) -> str:
         {kpi('Tree nodes', f"{len(data['flat_tree']):,}", f"{workspace.get('page_count')} pages")}
         {kpi('Unrecovered', str(len(unrecovered)), 'gmp_eval_025')}
       </div>
+      <div class="cover-actions">
+        <a class="report-button" href="../../inputs/gmp_guidance.pdf" target="_blank" rel="noopener">원문 GMP PDF 열기</a>
+        <span class="small">보고서와 같은 repository에 포함된 원문 PDF입니다.</span>
+      </div>
       <p class="source-line">Repository: <a href="{REPO_URL}">{REPO_URL}</a></p>
     </section>
 
@@ -319,6 +323,9 @@ h4 { font-size: 10.5pt; margin: 4mm 0 1.5mm; }
 p { margin: 0 0 4mm; }
 .lead { color: #2f3a48; font-size: 12.5pt; max-width: 170mm; }
 .source-line { font-size: 9pt; color: var(--muted); margin-top: 6mm; }
+.cover-actions { display: flex; align-items: center; gap: 3mm; margin-top: 6mm; flex-wrap: wrap; }
+.report-button { display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 2mm; padding: 2.2mm 4mm; font-weight: 800; font-size: 9.5pt; }
+.report-button:hover { background: #183b61; }
 .meta-grid, .kpi-grid, .grid-2 { display: grid; gap: 4mm; }
 .meta-grid { grid-template-columns: repeat(3, 1fr); margin-top: 8mm; }
 .meta-grid div, .kpi, .card, .callout { break-inside: avoid; }
