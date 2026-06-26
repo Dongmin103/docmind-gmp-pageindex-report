@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build A4 print-ready HTML report pack for the GMP DocMIND analysis."""
+"""Build the single-file A4 print-ready GMP DocMIND HTML report."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from html import escape
 from pathlib import Path
+import shutil
 from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,19 +24,17 @@ REPO_URL = "https://github.com/Dongmin103/docmind-gmp-pageindex-report"
 
 
 def main() -> int:
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = ROOT / "results" / "reports" / "final-report.html"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     data = load_report_data()
-    files = {
-        "design-system.html": render_design_system(data),
-        "report-template.html": render_template(data),
-        "sample-analysis-report.html": render_sample_report(data),
-    }
-    for name, html in files.items():
-        path = OUT_DIR / name
-        path.write_text(html, encoding="utf-8")
-        print(f"wrote {path.relative_to(ROOT)} ({path.stat().st_size:,} bytes)")
+    html = render_sample_report(data)
+    out_path.write_text(html, encoding="utf-8")
+    # Final deliverable is one self-contained HTML file. Remove any previous intermediate report directory.
+    legacy_dir = ROOT / "results" / "reports" / "print"
+    if legacy_dir.exists():
+        shutil.rmtree(legacy_dir)
+    print(f"wrote {out_path.relative_to(ROOT)} ({out_path.stat().st_size:,} bytes)")
     return 0
-
 
 def load_report_data() -> dict[str, Any]:
     workspace = read_json(WORKSPACE)
@@ -72,102 +71,6 @@ def load_report_data() -> dict[str, Any]:
         "tree_ascii": tree_ascii,
         "generated": score.get("generated_at") or datetime.now(timezone.utc).isoformat(),
     }
-
-
-def render_design_system(data: dict[str, Any]) -> str:
-    body = f"""
-    <section class="cover compact">
-      <p class="eyebrow">Design System</p>
-      <h1>DocMIND GMP 분석 보고서 HTML 디자인 시스템</h1>
-      <p class="lead">A4 인쇄/PDF용 실험·분석 보고서를 위한 레이아웃, 색상, 타이포그래피, 표, 카드, callout 규칙입니다.</p>
-      <div class="meta-grid">
-        <div><span>문서 성격</span><strong>실험/분석 보고서</strong></div>
-        <div><span>출력 대상</span><strong>A4 PDF / Print</strong></div>
-        <div><span>톤</span><strong>차분함 · 전문적 · 근거 중심</strong></div>
-      </div>
-    </section>
-
-    <section class="report-section">
-      <h2>1. 디자인 원칙</h2>
-      <div class="callout neutral"><strong>핵심 결과 우선.</strong> 첫 페이지에서 목적, 핵심 수치, 결론을 바로 확인할 수 있어야 합니다.</div>
-      <div class="grid-2">
-        <div class="card"><h3>가독성</h3><p>본문은 10.5-11pt 기준으로 읽기 좋게 유지하고, 표는 행 간격과 zebra background로 구분합니다.</p></div>
-        <div class="card"><h3>인쇄 안정성</h3><p>카드와 표가 페이지 중간에서 과도하게 쪼개지지 않도록 <code>break-inside: avoid</code>를 사용합니다.</p></div>
-      </div>
-    </section>
-
-    <section class="report-section">
-      <h2>2. Typography</h2>
-      <h1 class="demo-h1">H1 보고서 제목</h1>
-      <h2>H2 주요 섹션</h2>
-      <h3>H3 하위 분석 항목</h3>
-      <p>본문은 한국어 분석 보고서에 맞춰 시스템 sans-serif를 사용합니다. 숫자와 코드성 값은 <code>monospace</code> 또는 표 안에서 정렬합니다.</p>
-    </section>
-
-    <section class="report-section">
-      <h2>3. Components</h2>
-      <div class="kpi-grid">
-        {kpi('공식 hit rate', '96.0%', 'aligned predicted union')}
-        {kpi('Eval 문항', '100', 'schema valid')}
-        {kpi('Tree nodes', '641', 'validated hierarchy')}
-        {kpi('Unrecovered', '1', 'gmp_eval_025')}
-      </div>
-      <div class="callout info"><strong>Info callout.</strong> 해석 기준이나 정의를 설명할 때 사용합니다.</div>
-      <div class="callout warning"><strong>Warning callout.</strong> 한계, 주의 사항, 공식 지표가 아닌 보조 지표를 설명할 때 사용합니다.</div>
-      <table>
-        <thead><tr><th>컴포넌트</th><th>용도</th><th>인쇄 규칙</th></tr></thead>
-        <tbody>
-          <tr><td>KPI card</td><td>핵심 수치 요약</td><td>첫 페이지 배치</td></tr>
-          <tr><td>Callout</td><td>해석/주의 강조</td><td>한 페이지 내 유지</td></tr>
-          <tr><td>Data table</td><td>평가 결과 정리</td><td>header 반복, 작은 폰트 허용</td></tr>
-        </tbody>
-      </table>
-    </section>
-    """
-    return document("Design System", body, subtitle="A4 print-ready visual language", doc_type="design-system")
-
-
-def render_template(data: dict[str, Any]) -> str:
-    body = """
-    <section class="cover">
-      <p class="eyebrow">Analysis Report Template</p>
-      <h1>[프로젝트/실험 보고서 제목]</h1>
-      <p class="lead">[보고서의 목적과 핵심 결론을 2-3문장으로 요약합니다. 첫 페이지에서 읽는 사람이 무엇을 검증했고 무엇을 얻었는지 알 수 있어야 합니다.]</p>
-      <div class="meta-grid">
-        <div><span>작성일</span><strong>[YYYY-MM-DD]</strong></div>
-        <div><span>작성자</span><strong>[팀/작성자]</strong></div>
-        <div><span>상태</span><strong>[Draft/Final]</strong></div>
-      </div>
-      <div class="kpi-grid">
-        {kpi1}{kpi2}{kpi3}{kpi4}
-      </div>
-    </section>
-
-    <nav class="toc">
-      <h2>목차</h2>
-      <ol>
-        <li><a href="#summary">요약</a></li>
-        <li><a href="#method">방법</a></li>
-        <li><a href="#results">결과</a></li>
-        <li><a href="#interpretation">해석</a></li>
-        <li><a href="#limitations">한계</a></li>
-        <li><a href="#next-steps">다음 단계</a></li>
-      </ol>
-    </nav>
-
-    <section id="summary" class="report-section page-break-before"><h2>1. 요약</h2><p>[핵심 결과와 결론을 먼저 작성합니다.]</p></section>
-    <section id="method" class="report-section"><h2>2. 방법</h2><p>[데이터, 절차, 검증 기준을 작성합니다.]</p></section>
-    <section id="results" class="report-section"><h2>3. 결과</h2><table><thead><tr><th>항목</th><th>결과</th><th>해석</th></tr></thead><tbody><tr><td>[metric]</td><td>[value]</td><td>[meaning]</td></tr></tbody></table></section>
-    <section id="interpretation" class="report-section"><h2>4. 해석</h2><div class="callout info">[결과를 어떻게 읽어야 하는지 설명합니다.]</div></section>
-    <section id="limitations" class="report-section"><h2>5. 한계</h2><ul><li>[한계 1]</li><li>[한계 2]</li></ul></section>
-    <section id="next-steps" class="report-section"><h2>6. 다음 단계</h2><ol><li>[다음 작업 1]</li><li>[다음 작업 2]</li></ol></section>
-    """.format(
-        kpi1=kpi("핵심 지표 1", "[값]", "[설명]"),
-        kpi2=kpi("핵심 지표 2", "[값]", "[설명]"),
-        kpi3=kpi("데이터 수", "[N]", "[범위]"),
-        kpi4=kpi("상태", "[PASS]", "[기준]"),
-    )
-    return document("Report Template", body, subtitle="Reusable A4 analysis report template", doc_type="template")
 
 
 def render_sample_report(data: dict[str, Any]) -> str:
@@ -307,7 +210,7 @@ def render_sample_report(data: dict[str, Any]) -> str:
           {tr('eval/gmp_eval_testset.jsonl', '100개 평가셋')}
           {tr('results/codex_agentic_10x10/predictions_001_100_agentic.jsonl', '검색 예측 결과')}
           {tr('results/page_alignment/score_001_100_agentic_official_alignment.json', '최종 official score')}
-          {tr('scripts/gmp_build_print_report_pack.py', 'A4 인쇄용 HTML 생성 스크립트')}
+          {tr('scripts/gmp_build_final_report.py', 'single-file HTML 생성 스크립트')}
         </tbody>
       </table>
     </section>

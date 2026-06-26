@@ -8,31 +8,15 @@
 2. 각 section과 page 범위를 검증한다.
 3. tree를 기반으로 질문별 근거 page를 찾는 검색 흐름을 만든다.
 4. 100개 평가셋으로 검색 성능을 정량 평가한다.
-5. 최종 결과를 공유 가능한 **단일 HTML 보고서**로 확인한다.
+5. 최종 결과를 공유 가능한 **single-file HTML 보고서** 하나로 확인한다.
 
-가장 먼저 볼 파일은 아래 A4 인쇄용 HTML 보고서입니다.
-
-```text
-results/reports/print/sample-analysis-report.html
-```
-
-기존 웹형 보고서는 아래 경로에 남아 있습니다.
+최종 산출물은 아래 HTML 파일 하나입니다.
 
 ```text
-results/reports/gmp_pageindex_final_report.html
+results/reports/final-report.html
 ```
 
----
-
-## A4 인쇄용 HTML 3종
-
-| 파일 | 용도 |
-| --- | --- |
-| `results/reports/print/design-system.html` | 보고서 색상, 타이포그래피, 카드, 표, callout, print CSS 규칙 |
-| `results/reports/print/report-template.html` | 다른 분석 보고서에 재사용 가능한 빈 템플릿 |
-| `results/reports/print/sample-analysis-report.html` | GMP 실험 데이터를 반영한 최종 A4 인쇄용 샘플 보고서 |
-
-각 파일은 A4 print CSS, 목차, page number 규칙, 표/카드/callout 스타일을 포함합니다.
+이 파일은 CSS와 데이터를 모두 HTML 내부에 포함하므로, 외부 파일 없이 브라우저에서 바로 열 수 있습니다.
 
 ---
 
@@ -40,7 +24,7 @@ results/reports/gmp_pageindex_final_report.html
 
 | 산출물 | 설명 | 경로 |
 | --- | --- | --- |
-| 최종 A4 HTML 보고서 | 전체 과정, tree 시각화, eval 결과를 인쇄/PDF에 맞춰 정리한 보고서 | `results/reports/print/sample-analysis-report.html` |
+| 최종 single-file HTML 보고서 | A4 인쇄/PDF에 맞춘 최종 분석 보고서 | `results/reports/final-report.html` |
 | 최종 GMP tree JSON | 641개 node로 구성된 GMP 문서 계층 구조 | `results/gmp_guidance_structure.json` |
 | ASCII tree | terminal/tree 형태의 전체 구조 시각화 | `results/visualizations/gmp_guidance_tree.txt` |
 | HTML tree | 접었다 펼칠 수 있는 tree 시각화 | `results/visualizations/gmp_guidance_tree.html` |
@@ -62,7 +46,7 @@ results/reports/gmp_pageindex_final_report.html
 | evidence+aligned 진단 coverage | 99.0% |
 | 완전 미회수 문항 | `gmp_eval_025` 1건 |
 
-이 프로젝트의 공식 성능 headline은 다음입니다.
+공식 성능 headline은 다음입니다.
 
 ```text
 Aligned predicted union hit rate = 96.0%
@@ -77,37 +61,33 @@ Aligned predicted union hit rate = 96.0%
 macOS:
 
 ```bash
-open results/reports/print/sample-analysis-report.html
+open results/reports/final-report.html
 ```
 
 보고서에서 확인할 수 있는 내용:
 
 - GMP PDF가 어떻게 workspace와 tree로 변환됐는지
 - 최종 tree가 어떤 구조인지
-- ASCII tree 전체 펼치기/접기
-- 접이식 HTML tree
 - 100개 eval의 정량 성능
 - `Aligned hit rate`를 왜 도입했는지
 - `Evidence+aligned hit`이 어떤 진단 의미를 가지는지
-- 100개 문항을 검색/필터/선택해서 확인하는 eval browser
+- 한계와 다음 단계
+- 주요 산출물과 eval 샘플
 
 ---
 
-## 4. HTML 보고서 재생성
+## 4. 최종 보고서 재생성
 
-보고서 HTML은 아래 명령으로 다시 만들 수 있습니다.
+아래 명령으로 `final-report.html`을 다시 만들 수 있습니다.
 
 ```bash
-python3 scripts/gmp_build_html_report.py
+python3 scripts/gmp_build_final_report.py
 ```
 
 생성 결과:
 
 ```text
-results/reports/gmp_pageindex_final_report.html
-results/reports/print/design-system.html
-results/reports/print/report-template.html
-results/reports/print/sample-analysis-report.html
+results/reports/final-report.html
 ```
 
 보고서 생성에 사용하는 주요 입력 파일:
@@ -125,18 +105,16 @@ results/reports/print/sample-analysis-report.html
 
 ## 5. 검증 명령
 
-아래 명령으로 주요 artifact와 HTML 보고서 생성이 정상인지 확인할 수 있습니다.
-
 ```bash
-python3 scripts/gmp_build_html_report.py
+python3 scripts/gmp_build_final_report.py
 python3 -m compileall pageindex scripts
-python3 -m tabnanny scripts/gmp_build_html_report.py
+python3 -m tabnanny scripts/gmp_build_final_report.py
 ```
 
 보고서 생성 성공 시 다음과 유사한 요약이 출력됩니다.
 
 ```text
-summary: nodes=641 pages=606 eval_rows=100 canonical=0.96 unresolved=1 browser_rows=100
+wrote results/reports/final-report.html (... bytes)
 ```
 
 ---
@@ -146,8 +124,6 @@ summary: nodes=641 pages=606 eval_rows=100 canonical=0.96 unresolved=1 browser_r
 ```text
 .
 ├── configs/
-│   ├── gmp_all_branch_expansion_manifest.json
-│   └── gmp_facility_expansion_manifest.json
 ├── eval/
 │   └── gmp_eval_testset.jsonl
 ├── inputs/
@@ -163,17 +139,16 @@ summary: nodes=641 pages=606 eval_rows=100 canonical=0.96 unresolved=1 browser_r
 │   │   ├── gmp_guidance_tree.md
 │   │   └── gmp_guidance_tree.html
 │   └── reports/
-│       └── gmp_pageindex_final_report.html
+│       └── final-report.html
 ├── scripts/
-│   ├── gmp_build_html_report.py
+│   ├── gmp_build_final_report.py
 │   ├── gmp_pageindex_codex_retriever.py
 │   ├── gmp_pageindex_codex_eval.py
 │   ├── gmp_page_coordinate_alignment.py
 │   ├── gmp_all_branch_validate.py
 │   ├── gmp_expand_all_branches.py
 │   └── gmp_targeted_expand.py
-├── pageindex/
-└── run_gmp_pageindex_codex.sh
+└── pageindex/
 ```
 
 ---
@@ -189,14 +164,6 @@ summary: nodes=641 pages=606 eval_rows=100 canonical=0.96 unresolved=1 browser_r
 | 제2장 완제의약품 제조 및 품질관리기준 | 531 | 16-478 |
 | 별첨1 의약품 제조소의 시설 | 83 | 478-554 |
 | 별첨2 컴퓨터화 시스템 | 23 | 554-606 |
-
-각 node는 다음 정보를 가집니다.
-
-- `node_id`: node 식별자
-- `title`: section 제목
-- `own_start_index`, `own_end_index`: 해당 node 자체 page 범위
-- `subtree_start_index`, `subtree_end_index`: child를 포함한 전체 subtree page 범위
-- `nodes`: child node 목록
 
 전체 tree는 아래 파일에서 확인할 수 있습니다.
 
@@ -242,4 +209,4 @@ results/visualizations/gmp_guidance_tree.txt
 
 - 이 저장소는 DocMIND GMP 문서 구조화/검색 평가 실험 결과를 공유하기 위한 public repo입니다.
 - `.env`, `.venv`, logs, 임시 실행 결과는 포함하지 않습니다.
-- 기본 HTML 보고서는 API key 없이 로컬 artifact만 읽습니다.
+- 최종 보고서는 `results/reports/final-report.html` 하나입니다.
