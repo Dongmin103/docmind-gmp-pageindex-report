@@ -1,356 +1,263 @@
-<div align="center">
-  
-<a href="https://vectify.ai/pageindex" target="_blank">
-  <img src="https://github.com/user-attachments/assets/46201e72-675b-43bc-bfbd-081cc6b65a1d" alt="PageIndex Banner" />
-</a>
+# DocMIND GMP 문서 구조화 및 검색 평가 보고서
 
-<br/>
-<br/>
+이 저장소는 GMP 가이던스 PDF를 대상으로 진행한 **DocMIND 문서 구조화 및 검색 평가 실험**의 결과물입니다.
 
-<p align="center">
-  <a href="https://trendshift.io/repositories/14736" target="_blank"><img src="https://trendshift.io/api/badge/repositories/14736" alt="VectifyAI%2FPageIndex | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</p>
+목표는 단순 PDF 검색이 아니라, 긴 GMP 문서를 다음과 같이 사용할 수 있게 만드는 것이었습니다.
 
-# PageIndex: Vectorless, Reasoning-based RAG
+1. PDF의 목차/본문 구조를 탐지해 **계층형 tree**로 만든다.
+2. 각 section과 page 범위를 검증한다.
+3. tree를 기반으로 질문별 근거 page를 찾는 검색 흐름을 만든다.
+4. 100개 평가셋으로 검색 성능을 정량 평가한다.
+5. 최종 결과를 공유 가능한 HTML 보고서와 로컬 UI로 확인한다.
 
-<p align="center"><b>Reasoning-based RAG&nbsp; ◦ &nbsp;No Vector DB, No Chunking&nbsp; ◦ &nbsp;Context-Aware Retrieval&nbsp; ◦ &nbsp;Reads Like a Human</b></p>
+가장 먼저 볼 파일은 아래 HTML 보고서입니다.
 
-<h4 align="center">
-  <a href="https://vectify.ai">🌐 Website</a>&nbsp; • &nbsp;
-  <a href="https://chat.pageindex.ai">🖥️ Chat Platform</a>&nbsp; • &nbsp;
-  <a href="https://pageindex.ai/developer">🔌 MCP & API</a>&nbsp; • &nbsp;
-  <a href="https://docs.pageindex.ai">📖 Docs</a>&nbsp; • &nbsp;
-  <a href="https://discord.com/invite/VuXuf29EUj">💬 Discord</a>&nbsp; • &nbsp;
-  <a href="https://ii2abc2jejf.typeform.com/to/tK3AXl8T">✉️ Contact</a>&nbsp;
-</h4>
-  
-</div>
-
-
-<details open>
-<summary><h2>📢 Updates</h2></summary>
-
-- 🔥 [**Agentic Vectorless RAG**](https://github.com/VectifyAI/PageIndex/blob/main/examples/agentic_vectorless_rag_demo.py) — A simple agentic, vectorless RAG [example](#-agentic-vectorless-rag-an-example) with *self-hosted PageIndex*, using OpenAI Agents SDK.
-- [**Scale PageIndex to Millions of Documents**](https://pageindex.ai/blog/pageindex-filesystem) — *PageIndex File System* is a file-level tree indexing layer that lets PageIndex reason over an entire corpus, not just a single document, enabling massive-scale document search.
-- [PageIndex Chat](https://chat.pageindex.ai) — Human-like document analysis agent [platform](https://chat.pageindex.ai) for professional long documents. Also available via [MCP](https://pageindex.ai/developer) or [API](https://pageindex.ai/developer).
-- [PageIndex Framework](https://pageindex.ai/blog/pageindex-intro) — Deep dive into PageIndex: an *agentic, in-context tree index* that enables LLMs to perform *reasoning-based, context-aware retrieval* over long documents.
-
- <!-- **🧪 Cookbooks:**
-- [Vectorless RAG](https://docs.pageindex.ai/cookbook/vectorless-rag-pageindex): A minimal, hands-on example of reasoning-based RAG using PageIndex. No vectors, no chunking, and human-like retrieval.
-- [Vision-based Vectorless RAG](https://docs.pageindex.ai/cookbook/vision-rag-pageindex): OCR-free, vision-only RAG with PageIndex's reasoning-native retrieval workflow that works directly over PDF page images. -->
-
-</details>
-
----
-
-# 📑 Introduction to PageIndex
-
-Are you frustrated with vector database retrieval accuracy for long professional documents? Traditional vector-based RAG relies on semantic *similarity* rather than true *relevance*. But **similarity ≠ relevance** — what we truly need in retrieval is **relevance**, and that requires **reasoning**. When working with professional documents that demand *contextual understanding*, domain expertise, and multi-step reasoning, similarity search often falls short — missing what's relevant but not similar, and returning what's similar yet not relevant.
-
-Inspired by AlphaGo, we propose **[PageIndex](https://vectify.ai/pageindex)** — a **vectorless**, **reasoning-based RAG** system that builds a **hierarchical tree index** from long documents, and uses LLMs to **reason** *over that index* for **agentic, context-aware retrieval**. The retrieval is *traceable* and *explainable*, with no vector DBs or chunking.
-PageIndex simulates how *human experts* navigate and extract knowledge from complex documents through *tree search*, enabling LLMs to *think* and *reason* their way to the most relevant document sections. It performs retrieval in two steps:
-
-1. Generate a “Table-of-Contents” **tree structure index** of documents
-2. Perform (agentic) reasoning-based retrieval through **tree search**
-
-<div align="center">
-  <a href="https://pageindex.ai/blog/pageindex-intro" target="_blank" title="The PageIndex Framework">
-    <img src="https://docs.pageindex.ai/images/cookbook/vectorless-rag.png" width="70%">
-  </a>
-</div>
-
-### 🎯 Core Features
-
-> PageIndex is a vectorless, reasoning-based RAG engine that mirrors how humans read, delivering traceable, explainable, and context-aware retrieval, without vector databases or chunking.
-
-Compared to traditional vector-based RAG, **PageIndex** features:
-- **No Vector DB**: Uses document structure and LLM reasoning for retrieval, instead of vector similarity search.
-- **No Chunking**: Documents are organized into natural sections, not artificial chunks.
-- **Better Traceability & Explainability**: Retrieval is reasoning-driven and grounded in explicit page and section references, making every result traceable and interpretable — no more “vibe retrieval” with opaque, approximate vector search.
-- **Context-Aware Retrieval**: Retrieval depends on your full context (e.g., conversation history and domain knowledge), and easily incorporates new context.
-- **Human-like Retrieval**: Mirrors how human experts navigate and extract knowledge from complex documents.
-
-PageIndex achieved **state-of-the-art** [98.7% accuracy](https://github.com/VectifyAI/Mafin2.5-FinanceBench) on FinanceBench (financial document QA benchmark), vastly outperforming vector RAG solutions on professional document analysis ([blog post](https://vectify.ai/blog/Mafin2.5)).
-
-### 📍 Explore PageIndex
-
-To learn more, please see a detailed introduction to the [PageIndex framework](https://pageindex.ai/blog/pageindex-intro). Check out [our GitHub](https://docs.pageindex.ai/open-source) for open-source code, and the [cookbooks](https://docs.pageindex.ai/cookbook), [tutorials](https://docs.pageindex.ai/tutorials), and [blog](https://pageindex.ai/blog) for more usage guides and examples.
-
-The PageIndex service is available as a ChatGPT-style [chat platform](https://chat.pageindex.ai), or can be integrated via [MCP](https://pageindex.ai/developer) or [API](https://pageindex.ai/developer), with [enterprise](https://pageindex.ai/enterprise) deployment available.
-
-### 🛠️ Deployment Options
-- **Self-host** — run locally with this open-source repo (using standard PDF parsing).
-- **Cloud Service** — production-grade pipeline with enhanced OCR, tree building, and retrieval for best results. Try instantly on our [Chat Platform](https://chat.pageindex.ai/), or integrate via [MCP](https://pageindex.ai/developer) or [API](https://pageindex.ai/developer).
-- **Enterprise** — dedicated or private deployment (VPC, on-prem). [Contact us](https://ii2abc2jejf.typeform.com/to/gVv7qkaN) or [book a demo](https://calendly.com/pageindex/meet) to learn more.
-
-### 🧪 Quick Hands-on
-
-- 🔥 [**Agentic Vectorless RAG**](examples/agentic_vectorless_rag_demo.py) *(latest)* — a simple but complete **agentic vectorless RAG** [example](#-agentic-vectorless-rag-an-example) with *self-hosted* PageIndex, using OpenAI Agents SDK.
-- Try the [Vectorless RAG](https://github.com/VectifyAI/PageIndex/blob/main/cookbook/pageindex_RAG_simple.ipynb) notebook — a *minimal*, hands-on example of reasoning-based RAG using PageIndex.
-- Check out [Vision-based Vectorless RAG](https://github.com/VectifyAI/PageIndex/blob/main/cookbook/vision_RAG_pageindex.ipynb) — no OCR; a minimal, vision-based & reasoning-native RAG pipeline that works directly over page images.
-  
-<div align="center">
-  <a href="https://github.com/VectifyAI/PageIndex/blob/main/examples/agentic_vectorless_rag_demo.py" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/View_on_GitHub-Agentic_Vectorless_RAG-blue?style=for-the-badge&logo=github" alt="View on GitHub: Agentic Vectorless RAG" />
-  </a>
-  <br/>
-  <a href="https://colab.research.google.com/github/VectifyAI/PageIndex/blob/main/cookbook/pageindex_RAG_simple.ipynb" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/Open_In_Colab-Vectorless_RAG-orange?style=for-the-badge&logo=googlecolab" alt="Open in Colab: Vectorless RAG" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://colab.research.google.com/github/VectifyAI/PageIndex/blob/main/cookbook/vision_RAG_pageindex.ipynb" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/Open_In_Colab-Vision_RAG-orange?style=for-the-badge&logo=googlecolab" alt="Open in Colab: Vision RAG" />
-  </a>
-</div>
-
----
-
-# 🌲 PageIndex Tree Structure
-
-PageIndex can transform lengthy PDF documents into a semantic **tree structure**, similar to a _“table of contents”_ but optimized for use with LLMs and AI agents. It's ideal for: financial reports, legal documents, regulatory filings, technical manuals, medical literature, academic textbooks, and any long, complex professional documents.
-
-Below is an example PageIndex tree structure. Also see more example [documents](https://github.com/VectifyAI/PageIndex/tree/main/examples/documents) and generated [tree structures](https://github.com/VectifyAI/PageIndex/tree/main/examples/documents/results).
-
-```jsonc
-...
-{
-  "title": "Financial Stability",
-  "node_id": "0006",
-  "start_index": 21,
-  "end_index": 22,
-  "summary": "The Federal Reserve ...",
-  "nodes": [
-    {
-      "title": "Monitoring Financial Vulnerabilities",
-      "node_id": "0007",
-      "start_index": 22,
-      "end_index": 28,
-      "summary": "The Federal Reserve's monitoring ..."
-    },
-    {
-      "title": "Domestic and International Cooperation and Coordination",
-      "node_id": "0008",
-      "start_index": 28,
-      "end_index": 31,
-      "summary": "In 2023, the Federal Reserve collaborated ..."
-    }
-  ]
-}
-...
+```text
+results/reports/gmp_pageindex_final_report.html
 ```
 
-You can generate PageIndex tree structures with this open-source repo. Or use our [API](https://pageindex.ai/developer) for higher-quality results powered by our enhanced OCR and tree building pipeline.
+---
+
+## 1. 이 프로젝트에서 만든 것
+
+| 산출물 | 설명 | 경로 |
+| --- | --- | --- |
+| 최종 HTML 보고서 | 전체 과정, tree 시각화, eval 결과를 한 번에 보는 공유용 보고서 | `results/reports/gmp_pageindex_final_report.html` |
+| 최종 GMP tree JSON | 641개 node로 구성된 GMP 문서 계층 구조 | `results/gmp_guidance_structure.json` |
+| ASCII tree | terminal/tree 형태의 전체 구조 시각화 | `results/visualizations/gmp_guidance_tree.txt` |
+| HTML tree | 접었다 펼칠 수 있는 tree 시각화 | `results/visualizations/gmp_guidance_tree.html` |
+| 100개 eval set | 검색 성능 평가용 질문/정답 page/section path | `eval/gmp_eval_testset.jsonl` |
+| 최종 score | aligned hit rate, evidence+aligned 등 공식 평가 결과 | `results/page_alignment/score_001_100_agentic_official_alignment.json` |
+| 발표용 UI | 문서 탐색과 eval 분석용 Streamlit UI | `apps/gmp_pageindex_ui.py` |
 
 ---
 
-# ⚙️ Package Usage
+## 2. 최종 결과 요약
 
-> **Note:** This package uses standard PDF parsing. For use cases with complex PDFs, our [cloud service](https://pageindex.ai/developer) (via MCP and API) offers enhanced OCR, tree building, and retrieval.
+| 항목 | 결과 |
+| --- | ---: |
+| 대상 문서 | `gmp_guidance.pdf` |
+| PDF page 수 | 606 |
+| 최종 tree node 수 | 641 |
+| top-level branch 수 | 5 |
+| eval 문항 수 | 100 |
+| 공식 검색 성공률 | 96.0% |
+| evidence+aligned 진단 coverage | 99.0% |
+| 완전 미회수 문항 | `gmp_eval_025` 1건 |
 
-You can follow these steps to generate a PageIndex tree from a PDF document.
+이 프로젝트의 공식 성능 headline은 다음입니다.
 
-### 1. Install dependencies
+```text
+Aligned predicted union hit rate = 96.0%
+```
+
+즉, 100개 질문 중 96개에서 정답 근거 page를 최종 predicted page 또는 page alignment 보정 후 page 집합 안에서 찾았습니다.
+
+---
+
+## 3. 최종 보고서 열기
+
+macOS:
 
 ```bash
-pip3 install --upgrade -r requirements.txt
+open results/reports/gmp_pageindex_final_report.html
 ```
 
-### 2. Set your LLM API key
+보고서에서 확인할 수 있는 내용:
 
-Create a `.env` file in the root directory with your LLM API key. Multi-LLM is supported via [LiteLLM](https://docs.litellm.ai/docs/providers):
-
-```bash
-OPENAI_API_KEY=your_openai_key_here
-```
-
-### 3. Generate PageIndex structure for your PDF
-
-```bash
-python3 run_pageindex.py --pdf_path /path/to/your/document.pdf
-```
-
-<details>
-<summary>Optional parameters</summary>
-<br>
-You can customize the processing with additional optional arguments:
-
-```
---model                 LLM model to use (default: gpt-4o-2024-11-20)
---toc-check-pages       Pages to check for table of contents (default: 20)
---max-pages-per-node    Max pages per node (default: 10)
---max-tokens-per-node   Max tokens per node (default: 20000)
---if-add-node-id        Add node ID (yes/no, default: yes)
---if-add-node-summary   Add node summary (yes/no, default: yes)
---if-add-doc-description Add doc description (yes/no, default: yes)
-```
-</details>
-
-<details>
-<summary>Markdown support</summary>
-<br>
-We also provide markdown support for PageIndex. You can use the `--md_path` flag to generate a tree structure for a markdown file.
-
-```bash
-python3 run_pageindex.py --md_path /path/to/your/document.md
-```
-
-> Note: in this mode, we use "#" to determine node headings and their levels. For example, "##" is level 2, "###" is level 3, etc. Make sure your markdown file is formatted correctly. If your Markdown file was converted from a PDF or HTML, we don't recommend using this mode, since most existing conversion tools cannot preserve the original hierarchy. Instead, use our [PageIndex OCR](https://pageindex.ai/blog/ocr), which is designed to preserve it, to convert the PDF to a markdown file and then use this mode.
-</details>
-
-## 🚀 Agentic Vectorless RAG: An Example
-
-For a simple, end-to-end **agentic vectorless RAG** example using **self-hosted PageIndex** (with OpenAI Agents SDK), see [`examples/agentic_vectorless_rag_demo.py`](examples/agentic_vectorless_rag_demo.py).
-
-```bash
-# Install optional dependency
-pip3 install openai-agents
-
-# Run the demo
-python3 examples/agentic_vectorless_rag_demo.py
-```
-
-<!--
-# ☁️ Improved Tree Generation with PageIndex OCR
-
-This repo is designed for generating PageIndex tree structure for simple PDFs, but many real-world use cases involve complex PDFs that are hard to parse by classic Python tools. However, extracting high-quality text from PDF documents remains a non-trivial challenge. Most OCR tools only extract page-level content, losing the broader document context and hierarchy.
-
-To address this, we introduced PageIndex OCR — the first long-context OCR model designed to preserve the global structure of documents. PageIndex OCR significantly outperforms other leading OCR tools, such as those from Mistral and Contextual AI, in recognizing true hierarchy and semantic relationships across document pages.
-
-- Experience next-level OCR quality with PageIndex OCR at our [Dashboard](https://dash.pageindex.ai/).
-- Integrate PageIndex OCR seamlessly into your stack via our [API](https://docs.pageindex.ai/quickstart).
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/eb35d8ae-865c-4e60-a33b-ebbd00c41732" width="80%">
-</p>
--->
+- GMP PDF가 어떻게 workspace와 tree로 변환됐는지
+- 최종 tree가 어떤 구조인지
+- ASCII tree 전체 펼치기/접기
+- 접이식 HTML tree
+- 100개 eval의 정량 성능
+- `Aligned hit rate`를 왜 도입했는지
+- `Evidence+aligned hit`이 어떤 진단 의미를 가지는지
+- 100개 문항을 검색/필터/선택해서 확인하는 eval browser
 
 ---
 
-# 📈 Case Study: PageIndex Leads Finance QA Benchmark
+## 4. 로컬 UI 실행
 
-[Mafin 2.5](https://vectify.ai/mafin) is a reasoning-based RAG system for financial document analysis, powered by **PageIndex**. It achieved a state-of-the-art [**98.7% accuracy**](https://vectify.ai/blog/Mafin2.5) on [FinanceBench](https://arxiv.org/abs/2311.11944) (financial document QA benchmark), significantly outperforming traditional vector-based RAG systems.
-
-PageIndex's hierarchical indexing and reasoning-driven retrieval enable precise navigation and extraction of relevant context from complex financial reports, such as SEC filings and earnings disclosures.
-
-Explore the full [benchmark results](https://github.com/VectifyAI/Mafin2.5-FinanceBench) and our [blog post](https://vectify.ai/blog/Mafin2.5) for detailed comparisons and performance metrics.
-
-<div align="center">
-  <a href="https://github.com/VectifyAI/Mafin2.5-FinanceBench">
-    <img src="https://github.com/user-attachments/assets/571aa074-d803-43c7-80c4-a04254b782a3" width="70%">
-  </a>
-</div>
-
----
-
-# 🧭 Resources
-
-* 📝 [Blog](https://pageindex.ai/blog): technical articles, research insights, and product updates.
-* 🔧 [Developer](https://pageindex.ai/developer): MCP setup, API docs, and integration guides.
-* 🧪 [Cookbooks](https://docs.pageindex.ai/cookbook): hands-on, runnable examples and advanced use cases.
-* 📖 [Tutorials](https://docs.pageindex.ai/tutorials): practical guides and strategies, including *Document Search* and *Tree Search*.
-
----
-
-# ⭐ Support Us
-
-Leave us a star 🌟 if you like our project. Thank you!  
-
-<p>
-  <img src="https://github.com/user-attachments/assets/eae4ff38-48ae-4a7c-b19f-eab81201d794" width="80%">
-</p>
-
-Please cite this work as:
-```
-Mingtian Zhang, Yu Tang and PageIndex Team,
-"PageIndex: Next-Generation Vectorless, Reasoning-based RAG",
-PageIndex Blog, Sep 2025.
-```
-
-<details>
-<summary>Or use the BibTeX citation.</summary>
-
-```bibtex
-@article{zhang2025pageindex,
-  author = {Mingtian Zhang and Yu Tang and PageIndex Team},
-  title = {PageIndex: Next-Generation Vectorless, Reasoning-based RAG},
-  journal = {PageIndex Blog},
-  year = {2025},
-  month = {September},
-  note = {https://pageindex.ai/blog/pageindex-intro},
-}
-```
-</details>
-
-
-### 🌐 Open-Source Ecosystem
-
-[PageIndex](https://github.com/VectifyAI/PageIndex) anchors a growing open-source [ecosystem](https://docs.pageindex.ai/open-source) of **long-context AI infra** — [OpenKB](https://github.com/VectifyAI/OpenKB) is an LLM knowledge base that compiles documents into an interlinked wiki. [ChatIndex](https://github.com/VectifyAI/ChatIndex) provides tree indexing and retrieval for long conversational histories and memory. [ConDB](https://github.com/VectifyAI/ConDB) is a KV-cache native context database for tree-based retrieval at scale. [PageIndex MCP](https://github.com/VectifyAI/pageindex-mcp) is PageIndex's MCP server.
-
-### Connect with Us
-
-<div align="center">
-
-[![Website](https://img.shields.io/badge/Website-2D72CF?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEyIDEgMSAxMWgyLjV2MTJoNnYtN2g1djdoNlYxMUgyM3oiLz48L3N2Zz4%3D)](https://pageindex.ai)&nbsp;
-[![Twitter](https://img.shields.io/badge/Twitter-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/PageIndexAI)&nbsp;
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTIwLjQ1IDIwLjQ1aC0zLjU1di01LjU3YzAtMS4zMy0uMDMtMy4wNC0xLjg1LTMuMDQtMS44NSAwLTIuMTQgMS40NS0yLjE0IDIuOTR2NS42N0g5LjM1VjloMy40MXYxLjU2aC4wNWMuNDgtLjkgMS42NC0xLjg1IDMuMzctMS44NSAzLjYgMCA0LjI3IDIuMzcgNC4yNyA1LjQ2djYuMjh6TTUuMzQgNy40M2EyLjA2IDIuMDYgMCAxIDEgMC00LjEzIDIuMDYgMi4wNiAwIDAgMSAwIDQuMTN6TTcuMTIgMjAuNDVIMy41NlY5aDMuNTZ2MTEuNDV6TTIyLjIyIDBIMS43N0MuNzkgMCAwIC43NyAwIDEuNzN2MjAuNTRDMCAyMy4yMy43OSAyNCAxLjc3IDI0aDIwLjQ1QzIzLjIgMjQgMjQgMjMuMjMgMjQgMjIuMjdWMS43M0MyNCAuNzcgMjMuMiAwIDIyLjIyIDB6Ii8%2BPC9zdmc%2B)](https://www.linkedin.com/company/vectify-ai/)&nbsp;
-[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/invite/VuXuf29EUj)&nbsp;
-[![Book a Demo](https://img.shields.io/badge/Book_a_Demo-6E7E96?style=for-the-badge&logo=googlecalendar&logoColor=white)](https://calendly.com/pageindex/meet)&nbsp;
-[![Contact Us](https://img.shields.io/badge/Contact_Us-3B82F6?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjIgNCAyMCAxNiI%2BPHBhdGggZmlsbD0iI2ZmZiIgZD0iTTIwIDRINGMtMS4xIDAtMiAuOS0yIDJ2MTJjMCAxLjEuOSAyIDIgMmgxNmMxLjEgMCAyLS45IDItMlY2YzAtMS4xLS45LTItMi0yem0wIDQtOCA1LTgtNVY2bDggNSA4LTV6Ii8%2BPC9zdmc%2B)](https://ii2abc2jejf.typeform.com/to/tK3AXl8T)
-
-</div>
-
----
-
-## GMP PageIndex Local UI
-
-This repo also includes a local UI for the GMP PageIndex workspace created under `results/pageindex_gmp_workspace/`.
-
-### Launch
+발표/탐색용 Streamlit UI를 실행하려면:
 
 ```bash
 pip3 install --upgrade -r requirements.txt
 bash run_gmp_pageindex_ui.sh
 ```
 
-The default presentation UI is local/offline and reads existing artifacts only. It exposes v0.1 document exploration and v0.2 eval analysis; it does not require an API key, does not call model APIs, and does not show v0.3 runner controls.
+기본 주소:
 
-### Score semantics
-
-The UI intentionally separates the score channels:
-
-- **Canonical default score:** `0.96` aligned predicted union hit rate from `results/page_alignment/score_001_100_agentic_official_alignment.json`.
-- **Diagnostic-only score:** `0.99` evidence + aligned coverage. This is useful for coverage analysis, but it is not the canonical header score.
-- **Known unresolved case:** `gmp_eval_025` remains the primary non-coordinate semantic confusion case.
-
-The Streamlit shell renders typed view objects from `pageindex/ui_data.py`; it should not parse raw score artifacts directly.
-
-### UI versions covered
-
-- **v0.1 document explorer:** question/tree search, section candidates, page content, physical PDF page, and internal printed page label.
-- **v0.2 eval explorer:** filterable 100-row eval inspection with original/aligned/evidence coverage details.
-
-The demo/presentation shell intentionally excludes v0.3. The design source of truth is `DESIGN.md`; the separate v0.3 runner code remains disabled/off-surface for non-demo experiment work.
-
-### Smoke verification
-
-```bash
-.venv/bin/python scripts/gmp_pageindex_ui_smoke.py
-python3 -m compileall pageindex scripts apps
+```text
+http://localhost:8765
 ```
 
-### Final HTML report
+UI의 범위:
 
-The shareable standalone report is generated at:
+- `v0.1 문서 탐색`: 질문/키워드로 tree 후보와 page content 확인
+- `v0.2 Eval 분석`: 100개 eval row의 hit/miss, section path, page evidence 확인
+- `v0.3 runner`: 발표용 UI에서는 숨김 처리
 
-```bash
-python3 scripts/gmp_build_html_report.py
-open results/reports/gmp_pageindex_final_report.html
-```
+기본 UI는 local/offline/read-only입니다.
 
-It includes the pipeline summary, ASCII/interactive tree visualization, official 100-row eval metrics, and an interactive eval browser.
-
+- API key 불필요
+- model API 호출 없음
+- 기존 artifact만 읽음
 
 ---
 
-© 2026 [Vectify AI](https://vectify.ai)
+## 5. HTML 보고서 재생성
 
+보고서 HTML은 아래 명령으로 다시 만들 수 있습니다.
+
+```bash
+python3 scripts/gmp_build_html_report.py
+```
+
+생성 결과:
+
+```text
+results/reports/gmp_pageindex_final_report.html
+```
+
+보고서 생성에 사용하는 주요 입력 파일:
+
+| 파일 | 역할 |
+| --- | --- |
+| `results/pageindex_gmp_workspace/gmp-guidance.json` | PDF에서 추출한 page content와 초기 document structure |
+| `results/gmp_guidance_structure.json` | 최종 보정된 GMP tree |
+| `results/visualizations/gmp_guidance_tree.txt` | ASCII tree 원본 |
+| `eval/gmp_eval_testset.jsonl` | 100개 평가셋 |
+| `results/codex_agentic_10x10/predictions_001_100_agentic.jsonl` | 100개 문항에 대한 검색 예측 결과 |
+| `results/page_alignment/score_001_100_agentic_official_alignment.json` | 최종 공식 score |
+
+---
+
+## 6. 검증 명령
+
+아래 명령으로 주요 artifact와 UI/report 생성이 정상인지 확인할 수 있습니다.
+
+```bash
+.venv/bin/python scripts/gmp_pageindex_ui_smoke.py
+python3 scripts/gmp_build_html_report.py
+python3 -m compileall apps pageindex scripts
+python3 -m tabnanny scripts/gmp_build_html_report.py apps/gmp_pageindex_ui.py
+```
+
+현재 smoke 기준 결과:
+
+```text
+UI smoke OK: canonical=0.96 diagnostic=0.99 eval_rows=100 unresolved=gmp_eval_025
+```
+
+---
+
+## 7. 프로젝트 구조
+
+```text
+.
+├── apps/
+│   └── gmp_pageindex_ui.py
+├── configs/
+│   ├── gmp_all_branch_expansion_manifest.json
+│   └── gmp_facility_expansion_manifest.json
+├── eval/
+│   └── gmp_eval_testset.jsonl
+├── inputs/
+│   ├── gmp_guidance.pdf
+│   └── gmp_guidance_first12.pdf
+├── pageindex/
+│   ├── ui_contracts.py
+│   ├── ui_data.py
+│   └── ui_experiments.py
+├── results/
+│   ├── gmp_guidance_structure.json
+│   ├── pageindex_gmp_workspace/
+│   ├── page_alignment/
+│   ├── codex_agentic_10x10/
+│   ├── visualizations/
+│   │   ├── gmp_guidance_tree.txt
+│   │   ├── gmp_guidance_tree.md
+│   │   └── gmp_guidance_tree.html
+│   └── reports/
+│       └── gmp_pageindex_final_report.html
+├── scripts/
+│   ├── gmp_build_html_report.py
+│   ├── gmp_pageindex_codex_retriever.py
+│   ├── gmp_pageindex_codex_eval.py
+│   ├── gmp_page_coordinate_alignment.py
+│   ├── gmp_all_branch_validate.py
+│   ├── gmp_expand_all_branches.py
+│   ├── gmp_targeted_expand.py
+│   └── gmp_pageindex_ui_smoke.py
+├── DESIGN.md
+└── run_gmp_pageindex_ui.sh
+```
+
+---
+
+## 8. Tree 구성 요약
+
+최종 tree는 641개 node로 구성됩니다.
+
+| Top-level branch | Node 수 | Subtree page range |
+| --- | ---: | --- |
+| Preface | 1 | 1-9 |
+| 제1장 서론 | 3 | 9-16 |
+| 제2장 완제의약품 제조 및 품질관리기준 | 531 | 16-478 |
+| 별첨1 의약품 제조소의 시설 | 83 | 478-554 |
+| 별첨2 컴퓨터화 시스템 | 23 | 554-606 |
+
+각 node는 다음 정보를 가집니다.
+
+- `node_id`: node 식별자
+- `title`: section 제목
+- `own_start_index`, `own_end_index`: 해당 node 자체 page 범위
+- `subtree_start_index`, `subtree_end_index`: child를 포함한 전체 subtree page 범위
+- `nodes`: child node 목록
+
+전체 tree는 아래 파일에서 확인할 수 있습니다.
+
+```text
+results/visualizations/gmp_guidance_tree.txt
+```
+
+---
+
+## 9. Eval metric 해석
+
+### Aligned hit rate
+
+질문별 gold page가 retriever의 최종 선택 page 안에 포함됐는지를 보는 공식 검색 성공률입니다.
+
+이 지표를 도입한 이유는 GMP PDF에서 **PDF 물리 page**와 **문서 내부 page 번호**가 밀리는 구간이 있었기 때문입니다. 단순히 predicted page와 gold page를 그대로 비교하면, 실제로는 근거 위치를 찾았는데도 page 좌표계 차이 때문에 miss로 계산될 수 있습니다.
+
+그래서 `page alignment map`을 만들고, 원래 predicted page와 alignment 보정 page를 함께 평가하는 `aligned predicted union`을 공식 기준으로 사용했습니다.
+
+### Evidence+aligned hit
+
+최종 predicted page뿐 아니라, retriever가 답을 고르기 전에 실제로 열어본 `evidence_pages_read`와 그 alignment 보정 page까지 포함해서 gold page가 있었는지 보는 진단 지표입니다.
+
+도입 이유는 실패 원인을 분리하기 위해서입니다.
+
+- **Aligned hit 실패 + Evidence+aligned hit 성공**: 근거 page는 읽었지만 최종 page selection에서 놓친 사례
+- **Evidence+aligned hit 실패**: 근거 page 자체를 탐색 과정에서 찾지 못한 더 강한 실패 사례
+
+따라서 공식 headline은 96.0%이고, Evidence+aligned 99.0%는 개선 방향을 찾기 위한 보조 지표입니다.
+
+---
+
+## 10. 사용한 기반 기술
+
+이 프로젝트는 VectifyAI의 open-source PageIndex repository를 기반으로 진행했습니다.
+
+- 원본 repository: https://github.com/VectifyAI/PageIndex
+- 본 repo에서는 GMP 문서에 맞춰 tree 확장, page alignment, eval set, 검색 평가, UI, 최종 HTML 보고서를 추가했습니다.
+
+---
+
+## 11. 주의 사항
+
+- 이 저장소는 DocMIND GMP 문서 구조화/검색 평가 실험 결과를 공유하기 위한 public repo입니다.
+- `.env`, `.venv`, logs, 임시 UI run 결과는 포함하지 않습니다.
+- `results/pageindex_ui_runs/`는 `.gitignore`로 제외했습니다.
+- 기본 UI와 HTML 보고서는 API key 없이 로컬 artifact만 읽습니다.
