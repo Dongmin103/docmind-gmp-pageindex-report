@@ -85,6 +85,8 @@ def render_sample_report(data: dict[str, Any]) -> str:
     notable = data["notable_items"]
     unrecovered = data["unrecovered"]
     eval_rows = data["eval_browser_rows"]
+    eval_json = json.dumps(eval_rows, ensure_ascii=False).replace("</", "<\\/")
+    tree_lines = data["tree_ascii"].splitlines()
 
     body = f"""
     <section class="cover">
@@ -217,16 +219,24 @@ def render_sample_report(data: dict[str, Any]) -> str:
 
     <section id="appendix-tree" class="report-section page-break-before">
       <h2>부록 A. Tree 요약</h2>
+      <p class="section-note">전체 tree를 긴 표로만 보지 않도록, 최상위 branch의 문서 범위와 node 밀도를 먼저 보여줍니다. 아래 막대는 각 branch가 차지하는 page span을 기준으로 상대 크기를 표현합니다.</p>
+      {tree_overview(data)}
       <table>
         <thead><tr><th>Top branch</th><th>Nodes</th><th>Max depth</th><th>Own pages</th><th>Subtree pages</th></tr></thead>
         <tbody>{''.join(tr_multi([r['title'], r['nodes'], r['max_depth'], r['own_range'], r['subtree_range']]) for r in data['top_rows'])}</tbody>
       </table>
-      <h3>ASCII tree excerpt</h3>
-      <pre class="ascii-excerpt">{esc('\n'.join(data['tree_ascii'].splitlines()[:80]))}</pre>
+      <h3>ASCII tree</h3>
+      <div class="tree-toolbar screen-only">
+        <button class="plain-button" type="button" data-toggle-target="ascii-tree" data-toggle-label="ASCII tree">ASCII tree 전체 펼치기</button>
+        <span class="small">화면에서는 전체 tree를 펼쳐볼 수 있고, 인쇄/PDF에서는 overflow 방지를 위해 preview 높이로 고정됩니다.</span>
+      </div>
+      <pre id="ascii-tree" class="ascii-excerpt" aria-label="GMP PageIndex ASCII tree">{esc('\n'.join(tree_lines))}</pre>
     </section>
 
     <section id="appendix-eval" class="report-section">
-      <h2>부록 B. Eval 샘플 및 실패 사례</h2>
+      <h2>부록 B. Eval 100문항 브라우저 및 실패 사례</h2>
+      <p class="section-note">100개 문항을 모두 본문에 펼치면 인쇄 레이아웃이 깨지므로, 화면에서는 토글/필터로 전체 문항을 확인하고 PDF에서는 요약 표와 실패 사례 중심으로 읽을 수 있게 구성했습니다.</p>
+      {eval_browser(eval_json)}
       <h3>Notable miss/repair cases</h3>
       {notable_table(notable)}
       <h3>Eval sample rows</h3>
@@ -249,6 +259,7 @@ def document(title: str, body: str, subtitle: str, doc_type: str) -> str:
   <article class="report-paper">
     {body}
   </article>
+  <script>{inline_js()}</script>
 </body>
 </html>
 """
@@ -276,6 +287,7 @@ def base_css() -> str:
 html { color: var(--ink); font-family: var(--sans); font-size: 11pt; line-height: 1.58; background: #edf0f4; }
 body { margin: 0; }
 a { color: var(--accent); text-decoration: none; }
+button, input, select { font: inherit; }
 .report-paper { max-width: 210mm; min-height: 297mm; margin: 18px auto; background: var(--paper); padding: 18mm 16mm 20mm; box-shadow: 0 10px 30px rgba(20, 30, 45, .12); }
 .cover { border-bottom: 2px solid var(--ink); padding-bottom: 10mm; margin-bottom: 9mm; }
 .cover.compact { min-height: auto; }
@@ -298,6 +310,7 @@ p { margin: 0 0 4mm; }
 .kpi { border: 1px solid var(--line); background: var(--panel); padding: 4mm; border-radius: 3mm; }
 .kpi strong { display: block; font-size: 20pt; letter-spacing: -0.04em; margin: 1.5mm 0; }
 .report-section { margin: 0 0 9mm; break-inside: auto; }
+.section-note { color: var(--muted); font-size: 9.3pt; margin-top: -1mm; }
 .page-break-before { break-before: page; }
 .toc { border: 1px solid var(--line); background: var(--panel); padding: 6mm; margin: 0 0 10mm; break-inside: avoid; }
 .toc h2 { margin-bottom: 3mm; }
@@ -314,16 +327,46 @@ p { margin: 0 0 4mm; }
 .step-num { display: inline-flex; align-items: center; justify-content: center; width: 8mm; height: 8mm; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 8pt; margin-bottom: 2mm; }
 table { width: 100%; border-collapse: collapse; margin: 3mm 0 6mm; break-inside: avoid; font-size: 9.4pt; }
 thead { display: table-header-group; }
-th, td { border: 1px solid var(--line); padding: 2.4mm 2.8mm; vertical-align: top; }
+th, td { border: 1px solid var(--line); padding: 2.4mm 2.8mm; vertical-align: top; overflow-wrap: anywhere; word-break: keep-all; }
 th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-spacing: .035em; text-transform: uppercase; text-align: left; }
 tbody tr:nth-child(even) td { background: #fbfcfe; }
 code, pre { font-family: var(--mono); }
 code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
-.ascii-excerpt { white-space: pre; overflow: hidden; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.6pt; line-height: 1.35; max-height: 105mm; }
+.tree-overview { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
+.tree-map { display: grid; gap: 2.3mm; margin-top: 2mm; }
+.tree-branch { display: grid; grid-template-columns: 45mm 1fr 32mm; align-items: center; gap: 3mm; }
+.tree-branch-title { font-weight: 800; line-height: 1.3; }
+.tree-branch-meta { color: var(--muted); font-size: 8.4pt; margin-top: .7mm; }
+.tree-branch-bar { height: 8mm; border: 1px solid #ccd5e2; border-radius: 999px; overflow: hidden; background: #fff; }
+.tree-branch-fill { height: 100%; min-width: 2mm; background: linear-gradient(90deg, #234f7d, #8eb1d4); }
+.tree-branch-stat { text-align: right; color: var(--muted); font-size: 8.8pt; }
+.depth-strip { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1.2mm; margin-top: 4mm; }
+.depth-cell { border: 1px solid var(--line); background: #fff; border-radius: 2mm; padding: 2mm; text-align: center; }
+.depth-cell strong { display: block; font-size: 12pt; }
+.depth-cell span { color: var(--muted); font-size: 8pt; }
+.tree-toolbar { display: flex; align-items: center; gap: 3mm; margin: 2mm 0; }
+.plain-button { border: 1px solid var(--accent); background: var(--accent); color: #fff; border-radius: 2mm; padding: 1.8mm 3mm; cursor: pointer; }
+.plain-button.secondary { background: #fff; color: var(--accent); }
+.ascii-excerpt { display: block; width: 100%; max-width: 100%; white-space: pre-wrap; overflow: auto; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.0pt; line-height: 1.32; max-height: 95mm; overflow-wrap: anywhere; word-break: break-word; }
+.ascii-excerpt.expanded { max-height: none; overflow: visible; }
+.eval-browser { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 4mm 0 6mm; break-inside: avoid; }
+.eval-controls { display: grid; grid-template-columns: 1.25fr repeat(4, minmax(24mm, 1fr)); gap: 2mm; margin-bottom: 3mm; }
+.eval-controls label { display: grid; gap: .8mm; color: var(--muted); font-size: 8.3pt; font-weight: 700; }
+.eval-controls input, .eval-controls select { width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 2mm; padding: 1.8mm 2mm; color: var(--ink); }
+.eval-status { display: flex; justify-content: space-between; align-items: center; gap: 3mm; margin: 2mm 0; color: var(--muted); font-size: 8.8pt; }
+.eval-table-wrap { max-height: 82mm; overflow: auto; border: 1px solid var(--line); border-radius: 2mm; background: #fff; }
+.eval-table { margin: 0; table-layout: fixed; font-size: 8.2pt; }
+.eval-table th, .eval-table td { padding: 1.8mm 2mm; }
+.eval-table tbody tr { cursor: pointer; }
+.eval-table tbody tr.is-selected td { background: #e7eff8; }
+.eval-detail { margin-top: 3mm; background: #fff; border: 1px solid var(--line); border-radius: 2mm; padding: 3mm; overflow-wrap: anywhere; }
+.eval-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2mm; margin: 2mm 0; }
+.eval-pill { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: .6mm 1.8mm; background: var(--panel); margin: 0 1mm 1mm 0; font-size: 8pt; }
 .bar-row { display: grid; grid-template-columns: 32mm 1fr 12mm; align-items: center; gap: 2mm; margin: 1.4mm 0; font-size: 9pt; }
 .bar-track { height: 3mm; background: #e3e8f0; border-radius: 999px; overflow: hidden; }
 .bar-fill { height: 100%; background: var(--accent); }
 .small { font-size: 8.5pt; color: var(--muted); }
+.screen-only { display: initial; }
 ul, ol { margin-top: 0; padding-left: 5mm; }
 li { margin-bottom: 1.8mm; }
 @page {
@@ -340,12 +383,152 @@ li { margin-bottom: 1.8mm; }
   .cover.compact { min-height: auto; display: block; }
   .report-section, .toc, .card, .callout, .kpi, table, .step { break-inside: avoid; }
   .method-flow { grid-template-columns: repeat(2, 1fr); }
+  .screen-only { display: none !important; }
+  .ascii-excerpt { max-height: 85mm; overflow: hidden; font-size: 6.6pt; break-inside: avoid; }
+  .ascii-excerpt.expanded { max-height: 85mm; overflow: hidden; }
+  .eval-browser { break-inside: auto; }
+  .eval-controls { display: none; }
+  .eval-table-wrap { max-height: none; overflow: visible; }
+  .eval-table tbody tr:nth-child(n+21) { display: none; }
+  .eval-detail { break-inside: avoid; }
 }
 @media screen and (max-width: 900px) {
   .report-paper { margin: 0; padding: 20px; max-width: none; }
-  .meta-grid, .kpi-grid, .grid-2, .method-flow { grid-template-columns: 1fr; }
+  .meta-grid, .kpi-grid, .grid-2, .method-flow, .eval-controls, .tree-branch, .eval-detail-grid { grid-template-columns: 1fr; }
   .toc ol { columns: 1; }
+  .tree-branch-stat { text-align: left; }
 }
+"""
+
+
+def inline_js() -> str:
+    return r"""
+(function () {
+  function text(value) {
+    if (Array.isArray(value)) return value.join(" > ");
+    return value == null ? "" : String(value);
+  }
+  function html(value) {
+    return text(value).replace(/[&<>"']/g, function (ch) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch];
+    });
+  }
+  function pill(label, value) {
+    return '<span class="eval-pill"><strong>' + html(label) + '</strong> ' + html(value) + '</span>';
+  }
+  function optionize(select, rows, key) {
+    if (!select) return;
+    Array.from(new Set(rows.map(function (row) { return text(row[key]); }).filter(Boolean))).sort().forEach(function (value) {
+      var opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = value;
+      select.appendChild(opt);
+    });
+  }
+  function setupAsciiToggle() {
+    document.querySelectorAll("[data-toggle-target]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var target = document.getElementById(button.getAttribute("data-toggle-target"));
+        if (!target) return;
+        target.classList.toggle("expanded");
+        var label = button.getAttribute("data-toggle-label") || "영역";
+        button.textContent = label + (target.classList.contains("expanded") ? " 접기" : " 전체 펼치기");
+      });
+    });
+  }
+  function setupEvalBrowser() {
+    var dataEl = document.getElementById("eval-data");
+    if (!dataEl) return;
+    var rows = [];
+    try { rows = JSON.parse(dataEl.textContent || "[]"); } catch (err) { rows = []; }
+    var state = { selected: rows[0] ? rows[0].id : "" };
+    var controls = {
+      search: document.getElementById("eval-search"),
+      difficulty: document.getElementById("eval-difficulty"),
+      qtype: document.getElementById("eval-qtype"),
+      hit: document.getElementById("eval-hit"),
+      select: document.getElementById("eval-select"),
+      count: document.getElementById("eval-count"),
+      tbody: document.getElementById("eval-tbody"),
+      detail: document.getElementById("eval-detail")
+    };
+    optionize(controls.difficulty, rows, "difficulty");
+    optionize(controls.qtype, rows, "question_type");
+    rows.forEach(function (row) {
+      var opt = document.createElement("option");
+      opt.value = row.id;
+      opt.textContent = row.id + " · " + text(row.question).slice(0, 42);
+      controls.select.appendChild(opt);
+    });
+    function isVisible(row) {
+      var q = text(controls.search && controls.search.value).trim().toLowerCase();
+      var blob = [
+        row.id, row.question, row.difficulty, row.question_type, row.classification,
+        row.gold_pages, row.predicted_pages, row.aligned_predicted_pages,
+        row.evidence_pages_read, row.evidence_plus_aligned_pages,
+        row.gold_section_path, row.predicted_section_path, row.expected_answer
+      ].map(text).join(" ").toLowerCase();
+      if (q && blob.indexOf(q) === -1) return false;
+      if (controls.difficulty.value && text(row.difficulty) !== controls.difficulty.value) return false;
+      if (controls.qtype.value && text(row.question_type) !== controls.qtype.value) return false;
+      if (controls.hit.value === "aligned-hit" && !row.aligned_hit) return false;
+      if (controls.hit.value === "aligned-miss" && row.aligned_hit) return false;
+      if (controls.hit.value === "evidence-hit" && !row.evidence_hit) return false;
+      if (controls.hit.value === "evidence-miss" && row.evidence_hit) return false;
+      return true;
+    }
+    function renderDetail(row) {
+      if (!row) {
+        controls.detail.innerHTML = '<p class="small">선택된 문항이 없습니다.</p>';
+        return;
+      }
+      controls.detail.innerHTML =
+        '<h3>' + html(row.id) + ' · ' + html(row.question) + '</h3>' +
+        '<div class="eval-detail-grid">' +
+          '<div>' + pill("Gold", row.gold_pages) + pill("Pred", row.predicted_pages) + pill("Aligned", row.aligned_predicted_pages) + '</div>' +
+          '<div>' + pill("Aligned hit", row.aligned_hit ? "hit" : "miss") + pill("Evidence+aligned", row.evidence_hit ? "hit" : "miss") + '</div>' +
+          '<div>' + pill("Difficulty", row.difficulty) + pill("Type", row.question_type) + '</div>' +
+        '</div>' +
+        '<p><strong>Gold section:</strong> ' + html(row.gold_section_path) + '</p>' +
+        '<p><strong>Predicted section:</strong> ' + html(row.predicted_section_path) + '</p>' +
+        '<p><strong>Evidence pages read:</strong> ' + html(row.evidence_pages_read) + ' / <strong>Evidence+aligned:</strong> ' + html(row.evidence_plus_aligned_pages) + '</p>' +
+        '<p><strong>Expected answer:</strong> ' + html(row.expected_answer) + '</p>' +
+        '<p><strong>Gold evidence summary:</strong> ' + html(row.gold_evidence_summary) + '</p>' +
+        '<p><strong>Retriever reason:</strong> ' + html(row.reason) + '</p>';
+    }
+    function render() {
+      var visible = rows.filter(isVisible);
+      if (!visible.some(function (row) { return row.id === state.selected; })) {
+        state.selected = visible[0] ? visible[0].id : "";
+      }
+      if (controls.count) controls.count.textContent = visible.length + " / " + rows.length + "개 문항 표시";
+      if (controls.select) controls.select.value = state.selected;
+      controls.tbody.innerHTML = visible.map(function (row) {
+        var hit = row.aligned_hit ? "aligned hit" : (row.evidence_hit ? "evidence only" : "miss");
+        return '<tr data-id="' + html(row.id) + '" class="' + (row.id === state.selected ? "is-selected" : "") + '">' +
+          '<td>' + html(row.id) + '</td><td>' + html(row.difficulty) + '</td><td>' + html(row.question_type) + '</td>' +
+          '<td>' + html(hit) + '</td><td>' + html(row.gold_pages) + '</td><td>' + html(row.question) + '</td></tr>';
+      }).join("");
+      renderDetail(rows.find(function (row) { return row.id === state.selected; }) || visible[0]);
+      controls.tbody.querySelectorAll("tr").forEach(function (tr) {
+        tr.addEventListener("click", function () {
+          state.selected = tr.getAttribute("data-id");
+          render();
+        });
+      });
+    }
+    [controls.search, controls.difficulty, controls.qtype, controls.hit].forEach(function (el) {
+      if (el) el.addEventListener("input", render);
+    });
+    if (controls.select) controls.select.addEventListener("change", function () {
+      state.selected = controls.select.value;
+      render();
+    });
+    render();
+  }
+  setupAsciiToggle();
+  setupEvalBrowser();
+})();
 """
 
 
@@ -385,12 +568,14 @@ def build_top_rows(top_nodes: list[dict[str, Any]]) -> list[dict[str, Any]]:
     for node in top_nodes:
         sub = list(walk([node]))
         own_start, own_end, subtree_start, subtree_end = node_range(node)
+        subtree_span = range_span(subtree_start, subtree_end)
         rows.append({
             "title": node.get("title", ""),
             "nodes": len(sub),
             "max_depth": max((depth for _, depth, _ in sub), default=0),
             "own_range": fmt_range(own_start, own_end),
             "subtree_range": fmt_range(subtree_start, subtree_end),
+            "subtree_span": subtree_span,
         })
     return rows
 
@@ -408,9 +593,20 @@ def build_eval_rows(eval_rows: list[dict[str, Any]], predictions: list[dict[str,
             "question": row.get("question", ""),
             "difficulty": row.get("difficulty", ""),
             "question_type": row.get("question_type", ""),
+            "expected_answer": row.get("expected_answer", ""),
+            "gold_section_path": row.get("gold_section_path", []),
+            "gold_section_title": row.get("gold_section_title", ""),
+            "gold_evidence_summary": row.get("gold_evidence_summary", ""),
+            "answer_judging_notes": row.get("answer_judging_notes", ""),
             "classification": score_row.get("classification", "missing_score_item"),
             "gold_pages": row.get("gold_pages", ""),
             "predicted_pages": score_row.get("predicted_pages", pred.get("predicted_pages", "")),
+            "predicted_section_path": pred.get("predicted_section_path", []),
+            "aligned_predicted_pages": score_row.get("aligned_predicted_pages", ""),
+            "evidence_pages_read": score_row.get("evidence_pages_read", pred.get("evidence_pages_read", "")),
+            "evidence_plus_aligned_pages": score_row.get("evidence_plus_aligned_pages", ""),
+            "reason": pred.get("reason", ""),
+            "original_hit": bool((score_row.get("original_page_metrics") or {}).get("hit")),
             "aligned_hit": bool((score_row.get("aligned_predicted_union_metrics") or {}).get("hit")),
             "evidence_hit": bool((score_row.get("evidence_plus_aligned_metrics") or {}).get("hit")),
         })
@@ -448,6 +644,86 @@ def classification_table(counter: Counter) -> str:
     return f"<table><thead><tr><th>Classification</th><th>Count</th></tr></thead><tbody>{body}</tbody></table>"
 
 
+def tree_overview(data: dict[str, Any]) -> str:
+    rows = data["top_rows"]
+    total_span = max(sum(int(row.get("subtree_span") or 0) for row in rows), 1)
+    max_nodes = max((int(row.get("nodes") or 0) for row in rows), default=1)
+    branch_html: list[str] = []
+    for row in rows:
+        span = int(row.get("subtree_span") or 0)
+        pct_width = max(span / total_span * 100, 3.0)
+        node_density = int(row.get("nodes") or 0) / max_nodes * 100
+        branch_html.append(
+            f"""
+            <div class="tree-branch">
+              <div>
+                <div class="tree-branch-title">{esc(row.get('title'))}</div>
+                <div class="tree-branch-meta">depth {esc(row.get('max_depth'))} · {esc(row.get('nodes'))} nodes</div>
+              </div>
+              <div class="tree-branch-bar" title="page span">
+                <div class="tree-branch-fill" style="width:{pct_width:.1f}%"></div>
+              </div>
+              <div class="tree-branch-stat">p.{esc(row.get('subtree_range'))}<br><span>{span} pages · density {node_density:.0f}%</span></div>
+            </div>
+            """
+        )
+
+    depth_items = sorted(data["depth_counts"].items(), key=lambda x: int(x[0]))[:8]
+    depth_html = "".join(
+        f"<div class=\"depth-cell\"><span>depth {esc(depth)}</span><strong>{esc(count)}</strong></div>"
+        for depth, count in depth_items
+    )
+    return f"""
+      <div class="tree-overview">
+        <h3>Tree at a glance</h3>
+        <div class="tree-map">{''.join(branch_html)}</div>
+        <div class="depth-strip" aria-label="Node count by tree depth">{depth_html}</div>
+      </div>
+    """
+
+
+def eval_browser(eval_json: str) -> str:
+    return f"""
+      <div class="eval-browser" id="eval-browser">
+        <script type="application/json" id="eval-data">{eval_json}</script>
+        <div class="eval-controls screen-only">
+          <label>검색
+            <input id="eval-search" type="search" placeholder="ID, 질문, section, page 검색" />
+          </label>
+          <label>난이도
+            <select id="eval-difficulty"><option value="">전체</option></select>
+          </label>
+          <label>질문 유형
+            <select id="eval-qtype"><option value="">전체</option></select>
+          </label>
+          <label>Hit 상태
+            <select id="eval-hit">
+              <option value="">전체</option>
+              <option value="aligned-hit">Aligned hit</option>
+              <option value="aligned-miss">Aligned miss</option>
+              <option value="evidence-hit">Evidence+aligned hit</option>
+              <option value="evidence-miss">Evidence+aligned miss</option>
+            </select>
+          </label>
+          <label>문항 선택
+            <select id="eval-select"></select>
+          </label>
+        </div>
+        <div class="eval-status">
+          <strong id="eval-count">100개 문항</strong>
+          <span>행을 클릭하면 아래 상세 근거가 바뀝니다.</span>
+        </div>
+        <div class="eval-table-wrap">
+          <table class="eval-table">
+            <thead><tr><th style="width:22mm;">ID</th><th style="width:20mm;">Diff</th><th style="width:28mm;">Type</th><th style="width:24mm;">Hit</th><th style="width:24mm;">Gold</th><th>Question</th></tr></thead>
+            <tbody id="eval-tbody"></tbody>
+          </table>
+        </div>
+        <div class="eval-detail" id="eval-detail"></div>
+      </div>
+    """
+
+
 def notable_table(rows: list[dict[str, Any]]) -> str:
     if not rows:
         return "<p class=\"small\">특이 사례 없음</p>"
@@ -471,6 +747,15 @@ def fmt_range(start: Any, end: Any) -> str:
     if start in (None, "") and end in (None, ""):
         return "N/A"
     return str(start) if start == end else f"{start}-{end}"
+
+
+def range_span(start: Any, end: Any) -> int:
+    try:
+        s = int(start)
+        e = int(end)
+    except (TypeError, ValueError):
+        return 0
+    return max(e - s + 1, 1)
 
 
 def pct(value: float) -> str:
