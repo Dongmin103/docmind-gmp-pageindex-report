@@ -239,9 +239,9 @@ def render_sample_report(data: dict[str, Any]) -> str:
       <h2>부록 B. Eval 100문항 브라우저 및 실패 사례</h2>
       <p class="section-note">100개 문항을 모두 본문에 펼치면 인쇄 레이아웃이 깨지므로, 화면에서는 토글/필터로 전체 문항을 확인하고 PDF에서는 요약 표와 실패 사례 중심으로 읽을 수 있게 구성했습니다.</p>
       {eval_browser(eval_json)}
-      <h3>Notable miss/repair cases</h3>
+      <h3>주요 실패/보정 사례</h3>
       {notable_table(notable)}
-      <h3>Eval sample rows</h3>
+      <h3>평가 문항 예시</h3>
       {eval_sample_table(eval_rows)}
     </section>
     """
