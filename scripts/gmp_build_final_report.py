@@ -220,6 +220,7 @@ def render_sample_report(data: dict[str, Any]) -> str:
     <section id="appendix-tree" class="report-section page-break-before">
       <h2>부록 A. Tree 요약</h2>
       <p class="section-note">전체 tree를 긴 표로만 보지 않도록, 최상위 branch의 문서 범위와 node 밀도를 먼저 보여줍니다. 아래 막대는 각 branch가 차지하는 page span을 기준으로 상대 크기를 표현합니다.</p>
+      {render_icicle_svg(data)}
       {tree_overview(data)}
       <table>
         <thead><tr><th>Top branch</th><th>Nodes</th><th>Max depth</th><th>Own pages</th><th>Subtree pages</th></tr></thead>
@@ -332,6 +333,17 @@ th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-s
 tbody tr:nth-child(even) td { background: #fbfcfe; }
 code, pre { font-family: var(--mono); }
 code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
+.icicle-panel { border: 1px solid var(--line); border-radius: 3mm; background: #fff; padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
+.icicle-panel h3 { margin-top: 0; }
+.icicle-caption { color: var(--muted); font-size: 8.8pt; margin-bottom: 2mm; }
+.icicle-svg-wrap { width: 100%; overflow: hidden; border: 1px solid var(--line); border-radius: 2mm; background: #fbfcfe; }
+.icicle-svg { display: block; width: 100%; height: auto; }
+.icicle-axis { fill: var(--muted); font: 10px var(--sans); }
+.icicle-label { fill: #111827; font: 10px var(--sans); pointer-events: none; }
+.icicle-label.light { fill: #fff; font-weight: 700; }
+.icicle-legend { display: flex; flex-wrap: wrap; gap: 2mm 4mm; margin-top: 2.5mm; color: var(--muted); font-size: 8.4pt; }
+.icicle-key { display: inline-flex; align-items: center; gap: 1.5mm; }
+.icicle-swatch { width: 4mm; height: 3mm; border-radius: .8mm; border: 1px solid rgba(0,0,0,.12); }
 .tree-overview { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
 .tree-map { display: grid; gap: 2.3mm; margin-top: 2mm; }
 .tree-branch { display: grid; grid-template-columns: 45mm 1fr 32mm; align-items: center; gap: 3mm; }
@@ -641,6 +653,87 @@ def classification_table(counter: Counter) -> str:
     return f"<table><thead><tr><th>Classification</th><th>Count</th></tr></thead><tbody>{body}</tbody></table>"
 
 
+def render_icicle_svg(data: dict[str, Any]) -> str:
+    nodes = data["tree"].get("structure") or []
+    page_count = int(data["workspace"].get("page_count") or 606)
+    flat = list(walk(nodes))
+    max_depth = max((depth for _, depth, _ in flat), default=0)
+    width = 1000
+    left = 46
+    right = 18
+    top = 32
+    row_h = 31
+    gap = 3
+    plot_w = width - left - right
+    height = top + row_h * (max_depth + 1) + 42
+    palette = ["#234f7d", "#2f6f56", "#8a5a12", "#7c4d8b", "#a13c3c", "#4a647a"]
+    top_titles = [str(node.get("title", "Untitled")) for node in nodes]
+    color_by_top = {title: palette[idx % len(palette)] for idx, title in enumerate(top_titles)}
+
+    def x_pos(page: Any) -> float:
+        page_num = clamp_int(page, 1, page_count)
+        return left + ((page_num - 1) / max(page_count - 1, 1)) * plot_w
+
+    rects: list[str] = []
+    label_count = 0
+    for node, depth, path in flat:
+        _, _, subtree_start, subtree_end = node_range(node)
+        if subtree_start in (None, "") or subtree_end in (None, ""):
+            continue
+        start = clamp_int(subtree_start, 1, page_count)
+        end = clamp_int(subtree_end, start, page_count)
+        x = x_pos(start)
+        x_end = x_pos(end) + max(plot_w / page_count, 1.0)
+        rect_w = max(x_end - x, 1.2)
+        y = top + depth * row_h
+        top_title = path[0] if path else str(node.get("title", "Untitled"))
+        color = color_by_top.get(top_title, "#234f7d")
+        opacity = max(0.28, 0.92 - depth * 0.09)
+        title = str(node.get("title", "Untitled"))
+        range_label = fmt_range(start, end)
+        stroke = "#ffffff" if depth > 0 else "#d4dce8"
+        rects.append(
+            f'<rect x="{x:.2f}" y="{y:.2f}" width="{rect_w:.2f}" height="{row_h-gap:.2f}" '
+            f'rx="3" fill="{color}" fill-opacity="{opacity:.2f}" stroke="{stroke}" stroke-width="0.8">'
+            f'<title>{esc(" > ".join(path))} · p.{esc(range_label)}</title></rect>'
+        )
+        min_label_w = 58 if depth <= 1 else 86
+        if depth <= 2 and rect_w >= min_label_w and label_count < 55:
+            max_chars = max(int(rect_w / 6.4), 5)
+            label = truncate(title, max_chars)
+            klass = "icicle-label light" if depth == 0 else "icicle-label"
+            rects.append(f'<text class="{klass}" x="{x + 5:.2f}" y="{y + 18:.2f}">{esc(label)}</text>')
+            label_count += 1
+
+    axes = []
+    for page in [1, 100, 200, 300, 400, 500, page_count]:
+        x = x_pos(page)
+        axes.append(f'<line x1="{x:.2f}" y1="22" x2="{x:.2f}" y2="{height-28}" stroke="#d9dee7" stroke-width="0.8"/>')
+        axes.append(f'<text class="icicle-axis" x="{x:.2f}" y="18" text-anchor="middle">p.{page}</text>')
+    for depth in range(max_depth + 1):
+        y = top + depth * row_h + 18
+        axes.append(f'<text class="icicle-axis" x="4" y="{y:.2f}">D{depth}</text>')
+
+    legend = "".join(
+        f'<span class="icicle-key"><span class="icicle-swatch" style="background:{color_by_top[title]}"></span>{esc(title)}</span>'
+        for title in top_titles
+    )
+    return f"""
+      <div class="icicle-panel">
+        <h3>Document map: page span × tree depth</h3>
+        <p class="icicle-caption">가로축은 PDF page 범위, 세로축은 tree depth입니다. 넓은 사각형일수록 해당 section subtree가 문서에서 차지하는 page span이 크다는 뜻입니다.</p>
+        <div class="icicle-svg-wrap">
+          <svg class="icicle-svg" viewBox="0 0 {width} {height}" role="img" aria-label="GMP document tree icicle map">
+            <rect x="0" y="0" width="{width}" height="{height}" fill="#fbfcfe"/>
+            {''.join(axes)}
+            {''.join(rects)}
+          </svg>
+        </div>
+        <div class="icicle-legend">{legend}</div>
+      </div>
+    """
+
+
 def tree_overview(data: dict[str, Any]) -> str:
     rows = data["top_rows"]
     total_span = max(sum(int(row.get("subtree_span") or 0) for row in rows), 1)
@@ -750,6 +843,21 @@ def range_span(start: Any, end: Any) -> int:
     except (TypeError, ValueError):
         return 0
     return max(e - s + 1, 1)
+
+
+def clamp_int(value: Any, min_value: int, max_value: int) -> int:
+    try:
+        num = int(value)
+    except (TypeError, ValueError):
+        num = min_value
+    return max(min_value, min(num, max_value))
+
+
+def truncate(value: Any, max_chars: int) -> str:
+    text = str(value)
+    if len(text) <= max_chars:
+        return text
+    return text[: max(max_chars - 1, 1)] + "…"
 
 
 def pct(value: float) -> str:
