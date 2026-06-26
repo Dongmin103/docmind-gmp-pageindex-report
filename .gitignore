@@ -4,4 +4,3 @@ __pycache__
 .env*
 .venv/
 logs/
-results/pageindex_ui_runs/

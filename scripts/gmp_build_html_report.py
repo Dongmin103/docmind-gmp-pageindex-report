@@ -21,7 +21,6 @@ ALIGNMENT = ROOT / "results" / "page_alignment" / "gmp_page_alignment_map.json"
 SCORE = ROOT / "results" / "page_alignment" / "score_001_100_agentic_official_alignment.json"
 EVAL = ROOT / "eval" / "gmp_eval_testset.jsonl"
 PREDICTIONS = ROOT / "results" / "codex_agentic_10x10" / "predictions_001_100_agentic.jsonl"
-DESIGN = ROOT / "DESIGN.md"
 
 
 def main() -> int:
@@ -375,7 +374,6 @@ def render_html(**ctx: Any) -> str:
         {file_item(EVAL, '100문항 평가셋')}
         {file_item(PREDICTIONS, 'Codex/PageIndex-style predictions')}
         {file_item(SCORE, '최종 official score')}
-        {file_item(DESIGN, '발표용 UI design source of truth')}
       </ul>
     </section>
   </main>

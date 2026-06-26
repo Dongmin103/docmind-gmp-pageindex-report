@@ -8,7 +8,7 @@
 2. 각 section과 page 범위를 검증한다.
 3. tree를 기반으로 질문별 근거 page를 찾는 검색 흐름을 만든다.
 4. 100개 평가셋으로 검색 성능을 정량 평가한다.
-5. 최종 결과를 공유 가능한 HTML 보고서와 로컬 UI로 확인한다.
+5. 최종 결과를 공유 가능한 **단일 HTML 보고서**로 확인한다.
 
 가장 먼저 볼 파일은 아래 HTML 보고서입니다.
 
@@ -28,7 +28,6 @@ results/reports/gmp_pageindex_final_report.html
 | HTML tree | 접었다 펼칠 수 있는 tree 시각화 | `results/visualizations/gmp_guidance_tree.html` |
 | 100개 eval set | 검색 성능 평가용 질문/정답 page/section path | `eval/gmp_eval_testset.jsonl` |
 | 최종 score | aligned hit rate, evidence+aligned 등 공식 평가 결과 | `results/page_alignment/score_001_100_agentic_official_alignment.json` |
-| 발표용 UI | 문서 탐색과 eval 분석용 Streamlit UI | `apps/gmp_pageindex_ui.py` |
 
 ---
 
@@ -76,36 +75,7 @@ open results/reports/gmp_pageindex_final_report.html
 
 ---
 
-## 4. 로컬 UI 실행
-
-발표/탐색용 Streamlit UI를 실행하려면:
-
-```bash
-pip3 install --upgrade -r requirements.txt
-bash run_gmp_pageindex_ui.sh
-```
-
-기본 주소:
-
-```text
-http://localhost:8765
-```
-
-UI의 범위:
-
-- `v0.1 문서 탐색`: 질문/키워드로 tree 후보와 page content 확인
-- `v0.2 Eval 분석`: 100개 eval row의 hit/miss, section path, page evidence 확인
-- `v0.3 runner`: 발표용 UI에서는 숨김 처리
-
-기본 UI는 local/offline/read-only입니다.
-
-- API key 불필요
-- model API 호출 없음
-- 기존 artifact만 읽음
-
----
-
-## 5. HTML 보고서 재생성
+## 4. HTML 보고서 재생성
 
 보고서 HTML은 아래 명령으로 다시 만들 수 있습니다.
 
@@ -132,31 +102,28 @@ results/reports/gmp_pageindex_final_report.html
 
 ---
 
-## 6. 검증 명령
+## 5. 검증 명령
 
-아래 명령으로 주요 artifact와 UI/report 생성이 정상인지 확인할 수 있습니다.
+아래 명령으로 주요 artifact와 HTML 보고서 생성이 정상인지 확인할 수 있습니다.
 
 ```bash
-.venv/bin/python scripts/gmp_pageindex_ui_smoke.py
 python3 scripts/gmp_build_html_report.py
-python3 -m compileall apps pageindex scripts
-python3 -m tabnanny scripts/gmp_build_html_report.py apps/gmp_pageindex_ui.py
+python3 -m compileall pageindex scripts
+python3 -m tabnanny scripts/gmp_build_html_report.py
 ```
 
-현재 smoke 기준 결과:
+보고서 생성 성공 시 다음과 유사한 요약이 출력됩니다.
 
 ```text
-UI smoke OK: canonical=0.96 diagnostic=0.99 eval_rows=100 unresolved=gmp_eval_025
+summary: nodes=641 pages=606 eval_rows=100 canonical=0.96 unresolved=1 browser_rows=100
 ```
 
 ---
 
-## 7. 프로젝트 구조
+## 6. 프로젝트 구조
 
 ```text
 .
-├── apps/
-│   └── gmp_pageindex_ui.py
 ├── configs/
 │   ├── gmp_all_branch_expansion_manifest.json
 │   └── gmp_facility_expansion_manifest.json
@@ -165,10 +132,6 @@ UI smoke OK: canonical=0.96 diagnostic=0.99 eval_rows=100 unresolved=gmp_eval_02
 ├── inputs/
 │   ├── gmp_guidance.pdf
 │   └── gmp_guidance_first12.pdf
-├── pageindex/
-│   ├── ui_contracts.py
-│   ├── ui_data.py
-│   └── ui_experiments.py
 ├── results/
 │   ├── gmp_guidance_structure.json
 │   ├── pageindex_gmp_workspace/
@@ -187,15 +150,14 @@ UI smoke OK: canonical=0.96 diagnostic=0.99 eval_rows=100 unresolved=gmp_eval_02
 │   ├── gmp_page_coordinate_alignment.py
 │   ├── gmp_all_branch_validate.py
 │   ├── gmp_expand_all_branches.py
-│   ├── gmp_targeted_expand.py
-│   └── gmp_pageindex_ui_smoke.py
-├── DESIGN.md
-└── run_gmp_pageindex_ui.sh
+│   └── gmp_targeted_expand.py
+├── pageindex/
+└── run_gmp_pageindex_codex.sh
 ```
 
 ---
 
-## 8. Tree 구성 요약
+## 7. Tree 구성 요약
 
 최종 tree는 641개 node로 구성됩니다.
 
@@ -223,7 +185,7 @@ results/visualizations/gmp_guidance_tree.txt
 
 ---
 
-## 9. Eval metric 해석
+## 8. Eval metric 해석
 
 ### Aligned hit rate
 
@@ -246,18 +208,17 @@ results/visualizations/gmp_guidance_tree.txt
 
 ---
 
-## 10. 사용한 기반 기술
+## 9. 사용한 기반 기술
 
 이 프로젝트는 VectifyAI의 open-source PageIndex repository를 기반으로 진행했습니다.
 
 - 원본 repository: https://github.com/VectifyAI/PageIndex
-- 본 repo에서는 GMP 문서에 맞춰 tree 확장, page alignment, eval set, 검색 평가, UI, 최종 HTML 보고서를 추가했습니다.
+- 본 repo에서는 GMP 문서에 맞춰 tree 확장, page alignment, eval set, 검색 평가, 최종 HTML 보고서를 추가했습니다.
 
 ---
 
-## 11. 주의 사항
+## 10. 주의 사항
 
 - 이 저장소는 DocMIND GMP 문서 구조화/검색 평가 실험 결과를 공유하기 위한 public repo입니다.
-- `.env`, `.venv`, logs, 임시 UI run 결과는 포함하지 않습니다.
-- `results/pageindex_ui_runs/`는 `.gitignore`로 제외했습니다.
-- 기본 UI와 HTML 보고서는 API key 없이 로컬 artifact만 읽습니다.
+- `.env`, `.venv`, logs, 임시 실행 결과는 포함하지 않습니다.
+- 기본 HTML 보고서는 API key 없이 로컬 artifact만 읽습니다.
