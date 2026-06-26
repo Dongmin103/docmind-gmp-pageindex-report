@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design System</title>
+  <style>
+:root {
+  --ink: #18202b;
+  --muted: #5d6878;
+  --subtle: #8a94a3;
+  --line: #d9dee7;
+  --panel: #f7f9fc;
+  --panel-strong: #eef3f9;
+  --accent: #234f7d;
+  --accent-soft: #e7eff8;
+  --success: #1f6f4a;
+  --warning: #8a5a12;
+  --danger: #a13c3c;
+  --paper: #ffffff;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { color: var(--ink); font-family: var(--sans); font-size: 11pt; line-height: 1.58; background: #edf0f4; }
+body { margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+.report-paper { max-width: 210mm; min-height: 297mm; margin: 18px auto; background: var(--paper); padding: 18mm 16mm 20mm; box-shadow: 0 10px 30px rgba(20, 30, 45, .12); }
+.cover { border-bottom: 2px solid var(--ink); padding-bottom: 10mm; margin-bottom: 9mm; }
+.cover.compact { min-height: auto; }
+.eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 9pt; margin: 0 0 4mm; }
+h1 { font-size: 26pt; line-height: 1.16; letter-spacing: -0.04em; margin: 0 0 5mm; }
+.demo-h1 { font-size: 22pt; }
+h2 { font-size: 16pt; line-height: 1.25; margin: 0 0 5mm; letter-spacing: -0.025em; }
+h3 { font-size: 12.5pt; margin: 6mm 0 2.5mm; }
+h4 { font-size: 10.5pt; margin: 4mm 0 1.5mm; }
+p { margin: 0 0 4mm; }
+.lead { color: #2f3a48; font-size: 12.5pt; max-width: 170mm; }
+.source-line { font-size: 9pt; color: var(--muted); margin-top: 6mm; }
+.meta-grid, .kpi-grid, .grid-2 { display: grid; gap: 4mm; }
+.meta-grid { grid-template-columns: repeat(3, 1fr); margin-top: 8mm; }
+.meta-grid div, .kpi, .card, .callout { break-inside: avoid; }
+.meta-grid div { border-top: 1px solid var(--line); padding-top: 3mm; }
+.meta-grid span, .kpi span { display: block; color: var(--muted); font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.meta-grid strong { display: block; margin-top: 1mm; font-size: 10.5pt; }
+.kpi-grid { grid-template-columns: repeat(4, 1fr); margin: 8mm 0 0; }
+.kpi { border: 1px solid var(--line); background: var(--panel); padding: 4mm; border-radius: 3mm; }
+.kpi strong { display: block; font-size: 20pt; letter-spacing: -0.04em; margin: 1.5mm 0; }
+.report-section { margin: 0 0 9mm; break-inside: auto; }
+.page-break-before { break-before: page; }
+.toc { border: 1px solid var(--line); background: var(--panel); padding: 6mm; margin: 0 0 10mm; break-inside: avoid; }
+.toc h2 { margin-bottom: 3mm; }
+.toc ol { columns: 2; margin: 0; padding-left: 5mm; }
+.toc li { margin: 0 0 1.5mm; }
+.grid-2 { grid-template-columns: 1fr 1fr; align-items: start; }
+.card { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; }
+.callout { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 4mm; margin: 4mm 0; border-radius: 0 2mm 2mm 0; }
+.callout.warning { border-left-color: var(--warning); background: #fbf4e6; }
+.callout.result { border-left-color: var(--success); background: #eaf6ef; }
+.callout.neutral { border-left-color: var(--muted); background: var(--panel); }
+.method-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 4mm 0; }
+.step { border: 1px solid var(--line); border-radius: 3mm; padding: 4mm; background: #fff; break-inside: avoid; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 8mm; height: 8mm; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 8pt; margin-bottom: 2mm; }
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 6mm; break-inside: avoid; font-size: 9.4pt; }
+thead { display: table-header-group; }
+th, td { border: 1px solid var(--line); padding: 2.4mm 2.8mm; vertical-align: top; }
+th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-spacing: .035em; text-transform: uppercase; text-align: left; }
+tbody tr:nth-child(even) td { background: #fbfcfe; }
+code, pre { font-family: var(--mono); }
+code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
+.ascii-excerpt { white-space: pre; overflow: hidden; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.6pt; line-height: 1.35; max-height: 105mm; }
+.bar-row { display: grid; grid-template-columns: 32mm 1fr 12mm; align-items: center; gap: 2mm; margin: 1.4mm 0; font-size: 9pt; }
+.bar-track { height: 3mm; background: #e3e8f0; border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); }
+.small { font-size: 8.5pt; color: var(--muted); }
+ul, ol { margin-top: 0; padding-left: 5mm; }
+li { margin-bottom: 1.8mm; }
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+  @bottom-center { content: "Page " counter(page) " / " counter(pages); font-size: 8pt; color: #6b7280; }
+}
+@media print {
+  html { background: #fff; font-size: 10.5pt; }
+  body { background: #fff; }
+  .report-paper { margin: 0; padding: 0; box-shadow: none; max-width: none; min-height: auto; }
+  a { color: inherit; text-decoration: none; }
+  .cover { min-height: 238mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover.compact { min-height: auto; display: block; }
+  .report-section, .toc, .card, .callout, .kpi, table, .step { break-inside: avoid; }
+  .method-flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media screen and (max-width: 900px) {
+  .report-paper { margin: 0; padding: 20px; max-width: none; }
+  .meta-grid, .kpi-grid, .grid-2, .method-flow { grid-template-columns: 1fr; }
+  .toc ol { columns: 1; }
+}
+</style>
+</head>
+<body class="design-system">
+  <article class="report-paper">
+    
+    <section class="cover compact">
+      <p class="eyebrow">Design System</p>
+      <h1>DocMIND GMP 분석 보고서 HTML 디자인 시스템</h1>
+      <p class="lead">A4 인쇄/PDF용 실험·분석 보고서를 위한 레이아웃, 색상, 타이포그래피, 표, 카드, callout 규칙입니다.</p>
+      <div class="meta-grid">
+        <div><span>문서 성격</span><strong>실험/분석 보고서</strong></div>
+        <div><span>출력 대상</span><strong>A4 PDF / Print</strong></div>
+        <div><span>톤</span><strong>차분함 · 전문적 · 근거 중심</strong></div>
+      </div>
+    </section>
+
+    <section class="report-section">
+      <h2>1. 디자인 원칙</h2>
+      <div class="callout neutral"><strong>핵심 결과 우선.</strong> 첫 페이지에서 목적, 핵심 수치, 결론을 바로 확인할 수 있어야 합니다.</div>
+      <div class="grid-2">
+        <div class="card"><h3>가독성</h3><p>본문은 10.5-11pt 기준으로 읽기 좋게 유지하고, 표는 행 간격과 zebra background로 구분합니다.</p></div>
+        <div class="card"><h3>인쇄 안정성</h3><p>카드와 표가 페이지 중간에서 과도하게 쪼개지지 않도록 <code>break-inside: avoid</code>를 사용합니다.</p></div>
+      </div>
+    </section>
+
+    <section class="report-section">
+      <h2>2. Typography</h2>
+      <h1 class="demo-h1">H1 보고서 제목</h1>
+      <h2>H2 주요 섹션</h2>
+      <h3>H3 하위 분석 항목</h3>
+      <p>본문은 한국어 분석 보고서에 맞춰 시스템 sans-serif를 사용합니다. 숫자와 코드성 값은 <code>monospace</code> 또는 표 안에서 정렬합니다.</p>
+    </section>
+
+    <section class="report-section">
+      <h2>3. Components</h2>
+      <div class="kpi-grid">
+        <div class="kpi"><span>공식 hit rate</span><strong>96.0%</strong><em>aligned predicted union</em></div>
+        <div class="kpi"><span>Eval 문항</span><strong>100</strong><em>schema valid</em></div>
+        <div class="kpi"><span>Tree nodes</span><strong>641</strong><em>validated hierarchy</em></div>
+        <div class="kpi"><span>Unrecovered</span><strong>1</strong><em>gmp_eval_025</em></div>
+      </div>
+      <div class="callout info"><strong>Info callout.</strong> 해석 기준이나 정의를 설명할 때 사용합니다.</div>
+      <div class="callout warning"><strong>Warning callout.</strong> 한계, 주의 사항, 공식 지표가 아닌 보조 지표를 설명할 때 사용합니다.</div>
+      <table>
+        <thead><tr><th>컴포넌트</th><th>용도</th><th>인쇄 규칙</th></tr></thead>
+        <tbody>
+          <tr><td>KPI card</td><td>핵심 수치 요약</td><td>첫 페이지 배치</td></tr>
+          <tr><td>Callout</td><td>해석/주의 강조</td><td>한 페이지 내 유지</td></tr>
+          <tr><td>Data table</td><td>평가 결과 정리</td><td>header 반복, 작은 폰트 허용</td></tr>
+        </tbody>
+      </table>
+    </section>
+    
+  </article>
+</body>
+</html>

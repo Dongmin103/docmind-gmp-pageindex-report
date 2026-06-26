@@ -10,7 +10,13 @@
 4. 100개 평가셋으로 검색 성능을 정량 평가한다.
 5. 최종 결과를 공유 가능한 **단일 HTML 보고서**로 확인한다.
 
-가장 먼저 볼 파일은 아래 HTML 보고서입니다.
+가장 먼저 볼 파일은 아래 A4 인쇄용 HTML 보고서입니다.
+
+```text
+results/reports/print/sample-analysis-report.html
+```
+
+기존 웹형 보고서는 아래 경로에 남아 있습니다.
 
 ```text
 results/reports/gmp_pageindex_final_report.html
@@ -18,11 +24,23 @@ results/reports/gmp_pageindex_final_report.html
 
 ---
 
+## A4 인쇄용 HTML 3종
+
+| 파일 | 용도 |
+| --- | --- |
+| `results/reports/print/design-system.html` | 보고서 색상, 타이포그래피, 카드, 표, callout, print CSS 규칙 |
+| `results/reports/print/report-template.html` | 다른 분석 보고서에 재사용 가능한 빈 템플릿 |
+| `results/reports/print/sample-analysis-report.html` | GMP 실험 데이터를 반영한 최종 A4 인쇄용 샘플 보고서 |
+
+각 파일은 A4 print CSS, 목차, page number 규칙, 표/카드/callout 스타일을 포함합니다.
+
+---
+
 ## 1. 이 프로젝트에서 만든 것
 
 | 산출물 | 설명 | 경로 |
 | --- | --- | --- |
-| 최종 HTML 보고서 | 전체 과정, tree 시각화, eval 결과를 한 번에 보는 공유용 보고서 | `results/reports/gmp_pageindex_final_report.html` |
+| 최종 A4 HTML 보고서 | 전체 과정, tree 시각화, eval 결과를 인쇄/PDF에 맞춰 정리한 보고서 | `results/reports/print/sample-analysis-report.html` |
 | 최종 GMP tree JSON | 641개 node로 구성된 GMP 문서 계층 구조 | `results/gmp_guidance_structure.json` |
 | ASCII tree | terminal/tree 형태의 전체 구조 시각화 | `results/visualizations/gmp_guidance_tree.txt` |
 | HTML tree | 접었다 펼칠 수 있는 tree 시각화 | `results/visualizations/gmp_guidance_tree.html` |
@@ -59,7 +77,7 @@ Aligned predicted union hit rate = 96.0%
 macOS:
 
 ```bash
-open results/reports/gmp_pageindex_final_report.html
+open results/reports/print/sample-analysis-report.html
 ```
 
 보고서에서 확인할 수 있는 내용:
@@ -87,6 +105,9 @@ python3 scripts/gmp_build_html_report.py
 
 ```text
 results/reports/gmp_pageindex_final_report.html
+results/reports/print/design-system.html
+results/reports/print/report-template.html
+results/reports/print/sample-analysis-report.html
 ```
 
 보고서 생성에 사용하는 주요 입력 파일:

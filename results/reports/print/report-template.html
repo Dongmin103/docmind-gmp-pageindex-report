@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Report Template</title>
+  <style>
+:root {
+  --ink: #18202b;
+  --muted: #5d6878;
+  --subtle: #8a94a3;
+  --line: #d9dee7;
+  --panel: #f7f9fc;
+  --panel-strong: #eef3f9;
+  --accent: #234f7d;
+  --accent-soft: #e7eff8;
+  --success: #1f6f4a;
+  --warning: #8a5a12;
+  --danger: #a13c3c;
+  --paper: #ffffff;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { color: var(--ink); font-family: var(--sans); font-size: 11pt; line-height: 1.58; background: #edf0f4; }
+body { margin: 0; }
+a { color: var(--accent); text-decoration: none; }
+.report-paper { max-width: 210mm; min-height: 297mm; margin: 18px auto; background: var(--paper); padding: 18mm 16mm 20mm; box-shadow: 0 10px 30px rgba(20, 30, 45, .12); }
+.cover { border-bottom: 2px solid var(--ink); padding-bottom: 10mm; margin-bottom: 9mm; }
+.cover.compact { min-height: auto; }
+.eyebrow { color: var(--accent); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 9pt; margin: 0 0 4mm; }
+h1 { font-size: 26pt; line-height: 1.16; letter-spacing: -0.04em; margin: 0 0 5mm; }
+.demo-h1 { font-size: 22pt; }
+h2 { font-size: 16pt; line-height: 1.25; margin: 0 0 5mm; letter-spacing: -0.025em; }
+h3 { font-size: 12.5pt; margin: 6mm 0 2.5mm; }
+h4 { font-size: 10.5pt; margin: 4mm 0 1.5mm; }
+p { margin: 0 0 4mm; }
+.lead { color: #2f3a48; font-size: 12.5pt; max-width: 170mm; }
+.source-line { font-size: 9pt; color: var(--muted); margin-top: 6mm; }
+.meta-grid, .kpi-grid, .grid-2 { display: grid; gap: 4mm; }
+.meta-grid { grid-template-columns: repeat(3, 1fr); margin-top: 8mm; }
+.meta-grid div, .kpi, .card, .callout { break-inside: avoid; }
+.meta-grid div { border-top: 1px solid var(--line); padding-top: 3mm; }
+.meta-grid span, .kpi span { display: block; color: var(--muted); font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.meta-grid strong { display: block; margin-top: 1mm; font-size: 10.5pt; }
+.kpi-grid { grid-template-columns: repeat(4, 1fr); margin: 8mm 0 0; }
+.kpi { border: 1px solid var(--line); background: var(--panel); padding: 4mm; border-radius: 3mm; }
+.kpi strong { display: block; font-size: 20pt; letter-spacing: -0.04em; margin: 1.5mm 0; }
+.report-section { margin: 0 0 9mm; break-inside: auto; }
+.page-break-before { break-before: page; }
+.toc { border: 1px solid var(--line); background: var(--panel); padding: 6mm; margin: 0 0 10mm; break-inside: avoid; }
+.toc h2 { margin-bottom: 3mm; }
+.toc ol { columns: 2; margin: 0; padding-left: 5mm; }
+.toc li { margin: 0 0 1.5mm; }
+.grid-2 { grid-template-columns: 1fr 1fr; align-items: start; }
+.card { border: 1px solid var(--line); border-radius: 3mm; background: var(--panel); padding: 4mm; }
+.callout { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 4mm; margin: 4mm 0; border-radius: 0 2mm 2mm 0; }
+.callout.warning { border-left-color: var(--warning); background: #fbf4e6; }
+.callout.result { border-left-color: var(--success); background: #eaf6ef; }
+.callout.neutral { border-left-color: var(--muted); background: var(--panel); }
+.method-flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; margin: 4mm 0; }
+.step { border: 1px solid var(--line); border-radius: 3mm; padding: 4mm; background: #fff; break-inside: avoid; }
+.step-num { display: inline-flex; align-items: center; justify-content: center; width: 8mm; height: 8mm; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 8pt; margin-bottom: 2mm; }
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 6mm; break-inside: avoid; font-size: 9.4pt; }
+thead { display: table-header-group; }
+th, td { border: 1px solid var(--line); padding: 2.4mm 2.8mm; vertical-align: top; }
+th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-spacing: .035em; text-transform: uppercase; text-align: left; }
+tbody tr:nth-child(even) td { background: #fbfcfe; }
+code, pre { font-family: var(--mono); }
+code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
+.ascii-excerpt { white-space: pre; overflow: hidden; border: 1px solid var(--line); background: #101820; color: #e5edf7; padding: 4mm; border-radius: 2mm; font-size: 7.6pt; line-height: 1.35; max-height: 105mm; }
+.bar-row { display: grid; grid-template-columns: 32mm 1fr 12mm; align-items: center; gap: 2mm; margin: 1.4mm 0; font-size: 9pt; }
+.bar-track { height: 3mm; background: #e3e8f0; border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); }
+.small { font-size: 8.5pt; color: var(--muted); }
+ul, ol { margin-top: 0; padding-left: 5mm; }
+li { margin-bottom: 1.8mm; }
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+  @bottom-center { content: "Page " counter(page) " / " counter(pages); font-size: 8pt; color: #6b7280; }
+}
+@media print {
+  html { background: #fff; font-size: 10.5pt; }
+  body { background: #fff; }
+  .report-paper { margin: 0; padding: 0; box-shadow: none; max-width: none; min-height: auto; }
+  a { color: inherit; text-decoration: none; }
+  .cover { min-height: 238mm; display: flex; flex-direction: column; justify-content: center; }
+  .cover.compact { min-height: auto; display: block; }
+  .report-section, .toc, .card, .callout, .kpi, table, .step { break-inside: avoid; }
+  .method-flow { grid-template-columns: repeat(2, 1fr); }
+}
+@media screen and (max-width: 900px) {
+  .report-paper { margin: 0; padding: 20px; max-width: none; }
+  .meta-grid, .kpi-grid, .grid-2, .method-flow { grid-template-columns: 1fr; }
+  .toc ol { columns: 1; }
+}
+</style>
+</head>
+<body class="template">
+  <article class="report-paper">
+    
+    <section class="cover">
+      <p class="eyebrow">Analysis Report Template</p>
+      <h1>[프로젝트/실험 보고서 제목]</h1>
+      <p class="lead">[보고서의 목적과 핵심 결론을 2-3문장으로 요약합니다. 첫 페이지에서 읽는 사람이 무엇을 검증했고 무엇을 얻었는지 알 수 있어야 합니다.]</p>
+      <div class="meta-grid">
+        <div><span>작성일</span><strong>[YYYY-MM-DD]</strong></div>
+        <div><span>작성자</span><strong>[팀/작성자]</strong></div>
+        <div><span>상태</span><strong>[Draft/Final]</strong></div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><span>핵심 지표 1</span><strong>[값]</strong><em>[설명]</em></div><div class="kpi"><span>핵심 지표 2</span><strong>[값]</strong><em>[설명]</em></div><div class="kpi"><span>데이터 수</span><strong>[N]</strong><em>[범위]</em></div><div class="kpi"><span>상태</span><strong>[PASS]</strong><em>[기준]</em></div>
+      </div>
+    </section>
+
+    <nav class="toc">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#summary">요약</a></li>
+        <li><a href="#method">방법</a></li>
+        <li><a href="#results">결과</a></li>
+        <li><a href="#interpretation">해석</a></li>
+        <li><a href="#limitations">한계</a></li>
+        <li><a href="#next-steps">다음 단계</a></li>
+      </ol>
+    </nav>
+
+    <section id="summary" class="report-section page-break-before"><h2>1. 요약</h2><p>[핵심 결과와 결론을 먼저 작성합니다.]</p></section>
+    <section id="method" class="report-section"><h2>2. 방법</h2><p>[데이터, 절차, 검증 기준을 작성합니다.]</p></section>
+    <section id="results" class="report-section"><h2>3. 결과</h2><table><thead><tr><th>항목</th><th>결과</th><th>해석</th></tr></thead><tbody><tr><td>[metric]</td><td>[value]</td><td>[meaning]</td></tr></tbody></table></section>
+    <section id="interpretation" class="report-section"><h2>4. 해석</h2><div class="callout info">[결과를 어떻게 읽어야 하는지 설명합니다.]</div></section>
+    <section id="limitations" class="report-section"><h2>5. 한계</h2><ul><li>[한계 1]</li><li>[한계 2]</li></ul></section>
+    <section id="next-steps" class="report-section"><h2>6. 다음 단계</h2><ol><li>[다음 작업 1]</li><li>[다음 작업 2]</li></ol></section>
+    
+  </article>
+</body>
+</html>
