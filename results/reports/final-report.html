@@ -191,6 +191,7 @@ li { margin-bottom: 1.8mm; }
     <nav class="toc">
       <h2>목차</h2>
       <ol>
+        <li><a href="#background">배경</a></li>
         <li><a href="#summary">요약</a></li>
         <li><a href="#method">방법</a></li>
         <li><a href="#results">결과</a></li>
@@ -203,8 +204,24 @@ li { margin-bottom: 1.8mm; }
       </ol>
     </nav>
 
+    <section id="background" class="report-section page-break-before">
+      <h2>1. 배경</h2>
+      <div class="callout info"><strong>기준 레포:</strong> 본 실험은 VectifyAI의 <code>PageIndex</code> repository 구조를 기준으로 GMP PDF를 구조화하고 검색 평가까지 확장한 작업입니다.</div>
+      <p><strong>왜 PageIndex를 기준으로 삼았나?</strong> GMP 가이던스처럼 길고 계층이 깊은 규제 문서는 단순 키워드 검색만으로는 원하는 근거 page를 안정적으로 찾기 어렵습니다. 질문은 보통 특정 단어 하나가 아니라 “어느 장/절의 어떤 기준을 확인해야 하는가”에 가깝기 때문에, 문서를 page 단위 텍스트 더미가 아니라 <strong>section tree + page range</strong>로 다루는 방식이 필요했습니다.</p>
+      <p>PageIndex는 PDF를 page content와 document structure로 분리해 다루는 흐름을 제공합니다. 이 보고서에서는 그 구조를 GMP 문서에 적용하여, 먼저 목차와 본문 heading을 기반으로 문서 전체를 계층형 tree로 재구성했습니다. 이후 질문별로 <code>get_document</code>, <code>get_document_structure</code>, <code>get_page_content</code> 흐름을 따라 관련 section과 page content를 확인하는 방식으로 검색 성능을 평가했습니다.</p>
+      <table>
+        <thead><tr><th>구분</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>기준 repository</td><td><strong>VectifyAI/PageIndex</strong></td></tr>
+          <tr><td>적용 대상</td><td><strong>gmp_guidance.pdf</strong></td></tr>
+          <tr><td>핵심 목적</td><td><strong>GMP 문서를 section tree로 구조화하고, 질문이 요구하는 근거 page를 찾을 수 있는지 검증</strong></td></tr>
+          <tr><td>실험 이유</td><td><strong>규제 문서는 제목·장·절·page 범위가 중요하므로 단순 검색보다 구조 기반 검색이 적합한지 확인</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
     <section id="summary" class="report-section page-break-before">
-      <h2>1. 요약</h2>
+      <h2>2. 요약</h2>
       <div class="callout result"><strong>핵심 결과:</strong> 606 page GMP PDF에서 641개 node의 계층형 tree를 구축했고, 100개 평가셋 기준 공식 aligned hit rate는 <strong>96.0%</strong>입니다.</div>
       <p>본 작업은 GMP 문서를 단순 키워드 검색 대상으로 보지 않고, 목차와 본문 heading을 기반으로 section/page 범위가 보존된 tree로 재구성했습니다. 이후 질문별로 tree와 page content를 탐색해 정답 근거 page를 찾는 retrieval 평가를 수행했습니다.</p>
       <table>
@@ -220,7 +237,7 @@ li { margin-bottom: 1.8mm; }
     </section>
 
     <section id="method" class="report-section">
-      <h2>2. 방법</h2>
+      <h2>3. 방법</h2>
       <div class="method-flow">
         <div class="step"><div class="step-num">01</div><h3>PDF 구조화</h3><p>GMP PDF를 PageIndex workspace로 변환해 page content와 초기 structure를 생성했습니다.</p></div>
         <div class="step"><div class="step-num">02</div><h3>Tree 확장/보정</h3><p>TOC와 본문 heading을 기준으로 모든 주요 branch를 세분화하고 page span을 정규화했습니다.</p></div>
@@ -231,7 +248,7 @@ li { margin-bottom: 1.8mm; }
     </section>
 
     <section id="results" class="report-section">
-      <h2>3. 결과</h2>
+      <h2>4. 결과</h2>
       <div class="grid-2">
         <div>
           <h3>공식 metric</h3>
@@ -257,14 +274,14 @@ li { margin-bottom: 1.8mm; }
     </section>
 
     <section id="interpretation" class="report-section">
-      <h2>4. 해석</h2>
+      <h2>5. 해석</h2>
       <div class="callout info"><strong>Aligned hit rate 도입 배경:</strong> GMP PDF는 PDF 물리 page와 문서 내부 page 번호가 밀리는 구간이 있어, 단순 page 번호 비교만으로는 검색 성능이 왜곡될 수 있습니다. 따라서 page alignment map을 반영한 aligned predicted union을 공식 기준으로 사용했습니다.</div>
       <div class="callout warning"><strong>Evidence+aligned의 의미:</strong> 99.0%는 최종 선택 page가 아니라, retriever가 탐색 과정에서 읽은 evidence page까지 포함한 진단 coverage입니다. 공식 headline은 96.0%로 유지합니다.</div>
       <p>잔여 오류는 크게 두 유형으로 나뉩니다. 첫째, 근거 page를 읽었지만 최종 page selection에서 놓친 사례입니다. 둘째, evidence 탐색 과정에서도 gold page를 찾지 못한 더 강한 실패입니다. 현재 완전 미회수 사례는 <code>gmp_eval_025</code> 1건입니다.</p>
     </section>
 
     <section id="limitations" class="report-section">
-      <h2>5. 한계</h2>
+      <h2>6. 한계</h2>
       <ul>
         <li>평가셋은 100개 문항으로 구성되어 있어, 더 넓은 GMP 질의 유형을 모두 대표한다고 보기는 어렵습니다.</li>
         <li>Evidence+aligned는 내부 탐색 coverage를 보여주는 진단 지표이며, 최종 사용자에게 반환되는 page 선택 성능과 동일하지 않습니다.</li>
@@ -273,7 +290,7 @@ li { margin-bottom: 1.8mm; }
     </section>
 
     <section id="next-steps" class="report-section">
-      <h2>6. 다음 단계</h2>
+      <h2>7. 다음 단계</h2>
       <ol>
         <li><strong>실패 4건 상세 분석:</strong> aligned miss 4건의 원인을 page selection, evidence 탐색, semantic confusion으로 분류합니다.</li>
         <li><strong>평가셋 확장:</strong> 100개에서 더 다양한 장/절/질문 유형으로 확장합니다.</li>
@@ -282,7 +299,7 @@ li { margin-bottom: 1.8mm; }
     </section>
 
     <section id="artifacts" class="report-section">
-      <h2>7. 재현 가능한 산출물</h2>
+      <h2>8. 재현 가능한 산출물</h2>
       <p>본 보고서는 아래 repository artifact를 기준으로 재생성할 수 있습니다.</p>
       <table>
         <thead><tr><th>Artifact</th><th>역할</th></tr></thead>
