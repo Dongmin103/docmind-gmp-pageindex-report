@@ -156,6 +156,9 @@ li { margin-bottom: 1.8mm; }
   .eval-table tbody tr:nth-child(n+21) { display: none; }
   .eval-detail { break-inside: avoid; }
 }
+@media screen and (min-width: 901px) {
+  .report-paper { width: calc(100vw - 48px); max-width: 1180px; padding: 36px 42px 48px; }
+}
 @media screen and (max-width: 900px) {
   .report-paper { margin: 0; padding: 20px; max-width: none; }
   .meta-grid, .kpi-grid, .grid-2, .method-flow, .eval-controls, .tree-branch, .eval-detail-grid { grid-template-columns: 1fr; }
