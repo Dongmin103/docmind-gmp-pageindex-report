@@ -404,6 +404,17 @@ li { margin-bottom: 1.8mm; }
       <h2>5. 해석</h2>
       <div class="callout info"><strong>Aligned hit rate 도입 배경:</strong> GMP PDF는 PDF 물리 page와 문서 내부 page 번호가 밀리는 구간이 있어, 단순 page 번호 비교만으로는 검색 성능이 왜곡될 수 있습니다. 따라서 page alignment map을 반영한 aligned predicted union을 공식 기준으로 사용했습니다.</div>
       <div class="callout warning"><strong>Evidence+aligned의 의미:</strong> 99.0%는 최종 선택 page가 아니라, retriever가 탐색 과정에서 읽은 evidence page까지 포함한 진단 coverage입니다. 공식 headline은 96.0%로 유지합니다.</div>
+      <h3>Predicted page와 evidence page의 차이</h3>
+      <p><code>evidence_pages_read</code>는 retriever가 탐색 과정에서 <code>get_page_content</code>로 실제 열어본 후보 page를 의미합니다. 따라서 evidence page에 gold page가 포함되어 있다면 “LLM이 그 page를 전혀 보지 않았다”는 뜻이 아니라, <strong>읽기는 읽었지만 최종 <code>predicted_pages</code>로 채택하지 않았을 수 있다</strong>는 뜻입니다.</p>
+      <table>
+        <thead><tr><th>필드</th><th>의미</th><th>평가상 해석</th></tr></thead>
+        <tbody>
+          <tr><td>predicted_pages</td><td>최종적으로 정답 근거 page라고 제출한 page</td><td>공식 hit rate의 핵심 기준</td></tr>
+          <tr><td>evidence_pages_read</td><td>탐색 중 실제로 열어본 후보 page</td><td>LLM이 탐색 과정에서 본 page 기록</td></tr>
+          <tr><td>evidence_plus_aligned</td><td>evidence page와 page alignment 보정을 함께 본 진단 범위</td><td>최종 선택은 틀렸지만 근거 page 근처를 읽었는지 확인</td></tr>
+        </tbody>
+      </table>
+      <div class="callout neutral"><strong>해석 예시:</strong> gold page가 p.533인데 <code>predicted_pages</code>가 p.519-521이고 <code>evidence_pages_read</code>에 p.533이 포함되어 있다면, 이는 “LLM context에 들어가지 않았다”가 아니라 “탐색 중 p.533을 봤지만 최종 page selection에서 p.533을 선택하지 못했다”로 해석합니다.</div>
       <p>잔여 오류는 크게 두 유형으로 나뉩니다. 첫째, 근거 page를 읽었지만 최종 page selection에서 놓친 사례입니다. 둘째, evidence 탐색 과정에서도 gold page를 찾지 못한 더 강한 실패입니다. 현재 완전 미회수 사례는 <code>gmp_eval_025</code> 1건입니다.</p>
     </section>
 
