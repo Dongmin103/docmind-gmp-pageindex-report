@@ -181,6 +181,18 @@ def render_sample_report(data: dict[str, Any]) -> str:
         </tbody>
       </table>
       {tree_json_example()}
+      <h3>PageIndex workspace 구성</h3>
+      <p>PageIndex workspace는 원본 PDF를 검색하기 좋은 형태로 변환해 저장한 작업 폴더입니다. 본 실험의 workspace는 <code>results/pageindex_gmp_workspace/</code>이며, 문서 목록을 담은 <code>_meta.json</code>과 실제 문서 데이터를 담은 <code>gmp-guidance.json</code>으로 구성됩니다.</p>
+      <table>
+        <thead><tr><th>파일/영역</th><th>역할</th><th>실제 내용</th></tr></thead>
+        <tbody>
+          {tr_multi(['_meta.json', 'workspace 안의 문서 목록과 기본 메타데이터', 'doc_id: gmp-guidance, type: pdf, page_count: 606'])}
+          {tr_multi(['gmp-guidance.json · metadata', '문서 식별 정보', 'id, type, path, doc_name, doc_description, page_count'])}
+          {tr_multi(['gmp-guidance.json · structure', 'section tree', 'title, node_id, page range, nodes, subtree range'])}
+          {tr_multi(['gmp-guidance.json · pages', 'page별 실제 본문', 'page 1부터 page 606까지 content 저장'])}
+        </tbody>
+      </table>
+      {workspace_json_example()}
       <h3>Retrieve 작동 방식</h3>
       <p>본 평가에서 retrieve는 PDF 전체를 한 번에 검색하는 방식이 아니라, PageIndex workspace에 저장된 <strong>문서 메타데이터, tree 구조, page content</strong>를 순서대로 확인하는 방식으로 작동합니다. 먼저 문서가 어떤 PDF인지 확인하고, 그 다음 JSON tree에서 질문과 관련된 section path와 page range를 좁힌 뒤, 필요한 page 본문만 열어 근거를 확인합니다.</p>
       <div class="callout neutral"><strong>“트리를 읽는다”의 의미:</strong> 여기서 tree를 읽는다는 것은 JSON 안의 section <strong>node</strong>들을 읽고, 각 node가 어떤 부모/자식 관계로 연결되어 있는지 확인한다는 뜻입니다. 즉 <code>용어의 정의</code> 같은 section 하나가 node이고, <code>nodes</code> 배열 안에 들어 있는 하위 section들이 child node입니다. 따라서 <strong>tree 확인 = node 목록과 node 간 계층 관계 확인</strong>이라고 볼 수 있습니다.</div>
@@ -763,6 +775,41 @@ def tree_json_example() -> str:
     return f"""
       <div class="callout neutral"><strong>실제 JSON node 예시:</strong> 아래 예시는 <code>용어의 정의</code> section과 그 하위의 <code>다. “일탈”</code> node입니다. retrieve는 이 구조에서 <code>subtree_start_index/end_index</code>를 보고 먼저 p.18-28 범위를 후보로 잡고, 하위 node의 p.18을 더 좁은 근거 page로 선택합니다.</div>
       <pre class="json-example">{esc(json.dumps(example, ensure_ascii=False, indent=2))}</pre>
+    """
+
+
+def workspace_json_example() -> str:
+    layout = """results/pageindex_gmp_workspace/
+├── _meta.json
+└── gmp-guidance.json
+    ├── metadata: id, type, path, doc_name, page_count
+    ├── structure: JSON tree nodes
+    └── pages: [{ page, content }, ... 606 pages]"""
+    example = {
+        "id": "gmp-guidance",
+        "type": "pdf",
+        "doc_name": "gmp_guidance.pdf",
+        "page_count": 606,
+        "structure": [
+            {
+                "title": "제2장 완제의약품 제조 및 품질관리기준",
+                "subtree_start_index": 16,
+                "subtree_end_index": 478,
+                "nodes": ["용어의 정의", "시설 및 환경의 관리", "..."],
+            }
+        ],
+        "pages": [
+            {
+                "page": 18,
+                "content": "다. “일탈”이란 제조 또는 품질관리 과정에서 미리 정해진 기준을 벗어나...",
+            }
+        ],
+    }
+    return f"""
+      <div class="callout neutral"><strong>Workspace를 읽는 순서:</strong> <code>get_document()</code>는 metadata를, <code>get_document_structure()</code>는 <code>structure</code>를, <code>get_page_content()</code>는 <code>pages</code>를 읽습니다. 따라서 retrieve는 같은 <code>gmp-guidance.json</code> 안에서 metadata → structure → pages 순서로 필요한 정보만 단계적으로 확인합니다.</div>
+      <pre class="json-example">{esc(layout)}
+
+{esc(json.dumps(example, ensure_ascii=False, indent=2))}</pre>
     """
 
 
