@@ -169,7 +169,7 @@ def render_sample_report(data: dict[str, Any]) -> str:
       </div>
       <div class="callout info"><strong>평가 흐름:</strong> get_document → get_document_structure → get_page_content 흐름을 기준으로, tree를 보고 관련 section 후보를 고른 뒤 page content를 열어 최종 predicted page를 결정하는 방식입니다.</div>
       <h3>Tree 생성 예시</h3>
-      <p>GMP PDF는 <code>inputs/gmp_guidance.pdf</code>에서 시작해 page별 text, TOC 목차, section node, workspace 순서로 변환됩니다. PageIndex는 먼저 PDF를 page content로 분리하고, 앞부분에서 TOC page를 감지한 뒤, 목차와 본문 heading을 이용해 section tree 후보를 만듭니다. 이후 각 section title이 실제 본문 어느 page에서 시작하는지 매핑하고, node id와 page span을 보정해 최종 JSON tree로 저장합니다.</p>
+      {pdf_to_workspace_pipeline_detail()}
       <table>
         <thead><tr><th>생성 단계</th><th>처리 내용</th><th>산출 예시</th></tr></thead>
         <tbody>
@@ -446,6 +446,12 @@ th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-s
 tbody tr:nth-child(even) td { background: #fbfcfe; }
 code, pre { font-family: var(--mono); }
 code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
+.pipeline-detail { border: 1px solid var(--line); background: #fbfcfe; border-radius: 3mm; padding: 4mm; margin: 4mm 0 5mm; }
+.pipeline-detail h4 { border-top: 1px solid var(--line); padding-top: 3mm; margin-top: 4mm; }
+.pipeline-detail h4:first-of-type { border-top: 0; padding-top: 0; }
+.pipeline-detail pre { border: 1px solid var(--line); background: #f8fafc; color: #243244; padding: 3mm; border-radius: 2mm; font-size: 8.1pt; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; word-break: normal; overflow: auto; max-width: 100%; }
+.pipeline-detail pre code { background: transparent; border: 0; padding: 0; font-size: inherit; }
+.pipeline-detail .flow-pre { background: #f4f7fb; }
 .json-example { border: 1px solid var(--line); background: #f8fafc; color: #243244; padding: 4mm; border-radius: 2mm; font-size: 8.2pt; line-height: 1.42; max-height: 95mm; overflow: auto; white-space: pre; }
 .icicle-panel { border: 1px solid var(--line); border-radius: 3mm; background: #fff; padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
 .icicle-panel h3 { margin-top: 0; }
@@ -784,6 +790,150 @@ def classification_table(counter: Counter) -> str:
     body = "".join(tr_multi([key, count]) for key, count in sorted(counter.items(), key=lambda x: (-x[1], str(x[0]))))
     return f"<table><thead><tr><th>Classification</th><th>Count</th></tr></thead><tbody>{body}</tbody></table>"
 
+
+
+def pdf_to_workspace_pipeline_detail() -> str:
+    return """
+      <div class="pipeline-detail">
+        <p>처음 PDF에서 현재의 <strong>workspace/tree</strong>까지 온 흐름은 아래와 같습니다. 핵심은 PDF 원문을 바로 검색하는 것이 아니라, 먼저 page별 text와 목차 정보를 이용해 문서 구조를 만들고, 그 구조를 PageIndex workspace 안에 <code>structure + pages</code> 형태로 포장했다는 점입니다.</p>
+
+        <h4>전체 흐름</h4>
+        <pre class="flow-pre"><code>GMP PDF
+→ page별 text 추출
+→ TOC/목차 page 탐지
+→ 목차를 JSON tree 후보로 변환
+→ 각 section title이 실제 본문 어느 page에서 시작하는지 매핑
+→ node_id, own range, subtree range 보정
+→ results/gmp_guidance_structure.json 저장
+→ PageIndex workspace/gmp-guidance.json에 structure + pages로 포장</code></pre>
+
+        <h4>1. 입력 PDF</h4>
+        <p>처음 입력은 <code>inputs/gmp_guidance.pdf</code>입니다. 실행 스크립트는 <code>run_gmp_pageindex.sh</code>이고, 그 안에서 실제로는 PageIndex 파이프라인인 <code>run_pageindex.py</code>를 호출합니다.</p>
+        <pre><code>python run_pageindex.py \
+  --pdf_path inputs/gmp_guidance.pdf \
+  --model gpt-4o-mini \
+  --toc-check-pages 30 \
+  --max-pages-per-node 10 \
+  --max-tokens-per-node 20000 \
+  --if-add-node-id yes</code></pre>
+
+        <h4>2. PDF를 page별 text로 분리</h4>
+        <p>PDF를 먼저 page 단위로 읽습니다. 그 결과 workspace 안에는 page 번호와 해당 page의 본문이 함께 저장됩니다. 본 GMP 문서는 총 <strong>606 pages</strong>입니다.</p>
+        <pre><code>{
+  "pages": [
+    {
+      "page": 1,
+      "content": "완제의약품제조및품질관리기준가이던스..."
+    },
+    {
+      "page": 2,
+      "content": "..."
+    }
+  ]
+}</code></pre>
+
+        <h4>3. TOC, 즉 목차 page 탐지</h4>
+        <p>PageIndex는 처음 몇 page를 보면서 해당 page가 목차인지 판단합니다. 관련 함수는 <code>pageindex/page_index.py</code>의 <code>find_toc_pages(...)</code>, <code>toc_detector_single_page(...)</code>입니다. 개념적으로는 “이 page가 목차인가?”를 확인하고, yes이면 TOC page 목록에 추가하며, no가 나오면 목차 구간을 종료합니다.</p>
+        <p>우리 실행에서는 <code>--toc-check-pages 30</code>을 사용했기 때문에, 앞 30 page 안에서 TOC를 찾도록 설정했습니다.</p>
+
+        <h4>4. TOC를 JSON tree 후보로 변환</h4>
+        <p>목차 text를 찾으면 그 목차를 구조화합니다. 관련 함수는 <code>toc_extractor(...)</code>, <code>toc_transformer(...)</code>입니다. 예를 들어 목차가 아래처럼 되어 있으면:</p>
+        <pre><code>제2장 완제의약품 제조 및 품질관리기준
+  1. 용어의 정의
+  2. 시설 및 환경의 관리
+  3. 조직</code></pre>
+        <p>이를 다음과 같은 JSON tree 후보로 변환합니다.</p>
+        <pre><code>[
+  {
+    "title": "제2장 완제의약품 제조 및 품질관리기준",
+    "nodes": [
+      {
+        "title": "용어의 정의",
+        "nodes": []
+      },
+      {
+        "title": "시설 및 환경의 관리",
+        "nodes": []
+      }
+    ]
+  }
+]</code></pre>
+
+        <h4>5. 각 section이 실제 PDF 몇 page에서 시작하는지 찾음</h4>
+        <p>목차만으로는 구조는 알 수 있지만, 실제 본문 page가 정확히 어디인지 확인해야 합니다. 그래서 PageIndex는 본문 text에 page marker를 붙여 section title이 어느 page에서 시작하는지 확인합니다.</p>
+        <pre><code>&lt;physical_index_18&gt;
+2장 완제의약품 제조 및 품질관리기준
+1 용어의 정의
+...
+&lt;physical_index_18&gt;</code></pre>
+        <p>그리고 LLM에게 “이 section title이 이 본문 조각에서 시작하면 <code>start_index</code>를 넣어라”라고 요청합니다. 관련 함수는 <code>add_page_number_to_toc(...)</code>입니다. 결과적으로 node에는 page 정보가 붙습니다.</p>
+        <pre><code>{
+  "title": "용어의 정의",
+  "start_index": 18,
+  "end_index": 28
+}</code></pre>
+
+        <h4>6. node id와 page range를 보정</h4>
+        <p>우리 작업에서는 여기서 끝내지 않고 추가 보정을 했습니다. GMP 문서에는 중복 제목이 있고, 같은 page에 parent/child가 함께 나오며, <code>시설 및 환경의 관리</code>처럼 branch가 잘못 중첩될 수 있고, PDF 물리 page와 문서 내부 page 번호가 밀리는 문제도 있었기 때문입니다.</p>
+        <p>그래서 보정 후 최종 node는 다음과 같은 형태가 되었습니다.</p>
+        <pre><code>{
+  "title": "용어의 정의",
+  "node_id": "0005",
+  "start_index": 18,
+  "end_index": 28,
+  "own_start_index": 18,
+  "own_end_index": 18,
+  "subtree_start_index": 18,
+  "subtree_end_index": 28,
+  "nodes": [...]
+}</code></pre>
+        <ul>
+          <li><code>own_start/end</code>: 이 node 자체의 page 범위</li>
+          <li><code>subtree_start/end</code>: child node까지 포함한 전체 page 범위</li>
+        </ul>
+
+        <h4>7. 최종 tree JSON 저장</h4>
+        <p>최종 tree는 <code>results/gmp_guidance_structure.json</code>에 저장됩니다. 구조는 아래와 같고, <code>structure</code> 배열 안의 객체들이 전부 section node입니다.</p>
+        <pre><code>{
+  "doc_name": "gmp_guidance.pdf",
+  "structure": [...]
+}</code></pre>
+
+        <h4>8. PageIndex workspace로 포장</h4>
+        <p>그 다음 검색/retrieve에서 쓰기 위해 workspace 형태로 만들었습니다. 최종 workspace는 <code>results/pageindex_gmp_workspace/</code>입니다.</p>
+        <pre><code>results/pageindex_gmp_workspace/
+├── _meta.json
+└── gmp-guidance.json</code></pre>
+        <p><code>gmp-guidance.json</code> 안에는 문서 식별 정보, tree 구조, page별 본문이 함께 들어갑니다.</p>
+        <pre><code>{
+  "id": "gmp-guidance",
+  "type": "pdf",
+  "doc_name": "gmp_guidance.pdf",
+  "page_count": 606,
+  "structure": [...],
+  "pages": [...]
+}</code></pre>
+        <ul>
+          <li><code>structure</code>: tree/node</li>
+          <li><code>pages</code>: page별 본문</li>
+          <li><code>metadata</code>: 문서 정보</li>
+        </ul>
+
+        <h4>9. retrieve에서 사용</h4>
+        <p>나중에 retrieve는 이 workspace를 순서대로 읽습니다. 먼저 문서 metadata를 확인하고, 그 다음 tree/node 구조를 확인한 뒤, 필요한 page 본문만 엽니다.</p>
+        <pre class="flow-pre"><code>get_document()
+→ metadata 확인
+
+get_document_structure()
+→ structure 배열, 즉 tree/node 확인
+
+get_page_content("18")
+→ pages에서 page 18 content 확인</code></pre>
+
+        <h4>핵심 요약</h4>
+        <p>처음 PDF에서 지금 구조까지는 <strong>PDF 원문 → page별 text → TOC 탐지 → TOC를 tree 후보로 변환 → 본문에서 section 시작 page 확인 → node id/range 보정 → 최종 tree JSON 생성 → workspace에 structure + pages로 저장 → retrieve가 metadata → tree → page content 순서로 사용</strong>하는 흐름으로 만들어졌습니다.</p>
+      </div>
+    """
 
 def tree_json_example() -> str:
     example = {
