@@ -169,17 +169,22 @@ def render_sample_report(data: dict[str, Any]) -> str:
       </div>
       <div class="callout info"><strong>평가 흐름:</strong> get_document → get_document_structure → get_page_content 흐름을 기준으로, tree를 보고 관련 section 후보를 고른 뒤 page content를 열어 최종 predicted page를 결정하는 방식입니다.</div>
       <h3>Tree 생성 예시</h3>
-      <p>GMP PDF는 먼저 page별 본문으로 분리되고, 목차와 본문 heading을 기준으로 section node가 만들어집니다. 각 node는 제목과 page 범위를 갖고, 하위 section은 <code>nodes</code> 배열에 중첩됩니다. 최종 결과는 <code>results/gmp_guidance_structure.json</code>과 PageIndex workspace의 <code>results/pageindex_gmp_workspace/gmp-guidance.json</code>에 JSON tree로 저장됩니다.</p>
+      <p>GMP PDF는 <code>inputs/gmp_guidance.pdf</code>에서 시작해 page별 text, TOC 목차, section node, workspace 순서로 변환됩니다. PageIndex는 먼저 PDF를 page content로 분리하고, 앞부분에서 TOC page를 감지한 뒤, 목차와 본문 heading을 이용해 section tree 후보를 만듭니다. 이후 각 section title이 실제 본문 어느 page에서 시작하는지 매핑하고, node id와 page span을 보정해 최종 JSON tree로 저장합니다.</p>
       <table>
         <thead><tr><th>생성 단계</th><th>처리 내용</th><th>산출 예시</th></tr></thead>
         <tbody>
-          {tr_multi(['1', 'PDF page content 추출', '606개 page content 생성'])}
-          {tr_multi(['2', 'TOC와 heading 탐지', '제2장, 용어의 정의, 시설 및 환경의 관리 등 section 후보 식별'])}
-          {tr_multi(['3', '계층 연결', '상위 section의 nodes 배열 안에 하위 section 배치'])}
-          {tr_multi(['4', 'page span 정규화', 'own page와 subtree page range를 분리해 저장'])}
-          {tr_multi(['5', 'PageIndex workspace 반영', 'structure와 pages를 gmp-guidance.json에 저장'])}
+          {tr_multi(['1', '입력 PDF 지정', 'inputs/gmp_guidance.pdf'])}
+          {tr_multi(['2', 'PDF page content 추출', '606개 page content 생성'])}
+          {tr_multi(['3', 'TOC page 탐지', '앞 30 page 범위에서 목차 구간 확인'])}
+          {tr_multi(['4', 'TOC를 JSON tree 후보로 변환', '제2장 → 용어의 정의 → 다. “일탈” 같은 계층 후보 생성'])}
+          {tr_multi(['5', '본문 heading과 page 시작점 매핑', '<physical_index_18> marker를 이용해 section 시작 page 확인'])}
+          {tr_multi(['6', '계층 연결', '상위 section의 nodes 배열 안에 하위 section 배치'])}
+          {tr_multi(['7', 'node id와 page span 보정', 'node_id, own_start/end, subtree_start/end 정규화'])}
+          {tr_multi(['8', '최종 tree JSON 저장', 'results/gmp_guidance_structure.json'])}
+          {tr_multi(['9', 'PageIndex workspace 반영', 'structure와 pages를 results/pageindex_gmp_workspace/gmp-guidance.json에 저장'])}
         </tbody>
       </table>
+      <div class="callout neutral"><strong>실행 표면:</strong> 원본 PageIndex 실행은 <code>run_pageindex.py</code>가 담당하고, 본 GMP 실험에서는 <code>run_gmp_pageindex.sh</code>가 <code>--toc-check-pages 30</code>, <code>--if-add-node-id yes</code> 등의 옵션으로 이를 호출했습니다. 이후 GMP 문서 특성에 맞게 중복 제목, 같은 page parent/child, page span, page alignment를 추가 보정했습니다.</div>
       {tree_json_example()}
       <h3>PageIndex workspace 구성</h3>
       <p>PageIndex workspace는 원본 PDF를 검색하기 좋은 형태로 변환해 저장한 작업 폴더입니다. 본 실험의 workspace는 <code>results/pageindex_gmp_workspace/</code>이며, 문서 목록을 담은 <code>_meta.json</code>과 실제 문서 데이터를 담은 <code>gmp-guidance.json</code>으로 구성됩니다.</p>
