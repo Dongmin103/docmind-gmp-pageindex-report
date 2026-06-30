@@ -272,6 +272,17 @@ def render_sample_report(data: dict[str, Any]) -> str:
         </tbody>
       </table>
       <div class="callout neutral"><strong>해석 예시:</strong> gold page가 p.533인데 <code>predicted_pages</code>가 p.519-521이고 <code>evidence_pages_read</code>에 p.533이 포함되어 있다면, 이는 “LLM context에 들어가지 않았다”가 아니라 “탐색 중 p.533을 봤지만 최종 page selection에서 p.533을 선택하지 못했다”로 해석합니다.</div>
+      <h3>자연어 답변 관점의 진단</h3>
+      <p>현재 산출물에는 별도의 <code>final_answer</code> 필드가 없습니다. 따라서 엄밀하게는 “최종 자연어 답변”과 평가셋의 <code>expected_answer</code>를 직접 비교할 수 없습니다. 다만 각 prediction에는 retrieval 판단 이유인 <code>reason</code>이 있으므로, 이를 자연어 답변 후보처럼 보아 보조적으로 의미 유사성을 점검했습니다.</p>
+      <table>
+        <thead><tr><th>ID</th><th>상황</th><th>reason vs expected_answer</th><th>해석</th></tr></thead>
+        <tbody>
+          {tr_multi(['gmp_eval_013', 'evidence_plus_aligned는 hit, 최종 predicted page는 miss', '낮음', '근거 page 근처를 봤지만 reason도 정답 핵심 문구를 충분히 담지 못함'])}
+          {tr_multi(['gmp_eval_084', 'evidence에서 gold page를 읽었지만 최종 page 선택 실패', '높음', '자연어 이해는 expected_answer와 매우 유사하나 최종 page selection이 실패'])}
+          {tr_multi(['gmp_eval_086', 'evidence에서 gold page를 읽었지만 최종 page 선택 실패', '중간~높음', '핵심 취지는 맞지만 설명 범위가 넓고 약간 분산됨'])}
+        </tbody>
+      </table>
+      <div class="callout warning"><strong>주의:</strong> 이 표는 answer generation 정식 평가는 아닙니다. 현재 eval은 자연어 답변 품질이 아니라 근거 page retrieval 평가입니다. 따라서 위 결과는 <code>reason</code>을 임시 자연어 후보로 본 진단이며, 실제 최종 답변 생성에 해당 evidence가 사용되었는지는 별도 <code>final_answer</code> 로그와 answer judging이 있어야 판단할 수 있습니다.</div>
       <p>잔여 오류는 크게 두 유형으로 나뉩니다. 첫째, 근거 page를 읽었지만 최종 page selection에서 놓친 사례입니다. 둘째, evidence 탐색 과정에서도 gold page를 찾지 못한 더 강한 실패입니다. 현재 완전 미회수 사례는 <code>gmp_eval_025</code> 1건입니다.</p>
     </section>
 
