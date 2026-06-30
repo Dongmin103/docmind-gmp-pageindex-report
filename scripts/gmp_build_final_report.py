@@ -168,6 +168,19 @@ def render_sample_report(data: dict[str, Any]) -> str:
         {step('04', '100문항 eval', '질문별 gold page/section path와 predicted page를 비교해 official score를 계산했습니다.')}
       </div>
       <div class="callout info"><strong>평가 흐름:</strong> get_document → get_document_structure → get_page_content 흐름을 기준으로, tree를 보고 관련 section 후보를 고른 뒤 page content를 열어 최종 predicted page를 결정하는 방식입니다.</div>
+      <h3>Retrieve 작동 방식</h3>
+      <p>본 평가에서 retrieve는 PDF 전체를 한 번에 검색하는 방식이 아니라, PageIndex workspace에 저장된 <strong>문서 메타데이터, tree 구조, page content</strong>를 순서대로 확인하는 방식으로 작동합니다. 먼저 문서가 어떤 PDF인지 확인하고, 그 다음 JSON tree에서 질문과 관련된 section path와 page range를 좁힌 뒤, 필요한 page 본문만 열어 근거를 확인합니다.</p>
+      <table>
+        <thead><tr><th>단계</th><th>PageIndex tool</th><th>확인 내용</th><th>GMP 예시</th></tr></thead>
+        <tbody>
+          {tr_multi(['1', 'get_document()', '문서명, 타입, 전체 page 수 확인', 'gmp_guidance.pdf · 606 pages'])}
+          {tr_multi(['2', 'get_document_structure()', '본문 text를 제외한 JSON tree 확인', '용어의 정의 · subtree p.18-28'])}
+          {tr_multi(['3', 'section/page 후보 선택', '질문 의미에 맞는 section path와 tight page range 선택', '“일탈” 질문 → 용어의 정의 → p.18'])}
+          {tr_multi(['4', 'get_page_content(pages)', '선택한 page의 실제 본문 확인', 'p.18에서 “일탈” 정의 문장 확인'])}
+          {tr_multi(['5', 'prediction 기록', 'predicted_section_path, predicted_pages, evidence_pages_read 저장', 'predicted_pages: 18-19'])}
+        </tbody>
+      </table>
+      <div class="callout neutral"><strong>Tree JSON의 핵심 속성:</strong> <code>title</code>은 section 제목, <code>nodes</code>는 하위 section, <code>own_start_index/end_index</code>는 해당 node 자체의 page 범위, <code>subtree_start_index/end_index</code>는 하위 section까지 포함한 전체 page 범위를 의미합니다.</div>
     </section>
 
     <section id="results" class="report-section">
