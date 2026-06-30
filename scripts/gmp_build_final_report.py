@@ -186,6 +186,7 @@ def render_sample_report(data: dict[str, Any]) -> str:
       <div class="callout neutral"><strong>“트리를 읽는다”의 의미:</strong> 여기서 tree를 읽는다는 것은 JSON 안의 section <strong>node</strong>들을 읽고, 각 node가 어떤 부모/자식 관계로 연결되어 있는지 확인한다는 뜻입니다. 즉 <code>용어의 정의</code> 같은 section 하나가 node이고, <code>nodes</code> 배열 안에 들어 있는 하위 section들이 child node입니다. 따라서 <strong>tree 확인 = node 목록과 node 간 계층 관계 확인</strong>이라고 볼 수 있습니다.</div>
       <div class="callout neutral"><strong>Leaf node와 branch node:</strong> <strong>leaf node</strong>는 더 이상 자식 node가 없는 맨 아래 node입니다. JSON 기준으로는 <code>"nodes": []</code>처럼 하위 배열이 비어 있으면 leaf node입니다. 반대로 <code>용어의 정의</code>처럼 <code>nodes</code> 안에 <code>다. “일탈”</code>, <code>라. “기준일탈”</code> 같은 하위 node를 가진 node는 leaf가 아닌 branch/parent node입니다.</div>
       <div class="callout result"><strong>핵심 원칙:</strong> retrieve는 항상 맨 아래 leaf node만 읽지 않습니다. 질문 범위에 맞춰 상위 node, 중간 node, leaf node 중 가장 적절한 depth를 선택합니다. 정의처럼 좁은 질문은 leaf node까지 내려가고, 절차·요건·종합 질문은 중간 node와 여러 child node를 함께 확인합니다.</div>
+      <p>따라서 실제 retrieve 판단은 AI가 질문의 의미를 먼저 해석한 뒤, tree JSON의 <code>title</code>, <code>nodes</code>, page range, 부모/자식 관계를 보고 어느 깊이까지 내려갈지 결정하는 방식입니다. AI가 곧바로 PDF 전체 본문을 읽는 것이 아니라, 먼저 tree에서 관련 node와 적절한 depth를 고른 다음 그 node의 page range를 근거로 필요한 page만 <code>get_page_content</code>로 확인합니다.</p>
       <table>
         <thead><tr><th>질문 유형</th><th>읽는 node 깊이</th><th>GMP 예시</th><th>retrieve 판단</th></tr></thead>
         <tbody>
