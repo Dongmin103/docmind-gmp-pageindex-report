@@ -193,6 +193,16 @@ def render_sample_report(data: dict[str, Any]) -> str:
         </tbody>
       </table>
       {workspace_json_example()}
+      <h3>Node 저장 위치</h3>
+      <p>Node는 별도의 파일로 따로 저장되는 것이 아니라, JSON의 <code>structure</code> 배열 안에 중첩 객체로 저장됩니다. 즉 section 하나가 node이고, 그 node의 하위 section은 다시 <code>nodes</code> 배열 안에 child node로 들어갑니다.</p>
+      <table>
+        <thead><tr><th>파일</th><th>역할</th><th>node 저장 방식</th></tr></thead>
+        <tbody>
+          {tr_multi(['results/gmp_guidance_structure.json', '최종 tree 산출물', 'structure 배열 안에 전체 node tree 저장'])}
+          {tr_multi(['results/pageindex_gmp_workspace/gmp-guidance.json', 'retrieve가 사용하는 workspace 문서', 'metadata, structure, pages 중 structure 배열 안에 node 저장'])}
+        </tbody>
+      </table>
+      <div class="callout neutral"><strong>Node 저장 규칙:</strong> <code>structure</code> 안의 객체 하나가 node입니다. 하위 node는 부모 node의 <code>nodes</code> 배열에 들어가며, <code>"nodes": []</code>이면 더 이상 자식이 없는 leaf node입니다.</div>
       <h3>Retrieve 작동 방식</h3>
       <p>본 평가에서 retrieve는 PDF 전체를 한 번에 검색하는 방식이 아니라, PageIndex workspace에 저장된 <strong>문서 메타데이터, tree 구조, page content</strong>를 순서대로 확인하는 방식으로 작동합니다. 먼저 문서가 어떤 PDF인지 확인하고, 그 다음 JSON tree에서 질문과 관련된 section path와 page range를 좁힌 뒤, 필요한 page 본문만 열어 근거를 확인합니다.</p>
       <div class="callout neutral"><strong>“트리를 읽는다”의 의미:</strong> 여기서 tree를 읽는다는 것은 JSON 안의 section <strong>node</strong>들을 읽고, 각 node가 어떤 부모/자식 관계로 연결되어 있는지 확인한다는 뜻입니다. 즉 <code>용어의 정의</code> 같은 section 하나가 node이고, <code>nodes</code> 배열 안에 들어 있는 하위 section들이 child node입니다. 따라서 <strong>tree 확인 = node 목록과 node 간 계층 관계 확인</strong>이라고 볼 수 있습니다.</div>
