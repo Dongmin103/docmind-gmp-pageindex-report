@@ -184,6 +184,16 @@ def render_sample_report(data: dict[str, Any]) -> str:
       <h3>Retrieve 작동 방식</h3>
       <p>본 평가에서 retrieve는 PDF 전체를 한 번에 검색하는 방식이 아니라, PageIndex workspace에 저장된 <strong>문서 메타데이터, tree 구조, page content</strong>를 순서대로 확인하는 방식으로 작동합니다. 먼저 문서가 어떤 PDF인지 확인하고, 그 다음 JSON tree에서 질문과 관련된 section path와 page range를 좁힌 뒤, 필요한 page 본문만 열어 근거를 확인합니다.</p>
       <div class="callout neutral"><strong>“트리를 읽는다”의 의미:</strong> 여기서 tree를 읽는다는 것은 JSON 안의 section <strong>node</strong>들을 읽고, 각 node가 어떤 부모/자식 관계로 연결되어 있는지 확인한다는 뜻입니다. 즉 <code>용어의 정의</code> 같은 section 하나가 node이고, <code>nodes</code> 배열 안에 들어 있는 하위 section들이 child node입니다. 따라서 <strong>tree 확인 = node 목록과 node 간 계층 관계 확인</strong>이라고 볼 수 있습니다.</div>
+      <div class="callout result"><strong>핵심 원칙:</strong> retrieve는 항상 맨 아래 leaf node만 읽지 않습니다. 질문 범위에 맞춰 상위 node, 중간 node, leaf node 중 가장 적절한 depth를 선택합니다. 정의처럼 좁은 질문은 leaf node까지 내려가고, 절차·요건·종합 질문은 중간 node와 여러 child node를 함께 확인합니다.</div>
+      <table>
+        <thead><tr><th>질문 유형</th><th>읽는 node 깊이</th><th>GMP 예시</th><th>retrieve 판단</th></tr></thead>
+        <tbody>
+          {tr_multi(['정의 질문', 'leaf node까지 내려감', '“일탈”이란 무엇인가?', '용어의 정의 → 다. “일탈” node → p.18'])}
+          {tr_multi(['절차/요건 질문', '중간 node와 여러 child node 확인', '변경관리는 어떻게 수행하는가?', '변경관리 node의 subtree p.441-447 범위에서 관련 조항 확인'])}
+          {tr_multi(['비교 질문', '관련 leaf node 여러 개 확인', '일탈과 기준일탈은 어떻게 다른가?', '다. “일탈” node와 라. “기준일탈” node를 함께 확인'])}
+          {tr_multi(['넓은 관리체계 질문', '상위/중간 node의 subtree 범위 확인', '품질경영 체계는 무엇을 포함하는가?', '품질경영 관련 상위 node와 child node들을 함께 검토'])}
+        </tbody>
+      </table>
       <table>
         <thead><tr><th>단계</th><th>PageIndex tool</th><th>확인 내용</th><th>GMP 예시</th></tr></thead>
         <tbody>
