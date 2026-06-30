@@ -168,6 +168,19 @@ def render_sample_report(data: dict[str, Any]) -> str:
         {step('04', '100문항 eval', '질문별 gold page/section path와 predicted page를 비교해 official score를 계산했습니다.')}
       </div>
       <div class="callout info"><strong>평가 흐름:</strong> get_document → get_document_structure → get_page_content 흐름을 기준으로, tree를 보고 관련 section 후보를 고른 뒤 page content를 열어 최종 predicted page를 결정하는 방식입니다.</div>
+      <h3>Tree 생성 예시</h3>
+      <p>GMP PDF는 먼저 page별 본문으로 분리되고, 목차와 본문 heading을 기준으로 section node가 만들어집니다. 각 node는 제목과 page 범위를 갖고, 하위 section은 <code>nodes</code> 배열에 중첩됩니다. 최종 결과는 <code>results/gmp_guidance_structure.json</code>과 PageIndex workspace의 <code>results/pageindex_gmp_workspace/gmp-guidance.json</code>에 JSON tree로 저장됩니다.</p>
+      <table>
+        <thead><tr><th>생성 단계</th><th>처리 내용</th><th>산출 예시</th></tr></thead>
+        <tbody>
+          {tr_multi(['1', 'PDF page content 추출', '606개 page content 생성'])}
+          {tr_multi(['2', 'TOC와 heading 탐지', '제2장, 용어의 정의, 시설 및 환경의 관리 등 section 후보 식별'])}
+          {tr_multi(['3', '계층 연결', '상위 section의 nodes 배열 안에 하위 section 배치'])}
+          {tr_multi(['4', 'page span 정규화', 'own page와 subtree page range를 분리해 저장'])}
+          {tr_multi(['5', 'PageIndex workspace 반영', 'structure와 pages를 gmp-guidance.json에 저장'])}
+        </tbody>
+      </table>
+      {tree_json_example()}
       <h3>Retrieve 작동 방식</h3>
       <p>본 평가에서 retrieve는 PDF 전체를 한 번에 검색하는 방식이 아니라, PageIndex workspace에 저장된 <strong>문서 메타데이터, tree 구조, page content</strong>를 순서대로 확인하는 방식으로 작동합니다. 먼저 문서가 어떤 PDF인지 확인하고, 그 다음 JSON tree에서 질문과 관련된 section path와 page range를 좁힌 뒤, 필요한 page 본문만 열어 근거를 확인합니다.</p>
       <table>
@@ -371,6 +384,7 @@ th { background: var(--panel-strong); color: #303a48; font-size: 8.5pt; letter-s
 tbody tr:nth-child(even) td { background: #fbfcfe; }
 code, pre { font-family: var(--mono); }
 code { background: var(--panel); border: 1px solid var(--line); border-radius: 1.5mm; padding: 0 .8mm; font-size: 9pt; }
+.json-example { border: 1px solid var(--line); background: #f8fafc; color: #243244; padding: 4mm; border-radius: 2mm; font-size: 8.2pt; line-height: 1.42; max-height: 95mm; overflow: auto; white-space: pre; }
 .icicle-panel { border: 1px solid var(--line); border-radius: 3mm; background: #fff; padding: 4mm; margin: 3mm 0 5mm; break-inside: avoid; }
 .icicle-panel h3 { margin-top: 0; }
 .icicle-caption { color: var(--muted); font-size: 8.8pt; margin-bottom: 2mm; }
@@ -707,6 +721,36 @@ def bar_table(counter: Counter, title: str) -> str:
 def classification_table(counter: Counter) -> str:
     body = "".join(tr_multi([key, count]) for key, count in sorted(counter.items(), key=lambda x: (-x[1], str(x[0]))))
     return f"<table><thead><tr><th>Classification</th><th>Count</th></tr></thead><tbody>{body}</tbody></table>"
+
+
+def tree_json_example() -> str:
+    example = {
+        "title": "용어의 정의",
+        "node_id": "0005",
+        "start_index": 18,
+        "end_index": 28,
+        "own_start_index": 18,
+        "own_end_index": 18,
+        "subtree_start_index": 18,
+        "subtree_end_index": 28,
+        "nodes": [
+            {
+                "title": "다. “일탈”이란 제조 또는 품질관리 과정에서 미리 정해진 기준을 벗어나 이루어진 행위를 말한다.",
+                "node_id": "0008",
+                "start_index": 18,
+                "end_index": 18,
+                "own_start_index": 18,
+                "own_end_index": 18,
+                "subtree_start_index": 18,
+                "subtree_end_index": 18,
+                "nodes": [],
+            }
+        ],
+    }
+    return f"""
+      <div class="callout neutral"><strong>실제 JSON node 예시:</strong> 아래 예시는 <code>용어의 정의</code> section과 그 하위의 <code>다. “일탈”</code> node입니다. retrieve는 이 구조에서 <code>subtree_start_index/end_index</code>를 보고 먼저 p.18-28 범위를 후보로 잡고, 하위 node의 p.18을 더 좁은 근거 page로 선택합니다.</div>
+      <pre class="json-example">{esc(json.dumps(example, ensure_ascii=False, indent=2))}</pre>
+    """
 
 
 def render_icicle_svg(data: dict[str, Any]) -> str:
